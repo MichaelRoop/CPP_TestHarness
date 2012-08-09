@@ -162,14 +162,26 @@ _REG_TEST_( className, classInst, derivedClass, L("") )				\
 
 // Simplified macros for next generation
 
-// Register the fixture to the engine
-#define _REGISTER_TEST_CASE_( _testCaseClass_ )	\
+// Adding the test fixture to the engine
+#define _ADD_TEST_FIXTURE_( _testCaseClass_ )	\
 mr_test::engine::getInstance().regCase( _testCaseClass_ );						\
 
 // Create the fixture instance with a unique variable name. This will trigger the constructor which registers it with the engine
 // You can only register a fixture class once
 #define _REGISTER_FIXTURE_( _fixture_ )	\
 _fixture_*  ##_fixture_##Instance  = new _fixture_();  \
+
+
+#define _FIXTURE_SETUP_( _fixture_,  _setup_ )		\
+_fixture_->RegisterFixtureSetup(static_cast<testCase::testCase_ptr>( _setup_  ));			\
+
+
+#define _FIXTURE_TEARDOWN_( _fixture_,  _teardown_ )		\
+_fixture_->RegisterFixtureTeardown(static_cast<testCase::testCase_ptr>( _teardown_  ));			\
+
+
+
+		//this->RegisterFixtureSetup( static_cast<testCase::test_ptr>( &TokTestBase::FixtureSetup ));
 
 
 

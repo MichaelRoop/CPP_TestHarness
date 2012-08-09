@@ -11,11 +11,13 @@ class TokTestBase : public mr_test::testCase
 public:
 
 	TokTestBase( const mr_utils::mr_string& testName, const mr_utils::mr_string& argStr ) 
-		: mr_test::testCase( testName, argStr )
-	{
+		: mr_test::testCase( testName, argStr ) {
+		_FIXTURE_SETUP_(this, &TokTestBase::FixtureSetup );
+		_FIXTURE_TEARDOWN_(this, &TokTestBase::FixtureTeardown );
 	}
 
-	bool setup()	
+
+	void FixtureSetup()	
 	{ 
 		m_tokens.push_back( L("This" ) );
 		m_tokens.push_back( L("is" ) );
@@ -25,8 +27,27 @@ public:
 		m_tokens.push_back( L("with" ) );
 		m_tokens.push_back( L("some" ) );
 		m_tokens.push_back( L("tokens" ) );
-		return true; 
+		//return true; 
 	}
+
+	void FixtureTeardown() {
+		printf("**** Registered Teardown Executed ****\n");
+	}
+
+
+
+	//bool setup()	
+	//{ 
+	//	m_tokens.push_back( L("This" ) );
+	//	m_tokens.push_back( L("is" ) );
+	//	m_tokens.push_back( L("a" ) );
+	//	m_tokens.push_back( L("test" ) );
+	//	m_tokens.push_back( L("string" ) );
+	//	m_tokens.push_back( L("with" ) );
+	//	m_tokens.push_back( L("some" ) );
+	//	m_tokens.push_back( L("tokens" ) );
+	//	return true; 
+	//}
 
 protected:
 
@@ -69,7 +90,7 @@ protected:
 class mrTokTestNormal : public TokTestBase {
 public:
 	mrTokTestNormal() : TokTestBase( L( "UTL_TOK_1_1" ), L( "Normal tokenize string" ) )	{
-		_REGISTER_TEST_CASE_( this );
+		_ADD_TEST_FIXTURE_( this );
 	}
 
 	bool test()	{ 
@@ -121,14 +142,19 @@ _REG_TEST_( UTL_TOK_1_5, instUTL_TOK_1_5, mrTokTestLeadFollowDel, L( "Tokenize t
 
 
 // Test tokenize of string with multiple mid and leading and following token delimiters.
-_DECL_TEST_( mrTokTestLeadMidFollowDel, TokTestBase )
-	bool test()		
-	{ 
+class mrTokTestLeadMidFollowDel : public TokTestBase {
+public:
+	mrTokTestLeadMidFollowDel()
+		: TokTestBase( L( "UTL_TOK_1_6" ), L( "Tokenize test multiple leading mid and following delimiters" ) )	{
+		_ADD_TEST_FIXTURE_( this );
+	}
+
+	bool test()	{ 
 		mr_utils::mr_string str( L("||||||||This|is|a|test||||||string|with||||||some|tokens||||||||") );
 		return this->DoIt( str );
 	}
-_REG_TEST_( UTL_TOK_1_6, instUTL_TOK_1_6, mrTokTestLeadMidFollowDel, L( "Tokenize test multiple leading mid and following delimiters" ) )
-
+};
+_REGISTER_FIXTURE_(mrTokTestLeadMidFollowDel);
 
 
 // Test tokenize of string with only token delimiters.
@@ -137,10 +163,7 @@ class mrTokTestDelOnly2 : public mr_test::testCase {
 public:
 	mrTokTestDelOnly2()
 		: mr_test::testCase( L( "UTL_TOK_1_7" ), L( "Tokenize delimiters only" ) )	{
-
-			mr_cout << L("***** Constructor being invoked") << std::endl;
-
-		_REGISTER_TEST_CASE_( this );
+		_ADD_TEST_FIXTURE_( this );
 	}																				
 
 	bool test() { 

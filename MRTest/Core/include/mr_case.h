@@ -189,6 +189,17 @@ public:
 	/// @return	The test message buffer.
 	mr_utils::mr_stringstream& getVerboseBuffer();
 
+	/// @brief	Typdef of a class method pointer with no param and no return to clean up syntax. 
+	typedef void (testCase::*  testCase_ptr) ( void );
+
+	/// @brief	Register a setup method to be executed once for the entire fixture
+	/// @param	setup The setup method
+	void RegisterFixtureSetup(testCase_ptr setup);
+
+	/// @brief	Register a teardown method to be executed once for the entire fixture
+	/// @param	teardown The teardown method
+	void RegisterFixtureTeardown(testCase_ptr teardown);
+
 
 protected:
 	TestCaseStatus				m_status;			///< Status of the test case.
@@ -206,6 +217,11 @@ private:
 	long long					m_cleanupTime;		///< Cleanup time in ms.
 
 
+	
+	testCase_ptr m_fixtureSetup;	// setup method for the entire fixture
+	testCase_ptr m_fixtureTeardown;	// teardown method for the entire fixture
+	// TODO - add 
+	
 
 	/// @brief	Protected default constructor to force use of regular constructor.
 	testCase() ;

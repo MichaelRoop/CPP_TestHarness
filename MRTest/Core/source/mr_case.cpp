@@ -14,6 +14,7 @@
 #include "mr_exception.h"
 #include "mr_defines.h"
 
+#include <assert.h>
 
 namespace mr_test
 {
@@ -25,8 +26,9 @@ testCase::testCase( const mr_utils::mr_string& name, const mr_utils::mr_string& 
 	m_setupTime( 0 ),
 	m_execTime( 0 ),
 	m_cleanupTime( 0 ),
-	m_status( ST_NONE )
-
+	m_status( ST_NONE ),
+	m_fixtureSetup(0),
+	m_fixtureTeardown(0)
 {
 }
 
@@ -139,7 +141,15 @@ bool testCase::executeSetup()
 {
 	if (m_status == ST_SUCCESS)
 	{
-		return this->setStatus( execStep( m_setupTime, &testCase::setup ), ST_FAIL_SETUP );
+		// TODO temp to see if there is a fixture setup registered
+		if (this->m_fixtureSetup != 0) {
+			(this->*m_fixtureSetup)();
+
+			return true; // need a catch
+		}
+		else {
+			return this->setStatus( execStep( m_setupTime, &testCase::setup ), ST_FAIL_SETUP );
+		}
 	}
 	return false;
 }
@@ -157,8 +167,21 @@ bool testCase::executeTest()
 
 bool testCase::executeCleanup()
 {
+	bool success = false;
+
+	// TODO temp to test the registered fixture teardown
+	if (this->m_fixtureTeardown != 0) {
+			(this->*m_fixtureTeardown)();
+
+			success = true; // need a catch
+		}
+		else {
+			success = execStep( m_cleanupTime, &testCase::cleanup );
+		}
+
+
 	// Cleanup always executed.
-	bool success = execStep( m_cleanupTime, &testCase::cleanup );
+	//bool success = execStep( m_cleanupTime, &testCase::cleanup );
 
 	// Failure on cleanup will only be logged if all else was successful.
 	if (m_status == ST_SUCCESS)
@@ -180,6 +203,16 @@ mr_utils::mr_stringstream& testCase::getVerboseBuffer()
 	return m_verboseBuffer;
 }
 
+
+void testCase::RegisterFixtureSetup(testCase_ptr setup) {
+	assert(setup);
+	this->m_fixtureSetup = setup;
+}
+
+void testCase::RegisterFixtureTeardown(testCase_ptr teardown) {
+	assert(teardown);
+	this->m_fixtureTeardown = teardown;
+}
 
 
 }
