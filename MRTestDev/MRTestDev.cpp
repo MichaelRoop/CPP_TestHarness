@@ -84,5 +84,5 @@ void holdScreen()
 
 	// to intercept and wait.
 	int x;
-	std::cin >> x;
+	//std::cin >> x;
 }

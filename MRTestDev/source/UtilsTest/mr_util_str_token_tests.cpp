@@ -66,13 +66,18 @@ protected:
 
 
 // Test tokenize of string with multiple token delimiters.
-_DECL_TEST_( mrTokTestNormal, TokTestBase )
-	bool test()		
-	{ 
+class mrTokTestNormal : public TokTestBase {
+public:
+	mrTokTestNormal() : TokTestBase( L( "UTL_TOK_1_1" ), L( "Normal tokenize string" ) )	{
+		_REGISTER_TEST_CASE_( this );
+	}
+
+	bool test()	{ 
 		mr_utils::mr_string str( L("This|is|a|test|string|with|some|tokens") );
 		return this->DoIt( str );
 	}
-_REG_TEST_( UTL_TOK_1_1, instUTL_TOK_1_1, mrTokTestNormal, L( "Normal tokenize string" ) )
+};
+_REGISTER_FIXTURE_(mrTokTestNormal);
 
 
 // Test tokenize of string with multiple token delimiters and mid extras.
@@ -127,9 +132,18 @@ _REG_TEST_( UTL_TOK_1_6, instUTL_TOK_1_6, mrTokTestLeadMidFollowDel, L( "Tokeniz
 
 
 // Test tokenize of string with only token delimiters.
-_DECL_TEST_( mrTokTestDelOnly, mr_test::testCase )
-	bool test()		
-	{ 
+class mrTokTestDelOnly2 : public mr_test::testCase {
+
+public:
+	mrTokTestDelOnly2()
+		: mr_test::testCase( L( "UTL_TOK_1_7" ), L( "Tokenize delimiters only" ) )	{
+
+			mr_cout << L("***** Constructor being invoked") << std::endl;
+
+		_REGISTER_TEST_CASE_( this );
+	}																				
+
+	bool test() { 
 		mr_utils::mr_string str( L("||||||||") );
 		mr_utils::mr_string token;
 
@@ -138,10 +152,10 @@ _DECL_TEST_( mrTokTestDelOnly, mr_test::testCase )
 		for (count = 0; mr_utils::MrTokenize( pos, str, token, L('|') ); count++)
 		{
 		}
-
 		return mr_test::VerbCompareEqual( FL, 0, count, *this );
 	}
-_REG_TEST_( UTL_TOK_1_7, instUTL_TOK_1_7, mrTokTestDelOnly, L( "Tokenize delimiters only" ) )
+};
+_REGISTER_FIXTURE_(mrTokTestDelOnly2);
 
 
 

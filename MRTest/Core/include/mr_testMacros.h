@@ -160,6 +160,21 @@ _REG_TEST_( className, classInst, derivedClass, L("") )				\
 
 
 
+// Simplified macros for next generation
+
+// Register the fixture to the engine
+#define _REGISTER_TEST_CASE_( _testCaseClass_ )	\
+mr_test::engine::getInstance().regCase( _testCaseClass_ );						\
+
+// Create the fixture instance with a unique variable name. This will trigger the constructor which registers it with the engine
+// You can only register a fixture class once
+#define _REGISTER_FIXTURE_( _fixture_ )	\
+_fixture_*  ##_fixture_##Instance  = new _fixture_();  \
+
+
+
+/*_fixture_* x = new _fixture_();  \*/
+
 
 
 #endif
