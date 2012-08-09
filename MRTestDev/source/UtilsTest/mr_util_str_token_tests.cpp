@@ -19,35 +19,19 @@ public:
 
 	void FixtureSetup()	
 	{ 
-		m_tokens.push_back( L("This" ) );
-		m_tokens.push_back( L("is" ) );
-		m_tokens.push_back( L("a" ) );
-		m_tokens.push_back( L("test" ) );
-		m_tokens.push_back( L("string" ) );
-		m_tokens.push_back( L("with" ) );
-		m_tokens.push_back( L("some" ) );
-		m_tokens.push_back( L("tokens" ) );
-		//return true; 
+		m_tokens.push_back( _L_("This" ) );
+		m_tokens.push_back( _L_("is" ) );
+		m_tokens.push_back( _L_("a" ) );
+		m_tokens.push_back( _L_("test" ) );
+		m_tokens.push_back( _L_("string" ) );
+		m_tokens.push_back( _L_("with" ) );
+		m_tokens.push_back( _L_("some" ) );
+		m_tokens.push_back( _L_("tokens" ) );
 	}
 
 	void FixtureTeardown() {
 		printf("**** Registered Teardown Executed ****\n");
 	}
-
-
-
-	//bool setup()	
-	//{ 
-	//	m_tokens.push_back( L("This" ) );
-	//	m_tokens.push_back( L("is" ) );
-	//	m_tokens.push_back( L("a" ) );
-	//	m_tokens.push_back( L("test" ) );
-	//	m_tokens.push_back( L("string" ) );
-	//	m_tokens.push_back( L("with" ) );
-	//	m_tokens.push_back( L("some" ) );
-	//	m_tokens.push_back( L("tokens" ) );
-	//	return true; 
-	//}
 
 protected:
 
@@ -89,12 +73,12 @@ protected:
 // Test tokenize of string with multiple token delimiters.
 class mrTokTestNormal : public TokTestBase {
 public:
-	mrTokTestNormal() : TokTestBase( L( "UTL_TOK_1_1" ), L( "Normal tokenize string" ) )	{
+	mrTokTestNormal() : TokTestBase( _L_( "UTL_TOK_1_1" ), _L_( "Normal tokenize string" ) )	{
 		_ADD_TEST_FIXTURE_( this );
 	}
 
 	bool test()	{ 
-		mr_utils::mr_string str( L("This|is|a|test|string|with|some|tokens") );
+		mr_utils::mr_string str( _L_("This|is|a|test|string|with|some|tokens") );
 		return this->DoIt( str );
 	}
 };
@@ -105,52 +89,52 @@ _REGISTER_FIXTURE_(mrTokTestNormal);
 _DECL_TEST_( mrTokTestMidMultipleDel, TokTestBase )
 	bool test()		
 	{ 
-		mr_utils::mr_string str( L("This|is|a|test|string|with|some|||||tokens") );
+		mr_utils::mr_string str( _L_("This|is|a|test|string|with|some|||||tokens") );
 		return this->DoIt( str );
 	}
-_REG_TEST_( UTL_TOK_1_2, instUTL_TOK_1_2, mrTokTestMidMultipleDel, L( "Tokenize with multiple mid delimiters" ) )
+_REG_TEST_( UTL_TOK_1_2, instUTL_TOK_1_2, mrTokTestMidMultipleDel, _L_( "Tokenize with multiple mid delimiters" ) )
 
 
 // Test tokenize of string with leading token delimiters.
 _DECL_TEST_( mrTokTestLeadDel, TokTestBase )
 	bool test()		
 	{ 
-		mr_utils::mr_string str( L("||||||||This|is|a|test|string|with|some|tokens") );
+		mr_utils::mr_string str( _L_("||||||||This|is|a|test|string|with|some|tokens") );
 		return this->DoIt( str );
 	}
-_REG_TEST_( UTL_TOK_1_3, instUTL_TOK_1_3, mrTokTestLeadDel, L( "Tokenize test leading delimiters" ) )
+_REG_TEST_( UTL_TOK_1_3, instUTL_TOK_1_3, mrTokTestLeadDel, _L_( "Tokenize test leading delimiters" ) )
 
 
 // Test tokenize of string with following token delimiters.
 _DECL_TEST_( mrTokTestFollowDel, TokTestBase )
 	bool test()		
 	{ 
-		mr_utils::mr_string str( L("This|is|a|test|string|with|some|tokens||||||||") );
+		mr_utils::mr_string str( _L_("This|is|a|test|string|with|some|tokens||||||||") );
 		return this->DoIt( str );
 	}
-_REG_TEST_( UTL_TOK_1_4, instUTL_TOK_1_4, mrTokTestFollowDel, L( "Tokenize test following delimiters" ) )
+_REG_TEST_( UTL_TOK_1_4, instUTL_TOK_1_4, mrTokTestFollowDel, _L_( "Tokenize test following delimiters" ) )
 
 
 // Test tokenize of string with leading and following token delimiters.
 _DECL_TEST_( mrTokTestLeadFollowDel, TokTestBase )
 	bool test()		
 	{ 
-		mr_utils::mr_string str( L("||||||||This|is|a|test|string|with|some|tokens||||||||") );
+		mr_utils::mr_string str( _L_("||||||||This|is|a|test|string|with|some|tokens||||||||") );
 		return this->DoIt( str );
 	}
-_REG_TEST_( UTL_TOK_1_5, instUTL_TOK_1_5, mrTokTestLeadFollowDel, L( "Tokenize test leading and following delimiters" ) )
+_REG_TEST_( UTL_TOK_1_5, instUTL_TOK_1_5, mrTokTestLeadFollowDel, _L_( "Tokenize test leading and following delimiters" ) )
 
 
 // Test tokenize of string with multiple mid and leading and following token delimiters.
 class mrTokTestLeadMidFollowDel : public TokTestBase {
 public:
 	mrTokTestLeadMidFollowDel()
-		: TokTestBase( L( "UTL_TOK_1_6" ), L( "Tokenize test multiple leading mid and following delimiters" ) )	{
+		: TokTestBase( L( "UTL_TOK_1_6" ), _L_( "Tokenize test multiple leading mid and following delimiters" ) )	{
 		_ADD_TEST_FIXTURE_( this );
 	}
 
 	bool test()	{ 
-		mr_utils::mr_string str( L("||||||||This|is|a|test||||||string|with||||||some|tokens||||||||") );
+		mr_utils::mr_string str( _L_("||||||||This|is|a|test||||||string|with||||||some|tokens||||||||") );
 		return this->DoIt( str );
 	}
 };
@@ -162,20 +146,20 @@ class mrTokTestDelOnly2 : public mr_test::testCase {
 
 public:
 	mrTokTestDelOnly2()
-		: mr_test::testCase( L( "UTL_TOK_1_7" ), L( "Tokenize delimiters only" ) )	{
+		: mr_test::testCase( _L_( "UTL_TOK_1_7" ), _L_( "Tokenize delimiters only" ) )	{
 		_ADD_TEST_FIXTURE_( this );
 	}																				
 
 	bool test() { 
-		mr_utils::mr_string str( L("||||||||") );
+		mr_utils::mr_string str( _L_("||||||||") );
 		mr_utils::mr_string token;
 
 		mr_utils::mr_string::size_type pos = 0;
 		int count;
-		for (count = 0; mr_utils::MrTokenize( pos, str, token, L('|') ); count++)
+		for (count = 0; mr_utils::MrTokenize( pos, str, token, _L_('|') ); count++)
 		{
 		}
-		return mr_test::VerbCompareEqual( FL, 0, count, *this );
+		return mr_test::VerbCompareEqual( _FL_, 0, count, *this );
 	}
 };
 _REGISTER_FIXTURE_(mrTokTestDelOnly2);

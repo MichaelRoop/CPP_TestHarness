@@ -25,12 +25,14 @@ namespace mr_utils
 
 	/// @brief	Variable with const string macro.
 	#define L(str) L##str
+	#define _L_(str) L##str
 #else
 	typedef char			mr_char;
 
 
 	/// @brief	Variable with const string macro.
 	#define L( str ) str
+	#define _L_( str ) str
 #endif
 
 /// @todo	Make char versions for trim functions.

@@ -13,7 +13,7 @@
 
 #include "mr_case.h"
 #include "mr_testEngine.h"
-
+#include "mr_char.h"
 
 ///--------------------------------------------------------------------------------------
 ///
@@ -49,7 +49,7 @@ public:																			\
 	}																			\
 };																				\
 																				\
-className classInst( mr_utils::mr_string( L((#className)) ), mr_utils::mr_string( (caseDesc) ) );	\
+className classInst( mr_utils::mr_string( _L_((#className)) ), mr_utils::mr_string( (caseDesc) ) );	\
 
 
 ///--------------------------------------------------------------------------------------
@@ -70,7 +70,7 @@ className classInst( mr_utils::mr_string( L((#className)) ), mr_utils::mr_string
 ///
 ///--------------------------------------------------------------------------------------
 #define MAKE_CASE( className, classInst, caseClass )							\
-MAKE_CASE_DESC( className, classInst, caseClass, L("") )						\
+MAKE_CASE_DESC( className, classInst, caseClass, _L_("") )						\
 
 
 
@@ -156,7 +156,7 @@ MAKE_CASE_DESC( className, classInst, derivedClass, caseDesc )			\
 ///
 ///--------------------------------------------------------------------------------------
 #define _REG_TEST_ANON_( className, classInst, derivedClass )		\
-_REG_TEST_( className, classInst, derivedClass, L("") )				\
+_REG_TEST_( className, classInst, derivedClass, _L_("") )				\
 
 
 
@@ -179,13 +179,6 @@ _fixture_->RegisterFixtureSetup(static_cast<testCase::testCase_ptr>( _setup_  ))
 #define _FIXTURE_TEARDOWN_( _fixture_,  _teardown_ )		\
 _fixture_->RegisterFixtureTeardown(static_cast<testCase::testCase_ptr>( _teardown_  ));			\
 
-
-
-		//this->RegisterFixtureSetup( static_cast<testCase::test_ptr>( &TokTestBase::FixtureSetup ));
-
-
-
-/*_fixture_* x = new _fixture_();  \*/
 
 
 
