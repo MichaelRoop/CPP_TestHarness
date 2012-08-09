@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="test">
+      <UniqueIdentifier>{c748b7cd-fb5a-4c5b-97c0-dac4d55ab9a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="test\Utils">
+      <UniqueIdentifier>{ca8ed5a9-de7d-4ca6-bae0-89d9efcf6986}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="test\Test Platform">
+      <UniqueIdentifier>{7096c1fc-a619-42a9-9711-b1ae7da8dc05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="test\Thread library">
+      <UniqueIdentifier>{3b1501ba-ab7d-4f8a-a146-88cd29d88235}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="test\State Machine library">
+      <UniqueIdentifier>{df94376c-9d73-4714-a162-95ebfee9cedb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="test\State Machine library\Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="source\mr_simpleTestCases.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MRTestDev.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\IniReaderTest\mr_iniReaderTest.cpp">
+      <Filter>test\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="source\UtilsTest\mr_testSharedPtr.cpp">
+      <Filter>test\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="source\UtilsTest\mr_util_str_token_tests.cpp">
+      <Filter>test\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="source\UtilsTest\mr_util_str_trim_tests.cpp">
+      <Filter>test\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="source\TestPlatform\mr_testCompare.cpp">
+      <Filter>test\Test Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="source\MRThreadTest\JoinAndBreakTests.cpp">
+      <Filter>test\Thread library</Filter>
+    </ClCompile>
+    <ClCompile Include="source\MRThreadTest\mr_event_test.cpp">
+      <Filter>test\Thread library</Filter>
+    </ClCompile>
+    <ClCompile Include="source\MRThreadTest\mr_eventDataTests.cpp">
+      <Filter>test\Thread library</Filter>
+    </ClCompile>
+    <ClCompile Include="mr_queuedDataEventTests.cpp">
+      <Filter>test\Thread library</Filter>
+    </ClCompile>
+    <ClCompile Include="source\MRThreadTest\mr_thread_test_1.cpp">
+      <Filter>test\Thread library</Filter>
+    </ClCompile>
+    <ClCompile Include="source\StateMachineTest\StateMachineTest1.cpp">
+      <Filter>test\State Machine library</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="makeall">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="makefile">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="TestHarnessConfig.ini">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="targetver.h">
+      <Filter>test\State Machine library\Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuildStep Include="testscript.txt">
+      <Filter>Resource Files</Filter>
+    </CustomBuildStep>
+  </ItemGroup>
+</Project>

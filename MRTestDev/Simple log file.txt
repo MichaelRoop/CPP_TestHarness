@@ -1,0 +1,14 @@
+ID, Status, Description
+COMP_1,SUCCESS,compare same ints,Value not as expected
+----------- End of Tests -------------
+	Summary of test states:
+	------------
+	   Non State:0
+	     Success:1
+	   Fail Init:0
+	  Fail Setup:0
+	   Fail Test:0
+	Fail Cleanup:0
+	   Not Found:0
+	--------------------
+	       Total:1

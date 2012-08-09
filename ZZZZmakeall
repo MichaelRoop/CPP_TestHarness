@@ -1,0 +1,45 @@
+# -----------------------------------------
+#
+# bash file to process all the makefiles
+#
+# -----------------------------------------
+
+
+# -----------------------------------------
+# Utils lib compile
+cd Utils
+echo Utils lib
+echo make $1
+make $1
+cd ..
+
+
+# -----------------------------------------
+# IniReader lib compile
+cd IniReader
+echo IniReader lib
+echo make $1
+make $1
+cd ..
+
+
+# -----------------------------------------
+# MRTest lib compile
+cd MRTest
+echo MRTest lib
+echo make $1
+make $1
+cd ..
+
+
+# -----------------------------------------
+# Main application compile and link
+cd MRTestDev
+echo Main app
+echo make $1
+make $1
+cd ..
+
+
+echo done
+

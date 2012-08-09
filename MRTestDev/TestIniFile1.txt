@@ -1,0 +1,10 @@
+[Section1]
+node1.1=value1.1
+node1.2=value1.2
+
+[Section2]
+node2.1=value2.1
+node2.2=value2.2
+node2.3=value2.3
+#End file Comment line
+End file line without comment indicator - garbage

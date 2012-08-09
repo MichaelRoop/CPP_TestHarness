@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Exceptions">
+      <UniqueIdentifier>{fccd0973-3f94-4764-848f-6591b7bc141f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Log outputs">
+      <UniqueIdentifier>{747886ba-6ab5-4075-bf50-35af5f5768ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Logging">
+      <UniqueIdentifier>{9d1333df-a385-461c-95e1-e8ad825b921e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Script reader">
+      <UniqueIdentifier>{9dabd0a4-75e4-4888-87f3-94dc8b980ddf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Factories">
+      <UniqueIdentifier>{05dd1133-8a1d-44bd-88de-7f0eb0b04449}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Logging">
+      <UniqueIdentifier>{193c8e63-58a6-4fec-aee9-125bc4ac05f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Log outputs">
+      <UniqueIdentifier>{858ecf93-a302-4448-881b-2cf964649541}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Script reader">
+      <UniqueIdentifier>{dfe9ffe0-b315-4cdf-86bb-4b5511369a8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Exceptions">
+      <UniqueIdentifier>{5599c2f1-03f3-462a-a98f-1ac67b13a1e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Factories">
+      <UniqueIdentifier>{3d8a51a2-2ed2-4875-8354-56bc75292f45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="source\mr_case.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\mr_compareFunctions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\mr_testEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\mr_testInfoObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Exceptions\mr_scriptException.cpp">
+      <Filter>Source Files\Exceptions</Filter>
+    </ClCompile>
+    <ClCompile Include="source\LogOutputs\mr_consoleOutput.cpp">
+      <Filter>Source Files\Log outputs</Filter>
+    </ClCompile>
+    <ClCompile Include="source\LogOutputs\mr_fileOutput.cpp">
+      <Filter>Source Files\Log outputs</Filter>
+    </ClCompile>
+    <ClCompile Include="source\LogOutputs\mr_odbcOutput.cpp">
+      <Filter>Source Files\Log outputs</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Loggers\mr_buildColumnInfoString.cpp">
+      <Filter>Source Files\Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Loggers\mr_buildColumnValueString.cpp">
+      <Filter>Source Files\Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Loggers\mr_buildConsoleSummaryString.cpp">
+      <Filter>Source Files\Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Loggers\mr_buildSummaryColumnValueString.cpp">
+      <Filter>Source Files\Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Loggers\mr_buildTestCaseColumnValueString.cpp">
+      <Filter>Source Files\Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Loggers\mr_columnBuilder.cpp">
+      <Filter>Source Files\Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Loggers\mr_iniLogInitialiser.cpp">
+      <Filter>Source Files\Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Loggers\mr_simpleLog.cpp">
+      <Filter>Source Files\Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Loggers\mr_sqlBuilder.cpp">
+      <Filter>Source Files\Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Loggers\mr_sqlLog.cpp">
+      <Filter>Source Files\Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Loggers\mr_testLog.cpp">
+      <Filter>Source Files\Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Loggers\mr_testLogEngine.cpp">
+      <Filter>Source Files\Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="source\mr_fileScriptReader.cpp">
+      <Filter>Source Files\Script reader</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Factories\mr_logFactory.cpp">
+      <Filter>Source Files\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Factories\mr_logInitialiserFactory.cpp">
+      <Filter>Source Files\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Factories\mr_logOutputFactory.cpp">
+      <Filter>Source Files\Factories</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\mr_case.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mr_compareClasses.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mr_compareFunctions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mr_testEngine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mr_testInfoObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mr_testMacros.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mr_buildColumnInfoString.h">
+      <Filter>Header Files\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mr_buildColumnValueString.h">
+      <Filter>Header Files\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mr_buildConsoleSummaryString.h">
+      <Filter>Header Files\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mr_buildSummaryColumnValueString.h">
+      <Filter>Header Files\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mr_buildTestCaseColumnValueString.h">
+      <Filter>Header Files\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mr_columnBuilder.h">
+      <Filter>Header Files\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mr_fieldPair.h">
+      <Filter>Header Files\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mr_iLogInitialiser.h">
+      <Filter>Header Files\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mr_iniLogInitialiser.h">
+      <Filter>Header Files\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mr_iTestLog.h">
+      <Filter>Header Files\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mr_simpleLog.h">
+      <Filter>Header Files\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mr_sqlBuilder.h">
+      <Filter>Header Files\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mr_sqlLog.h">
+      <Filter>Header Files\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mr_testLog.h">
+      <Filter>Header Files\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mr_testLogEngine.h">
+      <Filter>Header Files\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mr_consoleOutput.h">
+      <Filter>Header Files\Log outputs</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mr_fileOutput.h">
+      <Filter>Header Files\Log outputs</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mr_iLogOutput.h">
+      <Filter>Header Files\Log outputs</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mr_odbcOutput.h">
+      <Filter>Header Files\Log outputs</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mr_fileScriptReader.h">
+      <Filter>Header Files\Script reader</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mr_scriptReader.h">
+      <Filter>Header Files\Script reader</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mr_scriptException.h">
+      <Filter>Header Files\Exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mr_logFactory.h">
+      <Filter>Header Files\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mr_logInitialiserFactory.h">
+      <Filter>Header Files\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mr_logOutputFactory.h">
+      <Filter>Header Files\Factories</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\makefile">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>

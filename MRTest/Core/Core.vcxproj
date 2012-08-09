@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{B750DC00-FC52-495B-B8DA-A5CB41361DB1}</ProjectGuid>
+    <RootNamespace>Core</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>include;..\..\Utils\include;..\..\IniReader\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>MR_USE_WIDE_STR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>include;..\..\Utils\include;..\..\IniReader\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>MR_USE_WIDE_STR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="source\mr_case.cpp" />
+    <ClCompile Include="source\mr_compareFunctions.cpp" />
+    <ClCompile Include="source\mr_testEngine.cpp" />
+    <ClCompile Include="source\mr_testInfoObject.cpp" />
+    <ClCompile Include="source\Exceptions\mr_scriptException.cpp" />
+    <ClCompile Include="source\LogOutputs\mr_consoleOutput.cpp" />
+    <ClCompile Include="source\LogOutputs\mr_fileOutput.cpp" />
+    <ClCompile Include="source\LogOutputs\mr_odbcOutput.cpp" />
+    <ClCompile Include="source\Loggers\mr_buildColumnInfoString.cpp" />
+    <ClCompile Include="source\Loggers\mr_buildColumnValueString.cpp" />
+    <ClCompile Include="source\Loggers\mr_buildConsoleSummaryString.cpp" />
+    <ClCompile Include="source\Loggers\mr_buildSummaryColumnValueString.cpp" />
+    <ClCompile Include="source\Loggers\mr_buildTestCaseColumnValueString.cpp" />
+    <ClCompile Include="source\Loggers\mr_columnBuilder.cpp" />
+    <ClCompile Include="source\Loggers\mr_iniLogInitialiser.cpp" />
+    <ClCompile Include="source\Loggers\mr_simpleLog.cpp" />
+    <ClCompile Include="source\Loggers\mr_sqlBuilder.cpp" />
+    <ClCompile Include="source\Loggers\mr_sqlLog.cpp" />
+    <ClCompile Include="source\Loggers\mr_testLog.cpp" />
+    <ClCompile Include="source\Loggers\mr_testLogEngine.cpp" />
+    <ClCompile Include="source\mr_fileScriptReader.cpp" />
+    <ClCompile Include="source\Factories\mr_logFactory.cpp" />
+    <ClCompile Include="source\Factories\mr_logInitialiserFactory.cpp" />
+    <ClCompile Include="source\Factories\mr_logOutputFactory.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\mr_case.h" />
+    <ClInclude Include="include\mr_compareClasses.h" />
+    <ClInclude Include="include\mr_compareFunctions.h" />
+    <ClInclude Include="include\mr_testEngine.h" />
+    <ClInclude Include="include\mr_testInfoObject.h" />
+    <ClInclude Include="include\mr_testMacros.h" />
+    <ClInclude Include="include\mr_buildColumnInfoString.h" />
+    <ClInclude Include="include\mr_buildColumnValueString.h" />
+    <ClInclude Include="include\mr_buildConsoleSummaryString.h" />
+    <ClInclude Include="include\mr_buildSummaryColumnValueString.h" />
+    <ClInclude Include="include\mr_buildTestCaseColumnValueString.h" />
+    <ClInclude Include="include\mr_columnBuilder.h" />
+    <ClInclude Include="include\mr_fieldPair.h" />
+    <ClInclude Include="include\mr_iLogInitialiser.h" />
+    <ClInclude Include="include\mr_iniLogInitialiser.h" />
+    <ClInclude Include="include\mr_iTestLog.h" />
+    <ClInclude Include="include\mr_simpleLog.h" />
+    <ClInclude Include="include\mr_sqlBuilder.h" />
+    <ClInclude Include="include\mr_sqlLog.h" />
+    <ClInclude Include="include\mr_testLog.h" />
+    <ClInclude Include="include\mr_testLogEngine.h" />
+    <ClInclude Include="include\mr_consoleOutput.h" />
+    <ClInclude Include="include\mr_fileOutput.h" />
+    <ClInclude Include="include\mr_iLogOutput.h" />
+    <ClInclude Include="include\mr_odbcOutput.h" />
+    <ClInclude Include="include\mr_fileScriptReader.h" />
+    <ClInclude Include="include\mr_scriptReader.h" />
+    <ClInclude Include="include\mr_scriptException.h" />
+    <ClInclude Include="include\mr_logFactory.h" />
+    <ClInclude Include="include\mr_logInitialiserFactory.h" />
+    <ClInclude Include="include\mr_logOutputFactory.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\makefile" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Utils\Utils.vcxproj">
+      <Project>{4e73b269-3fee-4063-9bca-a7bbc5810071}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
