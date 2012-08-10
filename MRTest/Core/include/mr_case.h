@@ -189,12 +189,15 @@ public:
 	/// @return	The test message buffer.
 	mr_utils::mr_stringstream& getVerboseBuffer();
 
+
 	/// @brief	Typdef of a class method pointer with no param and no return to clean up syntax. 
 	typedef void (testCase::*  testCase_ptr) ( void );
+
 
 	/// @brief	Register a setup method to be executed once for the entire fixture
 	/// @param	setup The setup method
 	void RegisterFixtureSetup(testCase_ptr setup);
+
 
 	/// @brief	Register a teardown method to be executed once for the entire fixture
 	/// @param	teardown The teardown method
