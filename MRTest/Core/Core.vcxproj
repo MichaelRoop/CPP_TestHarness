@@ -97,6 +97,7 @@
     <ClCompile Include="source\Factories\mr_logOutputFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\mr_Assert.h" />
     <ClInclude Include="include\mr_case.h" />
     <ClInclude Include="include\mr_compareClasses.h" />
     <ClInclude Include="include\mr_compareFunctions.h" />

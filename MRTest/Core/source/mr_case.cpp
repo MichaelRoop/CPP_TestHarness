@@ -115,12 +115,40 @@ long long testCase::cleanupTime() const
 
 bool testCase::execStep( long long& timeVal, step_ptr funcPtr )
 {
-	mr_utils::StaticTimer timer;
-	timer.start();
-	bool retVal = (this->*funcPtr)();
-	timer.stop();
-	timeVal = timer.getMsInterval();
-	return retVal;
+	//mr_utils::StaticTimer timer;
+	//timer.start();
+	//bool retVal = (this->*funcPtr)();
+	//timer.stop();
+	//timeVal = timer.getMsInterval();
+	//return retVal;
+
+
+	try {
+		mr_utils::StaticTimer timer;
+		timer.start();
+		bool retVal = (this->*funcPtr)();
+		timer.stop();
+		timeVal = timer.getMsInterval();
+		return retVal;
+	}
+	catch(mr_utils::mr_exception const & e) {
+
+		// TODO - at present, the values being logged before the exception is called by macros
+
+		//mr_cout << "** Caught mr_exception on Test ** File:" << e.fileName() << _L_(" Line:") << e.fileLine() << _L_(" Msg:") << e.msg()  << _L_(" LongMsg:") << e.longMsg() << std::endl;
+		//mr_cout << "** Caught mr_exception on Test ** File:" << e.fileName() << _L_(" Line:") << e.fileLine() << _L_(" Msg:") << e.msg() << std::endl;
+	}
+	catch(std::exception const & e) {
+		//mr_cout << "** Caught std::exception on Test **" << e.what() <<  std::endl;
+	}
+	catch(std::string const & s) {
+		//mr_cout << "** Caught std::string on Test **" << s.c_str() <<  std::endl;
+	}
+	catch (...) {
+		//printf("** Caught Unknown Exception on Test **\n");
+	}
+
+	return false;
 }
 
 

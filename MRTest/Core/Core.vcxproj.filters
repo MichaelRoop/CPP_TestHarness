@@ -212,6 +212,9 @@
     <ClInclude Include="include\mr_logOutputFactory.h">
       <Filter>Header Files\Factories</Filter>
     </ClInclude>
+    <ClInclude Include="include\mr_Assert.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\makefile">

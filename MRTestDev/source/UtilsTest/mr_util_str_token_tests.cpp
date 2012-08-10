@@ -4,6 +4,7 @@
 #include "mr_string.h"
 #include "mr_iostream.h"
 #include "mr_compareFunctions.h"
+#include "mr_Assert.h"
 
 
 class TokTestBase : public mr_test::testCase
@@ -30,7 +31,7 @@ public:
 	}
 
 	void FixtureTeardown() {
-		printf("**** Registered Teardown Executed ****\n");
+		//printf("**** Registered Teardown Executed ****\n");
 	}
 
 protected:
@@ -45,7 +46,9 @@ protected:
 			this->getMsgBuffer() << L( "index of:" ) << index << L( " exceeds token count of :" ) << m_tokens.size() << std::endl;
 			return false;
 		}
-		return mr_test::VerbCompareEqual( FL, m_tokens[index], token, *this, L("Token value mismatch") );
+		mr_assert::AreEqual(_FL_, m_tokens[index], token, *this);
+		//mr_cout << _L_("At Index:") << this->m_tokens[index] << _L_(" Compared:") << token << std::endl;
+		return true;
 	}
 
 	bool DoIt( const mr_utils::mr_string& str )
@@ -60,11 +63,15 @@ protected:
 			{
 				return false;
 			}
-			//mr_cout << L( "str:" ) << str << L( ", token:" ) << token.c_str() << std::endl;
 		}
 
 		// The index is incremented before the tokenize so it will be one high.
-		return mr_test::VerbCompareEqual( FL, m_tokens.size(), index, *this, L("Total tokens number mismatch") );
+		//return mr_test::VerbCompareEqual( FL, m_tokens.size(), index, *this, L("Total tokens number mismatch") );
+		//ASSERT_ARE_EQUAL(__FILE__, __LINE__, this->m_tokens.size(), index, this, _L_("Token value mismatch"));
+
+		mr_assert::AreEqual(_FL_, this->m_tokens.size(), index, *this);
+
+		return true;
 	}
 
 };
@@ -86,43 +93,66 @@ _REGISTER_FIXTURE_(mrTokTestNormal);
 
 
 // Test tokenize of string with multiple token delimiters and mid extras.
-_DECL_TEST_( mrTokTestMidMultipleDel, TokTestBase )
-	bool test()		
-	{ 
+class mrTokTestMidMultipleDel : public TokTestBase {
+public:
+	mrTokTestMidMultipleDel() : TokTestBase(_L_("UTL_TOK_1_2"), _L_( "Tokenize with multiple mid delimiters")) {
+		_ADD_TEST_FIXTURE_( this );
+	}
+
+	bool test()	{ 
 		mr_utils::mr_string str( _L_("This|is|a|test|string|with|some|||||tokens") );
 		return this->DoIt( str );
 	}
-_REG_TEST_( UTL_TOK_1_2, instUTL_TOK_1_2, mrTokTestMidMultipleDel, _L_( "Tokenize with multiple mid delimiters" ) )
+};
+_REGISTER_FIXTURE_(mrTokTestMidMultipleDel);
 
 
 // Test tokenize of string with leading token delimiters.
-_DECL_TEST_( mrTokTestLeadDel, TokTestBase )
+class mrTokTestLeadDel : public TokTestBase {
+public:
+	mrTokTestLeadDel() : TokTestBase(_L_("UTL_TOK_1_3"), _L_( "Tokenize test leading delimiters" )) {
+		_ADD_TEST_FIXTURE_( this );
+	}
+
 	bool test()		
 	{ 
 		mr_utils::mr_string str( _L_("||||||||This|is|a|test|string|with|some|tokens") );
 		return this->DoIt( str );
 	}
-_REG_TEST_( UTL_TOK_1_3, instUTL_TOK_1_3, mrTokTestLeadDel, _L_( "Tokenize test leading delimiters" ) )
+};
+_REGISTER_FIXTURE_(mrTokTestLeadDel);
 
 
 // Test tokenize of string with following token delimiters.
-_DECL_TEST_( mrTokTestFollowDel, TokTestBase )
+class mrTokTestFollowDel : public TokTestBase {
+public:
+	mrTokTestFollowDel() : TokTestBase(_L_("UTL_TOK_1_4"), _L_( "Tokenize test following delimiters" )) {
+		_ADD_TEST_FIXTURE_( this );
+	}
+
 	bool test()		
 	{ 
 		mr_utils::mr_string str( _L_("This|is|a|test|string|with|some|tokens||||||||") );
 		return this->DoIt( str );
 	}
-_REG_TEST_( UTL_TOK_1_4, instUTL_TOK_1_4, mrTokTestFollowDel, _L_( "Tokenize test following delimiters" ) )
+};
+_REGISTER_FIXTURE_(mrTokTestFollowDel);
 
 
 // Test tokenize of string with leading and following token delimiters.
-_DECL_TEST_( mrTokTestLeadFollowDel, TokTestBase )
+class mrTokTestLeadFollowDel : public TokTestBase {
+public:
+	mrTokTestLeadFollowDel() : TokTestBase(_L_("UTL_TOK_1_5"), _L_( "Tokenize test leading and following delimiters" )) {
+		_ADD_TEST_FIXTURE_( this );
+	}
+							 
 	bool test()		
 	{ 
 		mr_utils::mr_string str( _L_("||||||||This|is|a|test|string|with|some|tokens||||||||") );
 		return this->DoIt( str );
 	}
-_REG_TEST_( UTL_TOK_1_5, instUTL_TOK_1_5, mrTokTestLeadFollowDel, _L_( "Tokenize test leading and following delimiters" ) )
+};
+_REGISTER_FIXTURE_(mrTokTestLeadFollowDel);
 
 
 // Test tokenize of string with multiple mid and leading and following token delimiters.
