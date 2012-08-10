@@ -67,8 +67,6 @@ protected:
 
 		// The index is incremented before the tokenize so it will be one high.
 		//return mr_test::VerbCompareEqual( FL, m_tokens.size(), index, *this, L("Total tokens number mismatch") );
-		//ASSERT_ARE_EQUAL(__FILE__, __LINE__, this->m_tokens.size(), index, this, _L_("Token value mismatch"));
-
 		mr_assert::AreEqual(_FL_, this->m_tokens.size(), index, this->getMsgBuffer());
 
 		return true;
