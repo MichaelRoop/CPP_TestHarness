@@ -30,13 +30,13 @@ namespace mr_assert
 /// @param	msg			The user message. Default is empty.
 template<class T>
 void AreEqual(
-	const char* file, int line, const T& expected, const T& actual, mr_test::testCase& theCase, const mr_utils::mr_string& msg = _L_( "" )) {
+	const char* file, int line, const T& expected, const T& actual, mr_utils::mr_stringstream& buffer, const mr_utils::mr_string& msg = _L_( "" )) {
 
 	mr_utils::mr_stringstream ss;
 	ss << _L_("Expected '") << expected << _L_("' but actual is '") << actual << _L_("'  ");
 	CreateMsg(ss, file, line, msg);
 
-	if (!mr_test::CompareEqual(expected, actual, theCase, ss.str())) {
+	if (!mr_test::CompareEqual(expected, actual, buffer, ss.str())) {
 		throw mr_utils::mr_exception(file, line, ss.str());				
 	}																	
 }
@@ -53,13 +53,13 @@ void AreEqual(
 /// @param	msg		The user message. Default is empty.
 template<class T>
 void AreNotEqual(
-	const char* file, int line, const T& nonexpected, const T& actual, mr_test::testCase& theCase, const mr_utils::mr_string& msg = _L_( "" )) {
+	const char* file, int line, const T& nonexpected, const T& actual, mr_utils::mr_stringstream& buffer, const mr_utils::mr_string& msg = _L_( "" )) {
 
 	mr_utils::mr_stringstream ss;
 	ss << _L_("Did not Expected '") << nonexpected << _L_("' but actual is '") << actual << _L_("'  ");
 	CreateMsg(ss, file, line, msg);
 
-	if (!mr_test::CompareNotEqual(nonexpected, actual, theCase, ss.str())) {
+	if (!mr_test::CompareNotEqual(nonexpected, actual, buffer, ss.str())) {
 		throw mr_utils::mr_exception(file, line, ss.str());				
 	}																	
 }

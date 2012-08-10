@@ -18,7 +18,7 @@ _DECL_TEST_( _mr_dataEventTest1, mr_test::testCase)
 		dv.Signal( source );
 		dv.Wait( target );
 
-		return mr_test::CompareEqual( source, target, *this );
+		return mr_test::CompareEqual( source, target, this->getMsgBuffer());
 	}
 _REG_TEST_( THR_2_1_1, instTHR_2_1_1, _mr_dataEventTest1, L("Data event test - wait") )
 
@@ -32,9 +32,9 @@ _DECL_TEST_( _mr_dataEventTest2, mr_test::testCase)
 		mr_threads::mr_dataEvent<mr_utils::mr_string> dv;
 		dv.Signal( source );
 
-		if (mr_test::CompareEqual( dv.IsSignaled( target ), true, *this ))
+		if (mr_test::CompareEqual( dv.IsSignaled( target ), true, this->getMsgBuffer()))
 		{
-			return mr_test::CompareEqual( source, target, *this );
+			return mr_test::CompareEqual( source, target, this->getMsgBuffer());
 		}
 		return false;
 	}

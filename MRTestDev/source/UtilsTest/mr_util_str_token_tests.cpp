@@ -46,7 +46,7 @@ protected:
 			this->getMsgBuffer() << L( "index of:" ) << index << L( " exceeds token count of :" ) << m_tokens.size() << std::endl;
 			return false;
 		}
-		mr_assert::AreEqual(_FL_, m_tokens[index], token, *this);
+		mr_assert::AreEqual(_FL_, m_tokens[index], token, this->getMsgBuffer());
 		//mr_cout << _L_("At Index:") << this->m_tokens[index] << _L_(" Compared:") << token << std::endl;
 		return true;
 	}
@@ -69,7 +69,7 @@ protected:
 		//return mr_test::VerbCompareEqual( FL, m_tokens.size(), index, *this, L("Total tokens number mismatch") );
 		//ASSERT_ARE_EQUAL(__FILE__, __LINE__, this->m_tokens.size(), index, this, _L_("Token value mismatch"));
 
-		mr_assert::AreEqual(_FL_, this->m_tokens.size(), index, *this);
+		mr_assert::AreEqual(_FL_, this->m_tokens.size(), index, this->getMsgBuffer());
 
 		return true;
 	}
@@ -189,7 +189,7 @@ public:
 		for (count = 0; mr_utils::MrTokenize( pos, str, token, _L_('|') ); count++)
 		{
 		}
-		return mr_test::VerbCompareEqual( _FL_, 0, count, *this );
+		return mr_test::VerbCompareEqual( _FL_, 0, count, this->getVerboseBuffer() );
 	}
 };
 _REGISTER_FIXTURE_(mrTokTestDelOnly2);

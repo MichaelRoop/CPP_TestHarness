@@ -9,7 +9,7 @@
 _DECL_TEST_( mrIntEqComp, mr_test::testCase )
 	bool test()		
 	{ 
-		return mr_test::VerbCompareEqual( FL, 100, 100, *this );
+		return mr_test::VerbCompareEqual( FL, 100, 100, this->getVerboseBuffer() );
 	}
 _REG_TEST_( COMP_1_1, instCOMP_1_1, mrIntEqComp, L( "compare same ints" ) )
 
@@ -19,7 +19,7 @@ _REG_TEST_( COMP_1_1, instCOMP_1_1, mrIntEqComp, L( "compare same ints" ) )
 _DECL_TEST_( mrIntNotEqComp, mr_test::testCase )
 	bool test()		
 	{ 
-		return mr_test::VerbCompareNotEqual( FL, 100, 4234234, *this );
+		return mr_test::VerbCompareNotEqual( FL, 100, 4234234, this->getVerboseBuffer());
 	}
 _REG_TEST_( COMP_1_2, instCOMP_1_2, mrIntNotEqComp, L( "Not equal int compare" ) )
 
@@ -39,7 +39,7 @@ _DECL_TEST_( mrIntVecEqComp, mr_test::testCase )
 		actual.push_back( 66 );
 		actual.push_back( 345 );
 
-		return mr_test::VerbCompareVecEqual( FL, expected, actual, *this );
+		return mr_test::VerbCompareVecEqual( FL, expected, actual, this->getVerboseBuffer() );
 	}
 _REG_TEST_( COMP_1_3, instCOMP_1_3, mrIntVecEqComp, L( "compare same int vectors" ) )
 
@@ -49,7 +49,7 @@ _REG_TEST_( COMP_1_3, instCOMP_1_3, mrIntVecEqComp, L( "compare same int vectors
 _DECL_TEST_( mrIntEqCompFail, mr_test::testCase )
 	bool test()		
 	{ 
-		return !mr_test::VerbCompareEqual( FL, 100, 38, *this );
+		return !mr_test::VerbCompareEqual( FL, 100, 38, this->getVerboseBuffer() );
 	}
 _REG_TEST_( COMP_3, instCOMP_3, mrIntEqCompFail, L( "Fail int comparison - shows error dump" ) )
 
@@ -59,7 +59,7 @@ _REG_TEST_( COMP_3, instCOMP_3, mrIntEqCompFail, L( "Fail int comparison - shows
 _DECL_TEST_( mrIntNotEqCompFail, mr_test::testCase )
 	bool test()		
 	{ 
-		return !mr_test::VerbCompareNotEqual( FL, 100, 100, *this );
+		return !mr_test::VerbCompareNotEqual( FL, 100, 100, this->getVerboseBuffer() );
 	}
 _REG_TEST_( COMP_4, instCOMP_4, mrIntNotEqCompFail, L( "Fail Not equal int compare - shows error dump" ) )
 
@@ -70,7 +70,7 @@ _REG_TEST_( COMP_4, instCOMP_4, mrIntNotEqCompFail, L( "Fail Not equal int compa
 _DECL_TEST_( mrIntStrComp, mr_test::testCase )
 	bool test()		
 	{ 
-		return mr_test::VerbCompareEqual( FL, std::string( "Fred" ), std::string( "Fred" ), *this );
+		return mr_test::VerbCompareEqual( FL, std::string( "Fred" ), std::string( "Fred" ), this->getVerboseBuffer() );
 	}
 _REG_TEST_( COMP_5_1, instCOMP_5_1, mrIntStrComp, L( "compare same strings" ) )
 
@@ -80,7 +80,7 @@ _REG_TEST_( COMP_5_1, instCOMP_5_1, mrIntStrComp, L( "compare same strings" ) )
 _DECL_TEST_( mrIntStrCompFail, mr_test::testCase )
 	bool test()		
 	{ 
-		return mr_test::VerbCompareEqual( FL, std::string( "Fred" ), std::string( "George" ), *this );
+		return mr_test::VerbCompareEqual( FL, std::string( "Fred" ), std::string( "George" ), this->getVerboseBuffer() );
 	}
 _REG_TEST_( COMP_5_2, instCOMP_5_2, mrIntStrCompFail, L( "compare different strings" ) )
 
@@ -90,7 +90,7 @@ _REG_TEST_( COMP_5_2, instCOMP_5_2, mrIntStrCompFail, L( "compare different stri
 _DECL_TEST_( mrIntWStrComp, mr_test::testCase )
 	bool test()		
 	{ 
-		return mr_test::VerbCompareEqual( FL, std::wstring( L"Fred" ), std::wstring( L"Fred" ), *this );
+		return mr_test::VerbCompareEqual( FL, std::wstring( L"Fred" ), std::wstring( L"Fred" ), this->getVerboseBuffer());
 	}
 _REG_TEST_( COMP_6_1, instCOMP_6_1, mrIntWStrComp, L( "compare same wide strings" ) )
 
@@ -100,7 +100,7 @@ _REG_TEST_( COMP_6_1, instCOMP_6_1, mrIntWStrComp, L( "compare same wide strings
 _DECL_TEST_( mrIntWStrCompFail, mr_test::testCase )
 	bool test()		
 	{ 
-		return mr_test::VerbCompareEqual( FL, std::wstring( L"Fred" ), std::wstring( L"George" ), *this );
+		return mr_test::VerbCompareEqual( FL, std::wstring( L"Fred" ), std::wstring( L"George" ), this->getVerboseBuffer());
 	}
 _REG_TEST_( COMP_6_2, instCOMP_6_2, mrIntWStrCompFail, L( "compare differente wide strings" ) )
 

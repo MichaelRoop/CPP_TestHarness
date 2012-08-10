@@ -39,7 +39,7 @@ class testCase;
 /// @param	success	Then condition to test.
 ///
 /// @return	The value of the success argument.
-bool WriteToMsgBuff( mr_test::testCase& theCase, const mr_utils::mr_string& msg, bool success );
+bool WriteToMsgBuff(mr_utils::mr_stringstream& buffer, const mr_utils::mr_string& msg, bool success);
 
 
 /// @brief	Writes the first part of the verbose message to the testCase verbose message buffer.
@@ -49,7 +49,7 @@ bool WriteToMsgBuff( mr_test::testCase& theCase, const mr_utils::mr_string& msg,
 /// @param	file	The code file where the call originates.
 /// @param	line	The code line where the call originates.
 /// @param	theCase	The test case to write to.
-void WriteToVerboseBuffHead( const char* file, int line, mr_test::testCase&	theCase );
+void WriteToVerboseBuffHead(const char* file, int line, mr_utils::mr_stringstream& buffer);
 
 
 /// @brief	Writes the middle part of the verbose message to the testCase verbose message buffer.
@@ -57,7 +57,7 @@ void WriteToVerboseBuffHead( const char* file, int line, mr_test::testCase&	theC
 ///	Message creates the template and is ready for 'actual value'
 ///
 /// @param	theCase	The test case to write to.
-void WriteToVerboseBuffMid( mr_test::testCase& theCase );
+void WriteToVerboseBuffMid(mr_utils::mr_stringstream& buffer);
 
 
 /// @brief	Template function to write to the testCase verbose buffer on a false condition.
@@ -77,18 +77,16 @@ bool WriteToVerboseBuff(
 	int							line,
 	const T&					expected, 
 	const T&					actual, 
-	mr_test::testCase&			theCase, 
+	mr_utils::mr_stringstream&	buffer, 
 	bool						success 
 )
 {
 	if (!success)
 	{
-		mr_utils::mr_ostream& os = theCase.getVerboseBuffer();
-
-		WriteToVerboseBuffHead( file, line, theCase );
-		mr_utils::ToStream( os, expected );
-		WriteToVerboseBuffMid( theCase );
-		mr_utils::ToStream( os, actual );
+		WriteToVerboseBuffHead(file, line, buffer);
+		mr_utils::ToStream( buffer, expected);
+		WriteToVerboseBuffMid(buffer);
+		mr_utils::ToStream(buffer, actual);
 	}
 	return success;
 }
@@ -112,19 +110,17 @@ bool WriteVecToVerboseBuff(
 	int							line,
 	const std::vector<T>&		expected, 
 	const std::vector<T>&		actual, 
-	mr_test::testCase&			theCase, 
+	mr_utils::mr_stringstream&	buffer, 
 	bool						success 
 )
 {
 	if (!success)
 	{
-		mr_utils::mr_ostream& os = theCase.getVerboseBuffer();
-		mr_utils::VecStreamLineDelimited<T> lineFormater( os );
-
-		WriteToVerboseBuffHead( file, line, theCase );
-		mr_utils::ToStream( os, expected, lineFormater );
-		WriteToVerboseBuffMid( theCase );
-		mr_utils::ToStream( os, actual, lineFormater );
+		mr_utils::VecStreamLineDelimited<T> lineFormater(buffer);
+		WriteToVerboseBuffHead(file, line, buffer);
+		mr_utils::ToStream(buffer, expected, lineFormater);
+		WriteToVerboseBuffMid(buffer);
+		mr_utils::ToStream(buffer, actual, lineFormater);
 	}
 	return success;
 }
@@ -149,10 +145,10 @@ template<class T, class T2>
 bool CompareEqual( 
 	const T&					expected, 
 	const T2&					actual, 
-	mr_test::testCase&			theCase, 
+	mr_utils::mr_stringstream&	buffer, 
 	const mr_utils::mr_string&	msg = L( "Value not as expected" ) )
 {
-	return WriteToMsgBuff( theCase, msg, mr_utils::CompareEqual( expected, actual ) );
+	return WriteToMsgBuff(buffer, msg, mr_utils::CompareEqual(expected, actual));
 }
 
 
@@ -169,10 +165,10 @@ template<class T, class T2>
 bool CompareNotEqual( 
 	const T&					expected, 
 	const T2&					actual, 
-	mr_test::testCase&			theCase, 
+	mr_utils::mr_stringstream&	buffer, 
 	const mr_utils::mr_string&	msg = L( "Value not as expected" ) )
 {
-	return WriteToMsgBuff( theCase, msg, mr_utils::CompareNotEqual( expected, actual ) );
+	return WriteToMsgBuff(buffer, msg, mr_utils::CompareNotEqual(expected, actual));
 }
 
 
@@ -193,12 +189,12 @@ bool VerbCompareEqual(
 	int							line,
 	const T&					expected, 
 	const T&					actual, 
-	mr_test::testCase&			theCase, 
+	mr_utils::mr_stringstream&	buffer, 
 	const mr_utils::mr_string&	msg = L( "Value not as expected" ) 
 )
 {
 	return WriteToVerboseBuff( 
-		file, line, expected, actual, theCase, CompareEqual( expected, actual, theCase, msg ) 
+		file, line, expected, actual, buffer, CompareEqual(expected, actual, buffer, msg) 
 	);
 }
 
@@ -220,12 +216,12 @@ bool VerbCompareNotEqual(
 	int							line,
 	const T&					expected, 
 	const T&					actual, 
-	mr_test::testCase&			theCase, 
+	mr_utils::mr_stringstream&	buffer, 
 	const mr_utils::mr_string&	msg = L( "Value not as expected" ) 
 )
 {
 	return WriteToVerboseBuff( 
-		file, line, expected, actual, theCase, CompareNotEqual( expected, actual, theCase, msg ) 
+		file, line, expected, actual, buffer, CompareNotEqual(expected, actual, buffer, msg) 
 	);
 }
 
@@ -248,12 +244,12 @@ bool VerbCompareVecEqual(
 	int							line,
 	const std::vector<T>&		expected, 
 	const std::vector<T>&		actual, 
-	mr_test::testCase&			theCase, 
+	mr_utils::mr_stringstream&	buffer, 
 	const mr_utils::mr_string&	msg = L( "Value not as expected" ) 
 )
 {
 	return WriteVecToVerboseBuff( 
-		file, line, expected, actual, theCase, CompareEqual( expected, actual, theCase, msg ) 
+		file, line, expected, actual, buffer, CompareEqual( expected, actual, buffer, msg ) 
 	);
 }
 
