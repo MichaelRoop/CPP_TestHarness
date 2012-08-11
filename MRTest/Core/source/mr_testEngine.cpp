@@ -12,6 +12,7 @@
 #include "mr_case.h"
 #include "mr_pointerException.h"
 #include "mr_defines.h"
+#include "mr_iostream.h"
 
 #include <time.h>
 #include <algorithm>
@@ -47,6 +48,25 @@ private:
 
 	const mr_utils::mr_string& m_name; ///< The name to compare to each testCase.
 };
+
+
+class HasNamedTest
+{
+public:
+	HasNamedTest(const mr_utils::mr_string& name) : m_name(name) {
+	}
+
+	bool operator () (mr_test::testCase* test) {
+
+		//mr_cout << _L_("** Lookup Name:") << this->m_name << _L_(" Registered test name:") << test->name() << std::endl;
+
+		mr_utils::mr_pointerException::ptrAssert( test, FL );
+		return test->HasTest(this->m_name);
+	}
+private:
+	const mr_utils::mr_string& m_name;
+};
+
 
 
 //---------------------------------------------------------------------------------------
@@ -95,7 +115,59 @@ void engine::regCase( mr_test::testCase* newCase )
 	m_cases.push_back( newCase );
 }
 
+#define BLAHBLAH
+#ifdef BLAHBLAH
+void engine::processScript( scriptReader& theReader )
+{
+	m_logEngine.writeHeaders();
 
+	testInfoObject info = theReader.getNextTest();
+	while (!info.isNull()) {
+		bool infoUnused = false;
+		if (info.isActive()) {
+			//this->processCase( info );
+			// search vector for right test case per name.
+			std::vector<mr_test::testCase*>::iterator it = 
+				std::find_if( m_cases.begin(), m_cases.end(), HasNamedTest(info.getName()));
+
+			// check if exists
+			if (it == m_cases.end())
+			{
+				NonExistantTest test( info.getName() );
+				this->logResults( &test );
+			}
+			else
+			{
+				while (!info.isNull()) {
+					if (info.isActive()) {
+						(*it)->RunTest(info.getName(), info.getArguments());
+						this->logResults( (*it) );
+					}
+					info = theReader.getNextTest();
+					if (info.isNull()) {
+						(*it)->ResetFixture();
+						break;
+					}
+
+					if (!(*it)->HasTest(info.getName())) {
+						infoUnused = true;
+						(*it)->ResetFixture();
+						break;
+					}
+				}
+			}
+		}
+
+		// Only get next if not already hit end. Another case is when the info is valid but unused
+		if (!info.isNull() && !infoUnused) {
+			info = theReader.getNextTest();
+		}
+	}
+	m_logEngine.writeSummaries();
+}
+
+
+#else
 void engine::processScript( scriptReader& theReader )
 {
 	m_logEngine.writeHeaders();
@@ -111,6 +183,7 @@ void engine::processScript( scriptReader& theReader )
 	}
 	m_logEngine.writeSummaries();
 }
+#endif
 
 
 //void engine::processCase( const mr_utils::mr_string& name, const mr_utils::mr_string& args )

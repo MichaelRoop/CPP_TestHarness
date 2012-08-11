@@ -180,6 +180,9 @@ _fixture_->RegisterFixtureSetup(static_cast<testCase::testCase_ptr>( _setup_  ))
 _fixture_->RegisterFixtureTeardown(static_cast<testCase::testCase_ptr>( _teardown_  ));			\
 
 
+#define _REGISTER_TEST_( _fixture_, _test_ )												\
+_fixture_->RegisterTest(  _L_((#_test_)), static_cast<testCase::testCase_ptr>( _test_ ));			\
+
 
 
 #endif

@@ -29,6 +29,7 @@ public:
 	}
 
 	bool operator () (const std::pair<mr_utils::mr_string, void(testCase::*) ( void )>& testIndexPair ) {
+		//mr_cout << _L_("   ++ Test Fixture Lookup on:") << this->m_name << _L_(" Registered test name:") << testIndexPair.first << std::endl;
 		return testIndexPair.first == this->m_name;
 	}
 private:
@@ -278,7 +279,17 @@ void testCase::RegisterTestTeardown(testCase_ptr teardown) {
 void testCase::RegisterTest(const mr_utils::mr_string& name, testCase_ptr test) {
 	assert(test);
 	// TODO - test if already there?
-	this->m_tests.push_back(TestIndexPair(name, test));
+
+	//mr_utils::mr_string s(_L_((#_test_)));			
+	
+	mr_utils::mr_string scratch(name);
+	size_t pos = scratch.find(_L_("::"));
+	if (pos != mr_utils::mr_string::npos) {
+		scratch = name.substr(pos + 2);
+	}
+
+
+	this->m_tests.push_back(TestIndexPair(scratch, test));
 
 }
 
@@ -308,6 +319,8 @@ void testCase::RunTest(const mr_utils::mr_string& name, const TestArguments& arg
 			std::find_if(this->m_tests.begin(), this->m_tests.end(), HasNamedTest(name));
 		// TODO - report this as an error instead
 		assert(it != this->m_tests.end());
+
+		this->m_name = it->first;
 
 		this->ExecTestFixtureSetup();
 		this->ExecStep(this->m_setupTime, this->m_testSetup, ST_FAIL_SETUP);

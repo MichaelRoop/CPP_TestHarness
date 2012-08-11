@@ -74,6 +74,51 @@ protected:
 
 };
 
+class blah : public TokTestBase {
+public:
+	blah() : TokTestBase( _L_( "blah" ), _L_( "Blah class" ) )	{
+		_ADD_TEST_FIXTURE_( this );
+		_REGISTER_TEST_(this, &blah::UTL_TOK_1_1)
+		_REGISTER_TEST_(this, &blah::UTL_TOK_1_2)
+		_REGISTER_TEST_(this, &blah::UTL_TOK_1_3)
+		_REGISTER_TEST_(this, &blah::UTL_TOK_1_4)
+		_REGISTER_TEST_(this, &blah::UTL_TOK_1_5)
+	}
+
+	// just to satisfy compiler with old code
+	bool test()	{ return false;}
+
+	void UTL_TOK_1_1() { 
+		mr_utils::mr_string str( _L_("This|is|a|test|string|with|some|tokens") );
+		this->DoIt( str );
+	}
+
+	void UTL_TOK_1_2() { 
+		mr_utils::mr_string str( _L_("This|is|a|test|string|with|some|||||tokens") );
+		this->DoIt( str );
+	}
+	
+	void UTL_TOK_1_3() { 
+		mr_utils::mr_string str( _L_("||||||||This|is|a|test|string|with|some|tokens") );
+		this->DoIt( str );
+	}
+
+	void UTL_TOK_1_4() { 
+		mr_utils::mr_string str( _L_("This|is|a|test|string|with|some|tokens||||||||") );
+		this->DoIt( str );
+	}
+	
+	void UTL_TOK_1_5() { 
+		mr_utils::mr_string str( _L_("||||||||This|is|a|test|string|with|some|tokens||||||||") );
+		this->DoIt( str );
+	}
+
+
+
+};
+_REGISTER_FIXTURE_(blah);
+
+#ifdef erotiuertiou
 
 // Test tokenize of string with multiple token delimiters.
 class mrTokTestNormal : public TokTestBase {
@@ -152,6 +197,7 @@ public:
 };
 _REGISTER_FIXTURE_(mrTokTestLeadFollowDel);
 
+#endif
 
 // Test tokenize of string with multiple mid and leading and following token delimiters.
 class mrTokTestLeadMidFollowDel : public TokTestBase {
