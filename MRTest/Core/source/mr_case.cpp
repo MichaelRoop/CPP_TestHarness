@@ -28,7 +28,10 @@ testCase::testCase( const mr_utils::mr_string& name, const mr_utils::mr_string& 
 	m_cleanupTime( 0 ),
 	m_status( ST_NONE ),
 	m_fixtureSetup(0),
-	m_fixtureTeardown(0)
+	m_fixtureTeardown(0),
+	m_testSetup(0),
+	m_testTeardown(0),
+	m_isFixtureCalled(false)
 {
 }
 
@@ -82,6 +85,10 @@ mr_utils::mr_string testCase::status() const
 	case ST_FAIL_TEST:		return L( "FAIL_TEST" );
 	case ST_FAIL_CLEANUP:	return L( "FAIL_CLEANUP" );
 	case ST_NOT_EXISTS:		return L( "NOT_EXISTS" );
+
+	case ST_FAIL_FIXTURE_SETUP: return _L_("FAIL_FIXTURE_SETUP");
+	case ST_FAIL_FIXTURE_TEARDOWN: return _L_("FAIL_FIXTURE_TEARDOWN");
+
 	default:				
 		mr_utils::mr_exception::assertCondition( 0, FL, L( "ERROR-NO-STATUS" ) );
 		return L( "ERROR-NO-STATUS" );
@@ -115,14 +122,6 @@ long long testCase::cleanupTime() const
 
 bool testCase::execStep( long long& timeVal, step_ptr funcPtr )
 {
-	//mr_utils::StaticTimer timer;
-	//timer.start();
-	//bool retVal = (this->*funcPtr)();
-	//timer.stop();
-	//timeVal = timer.getMsInterval();
-	//return retVal;
-
-
 	try {
 		mr_utils::StaticTimer timer;
 		timer.start();
@@ -132,7 +131,6 @@ bool testCase::execStep( long long& timeVal, step_ptr funcPtr )
 		return retVal;
 	}
 	catch(mr_utils::mr_exception const & e) {
-
 		// TODO - at present, the values being logged before the exception is called by macros
 
 		//mr_cout << "** Caught mr_exception on Test ** File:" << e.fileName() << _L_(" Line:") << e.fileLine() << _L_(" Msg:") << e.msg()  << _L_(" LongMsg:") << e.longMsg() << std::endl;
@@ -232,6 +230,11 @@ mr_utils::mr_stringstream& testCase::getVerboseBuffer()
 }
 
 
+///////////////////////////////////////////////////////////////////
+//				Start New Stuff                                  //   
+///////////////////////////////////////////////////////////////////
+
+
 void testCase::RegisterFixtureSetup(testCase_ptr setup) {
 	assert(setup);
 	this->m_fixtureSetup = setup;
@@ -241,6 +244,103 @@ void testCase::RegisterFixtureTeardown(testCase_ptr teardown) {
 	assert(teardown);
 	this->m_fixtureTeardown = teardown;
 }
+
+void testCase::RegisterTestSetup(testCase_ptr setup) {
+	assert(setup);
+	this->m_testSetup = setup;
+}
+
+void testCase::RegisterTestTeardown(testCase_ptr teardown) {
+	assert(teardown);
+	this->m_testTeardown = teardown;
+}
+
+bool testCase::HasTest(const mr_utils::mr_string& name) {
+	// TODO - implement search on name
+	return false;
+}
+
+
+const std::vector<mr_utils::mr_string>& testCase::GetTestNames() {
+	assert(this->m_testNames.size() != 0);
+	return this->m_testNames;
+}
+
+
+
+void testCase::RunTest(const mr_utils::mr_string& name, const TestArguments& args ) {
+	this->ResetTest();
+
+	// Get a copy of the optional arguments for this test
+	this->m_args = args;
+	
+	try {
+		// TODO - validate the named test is registered
+		assert(this->HasTest(name));
+
+		// Fire the fixture setup if not previously fired by another test
+		if (!this->m_isFixtureCalled) {
+			// The fixture setup is not timed
+			long long bogusTimeVal = 0;
+			this->ExecStep(bogusTimeVal, this->m_fixtureSetup, ST_FAIL_FIXTURE_SETUP);
+		}
+
+		this->ExecStep(this->m_setupTime, this->m_testSetup, ST_FAIL_SETUP);
+	
+		// TODO lookup the test and execute
+
+		this->ExecStep(this->m_cleanupTime, this->m_testTeardown, ST_FAIL_CLEANUP);
+
+	}
+	catch (...) {
+		// TODO - later we may put the writing to buffer here but for now we will do it in the assert methods
+	}
+
+}
+
+void testCase::ExecStep(long long& timeVal, testCase_ptr funcPtr, TestCaseStatus failStatus) {
+	// In this case there may not even be a step registered
+	timeVal = 0;
+	if (funcPtr != 0) {
+		mr_utils::StaticTimer timer;
+		timer.start();
+		// set to failed in case it throws
+		this->m_status = failStatus;
+		(this->*funcPtr)();
+		this->m_status = ST_SUCCESS;
+
+		timer.stop();
+		timeVal = timer.getMsInterval();
+	}
+}
+
+
+
+void testCase::ResetTest() {
+	// Reset the state for the new test
+	this->m_status = ST_NONE;
+	mr_utils::ResetStringStream(this->m_buffer);
+	mr_utils::ResetStringStream(this->m_verboseBuffer);
+}
+
+
+void testCase::ResetFixture() {
+	this->ResetTest();
+	if (this->m_isFixtureCalled) {
+
+		// Have try Catch
+		this->m_isFixtureCalled = false;
+		if (this->m_fixtureTeardown != 0) {
+			(this->*m_fixtureTeardown)();
+		}
+	}
+}
+
+
+///////////////////////////////////////////////////////////////////
+//                END NEW STUFF                                  //
+///////////////////////////////////////////////////////////////////
+
 
 
 }

@@ -28,6 +28,13 @@ namespace mr_utils
 	typedef std::ostringstream	mr_ostringstream;
 #endif
 
+
+/// @brief	Rest the mr_stringstream so it can be reused
+///
+/// @param	ss	The mr_stringstream to reset
+void ResetStringStream(mr_stringstream& ss); 
+
+
 } // end namespace
 
 

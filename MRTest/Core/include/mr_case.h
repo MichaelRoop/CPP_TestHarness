@@ -42,6 +42,7 @@ namespace mr_test
 ///--------------------------------------------------------------------------------------
 class testCase
 {
+
 public:
 
 	/// @brief	Status indicator for the test case.
@@ -53,9 +54,89 @@ public:
 		ST_FAIL_SETUP,	///< Test failed on setup.
 		ST_FAIL_TEST,	///< Test failed.
 		ST_FAIL_CLEANUP,///< Test failed on cleanup.
-		ST_NOT_EXISTS	///< Test with unique id does not exist.
+		ST_NOT_EXISTS,	///< Test with unique id does not exist.
+
+		ST_FAIL_FIXTURE_SETUP,
+		ST_FAIL_FIXTURE_TEARDOWN
+
 	} TestCaseStatus;
 
+
+	///////////////////////////////////////////////////////////////////
+	//				Start New Stuff                                  //   
+	///////////////////////////////////////////////////////////////////
+
+public:
+
+	void RunTest(const mr_utils::mr_string& name, const TestArguments& args );
+
+	// probably private
+	void ResetTest();
+
+	void ResetFixture();
+
+
+	bool HasTest(const mr_utils::mr_string& name);
+
+	const std::vector<mr_utils::mr_string>& GetTestNames();
+
+protected:
+
+	/// @brief	Typdef of a class method pointer with no param and no return to clean up syntax. 
+	typedef void (testCase::*  testCase_ptr) ( void );
+
+private:
+	testCase_ptr m_fixtureSetup;	// setup method for the entire fixture
+	testCase_ptr m_fixtureTeardown;	// teardown method for the entire fixture
+	testCase_ptr m_testSetup;		// setup method for each test
+	testCase_ptr m_testTeardown;	// teardown method for each test
+
+	/// @brief	Determines if a test has been called on the fixture yet
+	bool m_isFixtureCalled;
+
+	/// @brief	List of tests registered in the test fixture
+	std::vector<mr_utils::mr_string> m_testNames;
+	
+protected:
+
+	/// @brief	Register a setup method to be executed once for the entire fixture
+	/// @param	setup The setup method
+	void RegisterFixtureSetup(testCase_ptr setup);
+
+
+	/// @brief	Register a teardown method to be executed once for the entire fixture
+	/// @param	teardown The teardown method
+	void RegisterFixtureTeardown(testCase_ptr teardown);
+	
+
+	/// @brief	Register a setup method to be executed for each test in the fixture
+	/// @param	setup The setup method
+	void RegisterTestSetup(testCase_ptr setup);
+
+
+	/// @brief	Register a teardown method to be executed for each test in the fixture
+	/// @param	teardown The teardown method
+	void RegisterTestTeardown(testCase_ptr teardown);
+
+
+private:
+
+	/// @brief	Wrapper function to wrap performance logging for various methods.
+	///
+	/// @param	timeVal	A reference to hold the timing information.
+	/// @param	funcPtr	A pointer to the function to time.
+	///
+	/// @return	true if the function timed is successful, otherwise false.
+	void ExecStep(long long& timeVal, testCase_ptr funcPtr, TestCaseStatus failStatus);
+
+
+
+	///////////////////////////////////////////////////////////////////
+	//                END NEW STUFF                                  //
+	///////////////////////////////////////////////////////////////////
+
+
+public:
 
 	/// @brief	Constructor
 	///	@param	name	Name of the test case.
@@ -189,21 +270,6 @@ public:
 	/// @return	The test message buffer.
 	mr_utils::mr_stringstream& getVerboseBuffer();
 
-
-	/// @brief	Typdef of a class method pointer with no param and no return to clean up syntax. 
-	typedef void (testCase::*  testCase_ptr) ( void );
-
-
-	/// @brief	Register a setup method to be executed once for the entire fixture
-	/// @param	setup The setup method
-	void RegisterFixtureSetup(testCase_ptr setup);
-
-
-	/// @brief	Register a teardown method to be executed once for the entire fixture
-	/// @param	teardown The teardown method
-	void RegisterFixtureTeardown(testCase_ptr teardown);
-
-
 protected:
 	TestCaseStatus				m_status;			///< Status of the test case.
 
@@ -221,9 +287,6 @@ private:
 
 
 	
-	testCase_ptr m_fixtureSetup;	// setup method for the entire fixture
-	testCase_ptr m_fixtureTeardown;	// teardown method for the entire fixture
-	// TODO - add 
 	
 
 	/// @brief	Protected default constructor to force use of regular constructor.

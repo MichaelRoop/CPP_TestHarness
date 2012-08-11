@@ -38,6 +38,9 @@
     <ClCompile Include="source\exceptions\mr_pointerException.cpp">
       <Filter>Source Files\exceptions</Filter>
     </ClCompile>
+    <ClCompile Include="source\mr_sstream.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\mr_char.h">
