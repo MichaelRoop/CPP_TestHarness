@@ -15,11 +15,22 @@ public:
 		: mr_test::testCase( testName, argStr ) {
 		_FIXTURE_SETUP_(this, &TokTestBase::FixtureSetup );
 		_FIXTURE_TEARDOWN_(this, &TokTestBase::FixtureTeardown );
+		_TEST_SETUP_(this, &TokTestBase::TestSetup);
+		_TEST_TEARDOWN_(this, &TokTestBase::TestTeardown);
+	}
+
+	void TestSetup()	{ 
+		printf("**** Registered Test Setup Executed ****\n");
+	}
+
+	void TestTeardown()	{ 
+		printf("**** Registered Test Teardown Executed ****\n");
 	}
 
 
 	void FixtureSetup()	
 	{ 
+		printf("++++ Registered Fixture Setup Executed ++++\n");
 		m_tokens.push_back( _L_("This" ) );
 		m_tokens.push_back( _L_("is" ) );
 		m_tokens.push_back( _L_("a" ) );
@@ -31,7 +42,7 @@ public:
 	}
 
 	void FixtureTeardown() {
-		//printf("**** Registered Teardown Executed ****\n");
+		printf("++++ Registered Fixture Teardown Executed ++++\n");
 	}
 
 protected:
@@ -68,6 +79,9 @@ protected:
 		// The index is incremented before the tokenize so it will be one high.
 		//return mr_test::VerbCompareEqual( FL, m_tokens.size(), index, *this, L("Total tokens number mismatch") );
 		mr_assert::AreEqual(_FL_, this->m_tokens.size(), index, this->getMsgBuffer());
+
+		//mr_assert::AreEqual(_FL_, 1, 99, this->getMsgBuffer());
+
 
 		return true;
 	}
