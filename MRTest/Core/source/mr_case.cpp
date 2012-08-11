@@ -13,11 +13,28 @@
 #include "mr_iostream.h"
 #include "mr_exception.h"
 #include "mr_defines.h"
+#include "mr_pointerException.h"
 
 #include <assert.h>
+#include <algorithm>
 
 namespace mr_test
 {
+
+//---------------------------------------------------------------------------------------
+/// @brief Functor to determine if the name is a match for the test case name.
+class HasNamedTest {
+public:
+	HasNamedTest(const mr_utils::mr_string& name) : m_name(name) {
+	}
+
+	bool operator () (const std::pair<mr_utils::mr_string, void(testCase::*) ( void )>& testIndexPair ) {
+		return testIndexPair.first == this->m_name;
+	}
+private:
+	const mr_utils::mr_string& m_name;
+};
+
 
 
 testCase::testCase( const mr_utils::mr_string& name, const mr_utils::mr_string& desc ) 
@@ -53,7 +70,6 @@ bool testCase::cleanup()
 {
 	return true;
 }
-
 
 
 const mr_utils::mr_string& testCase::name() const
@@ -240,24 +256,37 @@ void testCase::RegisterFixtureSetup(testCase_ptr setup) {
 	this->m_fixtureSetup = setup;
 }
 
+
 void testCase::RegisterFixtureTeardown(testCase_ptr teardown) {
 	assert(teardown);
 	this->m_fixtureTeardown = teardown;
 }
+
 
 void testCase::RegisterTestSetup(testCase_ptr setup) {
 	assert(setup);
 	this->m_testSetup = setup;
 }
 
+
 void testCase::RegisterTestTeardown(testCase_ptr teardown) {
 	assert(teardown);
 	this->m_testTeardown = teardown;
 }
 
+
+void testCase::RegisterTest(const mr_utils::mr_string& name, testCase_ptr test) {
+	assert(test);
+	// TODO - test if already there?
+	this->m_tests.push_back(TestIndexPair(name, test));
+
+}
+
+
 bool testCase::HasTest(const mr_utils::mr_string& name) {
-	// TODO - implement search on name
-	return false;
+	std::vector<TestIndexPair>::iterator it = 
+		std::find_if(this->m_tests.begin(), this->m_tests.end(), HasNamedTest(name));
+	return it != this->m_tests.end();
 }
 
 
@@ -267,7 +296,6 @@ const std::vector<mr_utils::mr_string>& testCase::GetTestNames() {
 }
 
 
-
 void testCase::RunTest(const mr_utils::mr_string& name, const TestArguments& args ) {
 	this->ResetTest();
 
@@ -275,22 +303,18 @@ void testCase::RunTest(const mr_utils::mr_string& name, const TestArguments& arg
 	this->m_args = args;
 	
 	try {
-		// TODO - validate the named test is registered
-		assert(this->HasTest(name));
+		// lookup the test
+		std::vector<TestIndexPair>::iterator it = 
+			std::find_if(this->m_tests.begin(), this->m_tests.end(), HasNamedTest(name));
+		// TODO - report this as an error instead
+		assert(it != this->m_tests.end());
 
-		// Fire the fixture setup if not previously fired by another test
-		if (!this->m_isFixtureCalled) {
-			// The fixture setup is not timed
-			long long bogusTimeVal = 0;
-			this->ExecStep(bogusTimeVal, this->m_fixtureSetup, ST_FAIL_FIXTURE_SETUP);
-		}
-
+		this->ExecTestFixtureSetup();
 		this->ExecStep(this->m_setupTime, this->m_testSetup, ST_FAIL_SETUP);
-	
-		// TODO lookup the test and execute
-
+		this->ExecStep(this->m_execTime, it->second, ST_FAIL_TEST);	
 		this->ExecStep(this->m_cleanupTime, this->m_testTeardown, ST_FAIL_CLEANUP);
 
+		// Test fixture teardown called from outside when no more tests to execute in fixture
 	}
 	catch (...) {
 		// TODO - later we may put the writing to buffer here but for now we will do it in the assert methods
@@ -314,6 +338,16 @@ void testCase::ExecStep(long long& timeVal, testCase_ptr funcPtr, TestCaseStatus
 	}
 }
 
+
+void testCase::ExecTestFixtureSetup() {
+	// Fire the fixture setup if not previously fired by another test
+	if (!this->m_isFixtureCalled) {
+		// The fixture setup is not presently timed
+		long long bogusTimeVal = 0;
+		this->ExecStep(bogusTimeVal, this->m_fixtureSetup, ST_FAIL_FIXTURE_SETUP);
+		this->m_isFixtureCalled = true;
+	}
+}
 
 
 void testCase::ResetTest() {

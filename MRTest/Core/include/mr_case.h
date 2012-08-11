@@ -68,6 +68,14 @@ public:
 
 public:
 
+	/// @brief	Typdef of a class method pointer with no param and no return to clean up syntax. 
+	typedef void (testCase::*  testCase_ptr) ( void );
+
+	/// @typedef Test name test pointer pair define.
+	typedef std::pair<mr_utils::mr_string, testCase_ptr> TestIndexPair; 
+
+
+
 	void RunTest(const mr_utils::mr_string& name, const TestArguments& args );
 
 	// probably private
@@ -82,8 +90,6 @@ public:
 
 protected:
 
-	/// @brief	Typdef of a class method pointer with no param and no return to clean up syntax. 
-	typedef void (testCase::*  testCase_ptr) ( void );
 
 private:
 	testCase_ptr m_fixtureSetup;	// setup method for the entire fixture
@@ -96,7 +102,10 @@ private:
 
 	/// @brief	List of tests registered in the test fixture
 	std::vector<mr_utils::mr_string> m_testNames;
-	
+
+
+	std::vector<TestIndexPair> m_tests; 
+
 protected:
 
 	/// @brief	Register a setup method to be executed once for the entire fixture
@@ -119,6 +128,9 @@ protected:
 	void RegisterTestTeardown(testCase_ptr teardown);
 
 
+	void RegisterTest(const mr_utils::mr_string& name, testCase_ptr test);
+
+
 private:
 
 	/// @brief	Wrapper function to wrap performance logging for various methods.
@@ -129,6 +141,7 @@ private:
 	/// @return	true if the function timed is successful, otherwise false.
 	void ExecStep(long long& timeVal, testCase_ptr funcPtr, TestCaseStatus failStatus);
 
+	void ExecTestFixtureSetup();
 
 
 	///////////////////////////////////////////////////////////////////
