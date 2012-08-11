@@ -71,14 +71,44 @@ void AreNotEqual(
 /// @param	file	The file where the method was executing
 /// @param	line	The line being executed
 /// @param	msg		The user message. Default is empty.
-void CreateMsg(mr_utils::mr_stringstream& ss, const char* file, int line, const mr_utils::mr_string& msg) {
-	mr_utils::ToStream( ss, mr_utils::ExtractFileName( file ));
-	ss << _L_(" line:") << line;
+void CreateMsg(mr_utils::mr_stringstream& ss, const char* file, int line, const mr_utils::mr_string& msg);
 
-	if (msg.length() > 0) { 
-		ss << _L_(" : ") << msg;
-	}
-}
+//{
+//	mr_utils::ToStream( ss, mr_utils::ExtractFileName( file ));
+//	ss << _L_(" line:") << line;
+//
+//	if (msg.length() > 0) { 
+//		ss << _L_(" : ") << msg;
+//	}
+//}
+
+
+void IsTrue(
+	const char* file, int line, bool condition, mr_utils::mr_stringstream& buffer, const mr_utils::mr_string& msg = _L_( "" ));
+
+
+#define ASSERT_TRUE(_file_, _line_, _condition_, _buffer_, _streamMsg_)		\
+mr_utils::mr_stringstream ss;												\
+ss << (_streamMsg_);														\
+mr_assert::IsTrue(_file_, _line_, _condition_, _buffer_, ss.str().c_str());			\
+
+
+
+
+
+
+//{
+//
+//	mr_utils::mr_stringstream ss;
+//	ss << msg;
+//	CreateMsg(ss, file, line, msg);
+//
+//	if (!mr_test::CompareEqual(true, condition, buffer, ss.str())) {
+//		throw mr_utils::mr_exception(file, line, ss.str());				
+//	}																	
+//}
+
+
 
 
 } // end of namespace

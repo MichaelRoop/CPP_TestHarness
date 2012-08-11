@@ -71,6 +71,7 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="source\mr_Assert.cpp" />
     <ClCompile Include="source\mr_case.cpp" />
     <ClCompile Include="source\mr_compareFunctions.cpp" />
     <ClCompile Include="source\mr_testEngine.cpp" />

@@ -51,6 +51,9 @@ protected:
 
 	bool CompareToken( std::vector<mr_utils::mr_string>::size_type index, const mr_utils::mr_string& token )
 	{
+//		ASSERT_TRUE(__FILE__, __LINE__, false, this->getMsgBuffer(), ( L( "index of:" ) << index << L( " exceeds token count of :" ) << m_tokens.size() ));
+//		ASSERT_TRUE(__FILE__, __LINE__, false, this->getMsgBuffer(), ( L( "index of:" ) << L( "Woof" )  ));
+
 		// compare index range.
 		if (index >= m_tokens.size())
 		{
@@ -126,8 +129,6 @@ public:
 		mr_utils::mr_string str( _L_("||||||||This|is|a|test|string|with|some|tokens||||||||") );
 		this->DoIt( str );
 	}
-
-
 
 };
 _REGISTER_FIXTURE_(blah);

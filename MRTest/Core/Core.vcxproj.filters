@@ -117,6 +117,9 @@
     <ClCompile Include="source\Factories\mr_logOutputFactory.cpp">
       <Filter>Source Files\Factories</Filter>
     </ClCompile>
+    <ClCompile Include="source\mr_Assert.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\mr_case.h">
