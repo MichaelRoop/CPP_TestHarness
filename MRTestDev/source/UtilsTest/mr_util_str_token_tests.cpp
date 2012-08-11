@@ -78,11 +78,11 @@ class blah : public TokTestBase {
 public:
 	blah() : TokTestBase( _L_( "blah" ), _L_( "Blah class" ) )	{
 		_ADD_TEST_FIXTURE_( this );
-		_REGISTER_TEST_(this, &blah::UTL_TOK_1_1)
-		_REGISTER_TEST_(this, &blah::UTL_TOK_1_2)
-		_REGISTER_TEST_(this, &blah::UTL_TOK_1_3)
-		_REGISTER_TEST_(this, &blah::UTL_TOK_1_4)
-		_REGISTER_TEST_(this, &blah::UTL_TOK_1_5)
+		_REGISTER_TEST_(this, &blah::UTL_TOK_1_1, _L_( "Normal tokenize string" ));
+		_REGISTER_TEST_(this, &blah::UTL_TOK_1_2, _L_( "Tokenize with multiple mid delimiters"));
+		_REGISTER_TEST_(this, &blah::UTL_TOK_1_3, _L_( "Tokenize test leading delimiters" ));
+		_REGISTER_TEST_(this, &blah::UTL_TOK_1_4, _L_( "Tokenize test following delimiters" ));
+		_REGISTER_TEST_(this, &blah::UTL_TOK_1_5, _L_("Tokenize test leading and following delimiters"));
 	}
 
 	// just to satisfy compiler with old code

@@ -101,6 +101,7 @@
     <ClInclude Include="include\mr_case.h" />
     <ClInclude Include="include\mr_compareClasses.h" />
     <ClInclude Include="include\mr_compareFunctions.h" />
+    <ClInclude Include="include\mr_TestCase.h" />
     <ClInclude Include="include\mr_testEngine.h" />
     <ClInclude Include="include\mr_testInfoObject.h" />
     <ClInclude Include="include\mr_testMacros.h" />

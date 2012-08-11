@@ -58,7 +58,7 @@ public:
 
 	bool operator () (mr_test::testCase* test) {
 
-		//mr_cout << _L_("** Lookup Name:") << this->m_name << _L_(" Registered test name:") << test->name() << std::endl;
+	//	mr_cout << _L_("** Lookup Name:") << this->m_name << _L_(" Registered test name:") << test->name() << std::endl;
 
 		mr_utils::mr_pointerException::ptrAssert( test, FL );
 		return test->HasTest(this->m_name);

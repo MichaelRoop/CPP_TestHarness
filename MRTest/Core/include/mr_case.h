@@ -8,8 +8,8 @@
 ///
 /// Copyright 2010 Michael Roop
 ///--------------------------------------------------------------------------------------
-#if !defined(MR_TEST_CASE_H)
-#define MR_TEST_CASE_H
+#if !defined(MR_TEST_CASE_FIXTURE_H)
+#define MR_TEST_CASE_FIXTURE_H
 
 #include "mr_string.h"
 #include "mr_sstream.h"
@@ -19,6 +19,8 @@
 
 namespace mr_test
 {
+
+class TestCaseHolder;
 
 
 ///--------------------------------------------------------------------------------------
@@ -72,7 +74,7 @@ public:
 	typedef void (testCase::*  testCase_ptr) ( void );
 
 	/// @typedef Test name test pointer pair define.
-	typedef std::pair<mr_utils::mr_string, testCase_ptr> TestIndexPair; 
+	//typedef std::pair<mr_utils::mr_string, testCase_ptr> TestIndexPair; 
 
 
 
@@ -104,7 +106,7 @@ private:
 	std::vector<mr_utils::mr_string> m_testNames;
 
 
-	std::vector<TestIndexPair> m_tests; 
+	std::vector<TestCaseHolder> m_tests; 
 
 protected:
 
@@ -128,7 +130,7 @@ protected:
 	void RegisterTestTeardown(testCase_ptr teardown);
 
 
-	void RegisterTest(const mr_utils::mr_string& name, testCase_ptr test);
+	void RegisterTest(testCase_ptr test, const mr_utils::mr_string& name, const mr_utils::mr_string& description);
 
 
 private:
@@ -335,6 +337,28 @@ private:
 
 
 };
+
+
+class TestCaseHolder {
+
+public:
+	mr_utils::mr_string m_name;
+	mr_utils::mr_string m_description;
+	testCase::testCase_ptr m_test;
+
+
+	TestCaseHolder(testCase::testCase_ptr funcPtr, const mr_utils::mr_string& name, const mr_utils::mr_string& description) :	
+		m_test(funcPtr),
+		m_name(name),
+		m_description(description) {
+	}
+
+
+
+	// TODO - make more robust
+
+};
+
 
 
 

@@ -28,9 +28,11 @@ public:
 	HasNamedTest(const mr_utils::mr_string& name) : m_name(name) {
 	}
 
-	bool operator () (const std::pair<mr_utils::mr_string, void(testCase::*) ( void )>& testIndexPair ) {
-		//mr_cout << _L_("   ++ Test Fixture Lookup on:") << this->m_name << _L_(" Registered test name:") << testIndexPair.first << std::endl;
-		return testIndexPair.first == this->m_name;
+
+	bool operator () (const TestCaseHolder& testHolder) {
+	//bool operator () (const std::pair<mr_utils::mr_string, void(testCase::*) ( void )>& testIndexPair ) {
+//		mr_cout << _L_("   ++ Test Fixture Lookup on:") << this->m_name << _L_(" Registered test name:") << testHolder.m_name << std::endl;
+		return testHolder.m_name == this->m_name;
 	}
 private:
 	const mr_utils::mr_string& m_name;
@@ -276,12 +278,15 @@ void testCase::RegisterTestTeardown(testCase_ptr teardown) {
 }
 
 
-void testCase::RegisterTest(const mr_utils::mr_string& name, testCase_ptr test) {
+        //void RegisterTest(testCase_ptr test, const mr_utils::mr_string& name, const mr_utils::mr_string& description);
+void testCase::RegisterTest(testCase_ptr test, const mr_utils::mr_string& name, const mr_utils::mr_string& description) {
 	assert(test);
 	// TODO - test if already there?
 
 	//mr_utils::mr_string s(_L_((#_test_)));			
 	
+
+
 	mr_utils::mr_string scratch(name);
 	size_t pos = scratch.find(_L_("::"));
 	if (pos != mr_utils::mr_string::npos) {
@@ -289,13 +294,18 @@ void testCase::RegisterTest(const mr_utils::mr_string& name, testCase_ptr test) 
 	}
 
 
-	this->m_tests.push_back(TestIndexPair(scratch, test));
+	//this->m_tests.push_back(TestIndexPair(scratch, test));
+	this->m_tests.push_back(TestCaseHolder(test, scratch, description));
 
 }
 
 
 bool testCase::HasTest(const mr_utils::mr_string& name) {
-	std::vector<TestIndexPair>::iterator it = 
+	//std::vector<TestIndexPair>::iterator it = 
+	//	std::find_if(this->m_tests.begin(), this->m_tests.end(), HasNamedTest(name));
+	//return it != this->m_tests.end();
+
+	std::vector<TestCaseHolder>::iterator it = 
 		std::find_if(this->m_tests.begin(), this->m_tests.end(), HasNamedTest(name));
 	return it != this->m_tests.end();
 }
@@ -315,16 +325,22 @@ void testCase::RunTest(const mr_utils::mr_string& name, const TestArguments& arg
 	
 	try {
 		// lookup the test
-		std::vector<TestIndexPair>::iterator it = 
+		//std::vector<TestIndexPair>::iterator it = 
+		//	std::find_if(this->m_tests.begin(), this->m_tests.end(), HasNamedTest(name));
+		std::vector<TestCaseHolder>::iterator it = 
 			std::find_if(this->m_tests.begin(), this->m_tests.end(), HasNamedTest(name));
+
+		
 		// TODO - report this as an error instead
 		assert(it != this->m_tests.end());
 
-		this->m_name = it->first;
+		// TODO - replace this with having a current ptr to test with all info instead or writting over fixture information
+		this->m_name = it->m_name;
+		this->m_desc = it->m_description;
 
 		this->ExecTestFixtureSetup();
 		this->ExecStep(this->m_setupTime, this->m_testSetup, ST_FAIL_SETUP);
-		this->ExecStep(this->m_execTime, it->second, ST_FAIL_TEST);	
+		this->ExecStep(this->m_execTime, it->m_test, ST_FAIL_TEST);	
 		this->ExecStep(this->m_cleanupTime, this->m_testTeardown, ST_FAIL_CLEANUP);
 
 		// Test fixture teardown called from outside when no more tests to execute in fixture
