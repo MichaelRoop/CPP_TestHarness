@@ -7,16 +7,25 @@
 #include "mr_Assert.h"
 
 
-class TokTestBase : public mr_test::testCase
+class TokenizerTests1 : public mr_test::testCase
 {
 public:
 
-	TokTestBase( const mr_utils::mr_string& testName, const mr_utils::mr_string& argStr ) 
-		: mr_test::testCase( testName, argStr ) {
-		_FIXTURE_SETUP_(this, &TokTestBase::FixtureSetup );
-		_FIXTURE_TEARDOWN_(this, &TokTestBase::FixtureTeardown );
-		_TEST_SETUP_(this, &TokTestBase::TestSetup);
-		_TEST_TEARDOWN_(this, &TokTestBase::TestTeardown);
+	TokenizerTests1() 
+		: mr_test::testCase( _L_("testName"), _L_("argStr") ) {
+		_ADD_TEST_FIXTURE_( this );
+
+		_FIXTURE_SETUP_(this, &TokenizerTests1::FixtureSetup );
+		_FIXTURE_TEARDOWN_(this, &TokenizerTests1::FixtureTeardown );
+		_TEST_SETUP_(this, &TokenizerTests1::TestSetup);
+		_TEST_TEARDOWN_(this, &TokenizerTests1::TestTeardown);
+
+		_REGISTER_TEST_(this, &TokenizerTests1::UTL_TOK_1_1, _L_( "Normal tokenize string" ));
+		_REGISTER_TEST_(this, &TokenizerTests1::UTL_TOK_1_2, _L_( "Tokenize with multiple mid delimiters"));
+		_REGISTER_TEST_(this, &TokenizerTests1::UTL_TOK_1_3, _L_( "Tokenize test leading delimiters" ));
+		_REGISTER_TEST_(this, &TokenizerTests1::UTL_TOK_1_4, _L_( "Tokenize test following delimiters" ));
+		_REGISTER_TEST_(this, &TokenizerTests1::UTL_TOK_1_5, _L_("Tokenize test leading and following delimiters"));
+		_REGISTER_TEST_(this, &TokenizerTests1::UTL_TOK_1_6, _L_("Tokenize test multiple leading mid and following delimiters"));
 	}
 
 	void TestSetup()	{ 
@@ -26,8 +35,7 @@ public:
 	void TestTeardown()	{ 
 		printf("**** Registered Test Teardown Executed ****\n");
 	}
-
-
+	
 	void FixtureSetup()	
 	{ 
 		printf("++++ Registered Fixture Setup Executed ++++\n");
@@ -44,6 +52,39 @@ public:
 	void FixtureTeardown() {
 		printf("++++ Registered Fixture Teardown Executed ++++\n");
 	}
+
+
+	void UTL_TOK_1_1() { 
+		mr_utils::mr_string str( _L_("This|is|a|test|string|with|some|tokens") );
+		this->DoIt( str );
+	}
+
+	void UTL_TOK_1_2() { 
+		mr_utils::mr_string str( _L_("This|is|a|test|string|with|some|||||tokens") );
+		this->DoIt( str );
+	}
+	
+	void UTL_TOK_1_3() { 
+		mr_utils::mr_string str( _L_("||||||||This|is|a|test|string|with|some|tokens") );
+		this->DoIt( str );
+	}
+
+	void UTL_TOK_1_4() { 
+		mr_utils::mr_string str( _L_("This|is|a|test|string|with|some|tokens||||||||") );
+		this->DoIt( str );
+	}
+	
+	void UTL_TOK_1_5() { 
+		mr_utils::mr_string str( _L_("||||||||This|is|a|test|string|with|some|tokens||||||||") );
+		this->DoIt( str );
+	}
+
+	void UTL_TOK_1_6()	{ 
+		mr_utils::mr_string str( _L_("||||||||This|is|a|test||||||string|with||||||some|tokens||||||||") );
+		this->DoIt( str );
+	}
+
+
 
 protected:
 
@@ -90,48 +131,50 @@ protected:
 	}
 
 };
+_REGISTER_FIXTURE_(TokenizerTests1)
 
-class blah : public TokTestBase {
-public:
-	blah() : TokTestBase( _L_( "blah" ), _L_( "Blah class" ) )	{
-		_ADD_TEST_FIXTURE_( this );
-		_REGISTER_TEST_(this, &blah::UTL_TOK_1_1, _L_( "Normal tokenize string" ));
-		_REGISTER_TEST_(this, &blah::UTL_TOK_1_2, _L_( "Tokenize with multiple mid delimiters"));
-		_REGISTER_TEST_(this, &blah::UTL_TOK_1_3, _L_( "Tokenize test leading delimiters" ));
-		_REGISTER_TEST_(this, &blah::UTL_TOK_1_4, _L_( "Tokenize test following delimiters" ));
-		_REGISTER_TEST_(this, &blah::UTL_TOK_1_5, _L_("Tokenize test leading and following delimiters"));
-	}
-
-	// just to satisfy compiler with old code
-	bool test()	{ return false;}
-
-	void UTL_TOK_1_1() { 
-		mr_utils::mr_string str( _L_("This|is|a|test|string|with|some|tokens") );
-		this->DoIt( str );
-	}
-
-	void UTL_TOK_1_2() { 
-		mr_utils::mr_string str( _L_("This|is|a|test|string|with|some|||||tokens") );
-		this->DoIt( str );
-	}
-	
-	void UTL_TOK_1_3() { 
-		mr_utils::mr_string str( _L_("||||||||This|is|a|test|string|with|some|tokens") );
-		this->DoIt( str );
-	}
-
-	void UTL_TOK_1_4() { 
-		mr_utils::mr_string str( _L_("This|is|a|test|string|with|some|tokens||||||||") );
-		this->DoIt( str );
-	}
-	
-	void UTL_TOK_1_5() { 
-		mr_utils::mr_string str( _L_("||||||||This|is|a|test|string|with|some|tokens||||||||") );
-		this->DoIt( str );
-	}
-
-};
-_REGISTER_FIXTURE_(blah);
+//
+//class blah : public TokTestBase {
+//public:
+//	blah() : TokTestBase( _L_( "blah" ), _L_( "Blah class" ) )	{
+//		_ADD_TEST_FIXTURE_( this );
+//		_REGISTER_TEST_(this, &blah::UTL_TOK_1_1, _L_( "Normal tokenize string" ));
+//		_REGISTER_TEST_(this, &blah::UTL_TOK_1_2, _L_( "Tokenize with multiple mid delimiters"));
+//		_REGISTER_TEST_(this, &blah::UTL_TOK_1_3, _L_( "Tokenize test leading delimiters" ));
+//		_REGISTER_TEST_(this, &blah::UTL_TOK_1_4, _L_( "Tokenize test following delimiters" ));
+//		_REGISTER_TEST_(this, &blah::UTL_TOK_1_5, _L_("Tokenize test leading and following delimiters"));
+//	}
+//
+//	// just to satisfy compiler with old code
+//	bool test()	{ return false;}
+//
+//	void UTL_TOK_1_1() { 
+//		mr_utils::mr_string str( _L_("This|is|a|test|string|with|some|tokens") );
+//		this->DoIt( str );
+//	}
+//
+//	void UTL_TOK_1_2() { 
+//		mr_utils::mr_string str( _L_("This|is|a|test|string|with|some|||||tokens") );
+//		this->DoIt( str );
+//	}
+//	
+//	void UTL_TOK_1_3() { 
+//		mr_utils::mr_string str( _L_("||||||||This|is|a|test|string|with|some|tokens") );
+//		this->DoIt( str );
+//	}
+//
+//	void UTL_TOK_1_4() { 
+//		mr_utils::mr_string str( _L_("This|is|a|test|string|with|some|tokens||||||||") );
+//		this->DoIt( str );
+//	}
+//	
+//	void UTL_TOK_1_5() { 
+//		mr_utils::mr_string str( _L_("||||||||This|is|a|test|string|with|some|tokens||||||||") );
+//		this->DoIt( str );
+//	}
+//
+//};
+//_REGISTER_FIXTURE_(blah);
 
 #ifdef erotiuertiou
 
@@ -214,32 +257,65 @@ _REGISTER_FIXTURE_(mrTokTestLeadFollowDel);
 
 #endif
 
-// Test tokenize of string with multiple mid and leading and following token delimiters.
-class mrTokTestLeadMidFollowDel : public TokTestBase {
-public:
-	mrTokTestLeadMidFollowDel()
-		: TokTestBase( L( "UTL_TOK_1_6" ), _L_( "Tokenize test multiple leading mid and following delimiters" ) )	{
-		_ADD_TEST_FIXTURE_( this );
-	}
-
-	bool test()	{ 
-		mr_utils::mr_string str( _L_("||||||||This|is|a|test||||||string|with||||||some|tokens||||||||") );
-		return this->DoIt( str );
-	}
-};
-_REGISTER_FIXTURE_(mrTokTestLeadMidFollowDel);
+//// Test tokenize of string with multiple mid and leading and following token delimiters.
+//class mrTokTestLeadMidFollowDel : public TokTestBase {
+//public:
+//	mrTokTestLeadMidFollowDel()
+//		: TokTestBase( L( "UTL_TOK_1_6" ), _L_( "Tokenize test multiple leading mid and following delimiters" ) )	{
+//		_ADD_TEST_FIXTURE_( this );
+//	}
+//
+//	bool test()	{ 
+//		mr_utils::mr_string str( _L_("||||||||This|is|a|test||||||string|with||||||some|tokens||||||||") );
+//		return this->DoIt( str );
+//	}
+//};
+//_REGISTER_FIXTURE_(mrTokTestLeadMidFollowDel);
 
 
 // Test tokenize of string with only token delimiters.
-class mrTokTestDelOnly2 : public mr_test::testCase {
+class TokenizerTests2 : public mr_test::testCase {
 
 public:
-	mrTokTestDelOnly2()
-		: mr_test::testCase( _L_( "UTL_TOK_1_7" ), _L_( "Tokenize delimiters only" ) )	{
+	TokenizerTests2()
+		: mr_test::testCase( _L_( "Ziffle" ), _L_( "Pig" ) )	{
 		_ADD_TEST_FIXTURE_( this );
+
+		_FIXTURE_SETUP_(this, &TokenizerTests2::FixtureSetup );
+		_FIXTURE_TEARDOWN_(this, &TokenizerTests2::FixtureTeardown );
+		_TEST_SETUP_(this, &TokenizerTests2::TestSetup);
+		_TEST_TEARDOWN_(this, &TokenizerTests2::TestTeardown);
+
+		_REGISTER_TEST_(this, &TokenizerTests2::UTL_TOK_1_7, _L_( "Tokenize delimiters only" ));
 	}																				
 
-	bool test() { 
+	void TestSetup()	{ 
+		printf("**** 2 Registered Test Setup Executed ****\n");
+	}
+
+	void TestTeardown()	{ 
+		printf("**** 2 Registered Test Teardown Executed ****\n");
+	}
+	
+	void FixtureSetup()		{ 
+		printf("++++ 2 Registered Fixture Setup Executed ++++\n");
+		this->m_tokens.push_back( _L_("This" ) );
+		this->m_tokens.push_back( _L_("is" ) );
+		this->m_tokens.push_back( _L_("a" ) );
+		this->m_tokens.push_back( _L_("test" ) );
+		this->m_tokens.push_back( _L_("string" ) );
+		this->m_tokens.push_back( _L_("with" ) );
+		this->m_tokens.push_back( _L_("some" ) );
+		this->m_tokens.push_back( _L_("tokens" ) );
+	}
+
+	void FixtureTeardown() {
+		printf("++++ 2 Registered Fixture Teardown Executed ++++\n");
+	}
+
+
+
+	void UTL_TOK_1_7() { 
 		mr_utils::mr_string str( _L_("||||||||") );
 		mr_utils::mr_string token;
 
@@ -248,10 +324,13 @@ public:
 		for (count = 0; mr_utils::MrTokenize( pos, str, token, _L_('|') ); count++)
 		{
 		}
-		return mr_test::VerbCompareEqual( _FL_, 0, count, this->getVerboseBuffer() );
+		mr_test::VerbCompareEqual( _FL_, 0, count, this->getVerboseBuffer() );
 	}
+
+private:
+	std::vector<mr_utils::mr_string> m_tokens;
 };
-_REGISTER_FIXTURE_(mrTokTestDelOnly2);
+_REGISTER_FIXTURE_(TokenizerTests2);
 
 
 
