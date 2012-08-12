@@ -115,8 +115,7 @@ void engine::regCase( mr_test::testCase* newCase )
 	m_cases.push_back( newCase );
 }
 
-#define BLAHBLAH
-#ifdef BLAHBLAH
+
 void engine::processScript( scriptReader& theReader )
 {
 	m_logEngine.writeHeaders();
@@ -167,7 +166,7 @@ void engine::processScript( scriptReader& theReader )
 }
 
 
-#else
+#ifdef blah1_execMethodsRemoved
 void engine::processScript( scriptReader& theReader )
 {
 	m_logEngine.writeHeaders();
@@ -185,7 +184,7 @@ void engine::processScript( scriptReader& theReader )
 }
 #endif
 
-
+#ifdef blah1_execMethodsRemoved
 //void engine::processCase( const mr_utils::mr_string& name, const mr_utils::mr_string& args )
 void engine::processCase( const testInfoObject& info )
 {
@@ -213,7 +212,7 @@ void engine::processCase( const testInfoObject& info )
 		m_cases.erase( it );
 	}
 }
-
+#endif
 
 void engine::logResults( mr_test::testCase* theCase )
 {

@@ -17,8 +17,7 @@
 #include "mr_testInfoObject.h"
 
 
-namespace mr_test
-{
+namespace mr_test {
 
 class TestCaseHolder;
 
@@ -42,14 +41,12 @@ class TestCaseHolder;
 /// There are three stages to a test case, the setup, the test, and the cleanup.
 ///
 ///--------------------------------------------------------------------------------------
-class testCase
-{
+class testCase {
 
 public:
 
 	/// @brief	Status indicator for the test case.
-	typedef enum Status
-	{
+	typedef enum Status {
 		ST_NONE,		///< No status. Default.
 		ST_SUCCESS,		///< Test was successful.
 		ST_FAIL_INIT,	///< Test failed when init was called.
@@ -71,24 +68,18 @@ public:
 public:
 
 	/// @brief	Typdef of a class method pointer with no param and no return to clean up syntax. 
-	typedef void (testCase::*  testCase_ptr) ( void );
-
-	/// @typedef Test name test pointer pair define.
-	//typedef std::pair<mr_utils::mr_string, testCase_ptr> TestIndexPair; 
+	typedef void (testCase::*  testCase_ptr) (void);
 
 
+	void RunTest(const mr_utils::mr_string& name, const TestArguments& args);
 
-	void RunTest(const mr_utils::mr_string& name, const TestArguments& args );
-
-	// probably private
-	void ResetTest();
-
+	/// @brief	Reset flags and data and run 
 	void ResetFixture();
 
 
 	bool HasTest(const mr_utils::mr_string& name);
 
-	const std::vector<mr_utils::mr_string>& GetTestNames();
+	const std::vector<mr_utils::mr_string> GetTestNames();
 
 protected:
 
@@ -132,6 +123,9 @@ protected:
 
 	void RegisterTest(testCase_ptr test, const mr_utils::mr_string& name, const mr_utils::mr_string& description);
 
+	///	@brief	Reset any data from previous test TODO - replace with current test.data
+	void ResetTest();
+
 
 private:
 
@@ -156,7 +150,7 @@ public:
 	/// @brief	Constructor
 	///	@param	name	Name of the test case.
 	///	@param	desc	Description of test case.
-	testCase( const mr_utils::mr_string& name, const mr_utils::mr_string& desc );
+	testCase(const mr_utils::mr_string& name, const mr_utils::mr_string& desc);
 
 
 	/// @brief	Initialise method for two phase construction.
@@ -164,26 +158,26 @@ public:
 	///	@param	args	Any args that you want to send to the test case.
 	///
 	///	@return	true if successful, otherwise false.
-	virtual bool init( const TestArguments& args );
+//	virtual bool init( const TestArguments& args );
 
 
 	/// @brief	Override to setup test before test is run in test method. Default 
 	///			returns true.
 	///
 	/// @return	true if successful, otherwise false.
-	virtual bool setup();
+//	virtual bool setup();
 
 
 	/// @brief	Override to execute test code.
 	///
 	/// @return	true if successful, otherwise false.
-	virtual bool test() = 0;
+//	virtual bool test() = 0;
 
 
 	/// @brief	Override to clean up after test is run. Default returns true.
 	///
 	/// @return	true if successful, otherwise false.
-	virtual bool cleanup();
+//	virtual bool cleanup();
 
 
 	/// @brief	Retrieve uniquely indentifying test name.
@@ -235,38 +229,39 @@ public:
 	/// @return	The time in ms that the cleanup took.
 	long long cleanupTime() const;
 
+#ifdef blah1_execMethodsRemoved
 	// Only used by the engine
 
-	/// @brief	Called by the engine when the test is selected.
-	///
-	///	Allows the test to be created before the arguments for the test are known. In this
-	/// way a test case code can be used in different ways depending on the arguments that
-	/// are read in at select time.  Part of the arguments can also be expected return value.
-	///
-	/// The test is instantiated and stored.  When it is selected, the arguments are know from 
-	/// the same script from which is was selected.
-	///
-	/// @param	args	A TestArguments object with the arguments for the test.
-	bool executeInit(  const TestArguments& args );
+	///// @brief	Called by the engine when the test is selected.
+	/////
+	/////	Allows the test to be created before the arguments for the test are known. In this
+	///// way a test case code can be used in different ways depending on the arguments that
+	///// are read in at select time.  Part of the arguments can also be expected return value.
+	/////
+	///// The test is instantiated and stored.  When it is selected, the arguments are know from 
+	///// the same script from which is was selected.
+	/////
+	///// @param	args	A TestArguments object with the arguments for the test.
+	//bool executeInit(  const TestArguments& args );
 
 
-	/// @brief	Executes and times the test setup. Only ever called by the testEngine.
-	/// 
-	/// @return true if successful, otherwise false.
-	bool executeSetup();
+	///// @brief	Executes and times the test setup. Only ever called by the testEngine.
+	///// 
+	///// @return true if successful, otherwise false.
+	//bool executeSetup();
 
 
-	/// @brief	Executes and times the test itself. Only ever called by the testEngine.
-	/// 
-	/// @return true if successful, otherwise false.
-	bool executeTest();
+	///// @brief	Executes and times the test itself. Only ever called by the testEngine.
+	///// 
+	///// @return true if successful, otherwise false.
+	//bool executeTest();
 
 
-	/// @brief	Executes and times the test cleanup. Only ever called by the testEngine.
-	/// 
-	/// @return true if successful, otherwise false.
-	bool executeCleanup();
-
+	///// @brief	Executes and times the test cleanup. Only ever called by the testEngine.
+	///// 
+	///// @return true if successful, otherwise false.
+	//bool executeCleanup();
+#endif
 
 	/// @brief	Retrieve the message buffer.
 	///
@@ -315,7 +310,7 @@ private:
 
 
 	/// @brief	Typdef of a class method pointer to clean up syntax. 
-	typedef bool (testCase::*  step_ptr) ( void );
+//	typedef bool (testCase::*  step_ptr) ( void );
 
 
 	/// @brief	Wrapper function to wrap performance logging for various methods.
@@ -324,7 +319,7 @@ private:
 	/// @param	funcPtr	A pointer to the function to time.
 	///
 	/// @return	true if the function timed is successful, otherwise false.
-	bool execStep( long long& timeVal, step_ptr funcPtr );
+//	bool execStep( long long& timeVal, step_ptr funcPtr );
 
 
 	/// @brief	Helper method to set the status.
@@ -333,7 +328,7 @@ private:
 	/// @param	failStatus	The status to set upon failure.
 	///
 	/// @return	The same status as the argument isOk.
-	bool setStatus( bool isOk, TestCaseStatus failStatus );
+//	bool setStatus( bool isOk, TestCaseStatus failStatus );
 
 
 };

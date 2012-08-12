@@ -23,21 +23,33 @@ namespace mr_test
 
 //---------------------------------------------------------------------------------------
 /// @brief Functor to determine if the name is a match for the test case name.
-class HasNamedTest {
+class HasNamedTestFunctor {
 public:
-	HasNamedTest(const mr_utils::mr_string& name) : m_name(name) {
+	HasNamedTestFunctor(const mr_utils::mr_string& name) : m_name(name) {
 	}
-
-
+	
 	bool operator () (const TestCaseHolder& testHolder) {
-	//bool operator () (const std::pair<mr_utils::mr_string, void(testCase::*) ( void )>& testIndexPair ) {
-//		mr_cout << _L_("   ++ Test Fixture Lookup on:") << this->m_name << _L_(" Registered test name:") << testHolder.m_name << std::endl;
 		return testHolder.m_name == this->m_name;
 	}
 private:
 	const mr_utils::mr_string& m_name;
 };
 
+
+class BuildNamesVectorFunctor {
+public:
+	BuildNamesVectorFunctor(std::vector<mr_utils::mr_string>& names) 
+		: m_names(names) {
+	}
+
+	void operator () (const TestCaseHolder& testHolder) {
+		this->m_names.push_back(testHolder.m_name);
+	}
+
+private:
+	// TODO - look up the const in relation to reference. The reference is not changing but the object
+	std::vector<mr_utils::mr_string>& m_names;
+};
 
 
 testCase::testCase( const mr_utils::mr_string& name, const mr_utils::mr_string& desc ) 
@@ -55,7 +67,7 @@ testCase::testCase( const mr_utils::mr_string& name, const mr_utils::mr_string& 
 {
 }
 
-
+#ifdef blah1_execMethodsRemoved
 bool testCase::init( const TestArguments& args )
 {
 	m_args = args;
@@ -73,29 +85,26 @@ bool testCase::cleanup()
 {
 	return true;
 }
+#endif
 
 
-const mr_utils::mr_string& testCase::name() const
-{
-	return m_name;
+const mr_utils::mr_string& testCase::name() const {
+	return this->m_name;
 }
 
 
-const TestArguments& testCase::args() const
-{
+const TestArguments& testCase::args() const {
 	return this->m_args;
 }
 
 
-const mr_utils::mr_string& testCase::desc() const
-{
-	return m_desc;
+const mr_utils::mr_string& testCase::desc() const {
+	return this->m_desc;
 }
 
 
-mr_utils::mr_string testCase::status() const
-{
-	switch (m_status)
+mr_utils::mr_string testCase::status() const {
+	switch (this->m_status)
 	{
 	case ST_NONE:			return L( "NONE" );
 	case ST_SUCCESS:		return L( "SUCCESS" );
@@ -115,30 +124,26 @@ mr_utils::mr_string testCase::status() const
 }
 
 
-testCase::TestCaseStatus testCase::statusEnum() const
-{
-	return m_status;
+testCase::TestCaseStatus testCase::statusEnum() const {
+	return this->m_status;
 }
 
 
-long long testCase::setupTime() const
-{
-	return m_setupTime;
+long long testCase::setupTime() const {
+	return this->m_setupTime;
 }
 
 
-long long testCase::execTime() const
-{
-	return m_execTime;
+long long testCase::execTime() const {
+	return this->m_execTime;
 }
 
 
-long long testCase::cleanupTime() const
-{
-	return m_cleanupTime;
+long long testCase::cleanupTime() const {
+	return this->m_cleanupTime;
 }
 
-
+#ifdef blah1_execMethodsRemoved
 bool testCase::execStep( long long& timeVal, step_ptr funcPtr )
 {
 	try {
@@ -235,17 +240,15 @@ bool testCase::executeCleanup()
 	}
 	return success;
 }
+#endif
 
-
-mr_utils::mr_stringstream& testCase::getMsgBuffer()
-{
-	return m_buffer;
+mr_utils::mr_stringstream& testCase::getMsgBuffer() {
+	return this->m_buffer;
 }
 
 
-mr_utils::mr_stringstream& testCase::getVerboseBuffer()
-{
-	return m_verboseBuffer;
+mr_utils::mr_stringstream& testCase::getVerboseBuffer() {
+	return this->m_verboseBuffer;
 }
 
 
@@ -278,42 +281,44 @@ void testCase::RegisterTestTeardown(testCase_ptr teardown) {
 }
 
 
-        //void RegisterTest(testCase_ptr test, const mr_utils::mr_string& name, const mr_utils::mr_string& description);
 void testCase::RegisterTest(testCase_ptr test, const mr_utils::mr_string& name, const mr_utils::mr_string& description) {
 	assert(test);
 	// TODO - test if already there?
 
-	//mr_utils::mr_string s(_L_((#_test_)));			
-	
-
-
+	// When using the macro it uses the # and will insert the full &ClassName::MethodName
 	mr_utils::mr_string scratch(name);
 	size_t pos = scratch.find(_L_("::"));
 	if (pos != mr_utils::mr_string::npos) {
 		scratch = name.substr(pos + 2);
 	}
-
-
-	//this->m_tests.push_back(TestIndexPair(scratch, test));
 	this->m_tests.push_back(TestCaseHolder(test, scratch, description));
-
 }
 
 
 bool testCase::HasTest(const mr_utils::mr_string& name) {
-	//std::vector<TestIndexPair>::iterator it = 
-	//	std::find_if(this->m_tests.begin(), this->m_tests.end(), HasNamedTest(name));
+	//std::vector<TestCaseHolder>::iterator it = 
+	//	std::find_if(this->m_tests.begin(), this->m_tests.end(), HasNamedTestFunctor(name));
 	//return it != this->m_tests.end();
 
-	std::vector<TestCaseHolder>::iterator it = 
-		std::find_if(this->m_tests.begin(), this->m_tests.end(), HasNamedTest(name));
-	return it != this->m_tests.end();
+	return std::find_if(
+		this->m_tests.begin(), 
+		this->m_tests.end(), 
+		HasNamedTestFunctor(name)) != this->m_tests.end();
 }
 
 
-const std::vector<mr_utils::mr_string>& testCase::GetTestNames() {
-	assert(this->m_testNames.size() != 0);
-	return this->m_testNames;
+const std::vector<mr_utils::mr_string> testCase::GetTestNames() {
+	// TODO - verify that stack var non pointer will pass out as a copy on return
+	std::vector<mr_utils::mr_string> names;
+	std::for_each(
+		this->m_tests.begin(),
+		this->m_tests.end(),
+		BuildNamesVectorFunctor(names));
+
+	return names;
+
+	//assert(this->m_testNames.size() != 0);
+	//return this->m_testNames;
 }
 
 
@@ -325,10 +330,8 @@ void testCase::RunTest(const mr_utils::mr_string& name, const TestArguments& arg
 	
 	try {
 		// lookup the test
-		//std::vector<TestIndexPair>::iterator it = 
-		//	std::find_if(this->m_tests.begin(), this->m_tests.end(), HasNamedTest(name));
 		std::vector<TestCaseHolder>::iterator it = 
-			std::find_if(this->m_tests.begin(), this->m_tests.end(), HasNamedTest(name));
+			std::find_if(this->m_tests.begin(), this->m_tests.end(), HasNamedTestFunctor(name));
 
 		
 		// TODO - report this as an error instead
@@ -382,8 +385,14 @@ void testCase::ExecTestFixtureSetup() {
 void testCase::ResetTest() {
 	// Reset the state for the new test
 	this->m_status = ST_NONE;
+	this->m_name = _L_("");
+	this->m_desc = _L_("");
+	this->m_args.clear();
 	mr_utils::ResetStringStream(this->m_buffer);
 	mr_utils::ResetStringStream(this->m_verboseBuffer);
+	this->m_setupTime = 0;
+	this->m_execTime = 0;
+	this->m_cleanupTime = 0;
 }
 
 
@@ -391,10 +400,15 @@ void testCase::ResetFixture() {
 	this->ResetTest();
 	if (this->m_isFixtureCalled) {
 
-		// Have try Catch
-		this->m_isFixtureCalled = false;
-		if (this->m_fixtureTeardown != 0) {
-			(this->*m_fixtureTeardown)();
+		// Have try Catch - the test results have already been reported.
+		try {
+			this->m_isFixtureCalled = false;
+			if (this->m_fixtureTeardown != 0) {
+				(this->*m_fixtureTeardown)();
+			}
+		}
+		catch (...) {
+			// TODO - try to log something here
 		}
 	}
 }
