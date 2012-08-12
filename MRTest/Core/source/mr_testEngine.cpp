@@ -22,44 +22,13 @@ namespace mr_test
 {
 
 //---------------------------------------------------------------------------------------
-/// @brief Functor to determine if the name is a match for the test case name.
-class isTestNamed
+class HasNamedTestFunctor
 {
 public:
-	/// @brief	Constructor.
-	///
-	/// @param	name	The lookup name.
-	isTestNamed( const mr_utils::mr_string& name ) : m_name( name ) {}
-
-
-	/// @brief	The function operator overloaded to check for each testCase.
-	///
-	/// The comparisons are case sensitve.
-	///
-	/// @param	aCase	Pointer to the current testCase being evaluated.
-	///
-	/// @return	true if the name matches otherwise false.
-	bool operator () ( mr_test::testCase* aCase )
-	{
-		mr_utils::mr_pointerException::ptrAssert( aCase, FL );
-		return aCase->name() == m_name;
-	}
-private:
-
-	const mr_utils::mr_string& m_name; ///< The name to compare to each testCase.
-};
-
-
-class HasNamedTest
-{
-public:
-	HasNamedTest(const mr_utils::mr_string& name) : m_name(name) {
+	HasNamedTestFunctor(const mr_utils::mr_string& name) : m_name(name) {
 	}
 
 	bool operator () (mr_test::testCase* test) {
-
-	//	mr_cout << _L_("** Lookup Name:") << this->m_name << _L_(" Registered test name:") << test->name() << std::endl;
-
 		mr_utils::mr_pointerException::ptrAssert( test, FL );
 		return test->HasTest(this->m_name);
 	}
@@ -124,10 +93,9 @@ void engine::processScript( scriptReader& theReader )
 	while (!info.isNull()) {
 		bool infoUnused = false;
 		if (info.isActive()) {
-			//this->processCase( info );
 			// search vector for right test case per name.
 			std::vector<mr_test::testCase*>::iterator it = 
-				std::find_if( m_cases.begin(), m_cases.end(), HasNamedTest(info.getName()));
+				std::find_if( m_cases.begin(), m_cases.end(), HasNamedTestFunctor(info.getName()));
 
 			// check if exists
 			if (it == m_cases.end())
@@ -165,54 +133,6 @@ void engine::processScript( scriptReader& theReader )
 	m_logEngine.writeSummaries();
 }
 
-
-#ifdef blah1_execMethodsRemoved
-void engine::processScript( scriptReader& theReader )
-{
-	m_logEngine.writeHeaders();
-
-	testInfoObject info = theReader.getNextTest();
-	while (!info.isNull())
-	{
-		if (info.isActive())
-		{
-			this->processCase( info );
-		}
-		info = theReader.getNextTest();
-	}
-	m_logEngine.writeSummaries();
-}
-#endif
-
-#ifdef blah1_execMethodsRemoved
-//void engine::processCase( const mr_utils::mr_string& name, const mr_utils::mr_string& args )
-void engine::processCase( const testInfoObject& info )
-{
-	// search vector for right test case per name.
-	std::vector<mr_test::testCase*>::iterator it = 
-		std::find_if( m_cases.begin(), m_cases.end(), isTestNamed( info.getName() ) );
-		
-	// check if exists
-	if (it == m_cases.end())
-	{
-		NonExistantTest test( info.getName() );
-		this->logResults( &test );
-	}
-	else
-	{
-		(*it)->executeInit( info.getArguments() );
-		(*it)->executeSetup();
-		(*it)->executeTest();
-		(*it)->executeCleanup();
-		this->logResults( (*it) );
-
-		// delete it now.
-		delete (*it);
-		(*it) = 0;
-		m_cases.erase( it );
-	}
-}
-#endif
 
 void engine::logResults( mr_test::testCase* theCase )
 {

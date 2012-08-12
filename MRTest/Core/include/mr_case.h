@@ -21,7 +21,6 @@ namespace mr_test {
 
 class TestCaseHolder;
 
-
 ///--------------------------------------------------------------------------------------
 ///
 ///	@brief	Pure virtual base class for all test cases.
@@ -49,7 +48,6 @@ public:
 	typedef enum Status {
 		ST_NONE,		///< No status. Default.
 		ST_SUCCESS,		///< Test was successful.
-		ST_FAIL_INIT,	///< Test failed when init was called.
 		ST_FAIL_SETUP,	///< Test failed on setup.
 		ST_FAIL_TEST,	///< Test failed.
 		ST_FAIL_CLEANUP,///< Test failed on cleanup.
@@ -153,33 +151,6 @@ public:
 	testCase(const mr_utils::mr_string& name, const mr_utils::mr_string& desc);
 
 
-	/// @brief	Initialise method for two phase construction.
-	///			This is fed into the test case by the engine just before the setup is called.
-	///	@param	args	Any args that you want to send to the test case.
-	///
-	///	@return	true if successful, otherwise false.
-//	virtual bool init( const TestArguments& args );
-
-
-	/// @brief	Override to setup test before test is run in test method. Default 
-	///			returns true.
-	///
-	/// @return	true if successful, otherwise false.
-//	virtual bool setup();
-
-
-	/// @brief	Override to execute test code.
-	///
-	/// @return	true if successful, otherwise false.
-//	virtual bool test() = 0;
-
-
-	/// @brief	Override to clean up after test is run. Default returns true.
-	///
-	/// @return	true if successful, otherwise false.
-//	virtual bool cleanup();
-
-
 	/// @brief	Retrieve uniquely indentifying test name.
 	///
 	/// @return	The unique name of the test.
@@ -229,39 +200,6 @@ public:
 	/// @return	The time in ms that the cleanup took.
 	long long cleanupTime() const;
 
-#ifdef blah1_execMethodsRemoved
-	// Only used by the engine
-
-	///// @brief	Called by the engine when the test is selected.
-	/////
-	/////	Allows the test to be created before the arguments for the test are known. In this
-	///// way a test case code can be used in different ways depending on the arguments that
-	///// are read in at select time.  Part of the arguments can also be expected return value.
-	/////
-	///// The test is instantiated and stored.  When it is selected, the arguments are know from 
-	///// the same script from which is was selected.
-	/////
-	///// @param	args	A TestArguments object with the arguments for the test.
-	//bool executeInit(  const TestArguments& args );
-
-
-	///// @brief	Executes and times the test setup. Only ever called by the testEngine.
-	///// 
-	///// @return true if successful, otherwise false.
-	//bool executeSetup();
-
-
-	///// @brief	Executes and times the test itself. Only ever called by the testEngine.
-	///// 
-	///// @return true if successful, otherwise false.
-	//bool executeTest();
-
-
-	///// @brief	Executes and times the test cleanup. Only ever called by the testEngine.
-	///// 
-	///// @return true if successful, otherwise false.
-	//bool executeCleanup();
-#endif
 
 	/// @brief	Retrieve the message buffer.
 	///
@@ -295,10 +233,7 @@ private:
 	long long					m_execTime;			///< Test time in ms.
 	long long					m_cleanupTime;		///< Cleanup time in ms.
 
-
 	
-	
-
 	/// @brief	Protected default constructor to force use of regular constructor.
 	testCase() ;
 
@@ -307,29 +242,6 @@ private:
 	///
 	/// @param	tc	The testCase used for construction.
 	testCase( const testCase& tc );
-
-
-	/// @brief	Typdef of a class method pointer to clean up syntax. 
-//	typedef bool (testCase::*  step_ptr) ( void );
-
-
-	/// @brief	Wrapper function to wrap performance logging for various methods.
-	///
-	/// @param	timeVal	A reference to hold the timing information.
-	/// @param	funcPtr	A pointer to the function to time.
-	///
-	/// @return	true if the function timed is successful, otherwise false.
-//	bool execStep( long long& timeVal, step_ptr funcPtr );
-
-
-	/// @brief	Helper method to set the status.
-	///
-	/// @param	isOk		The status of the current test.
-	/// @param	failStatus	The status to set upon failure.
-	///
-	/// @return	The same status as the argument isOk.
-//	bool setStatus( bool isOk, TestCaseStatus failStatus );
-
 
 };
 

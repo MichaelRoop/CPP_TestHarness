@@ -67,26 +67,6 @@ testCase::testCase( const mr_utils::mr_string& name, const mr_utils::mr_string& 
 {
 }
 
-#ifdef blah1_execMethodsRemoved
-bool testCase::init( const TestArguments& args )
-{
-	m_args = args;
-	return true;
-}
-
-
-bool testCase::setup()
-{
-	return true;
-}
-
-
-bool testCase::cleanup()
-{
-	return true;
-}
-#endif
-
 
 const mr_utils::mr_string& testCase::name() const {
 	return this->m_name;
@@ -108,7 +88,6 @@ mr_utils::mr_string testCase::status() const {
 	{
 	case ST_NONE:			return L( "NONE" );
 	case ST_SUCCESS:		return L( "SUCCESS" );
-	case ST_FAIL_INIT:		return L( "FAIL_INIT" );
 	case ST_FAIL_SETUP:		return L( "FAIL_SETUP" );
 	case ST_FAIL_TEST:		return L( "FAIL_TEST" );
 	case ST_FAIL_CLEANUP:	return L( "FAIL_CLEANUP" );
@@ -143,104 +122,6 @@ long long testCase::cleanupTime() const {
 	return this->m_cleanupTime;
 }
 
-#ifdef blah1_execMethodsRemoved
-bool testCase::execStep( long long& timeVal, step_ptr funcPtr )
-{
-	try {
-		mr_utils::StaticTimer timer;
-		timer.start();
-		bool retVal = (this->*funcPtr)();
-		timer.stop();
-		timeVal = timer.getMsInterval();
-		return retVal;
-	}
-	catch(mr_utils::mr_exception const & e) {
-		// TODO - at present, the values being logged before the exception is called by macros
-
-		//mr_cout << "** Caught mr_exception on Test ** File:" << e.fileName() << _L_(" Line:") << e.fileLine() << _L_(" Msg:") << e.msg()  << _L_(" LongMsg:") << e.longMsg() << std::endl;
-		//mr_cout << "** Caught mr_exception on Test ** File:" << e.fileName() << _L_(" Line:") << e.fileLine() << _L_(" Msg:") << e.msg() << std::endl;
-	}
-	catch(std::exception const & e) {
-		//mr_cout << "** Caught std::exception on Test **" << e.what() <<  std::endl;
-	}
-	catch(std::string const & s) {
-		//mr_cout << "** Caught std::string on Test **" << s.c_str() <<  std::endl;
-	}
-	catch (...) {
-		//printf("** Caught Unknown Exception on Test **\n");
-	}
-
-	return false;
-}
-
-
-bool testCase::setStatus( bool isOk, TestCaseStatus failStatus )
-{
-	m_status = (isOk == true) ? ST_SUCCESS : failStatus;
-	return isOk;
-}
-
-
-bool testCase::executeInit(  const TestArguments& args )
-{
-	return this->setStatus( this->init( args ), ST_FAIL_INIT );
-}
-
-
-bool testCase::executeSetup()
-{
-	if (m_status == ST_SUCCESS)
-	{
-		// TODO temp to see if there is a fixture setup registered
-		if (this->m_fixtureSetup != 0) {
-			(this->*m_fixtureSetup)();
-
-			return true; // need a catch
-		}
-		else {
-			return this->setStatus( execStep( m_setupTime, &testCase::setup ), ST_FAIL_SETUP );
-		}
-	}
-	return false;
-}
-
-
-bool testCase::executeTest()
-{
-	if (m_status == ST_SUCCESS)
-	{
-		return this->setStatus( execStep( m_execTime, &testCase::test ), ST_FAIL_TEST );
-	}
-	return false;
-}
-
-
-bool testCase::executeCleanup()
-{
-	bool success = false;
-
-	// TODO temp to test the registered fixture teardown
-	if (this->m_fixtureTeardown != 0) {
-			(this->*m_fixtureTeardown)();
-
-			success = true; // need a catch
-		}
-		else {
-			success = execStep( m_cleanupTime, &testCase::cleanup );
-		}
-
-
-	// Cleanup always executed.
-	//bool success = execStep( m_cleanupTime, &testCase::cleanup );
-
-	// Failure on cleanup will only be logged if all else was successful.
-	if (m_status == ST_SUCCESS)
-	{
-		return this->setStatus( success, ST_FAIL_CLEANUP );
-	}
-	return success;
-}
-#endif
 
 mr_utils::mr_stringstream& testCase::getMsgBuffer() {
 	return this->m_buffer;
@@ -296,10 +177,6 @@ void testCase::RegisterTest(testCase_ptr test, const mr_utils::mr_string& name, 
 
 
 bool testCase::HasTest(const mr_utils::mr_string& name) {
-	//std::vector<TestCaseHolder>::iterator it = 
-	//	std::find_if(this->m_tests.begin(), this->m_tests.end(), HasNamedTestFunctor(name));
-	//return it != this->m_tests.end();
-
 	return std::find_if(
 		this->m_tests.begin(), 
 		this->m_tests.end(), 
@@ -316,9 +193,6 @@ const std::vector<mr_utils::mr_string> testCase::GetTestNames() {
 		BuildNamesVectorFunctor(names));
 
 	return names;
-
-	//assert(this->m_testNames.size() != 0);
-	//return this->m_testNames;
 }
 
 
@@ -332,7 +206,6 @@ void testCase::RunTest(const mr_utils::mr_string& name, const TestArguments& arg
 		// lookup the test
 		std::vector<TestCaseHolder>::iterator it = 
 			std::find_if(this->m_tests.begin(), this->m_tests.end(), HasNamedTestFunctor(name));
-
 		
 		// TODO - report this as an error instead
 		assert(it != this->m_tests.end());

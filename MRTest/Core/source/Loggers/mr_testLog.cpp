@@ -64,9 +64,6 @@ bool testLog::log(  testCase* theCase )
 	case testCase::ST_SUCCESS:
 		++m_stSuccessCount;
 		break;
-	case testCase::ST_FAIL_INIT:		
-		++m_stFailInitCount;
-		break;
 	case testCase::ST_FAIL_SETUP:		
 		++m_stFailSetupCount;
 		break;
