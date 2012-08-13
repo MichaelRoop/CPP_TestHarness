@@ -13,6 +13,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MRThread", "..\MRThread\MRT
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MRStateMachine", "..\MRStateMachine\MRStateMachine.vcxproj", "{94BC7E5F-3909-4A78-B8DA-B42C47F894B5}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ExperimentDll", "..\ExperimentDll\ExperimentDll.vcxproj", "{7383196C-A1E3-4076-81F3-16A146464A27}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ExperimentDllLoader", "ExperimentDllLoader\ExperimentDllLoader.vcxproj", "{36747E99-B61D-46D3-AA2E-EBFD15F35A00}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -43,6 +47,14 @@ Global
 		{94BC7E5F-3909-4A78-B8DA-B42C47F894B5}.Debug|Win32.Build.0 = Debug|Win32
 		{94BC7E5F-3909-4A78-B8DA-B42C47F894B5}.Release|Win32.ActiveCfg = Release|Win32
 		{94BC7E5F-3909-4A78-B8DA-B42C47F894B5}.Release|Win32.Build.0 = Release|Win32
+		{7383196C-A1E3-4076-81F3-16A146464A27}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7383196C-A1E3-4076-81F3-16A146464A27}.Debug|Win32.Build.0 = Debug|Win32
+		{7383196C-A1E3-4076-81F3-16A146464A27}.Release|Win32.ActiveCfg = Release|Win32
+		{7383196C-A1E3-4076-81F3-16A146464A27}.Release|Win32.Build.0 = Release|Win32
+		{36747E99-B61D-46D3-AA2E-EBFD15F35A00}.Debug|Win32.ActiveCfg = Debug|Win32
+		{36747E99-B61D-46D3-AA2E-EBFD15F35A00}.Debug|Win32.Build.0 = Debug|Win32
+		{36747E99-B61D-46D3-AA2E-EBFD15F35A00}.Release|Win32.ActiveCfg = Release|Win32
+		{36747E99-B61D-46D3-AA2E-EBFD15F35A00}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
