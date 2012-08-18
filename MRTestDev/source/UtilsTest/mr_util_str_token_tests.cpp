@@ -41,6 +41,8 @@ public:
 	void TestSetup()	{ 
 		printf("**** Registered Test Setup Executed ****\n");
 		//_ARE_EQUAL(this, 1, 99);
+
+		//_ARE_NOT_EQUAL(this, 1, 1);
 	}
 
 	void TestTeardown()	{ 

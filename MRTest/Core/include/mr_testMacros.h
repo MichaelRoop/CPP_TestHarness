@@ -199,4 +199,8 @@ _fixture_->RegisterTest(static_cast<testCase::testCase_ptr>( _test_ ), _L_((#_te
 mr_assert::AreEqual(_FL_, (_expected_), (_actual_), (_fixture_)->getMsgBuffer());
 
 
+#define _ARE_NOT_EQUAL(_fixture_,_notexpected_, _actual_) \
+mr_assert::AreNotEqual(_FL_, (_notexpected_), (_actual_), (_fixture_)->getMsgBuffer());
+
+
 #endif
