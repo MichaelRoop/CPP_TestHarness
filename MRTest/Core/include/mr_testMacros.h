@@ -202,5 +202,16 @@ mr_assert::AreEqual(_FL_, (_expected_), (_actual_), (_fixture_)->getMsgBuffer())
 #define _ARE_NOT_EQUAL(_fixture_,_notexpected_, _actual_) \
 mr_assert::AreNotEqual(_FL_, (_notexpected_), (_actual_), (_fixture_)->getMsgBuffer());
 
+/*
+#define _DOES_THROW(_fixture_, _exception_, _logic_) \
+	try {									\
+		(_logic_);							\
+		_ARE_EQUAL(_fixture_, 1, 2);		\
+	}										\
+	catch (const (_exception_)& e) {			\
+		prinf("caught exception");			\
+	}										\
+*/
+
 
 #endif

@@ -6,6 +6,9 @@
 #include "mr_compareFunctions.h"
 #include "mr_Assert.h"
 
+// temp
+#include <exception>
+
 
 class TokenizerTests1 : public mr_test::testCase
 {
@@ -43,6 +46,8 @@ public:
 		//_ARE_EQUAL(this, 1, 99);
 
 		//_ARE_NOT_EQUAL(this, 1, 1);
+
+	//	_DOES_THROW(this, Exception, { this->ThrowTest());
 	}
 
 	void TestTeardown()	{ 
@@ -103,6 +108,10 @@ public:
 	}
 	
 protected:
+	void ThrowTest() {
+		throw Exception("blah");
+	}
+
 
 	std::vector<mr_utils::mr_string> m_tokens;
 
