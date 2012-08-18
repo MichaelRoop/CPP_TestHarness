@@ -47,6 +47,7 @@ class xecept : public std::exception {
 			std::cout << "Caught something" << std::endl; \
 		}  \
 
+
 #define _WRAP_TRY_BLOCK2( _logic_, _exType_)						\
 	try {															\
 		(_logic_);													\
@@ -73,15 +74,38 @@ static void TestThrowCatch3();
 static void TestThrowCatchEx();
 static void TestThrowCatchEx2();
 
+typedef void (*  func_ptr) (void);
+
+#define DO_FUNC(_func_ptr_) \
+	static_cast<func_ptr>(_func_ptr_)(); \
+
+//static void ExecFuncPtrTest() {
+//	std::cout << "ExecFuncPtrTest" << std::endl;
+//
+//	DO_FUNC((std::cout << "ExecFuncPtrTest" << std::endl));
+//}
+
+static void SampleFunc() {
+	std::cout << "sample statement 1" << std::endl;
+	std::cout << "sample statement 2" << std::endl;
+}
+static void ExecFuncPtrTest() {
+	std::cout << "ExecFuncPtrTest" << std::endl;
+
+	DO_FUNC(SampleFunc);
+}
 
 int main(int argc, char* argv[])
 {
-	TestWrapDelegate();
-	TestThrowCatch();
-	TestThrowCatch2();
-	TestThrowCatch3();
-	TestThrowCatchEx();
-	TestThrowCatchEx2();
+	ExecFuncPtrTest();
+
+
+	//TestWrapDelegate();
+	//TestThrowCatch();
+	//TestThrowCatch2();
+	//TestThrowCatch3();
+	//TestThrowCatchEx();
+	//TestThrowCatchEx2();
 
 	return 0;
 }
