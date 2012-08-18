@@ -21,6 +21,9 @@
 //ptrFunc Func ;
 
 
+#include "DllReflection.h"
+
+
 typedef void (__cdecl *ptrFunc)();
 
 class ExecDllFunctionFunctor {
@@ -45,29 +48,32 @@ private:
 int main(int argc, char* argv[])
 {
 	
-	HMODULE lib = LoadLibraryEx(L"C:\\Dev\\ExperimentDll.dll", NULL, DONT_RESOLVE_DLL_REFERENCES);
-	assert(((PIMAGE_DOS_HEADER)lib)->e_magic == IMAGE_DOS_SIGNATURE);
+//	HMODULE lib = LoadLibraryEx(L"C:\\Dev\\ExperimentDll.dll", NULL, DONT_RESOLVE_DLL_REFERENCES);
+//	assert(((PIMAGE_DOS_HEADER)lib)->e_magic == IMAGE_DOS_SIGNATURE);
+//
+//	PIMAGE_NT_HEADERS header = (PIMAGE_NT_HEADERS) ((BYTE *)lib + ((PIMAGE_DOS_HEADER)lib)->e_lfanew);
+//	assert(header->Signature == IMAGE_NT_SIGNATURE);
+//	assert(header->OptionalHeader.NumberOfRvaAndSizes > 0);
+//
+//	PIMAGE_EXPORT_DIRECTORY exports = (PIMAGE_EXPORT_DIRECTORY) 
+//		((BYTE *)lib + header->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_EXPORT].VirtualAddress);
+//	PVOID names = (BYTE *)lib + exports->AddressOfNames;
+//
+//std::vector<std::string> namesV;
+//
+//std::cout << "DLL Exported Method Names discovery" << std::endl;
+//for (int i = 0; i < exports->NumberOfNames; i++) {
+//    printf("Export Function Name: %s\n", (BYTE *)lib + ((DWORD *)names)[i]);
+//	namesV.push_back( (char*)((BYTE *)lib + ((DWORD *)names)[i]));
+//}
+//
+//FreeLibrary(lib);
+//std::cout << std::endl;
 
-	PIMAGE_NT_HEADERS header = (PIMAGE_NT_HEADERS) ((BYTE *)lib + ((PIMAGE_DOS_HEADER)lib)->e_lfanew);
-	assert(header->Signature == IMAGE_NT_SIGNATURE);
-	assert(header->OptionalHeader.NumberOfRvaAndSizes > 0);
-
-	PIMAGE_EXPORT_DIRECTORY exports = (PIMAGE_EXPORT_DIRECTORY) 
-		((BYTE *)lib + header->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_EXPORT].VirtualAddress);
-	PVOID names = (BYTE *)lib + exports->AddressOfNames;
-
-std::vector<std::string> namesV;
-
-for (int i = 0; i < exports->NumberOfNames; i++) {
-    printf("Export: %s\n", (BYTE *)lib + ((DWORD *)names)[i]);
-	namesV.push_back( (char*)((BYTE *)lib + ((DWORD *)names)[i]));
-}
-
-FreeLibrary(lib);
+	std::vector<std::string> namesV = cppTest::GetMethodNames(std::wstring(L"C:\\Dev\\ExperimentDll.dll"));
 
 
-
-
+std::cout << "DLL Exported Method Execution" << std::endl;
 	
 	std::cout << "Before load library" << std::endl;
 	HINSTANCE handle = LoadLibrary(L"C:\\Dev\\ExperimentDll.dll") ;

@@ -33,6 +33,10 @@ __declspec(dllexport) void __cdecl  Func2() {
 #endif
 
 
+ void  Func3() {
+	std::cout << "Executed Func3" << std::endl;
+}
+
 	//void Func1() {
 	//	std::cout << "Executed Func1" << std::endl;
 	//}
