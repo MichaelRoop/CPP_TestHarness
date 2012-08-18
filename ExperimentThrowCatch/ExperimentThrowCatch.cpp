@@ -74,6 +74,7 @@ static void TestThrowCatch3();
 static void TestThrowCatchEx();
 static void TestThrowCatchEx2();
 
+typedef void (func) (void);
 typedef void (*  func_ptr) (void);
 
 #define DO_FUNC(_func_ptr_) \
@@ -95,17 +96,26 @@ static void ExecFuncPtrTest() {
 	DO_FUNC(SampleFunc);
 }
 
+//static void ExecFuncPtrTest2() {
+//	std::cout << "ExecFuncPtrTest" << std::endl;
+//
+//	DO_FUNC(*(new func_ptr{
+//		std::cout << "sample statement 1" << std::endl;
+//		std::cout << "sample statement 2" << std::endl;})
+//	);
+//}
+
 int main(int argc, char* argv[])
 {
 	ExecFuncPtrTest();
 
 
-	//TestWrapDelegate();
-	//TestThrowCatch();
-	//TestThrowCatch2();
-	//TestThrowCatch3();
-	//TestThrowCatchEx();
-	//TestThrowCatchEx2();
+	TestWrapDelegate();
+	TestThrowCatch();
+	TestThrowCatch2();
+	TestThrowCatch3();
+	TestThrowCatchEx();
+	TestThrowCatchEx2();
 
 	return 0;
 }
