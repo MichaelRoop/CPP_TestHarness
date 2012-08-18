@@ -48,6 +48,8 @@ public:
 		//_ARE_NOT_EQUAL(this, 1, 1);
 
 	//	_DOES_THROW(this, Exception, { this->ThrowTest());
+
+		//_IS_TRUE_(this, false, "Totaly false msg");
 	}
 
 	void TestTeardown()	{ 
@@ -109,7 +111,7 @@ public:
 	
 protected:
 	void ThrowTest() {
-		throw Exception("blah");
+		//throw Exception("blah");
 	}
 
 

@@ -21,7 +21,8 @@ void IsTrue(
 	const char* file, int line, bool condition, mr_utils::mr_stringstream& buffer, const mr_utils::mr_string& msg) {
 
 	mr_utils::mr_stringstream ss;
-	ss << msg;
+	//ss << msg;
+	ss << _L_("Did not Expected false condition ");	
 	CreateMsg(ss, file, line, msg);
 
 	if (!mr_test::CompareEqual(true, condition, buffer, ss.str())) {
