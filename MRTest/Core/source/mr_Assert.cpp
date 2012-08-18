@@ -30,6 +30,18 @@ void IsTrue(
 	}																	
 }
 
+void IsFalse(
+	const char* file, int line, bool condition, mr_utils::mr_stringstream& buffer, const mr_utils::mr_string& msg) {
+
+	mr_utils::mr_stringstream ss;
+	ss << _L_("Did not Expected true condition ");	
+	CreateMsg(ss, file, line, msg);
+
+	if (!mr_test::CompareEqual(false, condition, buffer, ss.str())) {
+		throw mr_utils::mr_exception(file, line, ss.str());				
+	}																	
+}
+
 
 }
 

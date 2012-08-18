@@ -205,6 +205,10 @@ mr_assert::AreNotEqual(_FL_, (_notexpected_), (_actual_), (_fixture_)->getMsgBuf
 #define _IS_TRUE_(_fixture_,_condition_,_msg_)	\
 mr_assert::IsTrue(_FL_, (_condition_), (_fixture_)->getMsgBuffer(), _L_((_msg_)));
 
+#define _IS_FALSE_(_fixture_,_condition_,_msg_)	\
+mr_assert::IsFalse(_FL_, (_condition_), (_fixture_)->getMsgBuffer(), _L_((_msg_)));
+
+
 //void IsTrue(
 //	const char* file, int line, bool condition, mr_utils::mr_stringstream& buffer, const mr_utils::mr_string& msg) {
 

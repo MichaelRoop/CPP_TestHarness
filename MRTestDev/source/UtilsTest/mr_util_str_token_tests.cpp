@@ -50,6 +50,7 @@ public:
 	//	_DOES_THROW(this, Exception, { this->ThrowTest());
 
 		//_IS_TRUE_(this, false, "Totaly false msg");
+		//_IS_FALSE_(this, true, "Totaly false msg");
 	}
 
 	void TestTeardown()	{ 

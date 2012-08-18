@@ -86,11 +86,16 @@ void CreateMsg(mr_utils::mr_stringstream& ss, const char* file, int line, const 
 void IsTrue(
 	const char* file, int line, bool condition, mr_utils::mr_stringstream& buffer, const mr_utils::mr_string& msg = _L_( "" ));
 
+void IsFalse(
+	const char* file, int line, bool condition, mr_utils::mr_stringstream& buffer, const mr_utils::mr_string& msg = _L_( "" ));
 
-#define ASSERT_TRUE(_file_, _line_, _condition_, _buffer_, _streamMsg_)		\
-mr_utils::mr_stringstream ss;												\
-ss << (_streamMsg_);														\
-mr_assert::IsTrue(_file_, _line_, _condition_, _buffer_, ss.str().c_str());			\
+
+
+
+//#define ASSERT_TRUE(_file_, _line_, _condition_, _buffer_, _streamMsg_)		\
+//mr_utils::mr_stringstream ss;												\
+//ss << (_streamMsg_);														\
+//mr_assert::IsTrue(_file_, _line_, _condition_, _buffer_, ss.str().c_str());			\
 
 
 
