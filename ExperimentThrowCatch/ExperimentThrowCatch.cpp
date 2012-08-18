@@ -5,6 +5,12 @@
 #include <iostream>
 #include <exception>
 
+class xecept : public std::exception {
+	xecept() : exception("woof") {
+	}
+};
+
+
 /*
 #define _DOES_THROW(_fixture_, _exception_, _logic_) \
 	try {									\
@@ -47,10 +53,10 @@
 			std::cout << "No throw" << std::endl;					\
 		}															\
 		catch (const _exType_&) {									\
-			std::cout << "Caught something defined" << std::endl;	\
+			std::cout << "Caught expected exception type" << std::endl;	\
 		}															\
 		catch (...) {												\
-			std::cout << "Caught something else" << std::endl;		\
+		std::cout << "Caught exception other than expected '" << (#_exType_) << "' exception type"  << std::endl;		\
 		}															\
 
 
@@ -65,6 +71,7 @@ static void TestThrowCatch();
 static void TestThrowCatch2();
 static void TestThrowCatch3();
 static void TestThrowCatchEx();
+static void TestThrowCatchEx2();
 
 
 int main(int argc, char* argv[])
@@ -74,6 +81,7 @@ int main(int argc, char* argv[])
 	TestThrowCatch2();
 	TestThrowCatch3();
 	TestThrowCatchEx();
+	TestThrowCatchEx2();
 
 	return 0;
 }
@@ -106,8 +114,13 @@ static void TestThrowCatch3() {
 }
 
 static void TestThrowCatchEx() {
+	std::cout << "Catch expected exception type" << std::endl;
 	_WRAP_TRY_BLOCK2((ThrowMethod()), std::exception)
 }
 
+static void TestThrowCatchEx2() {
+	std::cout << "Catch non expected Expect type" << std::endl;
+	_WRAP_TRY_BLOCK2(ThrowMethod(), xecept)
+}
 
 
