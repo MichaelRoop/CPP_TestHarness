@@ -17,6 +17,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ExperimentDll", "..\Experim
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ExperimentDllLoader", "ExperimentDllLoader\ExperimentDllLoader.vcxproj", "{36747E99-B61D-46D3-AA2E-EBFD15F35A00}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ExperimentThrowCatch", "..\ExperimentThrowCatch\ExperimentThrowCatch.vcxproj", "{32B10B8E-FEFF-4C8C-A1D7-E0190E4382CF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -55,6 +57,10 @@ Global
 		{36747E99-B61D-46D3-AA2E-EBFD15F35A00}.Debug|Win32.Build.0 = Debug|Win32
 		{36747E99-B61D-46D3-AA2E-EBFD15F35A00}.Release|Win32.ActiveCfg = Release|Win32
 		{36747E99-B61D-46D3-AA2E-EBFD15F35A00}.Release|Win32.Build.0 = Release|Win32
+		{32B10B8E-FEFF-4C8C-A1D7-E0190E4382CF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{32B10B8E-FEFF-4C8C-A1D7-E0190E4382CF}.Debug|Win32.Build.0 = Debug|Win32
+		{32B10B8E-FEFF-4C8C-A1D7-E0190E4382CF}.Release|Win32.ActiveCfg = Release|Win32
+		{32B10B8E-FEFF-4C8C-A1D7-E0190E4382CF}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
