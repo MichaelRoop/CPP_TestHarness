@@ -193,7 +193,10 @@ _fixture_->RegisterTest(static_cast<testCase::testCase_ptr>( _test_ ), _L_((#_te
 
 //void RegisterTest(testCase_ptr test, const mr_utils::mr_string& name, const mr_utils::mr_string& description);
 
+// comparison assert macros
 
+#define _ARE_EQUAL(_fixture_,_expected_, _actual_) \
+mr_assert::AreEqual(_FL_, (_expected_), (_actual_), (_fixture_)->getMsgBuffer());
 
 
 #endif

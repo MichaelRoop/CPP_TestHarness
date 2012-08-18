@@ -21,9 +21,11 @@ public:
 		// that could be called from a DLL when the engine loads that DLL with the tests
 		_ADD_TEST_FIXTURE_( this );
 
-		// Register setup and teardown methods
+		// Optional Fixture setup and teardown. Executed once for series of test cases
 		_FIXTURE_SETUP_(this, &TokenizerTests1::FixtureSetup );
 		_FIXTURE_TEARDOWN_(this, &TokenizerTests1::FixtureTeardown );
+
+		// Optional Test case setup and teardown. executed for each test case
 		_TEST_SETUP_(this, &TokenizerTests1::TestSetup);
 		_TEST_TEARDOWN_(this, &TokenizerTests1::TestTeardown);
 
@@ -38,15 +40,18 @@ public:
 
 	void TestSetup()	{ 
 		printf("**** Registered Test Setup Executed ****\n");
+		//_ARE_EQUAL(this, 1, 99);
 	}
 
 	void TestTeardown()	{ 
 		printf("**** Registered Test Teardown Executed ****\n");
+		//_ARE_EQUAL(this, 1, 99);
 	}
 	
 	void FixtureSetup()	
 	{ 
 		printf("++++ Registered Fixture Setup Executed ++++\n");
+		//_ARE_EQUAL(this, 1, 99);
 		m_tokens.push_back( _L_("This" ) );
 		m_tokens.push_back( _L_("is" ) );
 		m_tokens.push_back( _L_("a" ) );
@@ -59,9 +64,10 @@ public:
 
 	void FixtureTeardown() {
 		printf("++++ Registered Fixture Teardown Executed ++++\n");
+		//_ARE_EQUAL(this, 1, 99);
 	}
 
-
+	// Example test case
 	void UTL_TOK_1_1() { 
 		mr_utils::mr_string str( _L_("This|is|a|test|string|with|some|tokens") );
 		this->DoIt( str );
@@ -88,6 +94,8 @@ public:
 	}
 
 	void UTL_TOK_1_6()	{ 
+		//_ARE_EQUAL(this, 1, 99);
+
 		mr_utils::mr_string str( _L_("||||||||This|is|a|test||||||string|with||||||some|tokens||||||||") );
 		this->DoIt( str );
 	}
@@ -107,7 +115,8 @@ protected:
 			this->getMsgBuffer() << L( "index of:" ) << index << L( " exceeds token count of :" ) << m_tokens.size() << std::endl;
 			return false;
 		}
-		mr_assert::AreEqual(_FL_, m_tokens[index], token, this->getMsgBuffer());
+		//mr_assert::AreEqual(_FL_, m_tokens[index], token, this->getMsgBuffer());
+		_ARE_EQUAL(this, m_tokens[index], token);
 		//mr_cout << _L_("At Index:") << this->m_tokens[index] << _L_(" Compared:") << token << std::endl;
 		return true;
 	}
@@ -128,10 +137,11 @@ protected:
 
 		// The index is incremented before the tokenize so it will be one high.
 		//return mr_test::VerbCompareEqual( FL, m_tokens.size(), index, *this, L("Total tokens number mismatch") );
-		mr_assert::AreEqual(_FL_, this->m_tokens.size(), index, this->getMsgBuffer());
+		//mr_assert::AreEqual(_FL_, this->m_tokens.size(), index, this->getMsgBuffer());
+		_ARE_EQUAL(this, this->m_tokens.size(), index);
 
 		//mr_assert::AreEqual(_FL_, 1, 99, this->getMsgBuffer());
-
+		//_ARE_EQUAL(this, 1, 99);
 
 		return true;
 	}

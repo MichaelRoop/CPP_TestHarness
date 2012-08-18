@@ -76,6 +76,17 @@ bool testLog::log(  testCase* theCase )
 	case testCase::ST_NOT_EXISTS:		
 		++m_stNotExistCount;
 		break;
+
+	// TODO - Need to modify this with fixture specific counters?
+	case testCase::ST_FAIL_FIXTURE_SETUP:
+		++this->m_stFailSetupCount;
+		break;
+	case testCase::ST_FAIL_FIXTURE_TEARDOWN:
+		++this->m_stFailCleanupCount;
+		break;
+
+
+
 	default:	
 		mr_utils::mr_stringstream ss;
 		ss << L("Invalid testCase state:") << theCase->statusEnum();
