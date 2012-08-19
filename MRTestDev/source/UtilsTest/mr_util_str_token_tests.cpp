@@ -33,12 +33,12 @@ public:
 		_TEST_TEARDOWN_(this, &TokenizerTests1::TestTeardown);
 
 		// Register test case methods
-		_REGISTER_TEST_(this, &TokenizerTests1::UTL_TOK_1_1, _L_( "Normal tokenize string" ));
-		_REGISTER_TEST_(this, &TokenizerTests1::UTL_TOK_1_2, _L_( "Tokenize with multiple mid delimiters"));
-		_REGISTER_TEST_(this, &TokenizerTests1::UTL_TOK_1_3, _L_( "Tokenize test leading delimiters" ));
-		_REGISTER_TEST_(this, &TokenizerTests1::UTL_TOK_1_4, _L_( "Tokenize test following delimiters" ));
-		_REGISTER_TEST_(this, &TokenizerTests1::UTL_TOK_1_5, _L_("Tokenize test leading and following delimiters"));
-		_REGISTER_TEST_(this, &TokenizerTests1::UTL_TOK_1_6, _L_("Tokenize test multiple leading mid and following delimiters"));
+		_REGISTER_TEST_(this, &TokenizerTests1::UTL_TOK_1_1, "Normal tokenize string");
+		_REGISTER_TEST_(this, &TokenizerTests1::UTL_TOK_1_2, "Tokenize with multiple mid delimiters");
+		_REGISTER_TEST_(this, &TokenizerTests1::UTL_TOK_1_3, "Tokenize test leading delimiters");
+		_REGISTER_TEST_(this, &TokenizerTests1::UTL_TOK_1_4, "Tokenize test following delimiters");
+		_REGISTER_TEST_(this, &TokenizerTests1::UTL_TOK_1_5, "Tokenize test leading and following delimiters");
+		_REGISTER_TEST_(this, &TokenizerTests1::UTL_TOK_1_6, "Tokenize test multiple leading mid and following delimiters");
 	}
 
 	void TestSetup()	{ 
@@ -177,7 +177,7 @@ public:
 		_TEST_SETUP_(this, &TokenizerTests2::TestSetup);
 		_TEST_TEARDOWN_(this, &TokenizerTests2::TestTeardown);
 
-		_REGISTER_TEST_(this, &TokenizerTests2::UTL_TOK_1_7, _L_( "Tokenize delimiters only" ));
+		_REGISTER_TEST_(this, &TokenizerTests2::UTL_TOK_1_7, "Tokenize delimiters only");
 	}																				
 
 	void TestSetup()	{ 
