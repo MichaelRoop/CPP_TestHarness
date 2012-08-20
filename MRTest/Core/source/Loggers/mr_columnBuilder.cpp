@@ -56,7 +56,7 @@ mr_utils::mr_string columnBuilder::createColumnData(
 	const FieldVector&			fieldInfo,
 	const mr_utils::mr_string&	delimiter,
 	const mr_utils::mr_string&	strQuotes,
-	CppTest::Fixture*			fixture 
+	CppTest::Case&				testCase 
 ) {
 	// I cannot use a factory to create the build objects since the for_each will fail with a
 	// C2893.  It cannot access a derived class through a virtual base class.
@@ -64,7 +64,7 @@ mr_utils::mr_string columnBuilder::createColumnData(
 	std::for_each( 
 		fieldInfo.begin(), 
 		fieldInfo.end(), 
-		buildTestCaseColumnValueString( os, delimiter, strQuotes, fixture)
+		buildTestCaseColumnValueString( os, delimiter, strQuotes, testCase)
 	);
 	return os.str();
 }

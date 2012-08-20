@@ -126,7 +126,7 @@ protected:
 		// compare index range.
 		if (index >= m_tokens.size())
 		{
-			this->getMsgBuffer() << L( "index of:" ) << index << L( " exceeds token count of :" ) << m_tokens.size() << std::endl;
+			this->CurrentTestCase().getMsgBuffer() << L( "index of:" ) << index << L( " exceeds token count of :" ) << m_tokens.size() << std::endl;
 			return false;
 		}
 		//mr_assert::AreEqual(_FL_, m_tokens[index], token, this->getMsgBuffer());
@@ -213,7 +213,7 @@ public:
 		for (count = 0; mr_utils::MrTokenize( pos, str, token, _L_('|') ); count++)
 		{
 		}
-		mr_test::VerbCompareEqual( _FL_, 0, count, this->getVerboseBuffer() );
+		mr_test::VerbCompareEqual( _FL_, 0, count, this->CurrentTestCase().getVerboseBuffer() );
 	}
 
 private:

@@ -58,7 +58,7 @@ struct WriteLogEntries {
 	/// @brief	Constructor.
 	///
 	/// @param	ptr	The testCase object that contains the information to log.
-	WriteLogEntries(CppTest::Fixture* ptr) : m_fixture(ptr) { 
+	WriteLogEntries(CppTest::Case& testCase) : m_case(testCase) { 
 	}
 
 
@@ -67,10 +67,10 @@ struct WriteLogEntries {
 	/// @param	theLog	The log object to call.
 	void operator () (mr_utils::SharedPtr<iTestLog>& theLog) { 
 		mr_utils::mr_exception::assertCondition(theLog.isValid(), FL, L("Invalid pointer"));
-		theLog->log(this->m_fixture);  
+		theLog->log(this->m_case);  
 	}
 private:
-	CppTest::Fixture* m_fixture; ///< The testCase information containing log information.
+	CppTest::Case& m_case; ///< The testCase information containing log information.
 };
 
 
@@ -116,9 +116,9 @@ bool testLogEngine::writeHeaders() {
 }
 
 
-bool testLogEngine::log(CppTest::Fixture* fixture) {
-	mr_utils::mr_pointerException::ptrAssert(fixture, FL );
-	std::for_each(m_logs.begin(), m_logs.end(), WriteLogEntries(fixture));
+bool testLogEngine::log(CppTest::Case& testCase) {
+	//mr_utils::mr_pointerException::ptrAssert(fixture, FL );
+	std::for_each(m_logs.begin(), m_logs.end(), WriteLogEntries(testCase));
 	return true;
 }
 

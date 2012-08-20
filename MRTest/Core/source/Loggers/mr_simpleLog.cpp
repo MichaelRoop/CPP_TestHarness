@@ -63,9 +63,9 @@ bool simpleLog::writeHeader()
 }
 
 
-bool simpleLog::writeEntry(CppTest::Fixture* fixture)
+bool simpleLog::writeEntry(CppTest::Case& testCase)
 {
-	mr_utils::mr_pointerException::ptrAssert(fixture, _FL_);
+//	mr_utils::mr_pointerException::ptrAssert(fixture, _FL_);
 	mr_utils::mr_exception::assertCondition( m_output.isValid(), FL, L( "invalid output" ) );
 
 	mr_utils::mr_stringstream os;
@@ -73,7 +73,7 @@ bool simpleLog::writeEntry(CppTest::Fixture* fixture)
 				m_formatData.m_fields, 
 				m_formatData.m_delimiter, 
 				m_formatData.m_strQuote, 
-				fixture 
+				testCase 
 			);
 	os << std::endl;
 	return m_output->write( os.str() );

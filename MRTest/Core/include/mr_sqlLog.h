@@ -16,6 +16,9 @@
 #include "mr_sqlBuilder.h"
 #include "mr_iLogInitialiser.h"
 
+namespace CppTest {
+	class Case;
+}
 
 namespace mr_test
 {
@@ -89,7 +92,7 @@ public:
 	/// @param	fixture	Pointer to the test case fixture object that contains information to log.
 	///
 	/// @return	true if successful, otherwise false.
-	bool writeEntry(CppTest::Fixture* fixture);
+	bool writeEntry(CppTest::Case& testCase);
 
 
 	/// @brief	Write the summary of the logging.
@@ -125,7 +128,7 @@ private:
 	/// @brief	Returns the SQL INSERT statement.
 	///
 	/// @return	The insert statement.
-	mr_utils::mr_string getInsertStmt(CppTest::Fixture* fixture) const;
+	mr_utils::mr_string getInsertStmt(CppTest::Case& testCase) const;
 
 
 	/// @brief	Returns the SQL INSERT statement.

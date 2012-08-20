@@ -38,24 +38,38 @@ private:
 
 //---------------------------------------------------------------------------------------
 /// @brief	Dummy testCase to carry the not found designation if lookup fails.
-class NonExistantTest : public CppTest::Fixture
+//class NonExistantTest : public CppTest::Fixture
+//{
+//public:
+//
+//	/// @brief	Constructor.
+//	///
+//	/// @param	testName	Unique name for the test.
+//	NonExistantTest( const mr_utils::mr_string& testName ) 
+//		: CppTest::Fixture( testName, L( "Test not found" ) )
+//	{
+//		m_status = ST_NOT_EXISTS;
+//	}
+//
+//	/// @brief	Override of test method to return true.
+//	///
+//	/// @return	Always returns true.
+//	bool test()		{ return true; }
+//};
+
+
+class NonExistantTestData : public CppTest::Case
 {
 public:
-
 	/// @brief	Constructor.
-	///
 	/// @param	testName	Unique name for the test.
-	NonExistantTest( const mr_utils::mr_string& testName ) 
-		: CppTest::Fixture( testName, L( "Test not found" ) )
-	{
+	NonExistantTestData(const mr_utils::mr_string& name) 
+		: CppTest::Case(name, L("Test not found") ) {
 		m_status = ST_NOT_EXISTS;
 	}
-
-	/// @brief	Override of test method to return true.
-	///
-	/// @return	Always returns true.
-	bool test()		{ return true; }
 };
+
+
 
 
 // End of functors
@@ -100,15 +114,15 @@ void engine::processScript( scriptReader& theReader )
 			// check if exists
 			if (it == this->m_fixtures.end())
 			{
-				NonExistantTest test( info.getName() );
-				this->logResults( &test );
+				NonExistantTestData test( info.getName() );
+				this->logResults(test);
 			}
 			else
 			{
 				while (!info.isNull()) {
 					if (info.isActive()) {
 						(*it)->RunTest(info.getName(), info.getArguments());
-						this->logResults( (*it) );
+						this->logResults((*it)->CurrentTestCase());
 					}
 					info = theReader.getNextTest();
 					if (info.isNull()) {
@@ -134,8 +148,8 @@ void engine::processScript( scriptReader& theReader )
 }
 
 
-void engine::logResults(CppTest::Fixture* fixture) {
-	m_logEngine.log(fixture);
+void engine::logResults(CppTest::Case& testCase) {
+	m_logEngine.log(testCase);
 }
 
 

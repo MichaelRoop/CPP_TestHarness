@@ -15,7 +15,7 @@
 #include "mr_iTestLog.h"
 
 namespace CppTest {
-	class Fixture;
+	class Case;
 }
 
 namespace mr_test
@@ -60,7 +60,7 @@ public:
 	/// @param	fixture	Pointer to the test case fixture object that contains information to log.
 	///
 	/// @return	true if successful, otherwise false.
-	bool log(CppTest::Fixture* fixture);
+	bool log(CppTest::Case& testCase);
 
 
 	/// @brief	Write the summary of the logging.
@@ -118,7 +118,7 @@ protected:
 	/// @param	fixture	Pointer to the test case fixture object that contains information to log.
 	///
 	/// @return	true if successful, otherwise false.
-	virtual bool writeEntry(CppTest::Fixture* fixture) = 0;
+	virtual bool writeEntry(CppTest::Case& testCase) = 0;
 
 
 	/// @brief	Determine if the existing log is to be overwritten or appended. 

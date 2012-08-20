@@ -9,7 +9,7 @@
 /// Copyright 2010 Michael Roop
 ///--------------------------------------------------------------------------------------
 #include "mr_buildTestCaseColumnValueString.h"
-#include "CppTestFixture.h"
+#include "CppTestCase.h"
 #include "mr_exception.h"
 #include "mr_pointerException.h"
 #include "mr_defines.h"
@@ -22,12 +22,12 @@ buildTestCaseColumnValueString::buildTestCaseColumnValueString(
 	mr_utils::mr_stringstream&	os,
 	const mr_utils::mr_string&	delimiter,
 	const mr_utils::mr_string&	strQuotes,
-	CppTest::Fixture*			fixture 
+	CppTest::Case&				testCase 
 	) 
 :	buildColumnValueString( os, delimiter, strQuotes ),
-	m_fixture(fixture)
+	m_testCase(testCase)
 {
-	mr_utils::mr_pointerException::ptrAssert(fixture, _FL_);
+	//mr_utils::mr_pointerException::ptrAssert(fixture, _FL_);
 }
 
 
@@ -36,31 +36,31 @@ void buildTestCaseColumnValueString::build( const FieldPair& field )
 	// add upper case conversion later.
 	if (field.first.compare( L("ID") ) == 0)
 	{
-		this->concatenateStr( this->m_fixture->name() );
+		this->concatenateStr( this->m_testCase.name() );
 	}
 	else if (field.first.compare( L("Description") ) == 0)
 	{
-		this->concatenateStr( this->m_fixture->desc() );
+		this->concatenateStr( this->m_testCase.desc() );
 	}
 	else if (field.first.compare( L("Status") ) == 0)
 	{
-		this->concatenateStr( this->m_fixture->status() );
+		this->concatenateStr( this->m_testCase.status() );
 	}
 	else if (field.first.compare( L("Message") ) == 0)
 	{
-		this->concatenateStr( this->m_fixture->getMsgBuffer().str() );
+		this->concatenateStr( this->m_testCase.getMsgBuffer().str() );
 	}
 	else if (field.first.compare( L("SetupTime") ) == 0)
 	{
-		m_os << this->m_fixture->setupTime();
+		m_os << this->m_testCase.setupTime();
 	}
 	else if (field.first.compare( L("ExecTime") ) == 0)
 	{
-		m_os << this->m_fixture->execTime();
+		m_os << this->m_testCase.execTime();
 	}
 	else if (field.first.compare( L("CleanupTime") ) == 0)
 	{
-		m_os << this->m_fixture->cleanupTime();
+		m_os << this->m_testCase.cleanupTime();
 	}
 	else if (field.first.compare( L("RunId") ) == 0)
 	{
@@ -68,7 +68,7 @@ void buildTestCaseColumnValueString::build( const FieldPair& field )
 	}
 	else if (field.first.compare( L("VerboseMessage") ) == 0)
 	{
-		this->concatenateVerboseBufferStr( this->m_fixture->getVerboseBuffer().str() );
+		this->concatenateVerboseBufferStr( this->m_testCase.getVerboseBuffer().str() );
 	}
 	else 
 	{

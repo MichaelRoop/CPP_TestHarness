@@ -139,11 +139,12 @@ public:
 	/// @return	The test message buffer.
 	mr_utils::mr_stringstream& getVerboseBuffer();
 
+public:
 
-protected:
+//protected:
 	TestCaseStatus				m_status;			///< Status of the test case.
 
-private:
+//private:
 	mr_utils::mr_string			m_name;				///< Test name.
 	mr_utils::mr_string			m_desc;				///< Test description.
 	mr_test::TestArguments		m_args;				///< Test arguments.

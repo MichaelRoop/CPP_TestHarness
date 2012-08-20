@@ -19,6 +19,7 @@
 
 namespace CppTest {
 	class Fixture;
+	class Case;
 }
 
 namespace mr_test
@@ -68,7 +69,7 @@ public:
 	/// @exception	throws a mr_utils::mr_pointerException on invalid loggers.
 	///
 	/// @return	true if successful, otherwise false.
-	bool log(CppTest::Fixture* fixture);
+	bool log(CppTest::Case& testCase);
 
 
 	/// @brief	Add a logger object to the logger group.

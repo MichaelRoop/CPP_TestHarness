@@ -15,7 +15,7 @@
 #include "mr_fieldPair.h"
 
 namespace CppTest {
-	class Fixture;
+	class Case;
 }
 
 
@@ -72,7 +72,7 @@ public:
 	/// @param	fixture			The test case fixture that holds the values.
 	///
 	/// @return	The INSERT statement with the data values.
-	static mr_utils::mr_string buildInsertStmtWithValues( const SQLData& sqlData, CppTest::Fixture* fixture);
+	static mr_utils::mr_string buildInsertStmtWithValues( const SQLData& sqlData, CppTest::Case& fixture);
 
 
 	/// @brief	Build the INSERT statement from the built template and values.

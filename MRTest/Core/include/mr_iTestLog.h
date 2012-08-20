@@ -15,7 +15,8 @@
 #include "mr_sharedPtr.h"
 
 namespace CppTest {
-	class Fixture;
+//	class Fixture;
+	class Case;
 }
 
 namespace mr_test {
@@ -55,7 +56,7 @@ public:
 	/// @param	fixture	Pointer to the test case fixture object that contains information to log.
 	///
 	/// @return	true if successful, otherwise false.
-	virtual bool log(CppTest::Fixture* fixture) = 0;
+	virtual bool log(CppTest::Case& testCase) = 0;
 
 
 	/// @brief	Write the summary of the logging to the summary log output.

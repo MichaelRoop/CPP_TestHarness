@@ -107,8 +107,8 @@ mr_utils::mr_stringstream& Case::getVerboseBuffer() {
 void Case::Reset() {
 	// Reset the state for the new test
 	this->m_status = ST_NONE;
-	this->m_name = _L_("");
-	this->m_desc = _L_("");
+	//this->m_name = _L_(""); // name and description never change
+	//this->m_desc = _L_("");
 	this->m_args.clear();
 	mr_utils::ResetStringStream(this->m_buffer);
 	mr_utils::ResetStringStream(this->m_verboseBuffer);

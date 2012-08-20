@@ -14,7 +14,7 @@
 #include "mr_pointerException.h"
 #include "mr_defines.h"
 #include "mr_testEngine.h"
-
+#include "CppTestCase.h"
 
 namespace mr_test
 {
@@ -64,11 +64,11 @@ bool sqlLog::writeHeader()
 }
 
 
-bool sqlLog::writeEntry(CppTest::Fixture* fixture)
+bool sqlLog::writeEntry(CppTest::Case& testCase)
 {
-	mr_utils::mr_pointerException::ptrAssert(fixture, _FL_);
+//	mr_utils::mr_pointerException::ptrAssert(fixture, _FL_);
 	mr_utils::mr_exception::assertCondition( m_output.isValid(), FL, L( "invalid output" ) );
-	return m_output->write(this->getInsertStmt(fixture));
+	return m_output->write(this->getInsertStmt(testCase));
 }
 
 
@@ -133,9 +133,9 @@ const mr_utils::mr_string& sqlLog::getCreateStmt() const
 }
 
 
-mr_utils::mr_string sqlLog::getInsertStmt(CppTest::Fixture* fixture) const
+mr_utils::mr_string sqlLog::getInsertStmt(CppTest::Case& testCase) const
 {
-	return sqlBuilder::buildInsertStmtWithValues( m_sqlData, fixture);
+	return sqlBuilder::buildInsertStmtWithValues( m_sqlData, testCase);
 }
 
 

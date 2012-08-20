@@ -14,7 +14,7 @@
 #include "mr_fieldPair.h"
 
 namespace CppTest {
-	class Fixture;	///< Forward declaration of fixture class
+	class Case;	///< Forward declaration of Case class
 }
 
 namespace mr_test
@@ -69,7 +69,7 @@ public:
 		const FieldVector&			fieldInfo,
 		const mr_utils::mr_string&	delimiter,
 		const mr_utils::mr_string&	strQuotes,
-		CppTest::Fixture*			fixture 
+		CppTest::Case&			fixture 
 	);
 
 

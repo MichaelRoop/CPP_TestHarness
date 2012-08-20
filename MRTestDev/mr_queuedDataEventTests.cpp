@@ -57,14 +57,14 @@ public:
 
 	bool test()
 	{
-		if (mr_test::CompareEqual( m_data.size(), m_events.QueuedCount(), this->getMsgBuffer() ))
+		if (mr_test::CompareEqual( m_data.size(), m_events.QueuedCount(), this->CurrentTestCase().getMsgBuffer() ))
 		{
 			std::vector<mr_utils::mr_string> target;
 			for (unsigned int i = 0; i < m_data.size(); ++i)
 			{
 				mr_utils::mr_string s;
 				
-				if (!mr_test::CompareEqual( this->GetEventData( s ), true, this->getMsgBuffer(), L("Did not get data") ) )
+				if (!mr_test::CompareEqual( this->GetEventData( s ), true, this->CurrentTestCase().getMsgBuffer(), L("Did not get data") ) )
 				{
 					return false;
 				}
@@ -73,9 +73,9 @@ public:
 			}
 
 			// check for empty queue.
-			if (mr_test::CompareEqual( (unsigned)0, m_events.QueuedCount(), this->getMsgBuffer(), L("Queue not empty") ))
+			if (mr_test::CompareEqual( (unsigned)0, m_events.QueuedCount(), this->CurrentTestCase().getMsgBuffer(), L("Queue not empty") ))
 			{
-				return mr_test::VerbCompareVecEqual( FL, m_data, target, this->getVerboseBuffer(), L("Vectors not equal") );
+				return mr_test::VerbCompareVecEqual( FL, m_data, target, this->CurrentTestCase().getVerboseBuffer(), L("Vectors not equal") );
 			}
 		}
 		return false;

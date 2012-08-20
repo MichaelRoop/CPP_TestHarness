@@ -20,6 +20,7 @@
 
 namespace CppTest {
 	class Fixture;
+	class Case;
 }
 
 namespace mr_test
@@ -90,7 +91,7 @@ private:
 	/// @exception	Throws a mr_utils::mr_pointerException if the testCase pointer is invalid.
 	///
 	/// @param	fixture	The test case fixture whose results are to be logged.
-	void logResults(CppTest::Fixture* fixture);
+	void logResults(CppTest::Case& caseData);
 
 };
 

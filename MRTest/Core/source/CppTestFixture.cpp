@@ -28,7 +28,7 @@ public:
 	}
 	
 	bool operator () (const TestCaseHolder* testHolder) {
-		return testHolder->m_name == this->m_name;
+		return testHolder->m_testData->m_name == this->m_name;
 	}
 private:
 	const mr_utils::mr_string& m_name;
@@ -43,7 +43,7 @@ public:
 	}
 
 	void operator () (const TestCaseHolder* testHolder) {
-		this->m_names.push_back(testHolder->m_name);
+		this->m_names.push_back(testHolder->m_testData->m_name);
 	}
 
 private:
@@ -53,12 +53,14 @@ private:
 
 
 Fixture::Fixture(const mr_utils::mr_string& name, const mr_utils::mr_string& desc) 
-:	m_name( name ),
-	m_desc( desc ),
-	m_setupTime( 0 ),
-	m_execTime( 0 ),
-	m_cleanupTime( 0 ),
-	m_status( ST_NONE ),
+:	
+	//m_name( name ), // TODO - have the name of the Fixture preserved
+	//m_desc( desc ),
+	//m_setupTime( 0 ),
+	//m_execTime( 0 ),
+	//m_cleanupTime( 0 ),
+	//m_status( ST_NONE ),
+	m_currentTestCase(0),
 	m_fixtureSetup(0),
 	m_fixtureTeardown(0),
 	m_testSetup(0),
@@ -67,70 +69,70 @@ Fixture::Fixture(const mr_utils::mr_string& name, const mr_utils::mr_string& des
 }
 
 
-const mr_utils::mr_string& Fixture::name() const {
-	return this->m_name;
-}
+//const mr_utils::mr_string& Fixture::name() const {
+//	return this->m_name;
+//}
 
 
 const mr_test::TestArguments& Fixture::CurrentArgs() const {
 	return this->m_args;
 }
 
-
-const mr_utils::mr_string& Fixture::desc() const {
-	return this->m_desc;
-}
-
-
-mr_utils::mr_string Fixture::status() const {
-	switch (this->m_status)
-	{
-	case ST_NONE:			return L( "NONE" );
-	case ST_SUCCESS:		return L( "SUCCESS" );
-	case ST_FAIL_SETUP:		return L( "FAIL_SETUP" );
-	case ST_FAIL_TEST:		return L( "FAIL_TEST" );
-	case ST_FAIL_CLEANUP:	return L( "FAIL_CLEANUP" );
-	case ST_NOT_EXISTS:		return L( "NOT_EXISTS" );
-
-	case ST_FAIL_FIXTURE_SETUP: return _L_("FAIL_FIXTURE_SETUP");
-	case ST_FAIL_FIXTURE_TEARDOWN: return _L_("FAIL_FIXTURE_TEARDOWN");
-
-	default:				
-		mr_utils::mr_exception::assertCondition( 0, FL, L( "ERROR-NO-STATUS" ) );
-		return L( "ERROR-NO-STATUS" );
-	}
-}
-
-
-Fixture::TestCaseStatus Fixture::statusEnum() const {
-	return this->m_status;
-}
-
-
-long long Fixture::setupTime() const {
-	return this->m_setupTime;
-}
-
-
-long long Fixture::execTime() const {
-	return this->m_execTime;
-}
-
-
-long long Fixture::cleanupTime() const {
-	return this->m_cleanupTime;
-}
-
-
-mr_utils::mr_stringstream& Fixture::getMsgBuffer() {
-	return this->m_buffer;
-}
-
-
-mr_utils::mr_stringstream& Fixture::getVerboseBuffer() {
-	return this->m_verboseBuffer;
-}
-
+/*
+//const mr_utils::mr_string& Fixture::desc() const {
+//	return this->m_desc;
+//}
+//
+//
+//mr_utils::mr_string Fixture::status() const {
+//	switch (this->m_status)
+//	{
+//	case ST_NONE:			return L( "NONE" );
+//	case ST_SUCCESS:		return L( "SUCCESS" );
+//	case ST_FAIL_SETUP:		return L( "FAIL_SETUP" );
+//	case ST_FAIL_TEST:		return L( "FAIL_TEST" );
+//	case ST_FAIL_CLEANUP:	return L( "FAIL_CLEANUP" );
+//	case ST_NOT_EXISTS:		return L( "NOT_EXISTS" );
+//
+//	case ST_FAIL_FIXTURE_SETUP: return _L_("FAIL_FIXTURE_SETUP");
+//	case ST_FAIL_FIXTURE_TEARDOWN: return _L_("FAIL_FIXTURE_TEARDOWN");
+//
+//	default:				
+//		mr_utils::mr_exception::assertCondition( 0, FL, L( "ERROR-NO-STATUS" ) );
+//		return L( "ERROR-NO-STATUS" );
+//	}
+//}
+//
+//
+//Fixture::TestCaseStatus Fixture::statusEnum() const {
+//	return this->m_status;
+//}
+//
+//
+//long long Fixture::setupTime() const {
+//	return this->m_setupTime;
+//}
+//
+//
+//long long Fixture::execTime() const {
+//	return this->m_execTime;
+//}
+//
+//
+//long long Fixture::cleanupTime() const {
+//	return this->m_cleanupTime;
+//}
+//
+//
+//mr_utils::mr_stringstream& Fixture::getMsgBuffer() {
+//	return this->m_buffer;
+//}
+//
+//
+//mr_utils::mr_stringstream& Fixture::getVerboseBuffer() {
+//	return this->m_verboseBuffer;
+//}
+*/
 
 void Fixture::RegisterFixtureSetup(fixture_method_ptr setup) {
 	assert(setup);
@@ -193,7 +195,8 @@ const std::vector<mr_utils::mr_string> Fixture::GetTestNames() {
 	return names;
 }
 
-Case Fixture::CurrentTestCase() const {
+
+Case& Fixture::CurrentTestCase() const {
 	assert(this->m_currentTestCase);
 	return *(this->m_currentTestCase->m_testData);
 }
@@ -216,13 +219,13 @@ void Fixture::RunTest(const mr_utils::mr_string& name, const mr_test::TestArgume
 		this->m_currentTestCase = (*it);
 
 		// TODO - replace this with having a current ptr to test with all info instead or writting over fixture information
-		this->m_name = this->m_currentTestCase->m_testData->name();
-		this->m_desc = this->m_currentTestCase->m_testData->desc();
+		//this->m_name = this->m_currentTestCase->m_testData->name();
+		//this->m_desc = this->m_currentTestCase->m_testData->desc();
 
 		this->ExecTestFixtureSetup();
-		this->ExecStep(this->m_setupTime, this->m_testSetup, ST_FAIL_SETUP);
-		this->ExecStep(this->m_execTime, this->m_currentTestCase->m_test, ST_FAIL_TEST);	
-		this->ExecStep(this->m_cleanupTime, this->m_testTeardown, ST_FAIL_CLEANUP);
+		this->ExecStep(this->m_currentTestCase->m_testData->m_setupTime, this->m_testSetup, Case::ST_FAIL_SETUP);
+		this->ExecStep(this->m_currentTestCase->m_testData->m_execTime, this->m_currentTestCase->m_test, Case::ST_FAIL_TEST);	
+		this->ExecStep(this->m_currentTestCase->m_testData->m_cleanupTime, this->m_testTeardown, Case::ST_FAIL_CLEANUP);
 
 		// Test fixture teardown is called on fixture from outside when no more tests to execute in fixture
 
@@ -250,16 +253,16 @@ void Fixture::RunTest(const mr_utils::mr_string& name, const mr_test::TestArgume
 }
 
 
-void Fixture::ExecStep(long long& timeVal, fixture_method_ptr funcPtr, TestCaseStatus failStatus) {
+void Fixture::ExecStep(long long& timeVal, fixture_method_ptr funcPtr, Case::TestCaseStatus failStatus) {
 	// In this case there may not even be a step registered
 	timeVal = 0;
 	if (funcPtr != 0) {
 		mr_utils::StaticTimer timer;
 		timer.start();
 		// set to failed in case it throws
-		this->m_status = failStatus;
+		this->m_currentTestCase->m_testData->m_status = failStatus;
 		(this->*funcPtr)();
-		this->m_status = ST_SUCCESS;
+		this->m_currentTestCase->m_testData->m_status = Case::ST_SUCCESS;
 
 		timer.stop();
 		timeVal = timer.getMsInterval();
@@ -272,23 +275,27 @@ void Fixture::ExecTestFixtureSetup() {
 	if (!this->m_isFixtureCalled) {
 		// The fixture setup is not presently timed
 		long long bogusTimeVal = 0;
-		this->ExecStep(bogusTimeVal, this->m_fixtureSetup, ST_FAIL_FIXTURE_SETUP);
+		this->ExecStep(bogusTimeVal, this->m_fixtureSetup, Case::ST_FAIL_FIXTURE_SETUP);
 		this->m_isFixtureCalled = true;
 	}
 }
 
 
 void Fixture::ResetTest() {
-	// Reset the state for the new test
-	this->m_status = ST_NONE;
-	this->m_name = _L_("");
-	this->m_desc = _L_("");
-	this->m_args.clear();
-	mr_utils::ResetStringStream(this->m_buffer);
-	mr_utils::ResetStringStream(this->m_verboseBuffer);
-	this->m_setupTime = 0;
-	this->m_execTime = 0;
-	this->m_cleanupTime = 0;
+	if (this->m_currentTestCase != 0) {
+		this->m_currentTestCase->Reset();
+	}
+
+	//// Reset the state for the new test
+	//this->m_status = ST_NONE;
+	//this->m_name = _L_("");
+	//this->m_desc = _L_("");
+	//this->m_args.clear();
+	//mr_utils::ResetStringStream(this->m_buffer);
+	//mr_utils::ResetStringStream(this->m_verboseBuffer);
+	//this->m_setupTime = 0;
+	//this->m_execTime = 0;
+	//this->m_cleanupTime = 0;
 }
 
 

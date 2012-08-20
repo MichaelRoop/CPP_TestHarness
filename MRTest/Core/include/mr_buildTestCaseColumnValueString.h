@@ -14,7 +14,7 @@
 #include "mr_buildColumnValueString.h"
 
 namespace CppTest {
-	class Fixture;	///< Forward declaration of testCase.
+	class Case;	///< Forward declaration of testCase.
 }
 
 namespace mr_test {
@@ -37,12 +37,12 @@ public:
 		mr_utils::mr_stringstream&	os,
 		const mr_utils::mr_string&	delimiter,
 		const mr_utils::mr_string&	strQuotes,
-		CppTest::Fixture*			fixture 
+		CppTest::Case&				testCase 
 	);
 
 private:
 
-	CppTest::Fixture* m_fixture; ///< The testCase to log column values.
+	CppTest::Case& m_testCase; ///< The testCase to log column values.
 
 
 	/// @brief	Handles the building of column data.
