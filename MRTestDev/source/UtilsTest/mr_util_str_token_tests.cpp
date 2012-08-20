@@ -26,7 +26,7 @@ public:
 
 		// Optional Fixture setup and teardown. Executed once for series of test cases
 		_FIXTURE_SETUP_(this, &TokenizerTests1::FixtureSetup );
-		_FIXTURE_TEARDOWN_(this, &TokenizerTests1::FixtureTeardown );
+		_FIXTURE_TEARDOWN_(this, &TokenizerTests1::FixtureTeardown ); 
 
 		// Optional Test case setup and teardown. executed for each test case
 		_TEST_SETUP_(this, &TokenizerTests1::TestSetup);

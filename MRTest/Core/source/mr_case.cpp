@@ -18,8 +18,7 @@
 #include <assert.h>
 #include <algorithm>
 
-namespace mr_test
-{
+namespace mr_test {
 
 //---------------------------------------------------------------------------------------
 /// @brief Functor to determine if the name is a match for the test case name.
@@ -36,6 +35,7 @@ private:
 };
 
 
+/// @brief Functor to vector of test names held by fixture
 class BuildNamesVectorFunctor {
 public:
 	BuildNamesVectorFunctor(std::vector<mr_utils::mr_string>& names) 
@@ -52,7 +52,7 @@ private:
 };
 
 
-testCase::testCase( const mr_utils::mr_string& name, const mr_utils::mr_string& desc ) 
+testCase::testCase(const mr_utils::mr_string& name, const mr_utils::mr_string& desc) 
 :	m_name( name ),
 	m_desc( desc ),
 	m_setupTime( 0 ),
@@ -63,8 +63,7 @@ testCase::testCase( const mr_utils::mr_string& name, const mr_utils::mr_string& 
 	m_fixtureTeardown(0),
 	m_testSetup(0),
 	m_testTeardown(0),
-	m_isFixtureCalled(false)
-{
+	m_isFixtureCalled(false) {
 }
 
 
@@ -133,11 +132,6 @@ mr_utils::mr_stringstream& testCase::getVerboseBuffer() {
 }
 
 
-///////////////////////////////////////////////////////////////////
-//				Start New Stuff                                  //   
-///////////////////////////////////////////////////////////////////
-
-
 void testCase::RegisterFixtureSetup(testCase_ptr setup) {
 	assert(setup);
 	this->m_fixtureSetup = setup;
@@ -177,6 +171,7 @@ void testCase::RegisterTest(testCase_ptr test, const mr_utils::mr_string& name, 
 
 
 bool testCase::HasTest(const mr_utils::mr_string& name) {
+	// TODO - look at a scheme where you would have TestFixtureName.TestCaseName
 	return std::find_if(
 		this->m_tests.begin(), 
 		this->m_tests.end(), 
@@ -197,9 +192,10 @@ const std::vector<mr_utils::mr_string> testCase::GetTestNames() {
 
 
 void testCase::RunTest(const mr_utils::mr_string& name, const TestArguments& args ) {
+	// Clear out any information from a previous test case
 	this->ResetTest();
 
-	// Get a copy of the optional arguments for this test
+	// Get a copy of the optional arguments for the current named test case
 	this->m_args = args;
 	
 	try {
@@ -220,12 +216,15 @@ void testCase::RunTest(const mr_utils::mr_string& name, const TestArguments& arg
 		this->ExecStep(this->m_cleanupTime, this->m_testTeardown, ST_FAIL_CLEANUP);
 
 		// Test fixture teardown called from outside when no more tests to execute in fixture
+
+		// TODO - add code to catch segfault and convert to exeception for catch and print out the stack info
 	}
 	catch (...) {
 		// TODO - later we may put the writing to buffer here but for now we will do it in the assert methods
 	}
 
 }
+
 
 void testCase::ExecStep(long long& timeVal, testCase_ptr funcPtr, TestCaseStatus failStatus) {
 	// In this case there may not even be a step registered
@@ -273,7 +272,7 @@ void testCase::ResetFixture() {
 	this->ResetTest();
 	if (this->m_isFixtureCalled) {
 
-		// Have try Catch - the test results have already been reported.
+		// Do not report errors on test fixture teardown
 		try {
 			this->m_isFixtureCalled = false;
 			if (this->m_fixtureTeardown != 0) {
@@ -287,10 +286,4 @@ void testCase::ResetFixture() {
 }
 
 
-///////////////////////////////////////////////////////////////////
-//                END NEW STUFF                                  //
-///////////////////////////////////////////////////////////////////
-
-
-
-}
+} // end namespace

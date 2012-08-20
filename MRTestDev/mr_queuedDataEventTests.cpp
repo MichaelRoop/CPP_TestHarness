@@ -35,8 +35,7 @@ class QueuedDataEventTests : public mr_test::testCase
 public:
 	QueuedDataEventTests() : mr_test::testCase( _L_("QueuedDataEventTests"), _L_("") ) {
 		_ADD_TEST_FIXTURE_(this);
-		_FIXTURE_SETUP_(this, &QueuedDataEventTests::FixtureSetup);
-
+		_FIXTURE_SETUP_(this, &QueuedDataEventTests::FixtureSetup); 
 	}
 
 	void FixtureSetup()
