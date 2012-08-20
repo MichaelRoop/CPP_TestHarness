@@ -18,6 +18,12 @@
 #include <assert.h>
 #include <algorithm>
 
+//// Win32 only
+//#if defined (_WIN32)
+//#include <excpt.h>
+//#include <Windows.h>
+//#endif
+
 namespace CppTest {
 
 //---------------------------------------------------------------------------------------
@@ -143,6 +149,10 @@ void Fixture::RunTest(const mr_utils::mr_string& name, const mr_test::TestArgume
 	// Get a copy of the optional arguments for the current named test case
 	this->m_args = args;
 	
+	// Windows specific test code
+//#if defined (_WIN32)
+//__try {
+//#endif
 	try {
 		// lookup the test
 		std::vector<TestCaseHolder*>::iterator it = 
@@ -164,6 +174,13 @@ void Fixture::RunTest(const mr_utils::mr_string& name, const mr_test::TestArgume
 	catch (...) {
 		// TODO - later we may put the writing to buffer here but for now we will do it in the assert methods
 	}
+
+//#if defined (_WIN32)
+//	}
+//__except(GetExceptionCode() == EXCEPTION_INT_DIVIDE_BY_ZERO) {
+//		printf("Devide by 0 error");
+//	}
+//#endif
 
 }
 

@@ -7,6 +7,7 @@
 #UTL_STR_LTRIM_2
 #UTL_STR_TRIM_1
 #UTL_STR_TRIM_2
+
 UTL_TOK_1_1
 UTL_TOK_1_2$
 UTL_TOK_1_3$arg1=3434||arg2=jjf
@@ -58,13 +59,13 @@ UTL_TOK_1_7
 #THR_1_2_2
 
 # Event Tests
-THR_2_0_1
-THR_2_0_2
-THR_2_0_3
-THR_2_0_4
+#THR_2_0_1
+#THR_2_0_2
+#THR_2_0_3
+#THR_2_0_4
 # Manuel Event Tests.
-THR_2_0_101
-THR_2_0_102
+#THR_2_0_101
+#THR_2_0_102
 
 
 # Data Event Tests

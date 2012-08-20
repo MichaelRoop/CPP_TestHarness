@@ -3,6 +3,7 @@
 #include "mr_testMacros.h"
 #include "mr_string.h"
 #include "mr_iostream.h"
+#include "mr_sstream.h"
 #include "mr_compareFunctions.h"
 #include "mr_Assert.h"
 
@@ -10,8 +11,7 @@
 #include <exception>
 
 
-class TokenizerTests1 : public CppTest::Fixture
-{
+class TokenizerTests1 : public CppTest::Fixture {
 public:
 
 	TokenizerTests1() 
@@ -22,11 +22,11 @@ public:
 		// fires the contructor. However, this only works if the test case is compiled in
 		// to a test app.  TODO - secondary step - register contructor with a method
 		// that could be called from a DLL when the engine loads that DLL with the tests
-		_ADD_TEST_FIXTURE_( this );
+		_ADD_TEST_FIXTURE_(this);
 
 		// Optional Fixture setup and teardown. Executed once for series of test cases
-		_FIXTURE_SETUP_(this, &TokenizerTests1::FixtureSetup );
-		_FIXTURE_TEARDOWN_(this, &TokenizerTests1::FixtureTeardown ); 
+		_FIXTURE_SETUP_(this, &TokenizerTests1::FixtureSetup);
+		_FIXTURE_TEARDOWN_(this, &TokenizerTests1::FixtureTeardown); 
 
 		// Optional Test case setup and teardown. executed for each test case
 		_TEST_SETUP_(this, &TokenizerTests1::TestSetup);
@@ -40,27 +40,9 @@ public:
 		_REGISTER_TEST_(this, &TokenizerTests1::UTL_TOK_1_5, "Tokenize test leading and following delimiters");
 		_REGISTER_TEST_(this, &TokenizerTests1::UTL_TOK_1_6, "Tokenize test multiple leading mid and following delimiters");
 	}
-
-	void TestSetup()	{ 
-		printf("**** Registered Test Setup Executed ****\n");
-		//_ARE_EQUAL(this, 1, 99);
-
-		//_ARE_NOT_EQUAL(this, 1, 1);
-
-	//	_DOES_THROW(this, Exception, { this->ThrowTest());
-
-		//_IS_TRUE_(this, false, "Totaly false msg");
-		//_IS_FALSE_(this, true, "Totaly false msg");
-	}
-
-	void TestTeardown()	{ 
-		printf("**** Registered Test Teardown Executed ****\n");
-		//_ARE_EQUAL(this, 1, 99);
-	}
 	
-	void FixtureSetup()	
-	{ 
-		printf("++++ Registered Fixture Setup Executed ++++\n");
+	void FixtureSetup()	{ 
+		printf("++++ TokenizerTests1 Registered Fixture Setup Executed ++++\n");
 		//_ARE_EQUAL(this, 1, 99);
 		m_tokens.push_back( _L_("This" ) );
 		m_tokens.push_back( _L_("is" ) );
@@ -73,91 +55,80 @@ public:
 	}
 
 	void FixtureTeardown() {
-		printf("++++ Registered Fixture Teardown Executed ++++\n");
+		printf("++++ TokenizerTests1Registered Fixture Teardown Executed ++++\n");
 		//_ARE_EQUAL(this, 1, 99);
 	}
+
+	void TestSetup()	{ 
+		printf("**** TokenizerTests1 Registered Test Setup Executed ****\n");
+		//_ARE_EQUAL(this, 1, 99);
+		//_ARE_NOT_EQUAL(this, 1, 1);
+		//_DOES_THROW(this, Exception, { this->ThrowTest());
+		//_IS_TRUE_(this, false, "Totaly false msg");
+		//_IS_FALSE_(this, true, "Totaly false msg");
+	}
+
+	void TestTeardown()	{ 
+		printf("**** TokenizerTests1 Registered Test Teardown Executed ****\n");
+		//_ARE_EQUAL(this, 1, 99);
+	}
+	
 
 	// Example test case
 	void UTL_TOK_1_1() { 
-		mr_utils::mr_string str( _L_("This|is|a|test|string|with|some|tokens") );
-		this->DoIt( str );
+		//int x = 0;
+		//int i = 10 / x;
+		this->TokenizeString(_L_("This|is|a|test|string|with|some|tokens"));
 	}
 
 	void UTL_TOK_1_2() { 
-		mr_utils::mr_string str( _L_("This|is|a|test|string|with|some|||||tokens") );
-		this->DoIt( str );
+		this->TokenizeString(_L_("This|is|a|test|string|with|some|||||tokens"));
 	}
 	
 	void UTL_TOK_1_3() { 
-		mr_utils::mr_string str( _L_("||||||||This|is|a|test|string|with|some|tokens") );
-		this->DoIt( str );
+		this->TokenizeString(_L_("||||||||This|is|a|test|string|with|some|tokens"));
 	}
 
 	void UTL_TOK_1_4() { 
-		mr_utils::mr_string str( _L_("This|is|a|test|string|with|some|tokens||||||||") );
-		this->DoIt( str );
+		this->TokenizeString(_L_("This|is|a|test|string|with|some|tokens||||||||"));
 	}
 	
 	void UTL_TOK_1_5() { 
-		mr_utils::mr_string str( _L_("||||||||This|is|a|test|string|with|some|tokens||||||||") );
-		this->DoIt( str );
+		this->TokenizeString(_L_("||||||||This|is|a|test|string|with|some|tokens||||||||"));
 	}
 
 	void UTL_TOK_1_6()	{ 
-		//_ARE_EQUAL(this, 1, 99);
-
-		mr_utils::mr_string str( _L_("||||||||This|is|a|test||||||string|with||||||some|tokens||||||||") );
-		this->DoIt( str );
+		this->TokenizeString(_L_("||||||||This|is|a|test||||||string|with||||||some|tokens||||||||"));
 	}
 	
 protected:
 	void ThrowTest() {
 		//throw Exception("blah");
 	}
-
-
+	
 	std::vector<mr_utils::mr_string> m_tokens;
 
-	bool CompareToken( std::vector<mr_utils::mr_string>::size_type index, const mr_utils::mr_string& token )
-	{
-//		ASSERT_TRUE(__FILE__, __LINE__, false, this->getMsgBuffer(), ( L( "index of:" ) << index << L( " exceeds token count of :" ) << m_tokens.size() ));
-//		ASSERT_TRUE(__FILE__, __LINE__, false, this->getMsgBuffer(), ( L( "index of:" ) << L( "Woof" )  ));
-
+	void CompareToken( std::vector<mr_utils::mr_string>::size_type index, const mr_utils::mr_string& token ) {
 		// compare index range.
-		if (index >= m_tokens.size())
-		{
-			this->CurrentTestCase().getMsgBuffer() << L( "index of:" ) << index << L( " exceeds token count of :" ) << m_tokens.size() << std::endl;
-			return false;
+		if (index >= m_tokens.size()) {
+			mr_utils::mr_stringstream ss;
+			ss << L( "index of:" ) << index << L( " exceeds token count of :" ) << m_tokens.size();
+			_IS_TRUE_(this, false, ss.str().c_str());
 		}
-		//mr_assert::AreEqual(_FL_, m_tokens[index], token, this->getMsgBuffer());
 		_ARE_EQUAL(this, m_tokens[index], token);
-		//mr_cout << _L_("At Index:") << this->m_tokens[index] << _L_(" Compared:") << token << std::endl;
-		return true;
 	}
 
-	bool DoIt( const mr_utils::mr_string& str )
-	{
+	void TokenizeString(const mr_utils::mr_string& str) {
 		mr_utils::mr_string token;
 		mr_utils::mr_string::size_type pos = 0;
 		std::vector<mr_utils::mr_string>::size_type index;
 
-		for (index = 0; mr_utils::MrTokenize( pos, str, token, L('|') ); index++)
-		{
-			if (!this->CompareToken( index, token ))
-			{
-				return false;
-			}
+		for (index = 0; mr_utils::MrTokenize( pos, str, token, L('|') ); index++) {
+			this->CompareToken( index, token );
 		}
 
 		// The index is incremented before the tokenize so it will be one high.
-		//return mr_test::VerbCompareEqual( FL, m_tokens.size(), index, *this, L("Total tokens number mismatch") );
-		//mr_assert::AreEqual(_FL_, this->m_tokens.size(), index, this->getMsgBuffer());
 		_ARE_EQUAL(this, this->m_tokens.size(), index);
-
-		//mr_assert::AreEqual(_FL_, 1, 99, this->getMsgBuffer());
-		//_ARE_EQUAL(this, 1, 99);
-
-		return true;
 	}
 
 };
@@ -181,15 +152,15 @@ public:
 	}																				
 
 	void TestSetup()	{ 
-		printf("**** 2 Registered Test Setup Executed ****\n");
+		printf("**** TokenizerTests2 Registered Test Setup Executed ****\n");
 	}
 
 	void TestTeardown()	{ 
-		printf("**** 2 Registered Test Teardown Executed ****\n");
+		printf("**** TokenizerTests2 Registered Test Teardown Executed ****\n");
 	}
 	
 	void FixtureSetup()		{ 
-		printf("++++ 2 Registered Fixture Setup Executed ++++\n");
+		printf("++++ TokenizerTests2 Registered Fixture Setup Executed ++++\n");
 		this->m_tokens.push_back( _L_("This" ) );
 		this->m_tokens.push_back( _L_("is" ) );
 		this->m_tokens.push_back( _L_("a" ) );
@@ -201,19 +172,16 @@ public:
 	}
 
 	void FixtureTeardown() {
-		printf("++++ 2 Registered Fixture Teardown Executed ++++\n");
+		printf("++++ TokenizerTests2 Registered Fixture Teardown Executed ++++\n");
 	}
 
 	void UTL_TOK_1_7() { 
-		mr_utils::mr_string str( _L_("||||||||") );
 		mr_utils::mr_string token;
-
 		mr_utils::mr_string::size_type pos = 0;
 		int count;
-		for (count = 0; mr_utils::MrTokenize( pos, str, token, _L_('|') ); count++)
-		{
+		for (count = 0; mr_utils::MrTokenize( pos,  _L_("||||||||"), token, _L_('|') ); count++) {
 		}
-		mr_test::VerbCompareEqual( _FL_, 0, count, this->CurrentTestCase().getVerboseBuffer() );
+		_ARE_EQUAL(this, 0, count);
 	}
 
 private:

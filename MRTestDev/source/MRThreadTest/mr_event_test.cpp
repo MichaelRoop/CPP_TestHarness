@@ -43,14 +43,14 @@ public:
 	// Test manual event with no Reset.
 	void THR_2_0_3() { 
 		mr_threads::mr_event ev( false );
-		_IS_FALSE_(this, ev.IsSignaled(), "should not have been signaled");
+		_IS_FALSE_(this, ev.IsSignaled(), _L_("should not have been signaled"));
 	}
 
 	// Test IsSignaled with signaled event.
 	void THR_2_0_4() { 
 		mr_threads::mr_event ev( false );
 		ev.Signal();
-		_IS_TRUE_(this, ev.IsSignaled(), "should have been signaled");
+		_IS_TRUE_(this, ev.IsSignaled(), _L_("should have been signaled"));
 	}
 
 	//=========================================================================================
@@ -60,14 +60,14 @@ public:
 	// Test IsSignaled with no signal.
 	void THR_2_0_101() { 
 		mr_threads::mr_event ev;
-		_IS_FALSE_(this, ev.IsSignaled(), "should not have been signaled");
+		_IS_FALSE_(this, ev.IsSignaled(), _L_("should not have been signaled"));
 	}
 
 	// Test IsSignaled with signaled event.
 	void THR_2_0_102() { 
 		mr_threads::mr_event ev;
 		ev.Signal();
-		_IS_TRUE_(this, ev.IsSignaled(), "should have been signaled");
+		_IS_TRUE_(this, ev.IsSignaled(), _L_("should have been signaled"));
 	}
 };
 _REGISTER_FIXTURE_(MrEventTests)
