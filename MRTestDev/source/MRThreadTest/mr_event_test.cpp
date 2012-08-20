@@ -6,11 +6,11 @@
 #include "mr_testMacros.h"
 
 
-class MrEventTests : public mr_test::testCase {
+class MrEventTests : public CppTest::Fixture {
 
 public:
 
-	MrEventTests() : mr_test::testCase( _L_("MrEventTests"), _L_("") ) {
+	MrEventTests() : CppTest::Fixture( _L_("MrEventTests"), _L_("") ) {
 		_ADD_TEST_FIXTURE_( this );
 
 		_REGISTER_TEST_(this, &MrEventTests::THR_2_0_1, "Manual event test - Reset & timeout on next wait");

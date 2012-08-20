@@ -71,6 +71,7 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="source\CppTestFixture.cpp" />
     <ClCompile Include="source\mr_Assert.cpp" />
     <ClCompile Include="source\mr_case.cpp" />
     <ClCompile Include="source\mr_compareFunctions.cpp" />
@@ -98,6 +99,7 @@
     <ClCompile Include="source\Factories\mr_logOutputFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\CppTestFixture.h" />
     <ClInclude Include="include\mr_Assert.h" />
     <ClInclude Include="include\mr_case.h" />
     <ClInclude Include="include\mr_compareClasses.h" />

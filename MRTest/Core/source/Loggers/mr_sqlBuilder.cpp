@@ -9,11 +9,12 @@
 /// Copyright 2010 Michael Roop
 ///--------------------------------------------------------------------------------------
 #include "mr_sqlBuilder.h"
-#include "mr_case.h"
+#include "CppTestFixture.h"
 #include "mr_iTestLog.h"
 #include "mr_exception.h"
 #include "mr_defines.h"
 #include "mr_columnBuilder.h"
+#include "mr_sstream.h"
 
 
 namespace mr_test
@@ -37,7 +38,7 @@ void sqlBuilder::buildInsertStmt( SQLData& sqlData, const mr_utils::mr_string& i
 }
 
 
-mr_utils::mr_string sqlBuilder::buildInsertStmtWithValues( const SQLData& sqlData, testCase* theCase )
+mr_utils::mr_string sqlBuilder::buildInsertStmtWithValues( const SQLData& sqlData, CppTest::Fixture* fixture)
 {
 	mr_utils::mr_char delimiter = L('&');
 	verifyPlaceHolder( sqlData.m_insertStmt, delimiter, FL );
@@ -52,7 +53,7 @@ mr_utils::mr_string sqlBuilder::buildInsertStmtWithValues( const SQLData& sqlDat
 				sqlData.m_fields, 
 				mr_utils::mr_string( L(",") ), 
 				sqlData.m_strQuote, 
-				theCase 
+				fixture 
 			);
 
 	os << GetStmtChunk( sqlData.m_insertStmt, delimiter, pos, FL );

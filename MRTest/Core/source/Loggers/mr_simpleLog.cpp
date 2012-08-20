@@ -14,6 +14,7 @@
 #include "mr_pointerException.h"
 #include "mr_defines.h"
 #include "mr_columnBuilder.h"
+#include "mr_sstream.h"
 
 
 namespace mr_test
@@ -62,9 +63,9 @@ bool simpleLog::writeHeader()
 }
 
 
-bool simpleLog::writeEntry( testCase* theCase )
+bool simpleLog::writeEntry(CppTest::Fixture* fixture)
 {
-	mr_utils::mr_pointerException::ptrAssert( theCase, FL );
+	mr_utils::mr_pointerException::ptrAssert(fixture, _FL_);
 	mr_utils::mr_exception::assertCondition( m_output.isValid(), FL, L( "invalid output" ) );
 
 	mr_utils::mr_stringstream os;
@@ -72,7 +73,7 @@ bool simpleLog::writeEntry( testCase* theCase )
 				m_formatData.m_fields, 
 				m_formatData.m_delimiter, 
 				m_formatData.m_strQuote, 
-				theCase 
+				fixture 
 			);
 	os << std::endl;
 	return m_output->write( os.str() );

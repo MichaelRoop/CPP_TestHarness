@@ -13,11 +13,13 @@
 
 #include "mr_fieldPair.h"
 
+namespace CppTest {
+	class Fixture;	///< Forward declaration of fixture class
+}
 
 namespace mr_test
 {
 
-class testCase;	///< Forward declaration of testCase.
 class iTestLog;	///< Forward declaration of iTestLog.
 
 //----------------------------------------------------------------------------------------
@@ -60,14 +62,14 @@ public:
 	/// @param	fieldInfo	Vector that holds the field information and order.
 	/// @param	delimiter	The char that delimits the fields.
 	/// @param	strQuotes	The char that starts and ends a string field value.
-	/// @param	theCase		The testCase that holds the values.
+	/// @param	fixture		The test case fixture that holds the values.
 	///		
 	/// @return	Formated column data string.
 	static mr_utils::mr_string createColumnData( 
 		const FieldVector&			fieldInfo,
 		const mr_utils::mr_string&	delimiter,
 		const mr_utils::mr_string&	strQuotes,
-		testCase*					theCase 
+		CppTest::Fixture*			fixture 
 	);
 
 

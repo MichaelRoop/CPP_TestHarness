@@ -17,11 +17,14 @@
 #include "mr_string.h"
 
 
+namespace CppTest {
+	class Fixture;
+}
+
 namespace mr_test
 {
 
 class iTestLog;
-class testCase;
 
 
 //--------------------------------------------------------------------------------------
@@ -65,7 +68,7 @@ public:
 	/// @exception	throws a mr_utils::mr_pointerException on invalid loggers.
 	///
 	/// @return	true if successful, otherwise false.
-	bool log( testCase* theCase );
+	bool log(CppTest::Fixture* fixture);
 
 
 	/// @brief	Add a logger object to the logger group.
@@ -82,7 +85,7 @@ public:
 	///
 	/// @param	fileName	Name of the int file.
 	/// @param	fileType	Type of file loading.  Presently INI or XML
-	void loadLoggers( std::string fileName, mr_utils::mr_string fileType );
+	void loadLoggers(std::string fileName, mr_utils::mr_string fileType);
 
 protected:
 

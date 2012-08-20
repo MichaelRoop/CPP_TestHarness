@@ -64,11 +64,11 @@ bool sqlLog::writeHeader()
 }
 
 
-bool sqlLog::writeEntry( testCase* theCase )
+bool sqlLog::writeEntry(CppTest::Fixture* fixture)
 {
-	mr_utils::mr_pointerException::ptrAssert( theCase, FL );
+	mr_utils::mr_pointerException::ptrAssert(fixture, _FL_);
 	mr_utils::mr_exception::assertCondition( m_output.isValid(), FL, L( "invalid output" ) );
-	return m_output->write( this->getInsertStmt( theCase ) );
+	return m_output->write(this->getInsertStmt(fixture));
 }
 
 
@@ -133,9 +133,9 @@ const mr_utils::mr_string& sqlLog::getCreateStmt() const
 }
 
 
-mr_utils::mr_string sqlLog::getInsertStmt(  testCase* theCase ) const
+mr_utils::mr_string sqlLog::getInsertStmt(CppTest::Fixture* fixture) const
 {
-	return sqlBuilder::buildInsertStmtWithValues( m_sqlData, theCase );
+	return sqlBuilder::buildInsertStmtWithValues( m_sqlData, fixture);
 }
 
 

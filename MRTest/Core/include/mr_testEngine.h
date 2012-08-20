@@ -18,11 +18,12 @@
 
 #include <vector>
 
+namespace CppTest {
+	class Fixture;
+}
 
 namespace mr_test
 {
-
-class testCase;
 
 
 ///--------------------------------------------------------------------------------------
@@ -47,8 +48,8 @@ public:
 	/// It is easier to use the macros to create and register the test case. The engine
 	/// takes ownership of the created test case.
 	///
-	/// @exception	Throws a mr_utils::mr_pointerException if the testCase pointer is invalid.
-	void regCase( testCase* newCase );
+	/// @exception	Throws a mr_utils::mr_pointerException if the test case fixture pointer is invalid.
+	void regCase(CppTest::Fixture* fixture);
 
 
 	/// @brief	Process the test cases using the scriptReader object.
@@ -69,28 +70,27 @@ public:
 
 private:
 
-	std::vector<mr_test::testCase*> m_cases;	///< The vector of registered testCase objects.
+	std::vector<CppTest::Fixture*> m_fixtures;	///< The vector of registered test case fixtures.
 	static engine*					m_instance;	///< The unique instance of the testEngine.
 	mr_utils::mr_string				m_runId;	///< Unique ID for the run used in log files.
 	testLogEngine					m_logEngine;///< The logging engine.
 
 
-	/// @brief	Process one testCase based on information contained in the testInfoObject.
+	/// @brief	Process one test case fixture based on information contained in the testInfoObject.
 	///
 	/// The testInfoObject has the test name for lookup as well as the arguments needed to 
 	/// feed to the test case.
 	///
 	/// @param	testInfo	The data necessary to look up and run the test case.
-	void processCase(  const testInfoObject& testInfo );
+	void processCase(const testInfoObject& testInfo);
 
 
 	/// @brief	Log the results of one test case across log outputs.
 	///
 	/// @exception	Throws a mr_utils::mr_pointerException if the testCase pointer is invalid.
 	///
-	/// @param	theCase	The test case whose results are to be logged.
-	void logResults( mr_test::testCase* theCase );
-
+	/// @param	fixture	The test case fixture whose results are to be logged.
+	void logResults(CppTest::Fixture* fixture);
 
 };
 

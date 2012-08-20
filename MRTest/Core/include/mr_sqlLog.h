@@ -86,10 +86,10 @@ public:
 	/// @exception	throws a mr_utils::mr_pointerException if the testCase object is invalid.
 	/// @exception	throws a mr_utils::mr_exception if the output object is invalid.
 	///
-	/// @param	theCase	Pointer to the testCase object that contains information to log.
+	/// @param	fixture	Pointer to the test case fixture object that contains information to log.
 	///
 	/// @return	true if successful, otherwise false.
-	bool writeEntry( testCase* theCase );
+	bool writeEntry(CppTest::Fixture* fixture);
 
 
 	/// @brief	Write the summary of the logging.
@@ -125,7 +125,7 @@ private:
 	/// @brief	Returns the SQL INSERT statement.
 	///
 	/// @return	The insert statement.
-	mr_utils::mr_string getInsertStmt(  testCase* theCase ) const;
+	mr_utils::mr_string getInsertStmt(CppTest::Fixture* fixture) const;
 
 
 	/// @brief	Returns the SQL INSERT statement.

@@ -14,12 +14,11 @@
 #include "mr_iLogOutput.h"
 #include "mr_sharedPtr.h"
 
+namespace CppTest {
+	class Fixture;
+}
 
-namespace mr_test
-{
-
-class testCase;		///< testCase class forward declaration.
-
+namespace mr_test {
 
 //----------------------------------------------------------------------------------------
 /// @brief	Interface for retrieving and formatting logging information.
@@ -53,10 +52,10 @@ public:
 	/// @exception	throws a mr_utils::mr_pointerException if the testCase object is invalid.
 	/// @exception	throws a mr_utils::mr_exception if test has a state that is not handled.
 	///
-	/// @param	theCase	Pointer to the testCase object that contains information to log.
+	/// @param	fixture	Pointer to the test case fixture object that contains information to log.
 	///
 	/// @return	true if successful, otherwise false.
-	virtual bool log(  testCase* theCase ) = 0;
+	virtual bool log(CppTest::Fixture* fixture) = 0;
 
 
 	/// @brief	Write the summary of the logging to the summary log output.

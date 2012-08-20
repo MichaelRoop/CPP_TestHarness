@@ -13,12 +13,11 @@
 
 #include "mr_buildColumnValueString.h"
 
+namespace CppTest {
+	class Fixture;	///< Forward declaration of testCase.
+}
 
-namespace mr_test
-{
-
-class testCase;	///< Forward declaration of testCase.
-
+namespace mr_test {
 
 ///--------------------------------------------------------------------------------------
 /// @brief	Functor to Add a value to the value string on each iteration.
@@ -38,12 +37,12 @@ public:
 		mr_utils::mr_stringstream&	os,
 		const mr_utils::mr_string&	delimiter,
 		const mr_utils::mr_string&	strQuotes,
-		testCase*					theCase 
+		CppTest::Fixture*			fixture 
 	);
 
 private:
 
-	testCase* m_testCase; ///< The testCase to log column values.
+	CppTest::Fixture* m_fixture; ///< The testCase to log column values.
 
 
 	/// @brief	Handles the building of column data.

@@ -30,10 +30,10 @@ private:
 
 
 /// @brief	Base test case.
-class QueuedDataEventTests : public mr_test::testCase
+class QueuedDataEventTests : public CppTest::Fixture
 {
 public:
-	QueuedDataEventTests() : mr_test::testCase( _L_("QueuedDataEventTests"), _L_("") ) {
+	QueuedDataEventTests() : CppTest::Fixture( _L_("QueuedDataEventTests"), _L_("") ) {
 		_ADD_TEST_FIXTURE_(this);
 		_FIXTURE_SETUP_(this, &QueuedDataEventTests::FixtureSetup); 
 	}

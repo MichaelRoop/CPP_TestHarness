@@ -14,6 +14,9 @@
 
 #include "mr_iTestLog.h"
 
+namespace CppTest {
+	class Fixture;
+}
 
 namespace mr_test
 {
@@ -54,10 +57,10 @@ public:
 	/// @exception	throws a mr_utils::mr_exception if test has a state that is not handled.
 	/// @exception	throws a mr_utils::mr_exception if the output object is invalid.
 	///
-	/// @param	theCase	Pointer to the testCase object that contains information to log.
+	/// @param	fixture	Pointer to the test case fixture object that contains information to log.
 	///
 	/// @return	true if successful, otherwise false.
-	bool log( testCase* theCase );
+	bool log(CppTest::Fixture* fixture);
 
 
 	/// @brief	Write the summary of the logging.
@@ -112,10 +115,10 @@ protected:
 	///
 	/// @exception	throws a mr_utils::mr_pointerException if the testCase object is invalid.
 	///
-	/// @param	theCase	Pointer to the testCase object that contains information to log.
+	/// @param	fixture	Pointer to the test case fixture object that contains information to log.
 	///
 	/// @return	true if successful, otherwise false.
-	virtual bool writeEntry( testCase* theCase ) = 0;
+	virtual bool writeEntry(CppTest::Fixture* fixture) = 0;
 
 
 	/// @brief	Determine if the existing log is to be overwritten or appended. 

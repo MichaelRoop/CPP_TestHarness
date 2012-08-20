@@ -86,10 +86,10 @@ public:
 	/// @exception	throws a mr_utils::mr_pointerException if the testCase object is invalid.
 	/// @exception	throws a mr_utils::mr_exception if the output object is invalid.
 	///
-	/// @param	theCase	Pointer to the testCase object that contains information to log.
+	/// @param	fixture	Pointer to the test case fixture object that contains information to log.
 	///
 	/// @return	true if successful, otherwise false.
-	bool writeEntry( testCase* theCase );
+	bool writeEntry(CppTest::Fixture* fixture);
 
 
 	/// @brief	Write the summary of the logging.

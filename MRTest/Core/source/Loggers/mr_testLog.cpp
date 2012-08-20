@@ -9,7 +9,7 @@
 /// Copyright 2010 Michael Roop
 ///--------------------------------------------------------------------------------------
 #include "mr_testLog.h"
-#include "mr_case.h"
+#include "CppTestFixture.h"
 #include "mr_pointerException.h"
 #include "mr_defines.h"
 
@@ -55,33 +55,32 @@ testLog::~testLog()
 }
 
 
-bool testLog::log(  testCase* theCase )
-{
-	mr_utils::mr_pointerException::ptrAssert( theCase, FL );
+bool testLog::log(CppTest::Fixture* fixture) {
+	mr_utils::mr_pointerException::ptrAssert(fixture, FL );
 
-	switch( theCase->statusEnum() )
+	switch( fixture->statusEnum() )
 	{
-	case testCase::ST_SUCCESS:
+	case CppTest::Fixture::ST_SUCCESS:
 		++m_stSuccessCount;
 		break;
-	case testCase::ST_FAIL_SETUP:		
+	case CppTest::Fixture::ST_FAIL_SETUP:		
 		++m_stFailSetupCount;
 		break;
-	case testCase::ST_FAIL_TEST:		
+	case CppTest::Fixture::ST_FAIL_TEST:		
 		++m_stFailTestCount;
 		break;
-	case testCase::ST_FAIL_CLEANUP:	
+	case CppTest::Fixture::ST_FAIL_CLEANUP:	
 		++m_stFailCleanupCount;
 		break;
-	case testCase::ST_NOT_EXISTS:		
+	case CppTest::Fixture::ST_NOT_EXISTS:		
 		++m_stNotExistCount;
 		break;
 
 	// TODO - Need to modify this with fixture specific counters?
-	case testCase::ST_FAIL_FIXTURE_SETUP:
+	case CppTest::Fixture::ST_FAIL_FIXTURE_SETUP:
 		++this->m_stFailSetupCount;
 		break;
-	case testCase::ST_FAIL_FIXTURE_TEARDOWN:
+	case CppTest::Fixture::ST_FAIL_FIXTURE_TEARDOWN:
 		++this->m_stFailCleanupCount;
 		break;
 
@@ -89,11 +88,11 @@ bool testLog::log(  testCase* theCase )
 
 	default:	
 		mr_utils::mr_stringstream ss;
-		ss << L("Invalid testCase state:") << theCase->statusEnum();
+		ss << L("Invalid testCase state:") << fixture->statusEnum();
 		throw mr_utils::mr_exception( FL, ss.str() );
 	}
 
-	return this->writeEntry( theCase );
+	return this->writeEntry(fixture);
 }
 
 

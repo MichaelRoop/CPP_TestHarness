@@ -83,6 +83,6 @@ void holdScreen()
 	std::cout << "Type a char and press Enter to end program" << std::endl;
 
 	// to intercept and wait.
-	int x;
+	//int x;
 	//std::cin >> x;
 }

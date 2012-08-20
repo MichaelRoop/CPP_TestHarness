@@ -12,6 +12,7 @@
 #define MR_ASSERT_H
 
 #include "mr_exception.h"
+#include "mr_sstream.h"
 
 namespace mr_assert 
 {

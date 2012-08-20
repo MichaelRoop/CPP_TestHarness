@@ -9,7 +9,7 @@
 /// Copyright 2010 Michael Roop
 ///--------------------------------------------------------------------------------------
 #include "mr_testEngine.h"
-#include "mr_case.h"
+#include "CppTestFixture.h"
 #include "mr_pointerException.h"
 #include "mr_defines.h"
 #include "mr_iostream.h"
@@ -18,8 +18,7 @@
 #include <algorithm>
 
 
-namespace mr_test
-{
+namespace mr_test {
 
 //---------------------------------------------------------------------------------------
 class HasNamedTestFunctor
@@ -28,19 +27,18 @@ public:
 	HasNamedTestFunctor(const mr_utils::mr_string& name) : m_name(name) {
 	}
 
-	bool operator () (mr_test::testCase* test) {
-		mr_utils::mr_pointerException::ptrAssert( test, FL );
-		return test->HasTest(this->m_name);
+	bool operator () (CppTest::Fixture* fixture) {
+		mr_utils::mr_pointerException::ptrAssert(fixture, _FL_ );
+		return fixture->HasTest(this->m_name);
 	}
 private:
 	const mr_utils::mr_string& m_name;
 };
 
 
-
 //---------------------------------------------------------------------------------------
 /// @brief	Dummy testCase to carry the not found designation if lookup fails.
-class NonExistantTest : public mr_test::testCase
+class NonExistantTest : public CppTest::Fixture
 {
 public:
 
@@ -48,7 +46,7 @@ public:
 	///
 	/// @param	testName	Unique name for the test.
 	NonExistantTest( const mr_utils::mr_string& testName ) 
-		: mr_test::testCase( testName, L( "Test not found" ) )
+		: CppTest::Fixture( testName, L( "Test not found" ) )
 	{
 		m_status = ST_NOT_EXISTS;
 	}
@@ -78,10 +76,9 @@ engine& engine::getInstance()
 }
 
 
-void engine::regCase( mr_test::testCase* newCase )
-{
-	mr_utils::mr_pointerException::ptrAssert( newCase, FL );
-	m_cases.push_back( newCase );
+void engine::regCase(CppTest::Fixture* fixture) {
+	mr_utils::mr_pointerException::ptrAssert( fixture, _FL_ );
+	this->m_fixtures.push_back(fixture);
 }
 
 
@@ -94,11 +91,14 @@ void engine::processScript( scriptReader& theReader )
 		bool infoUnused = false;
 		if (info.isActive()) {
 			// search vector for right test case per name.
-			std::vector<mr_test::testCase*>::iterator it = 
-				std::find_if( m_cases.begin(), m_cases.end(), HasNamedTestFunctor(info.getName()));
+			std::vector<CppTest::Fixture*>::iterator it = 
+				std::find_if(
+					this->m_fixtures.begin(), 
+					this->m_fixtures.end(), 
+					HasNamedTestFunctor(info.getName()));
 
 			// check if exists
-			if (it == m_cases.end())
+			if (it == this->m_fixtures.end())
 			{
 				NonExistantTest test( info.getName() );
 				this->logResults( &test );
@@ -134,9 +134,8 @@ void engine::processScript( scriptReader& theReader )
 }
 
 
-void engine::logResults( mr_test::testCase* theCase )
-{
-	m_logEngine.log( theCase );
+void engine::logResults(CppTest::Fixture* fixture) {
+	m_logEngine.log(fixture);
 }
 
 
@@ -164,7 +163,6 @@ mr_utils::mr_string engine::getRunId()
 	}
 	return m_runId;
 }
-
 
 
 }

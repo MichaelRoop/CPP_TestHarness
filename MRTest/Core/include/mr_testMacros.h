@@ -11,7 +11,7 @@
 #if !defined(MR_TEST_MACROS_H)
 #define MR_TEST_MACROS_H
 
-#include "mr_case.h"
+#include "CppTestFixture.h"
 #include "mr_testEngine.h"
 #include "mr_char.h"
 
@@ -163,36 +163,38 @@
 //
 
 
+
+
 // Simplified macros for next generation
 
 // Adding the test fixture to the engine
-#define _ADD_TEST_FIXTURE_( _testCaseClass_ )	\
-mr_test::engine::getInstance().regCase( _testCaseClass_ );						\
+#define _ADD_TEST_FIXTURE_( _fixtureClass_ )				\
+mr_test::engine::getInstance().regCase( _fixtureClass_ );	\
 
 // Create the fixture instance with a unique variable name. This will trigger the constructor which registers it with the engine
 // You can only register a fixture class once
-#define _REGISTER_FIXTURE_( _fixture_ )	\
-_fixture_*  ##_fixture_##Instance  = new _fixture_();  \
+#define _REGISTER_FIXTURE_( _fixture_ )						\
+_fixture_*  ##_fixture_##Instance  = new _fixture_();		\
 
 
 #define _FIXTURE_SETUP_( _fixture_,  _setup_ )		\
-_fixture_->RegisterFixtureSetup(static_cast<testCase::testCase_ptr>( _setup_  ));			\
+	_fixture_->RegisterFixtureSetup(static_cast<CppTest::Fixture::fixture_method_ptr>( _setup_  ));			\
 
 
 #define _FIXTURE_TEARDOWN_( _fixture_,  _teardown_ )		\
-_fixture_->RegisterFixtureTeardown(static_cast<testCase::testCase_ptr>( _teardown_  ));			\
+_fixture_->RegisterFixtureTeardown(static_cast<CppTest::Fixture::fixture_method_ptr>( _teardown_  ));			\
 
 
 #define _TEST_SETUP_( _fixture_,  _setup_ )		\
-_fixture_->RegisterTestSetup(static_cast<testCase::testCase_ptr>( _setup_  ));			\
+_fixture_->RegisterTestSetup(static_cast<CppTest::Fixture::fixture_method_ptr>( _setup_  ));			\
 
 
 #define _TEST_TEARDOWN_( _fixture_,  _teardown_ )		\
-_fixture_->RegisterTestTeardown(static_cast<testCase::testCase_ptr>( _teardown_  ));			\
+_fixture_->RegisterTestTeardown(static_cast<CppTest::Fixture::fixture_method_ptr>( _teardown_  ));			\
 
 
 #define _REGISTER_TEST_( _fixture_, _test_, _desc_ )												\
-_fixture_->RegisterTest(static_cast<testCase::testCase_ptr>( _test_ ), _L_((#_test_)), _L_((_desc_)) );			\
+_fixture_->RegisterTest(static_cast<CppTest::Fixture::fixture_method_ptr>( _test_ ), _L_((#_test_)), _L_((_desc_)) );			\
 
 //void RegisterTest(testCase_ptr test, const mr_utils::mr_string& name, const mr_utils::mr_string& description);
 

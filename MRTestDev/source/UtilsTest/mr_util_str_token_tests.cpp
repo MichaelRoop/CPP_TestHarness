@@ -1,5 +1,5 @@
 
-#include "mr_case.h"
+#include "CppTestFixture.h"
 #include "mr_testMacros.h"
 #include "mr_string.h"
 #include "mr_iostream.h"
@@ -10,12 +10,12 @@
 #include <exception>
 
 
-class TokenizerTests1 : public mr_test::testCase
+class TokenizerTests1 : public CppTest::Fixture
 {
 public:
 
 	TokenizerTests1() 
-		: mr_test::testCase( _L_("testName"), _L_("argStr") ) {
+		: CppTest::Fixture( _L_("testName"), _L_("argStr") ) {
 
 		// This will add the test fixture to the test engine list when it is constructed
 		// The Register Fixture macro at the end of the class creates an instance which
@@ -165,11 +165,11 @@ _REGISTER_FIXTURE_(TokenizerTests1)
 
 
 // Test tokenize of string with only token delimiters.
-class TokenizerTests2 : public mr_test::testCase {
+class TokenizerTests2 : public CppTest::Fixture {
 
 public:
 	TokenizerTests2()
-		: mr_test::testCase( _L_( "Ziffle" ), _L_( "Pig" ) )	{
+		: CppTest::Fixture( _L_( "Ziffle" ), _L_( "Pig" ) )	{
 		_ADD_TEST_FIXTURE_( this );
 
 		_FIXTURE_SETUP_(this, &TokenizerTests2::FixtureSetup );

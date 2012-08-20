@@ -9,7 +9,7 @@
 /// Copyright 2010 Michael Roop
 ///--------------------------------------------------------------------------------------
 #include "mr_buildTestCaseColumnValueString.h"
-#include "mr_case.h"
+#include "CppTestFixture.h"
 #include "mr_exception.h"
 #include "mr_pointerException.h"
 #include "mr_defines.h"
@@ -22,12 +22,12 @@ buildTestCaseColumnValueString::buildTestCaseColumnValueString(
 	mr_utils::mr_stringstream&	os,
 	const mr_utils::mr_string&	delimiter,
 	const mr_utils::mr_string&	strQuotes,
-	testCase*					theCase 
+	CppTest::Fixture*			fixture 
 	) 
 :	buildColumnValueString( os, delimiter, strQuotes ),
-	m_testCase( theCase )
+	m_fixture(fixture)
 {
-	mr_utils::mr_pointerException::ptrAssert( theCase, FL );
+	mr_utils::mr_pointerException::ptrAssert(fixture, _FL_);
 }
 
 
@@ -36,31 +36,31 @@ void buildTestCaseColumnValueString::build( const FieldPair& field )
 	// add upper case conversion later.
 	if (field.first.compare( L("ID") ) == 0)
 	{
-		this->concatenateStr( m_testCase->name() );
+		this->concatenateStr( this->m_fixture->name() );
 	}
 	else if (field.first.compare( L("Description") ) == 0)
 	{
-		this->concatenateStr( m_testCase->desc() );
+		this->concatenateStr( this->m_fixture->desc() );
 	}
 	else if (field.first.compare( L("Status") ) == 0)
 	{
-		this->concatenateStr( m_testCase->status() );
+		this->concatenateStr( this->m_fixture->status() );
 	}
 	else if (field.first.compare( L("Message") ) == 0)
 	{
-		this->concatenateStr( m_testCase->getMsgBuffer().str() );
+		this->concatenateStr( this->m_fixture->getMsgBuffer().str() );
 	}
 	else if (field.first.compare( L("SetupTime") ) == 0)
 	{
-		m_os << m_testCase->setupTime();
+		m_os << this->m_fixture->setupTime();
 	}
 	else if (field.first.compare( L("ExecTime") ) == 0)
 	{
-		m_os << m_testCase->execTime();
+		m_os << this->m_fixture->execTime();
 	}
 	else if (field.first.compare( L("CleanupTime") ) == 0)
 	{
-		m_os << m_testCase->cleanupTime();
+		m_os << this->m_fixture->cleanupTime();
 	}
 	else if (field.first.compare( L("RunId") ) == 0)
 	{
@@ -68,7 +68,7 @@ void buildTestCaseColumnValueString::build( const FieldPair& field )
 	}
 	else if (field.first.compare( L("VerboseMessage") ) == 0)
 	{
-		this->concatenateVerboseBufferStr( m_testCase->getVerboseBuffer().str() );
+		this->concatenateVerboseBufferStr( this->m_fixture->getVerboseBuffer().str() );
 	}
 	else 
 	{

@@ -14,13 +14,15 @@
 
 #include "mr_fieldPair.h"
 
+namespace CppTest {
+	class Fixture;
+}
 
-namespace mr_test
-{
+
+namespace mr_test {
 
 
 struct SQLData; ///< Forward declaration of SQLData structure.
-class testCase;	///< Forward declaration of testCase.
 class iTestLog;	///< Forward declaration of test log.
 
 
@@ -67,10 +69,10 @@ public:
 	///
 	/// @param	sqlData			Structure that will holds the INSERT template and 
 	///							field information and order.
-	/// @param	theCase			The testCase that holds the values.
+	/// @param	fixture			The test case fixture that holds the values.
 	///
 	/// @return	The INSERT statement with the data values.
-	static mr_utils::mr_string buildInsertStmtWithValues( const SQLData& sqlData, testCase* theCase );
+	static mr_utils::mr_string buildInsertStmtWithValues( const SQLData& sqlData, CppTest::Fixture* fixture);
 
 
 	/// @brief	Build the INSERT statement from the built template and values.
