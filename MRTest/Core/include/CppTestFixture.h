@@ -15,6 +15,12 @@
 #include "mr_sstream.h"
 #include "mr_char.h"
 #include "mr_testInfoObject.h"
+#include "CppTestCase.h"
+
+// temp
+#include "mr_iostream.h"
+
+#include <assert.h>
 
 
 namespace CppTest {
@@ -104,12 +110,6 @@ public:
 	const mr_utils::mr_string& desc() const;
 
 
-	/// @brief	Retrieve test arguments.
-	///
-	/// @return	The arguments for the test.
-	const mr_test::TestArguments& args() const;
-
-
 	/// @brief	Retrieve the test status in string format.
 	///
 	/// @exception	throws an mr_exception if the status is not accounted
@@ -141,6 +141,9 @@ public:
 	/// @return	The time in ms that the cleanup took.
 	long long cleanupTime() const;
 
+
+	/// @brief	Retrieve a copy of the currently executed test case
+	Case CurrentTestCase() const;
 
 	/// @brief	Retrieve the message buffer.
 	///
@@ -195,11 +198,17 @@ protected:
 	///	@brief	Reset any data from previous test TODO - replace with current test.data
 	void ResetTest();
 
+
+	/// @brief	Retrieve test arguments for current test case.
+	///
+	/// @return	The arguments for the test case.
+	const mr_test::TestArguments& CurrentArgs() const;
+
 private:
 
 	mr_utils::mr_string			m_name;				///< Test name.
 	mr_utils::mr_string			m_desc;				///< Test description.
-	mr_test::TestArguments		m_args;				///< Test arguments.
+	mr_test::TestArguments		m_args;				///< Arguments for current Test Case.
 
 	mr_utils::mr_stringstream	m_buffer;			///< Short message buffer.
 	mr_utils::mr_stringstream	m_verboseBuffer;	///< Verbose message buffer.
@@ -211,7 +220,8 @@ private:
 	fixture_method_ptr			m_testSetup;		///< setup method for each test
 	fixture_method_ptr			m_testTeardown;		///< teardown method for each test
 	bool						m_isFixtureCalled;	///< Determines if a test has been called on the fixture yet
-	std::vector<TestCaseHolder> m_tests;			///< The list of test cases
+	std::vector<TestCaseHolder*> m_tests;			///< The list of test cases
+	TestCaseHolder*				m_currentTestCase;	///< The currently executing test case holder
 
 private:
 
@@ -245,15 +255,46 @@ public:
 	mr_utils::mr_string			m_name;
 	mr_utils::mr_string			m_description;
 	Fixture::fixture_method_ptr m_test;
+	Case*						m_testData;
 
 
 	TestCaseHolder(Fixture::fixture_method_ptr testPtr, const mr_utils::mr_string& name, const mr_utils::mr_string& description) :	
 		m_test(testPtr),
 		m_name(name),
-		m_description(description) {
+		m_description(description),
+		m_testData(new Case(name, description)) {
 	}
 
-	// TODO - make more robust
+
+	virtual ~TestCaseHolder() {
+		if (this->m_testData != 0) {
+			delete this->m_testData;
+			this->m_testData = 0;
+		}
+	}
+
+
+	void Reset() {
+		assert(this->m_testData);
+		this->m_testData->Reset();
+	}
+
+
+	Case CloneTestCase() {
+		assert(this->m_testData);
+		return *(this->m_testData);
+	}
+
+private:
+	TestCaseHolder() {
+	}
+
+	TestCaseHolder& operator = (const TestCaseHolder&) {
+	}
+
+	TestCaseHolder(const TestCaseHolder&) {
+	}
+
 
 };
 

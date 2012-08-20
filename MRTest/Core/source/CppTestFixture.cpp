@@ -27,8 +27,8 @@ public:
 	HasNamedTestFunctor(const mr_utils::mr_string& name) : m_name(name) {
 	}
 	
-	bool operator () (const TestCaseHolder& testHolder) {
-		return testHolder.m_name == this->m_name;
+	bool operator () (const TestCaseHolder* testHolder) {
+		return testHolder->m_name == this->m_name;
 	}
 private:
 	const mr_utils::mr_string& m_name;
@@ -42,8 +42,8 @@ public:
 		: m_names(names) {
 	}
 
-	void operator () (const TestCaseHolder& testHolder) {
-		this->m_names.push_back(testHolder.m_name);
+	void operator () (const TestCaseHolder* testHolder) {
+		this->m_names.push_back(testHolder->m_name);
 	}
 
 private:
@@ -72,7 +72,7 @@ const mr_utils::mr_string& Fixture::name() const {
 }
 
 
-const mr_test::TestArguments& Fixture::args() const {
+const mr_test::TestArguments& Fixture::CurrentArgs() const {
 	return this->m_args;
 }
 
@@ -159,6 +159,7 @@ void Fixture::RegisterTestTeardown(fixture_method_ptr teardown) {
 void Fixture::RegisterTest(fixture_method_ptr test, const mr_utils::mr_string& name, const mr_utils::mr_string& description) {
 	assert(test);
 	// TODO - test if already there?
+	// TODO - look at a scheme where you would have TestFixtureName.TestCaseName
 
 	// When using the macro it uses the # and will insert the full &ClassName::MethodName
 	mr_utils::mr_string scratch(name);
@@ -166,7 +167,9 @@ void Fixture::RegisterTest(fixture_method_ptr test, const mr_utils::mr_string& n
 	if (pos != mr_utils::mr_string::npos) {
 		scratch = name.substr(pos + 2);
 	}
-	this->m_tests.push_back(TestCaseHolder(test, scratch, description));
+
+	this->m_tests.push_back(new TestCaseHolder(test, scratch, description));
+	// TODO - destructor to clean up holders
 }
 
 
@@ -190,6 +193,11 @@ const std::vector<mr_utils::mr_string> Fixture::GetTestNames() {
 	return names;
 }
 
+Case Fixture::CurrentTestCase() const {
+	assert(this->m_currentTestCase);
+	return *(this->m_currentTestCase->m_testData);
+}
+
 
 void Fixture::RunTest(const mr_utils::mr_string& name, const mr_test::TestArguments& args ) {
 	// Clear out any information from a previous test case
@@ -200,24 +208,40 @@ void Fixture::RunTest(const mr_utils::mr_string& name, const mr_test::TestArgume
 	
 	try {
 		// lookup the test
-		std::vector<TestCaseHolder>::iterator it = 
+		std::vector<TestCaseHolder*>::iterator it = 
 			std::find_if(this->m_tests.begin(), this->m_tests.end(), HasNamedTestFunctor(name));
 		
 		// TODO - report this as an error instead
 		assert(it != this->m_tests.end());
+		this->m_currentTestCase = (*it);
 
 		// TODO - replace this with having a current ptr to test with all info instead or writting over fixture information
-		this->m_name = it->m_name;
-		this->m_desc = it->m_description;
+		this->m_name = this->m_currentTestCase->m_testData->name();
+		this->m_desc = this->m_currentTestCase->m_testData->desc();
 
 		this->ExecTestFixtureSetup();
 		this->ExecStep(this->m_setupTime, this->m_testSetup, ST_FAIL_SETUP);
-		this->ExecStep(this->m_execTime, it->m_test, ST_FAIL_TEST);	
+		this->ExecStep(this->m_execTime, this->m_currentTestCase->m_test, ST_FAIL_TEST);	
 		this->ExecStep(this->m_cleanupTime, this->m_testTeardown, ST_FAIL_CLEANUP);
 
-		// Test fixture teardown called from outside when no more tests to execute in fixture
+		// Test fixture teardown is called on fixture from outside when no more tests to execute in fixture
 
 		// TODO - add code to catch segfault and convert to exeception for catch and print out the stack info
+
+
+
+		//// TODO - replace this with having a current ptr to test with all info instead or writting over fixture information
+		//this->m_name = (*it)->m_name;
+		//this->m_desc = (*it)->m_description;
+
+		//this->ExecTestFixtureSetup();
+		//this->ExecStep(this->m_setupTime, this->m_testSetup, ST_FAIL_SETUP);
+		//this->ExecStep(this->m_execTime, (*it)->m_test, ST_FAIL_TEST);	
+		//this->ExecStep(this->m_cleanupTime, this->m_testTeardown, ST_FAIL_CLEANUP);
+
+		//// Test fixture teardown called from outside when no more tests to execute in fixture
+
+		//// TODO - add code to catch segfault and convert to exeception for catch and print out the stack info
 	}
 	catch (...) {
 		// TODO - later we may put the writing to buffer here but for now we will do it in the assert methods

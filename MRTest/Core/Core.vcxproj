@@ -71,6 +71,7 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="source\CppTestCase.cpp" />
     <ClCompile Include="source\CppTestFixture.cpp" />
     <ClCompile Include="source\mr_Assert.cpp" />
     <ClCompile Include="source\mr_case.cpp" />
@@ -99,6 +100,7 @@
     <ClCompile Include="source\Factories\mr_logOutputFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\CppTestCase.h" />
     <ClInclude Include="include\CppTestFixture.h" />
     <ClInclude Include="include\mr_Assert.h" />
     <ClInclude Include="include\mr_case.h" />
