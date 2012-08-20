@@ -17,9 +17,6 @@
 #include "mr_testInfoObject.h"
 #include "CppTestCase.h"
 
-// temp
-#include "mr_iostream.h"
-
 #include <assert.h>
 
 
@@ -52,21 +49,6 @@ class Fixture {
 
 public:
 
-	///// @brief	Status indicator for the test case.
-	//typedef enum Status {
-	//	ST_NONE,		///< No status. Default.
-	//	ST_SUCCESS,		///< Test was successful.
-	//	ST_FAIL_SETUP,	///< Test failed on setup.
-	//	ST_FAIL_TEST,	///< Test failed.
-	//	ST_FAIL_CLEANUP,///< Test failed on cleanup.
-	//	ST_NOT_EXISTS,	///< Test with unique id does not exist.
-
-	//	ST_FAIL_FIXTURE_SETUP,
-	//	ST_FAIL_FIXTURE_TEARDOWN
-
-	//} TestCaseStatus;
-
-
 	/// @brief	Typdef of a class method pointer with no param and no return to clean up syntax. 
 	typedef void (Fixture::*  fixture_method_ptr) (void);
 
@@ -98,73 +80,8 @@ public:
 	const std::vector<mr_utils::mr_string> GetTestNames();
 
 
-	///// @brief	Retrieve uniquely indentifying test name.
-	/////
-	///// @return	The unique name of the test.
-	//const mr_utils::mr_string& name() const;
-
-
-	///// @brief	Retrieve test description.
-	/////
-	///// @return	The description of the test.
-	//const mr_utils::mr_string& desc() const;
-
-
-	///// @brief	Retrieve the test status in string format.
-	/////
-	///// @exception	throws an mr_exception if the status is not accounted
-	/////				for.  This would be a programming error.
-	///// @return	The status of the test.
-	//mr_utils::mr_string status() const;
-
-
-	///// @brief	Retrieve the test status in enum format.
-	/////
-	///// @return	The status of the test.
-	//TestCaseStatus statusEnum() const;
-
-
-	///// @brief	Retrieve the performance timing for the test setup.
-	/////
-	///// @return	The time in ms that the setup took.
-	//long long setupTime() const;
-
-
-	///// @brief	Retrieve the performance timing for the test.
-	/////
-	///// @return	The time in ms that the test took.
-	//long long execTime() const;
-
-
-	///// @brief	Retrieve the performance timing for the test cleanuup.
-	/////
-	///// @return	The time in ms that the cleanup took.
-	//long long cleanupTime() const;
-
-
 	/// @brief	Retrieve a copy of the currently executed test case
 	Case& CurrentTestCase() const;
-
-	///// @brief	Retrieve the message buffer.
-	/////
-	/////	Call to add messages from your tests. You would usualy use this to document
-	/////	a failure condition. This is usually put out to the shorter summary logs.
-	/////
-	///// @return	The test message buffer.
-	//mr_utils::mr_stringstream& getMsgBuffer();
-
-
-	///// @brief	Retrieve the message buffer.
-	/////
-	/////	This contains the details of failures from the comparison macros. These are usually
-	///// more detailed and are sent to a specific log.
-	/////
-	///// @return	The test message buffer.
-	//mr_utils::mr_stringstream& getVerboseBuffer();
-
-
-protected:
-	//TestCaseStatus				m_status;			///< Status of the test case.
 
 protected:
 
@@ -206,15 +123,8 @@ protected:
 
 private:
 
-	//mr_utils::mr_string			m_name;				///< Test name.
-	//mr_utils::mr_string			m_desc;				///< Test description.
+	//mr_utils::mr_string			m_name;				// TODO - preserve the fixture name for lookup 
 	mr_test::TestArguments		m_args;				///< Arguments for current Test Case.
-
-	//mr_utils::mr_stringstream	m_buffer;			///< Short message buffer.
-	//mr_utils::mr_stringstream	m_verboseBuffer;	///< Verbose message buffer.
-	//long long					m_setupTime;		///< Setup time in ms.
-	//long long					m_execTime;			///< Test time in ms.
-	//long long					m_cleanupTime;		///< Cleanup time in ms.
 	fixture_method_ptr			m_fixtureSetup;		///< setup method for the entire fixture
 	fixture_method_ptr			m_fixtureTeardown;	///< teardown method for the entire fixture
 	fixture_method_ptr			m_testSetup;		///< setup method for each test
@@ -252,16 +162,12 @@ private:
 class TestCaseHolder {
 
 public:
-	//mr_utils::mr_string			m_name;
-	//mr_utils::mr_string			m_description;
 	Fixture::fixture_method_ptr m_test;
 	Case*						m_testData;
 
 
 	TestCaseHolder(Fixture::fixture_method_ptr testPtr, const mr_utils::mr_string& name, const mr_utils::mr_string& description) :	
 		m_test(testPtr),
-		//m_name(name),
-		//m_description(description),
 		m_testData(new Case(name, description)) {
 	}
 
@@ -280,10 +186,10 @@ public:
 	}
 
 
-	Case CloneTestCase() {
-		assert(this->m_testData);
-		return *(this->m_testData);
-	}
+	//Case CloneTestCase() {
+	//	assert(this->m_testData);
+	//	return *(this->m_testData);
+	//}
 
 private:
 	TestCaseHolder() {
@@ -294,7 +200,6 @@ private:
 
 	TestCaseHolder(const TestCaseHolder&) {
 	}
-
 
 };
 

@@ -53,13 +53,7 @@ private:
 
 
 Fixture::Fixture(const mr_utils::mr_string& name, const mr_utils::mr_string& desc) 
-:	
-	//m_name( name ), // TODO - have the name of the Fixture preserved
-	//m_desc( desc ),
-	//m_setupTime( 0 ),
-	//m_execTime( 0 ),
-	//m_cleanupTime( 0 ),
-	//m_status( ST_NONE ),
+:	//m_name( name ), // TODO - have the name of the Fixture preserved
 	m_currentTestCase(0),
 	m_fixtureSetup(0),
 	m_fixtureTeardown(0),
@@ -69,70 +63,10 @@ Fixture::Fixture(const mr_utils::mr_string& name, const mr_utils::mr_string& des
 }
 
 
-//const mr_utils::mr_string& Fixture::name() const {
-//	return this->m_name;
-//}
-
-
 const mr_test::TestArguments& Fixture::CurrentArgs() const {
 	return this->m_args;
 }
 
-/*
-//const mr_utils::mr_string& Fixture::desc() const {
-//	return this->m_desc;
-//}
-//
-//
-//mr_utils::mr_string Fixture::status() const {
-//	switch (this->m_status)
-//	{
-//	case ST_NONE:			return L( "NONE" );
-//	case ST_SUCCESS:		return L( "SUCCESS" );
-//	case ST_FAIL_SETUP:		return L( "FAIL_SETUP" );
-//	case ST_FAIL_TEST:		return L( "FAIL_TEST" );
-//	case ST_FAIL_CLEANUP:	return L( "FAIL_CLEANUP" );
-//	case ST_NOT_EXISTS:		return L( "NOT_EXISTS" );
-//
-//	case ST_FAIL_FIXTURE_SETUP: return _L_("FAIL_FIXTURE_SETUP");
-//	case ST_FAIL_FIXTURE_TEARDOWN: return _L_("FAIL_FIXTURE_TEARDOWN");
-//
-//	default:				
-//		mr_utils::mr_exception::assertCondition( 0, FL, L( "ERROR-NO-STATUS" ) );
-//		return L( "ERROR-NO-STATUS" );
-//	}
-//}
-//
-//
-//Fixture::TestCaseStatus Fixture::statusEnum() const {
-//	return this->m_status;
-//}
-//
-//
-//long long Fixture::setupTime() const {
-//	return this->m_setupTime;
-//}
-//
-//
-//long long Fixture::execTime() const {
-//	return this->m_execTime;
-//}
-//
-//
-//long long Fixture::cleanupTime() const {
-//	return this->m_cleanupTime;
-//}
-//
-//
-//mr_utils::mr_stringstream& Fixture::getMsgBuffer() {
-//	return this->m_buffer;
-//}
-//
-//
-//mr_utils::mr_stringstream& Fixture::getVerboseBuffer() {
-//	return this->m_verboseBuffer;
-//}
-*/
 
 void Fixture::RegisterFixtureSetup(fixture_method_ptr setup) {
 	assert(setup);
@@ -214,13 +148,9 @@ void Fixture::RunTest(const mr_utils::mr_string& name, const mr_test::TestArgume
 		std::vector<TestCaseHolder*>::iterator it = 
 			std::find_if(this->m_tests.begin(), this->m_tests.end(), HasNamedTestFunctor(name));
 		
-		// TODO - report this as an error instead
+		// TODO - report this as an error instead ?
 		assert(it != this->m_tests.end());
 		this->m_currentTestCase = (*it);
-
-		// TODO - replace this with having a current ptr to test with all info instead or writting over fixture information
-		//this->m_name = this->m_currentTestCase->m_testData->name();
-		//this->m_desc = this->m_currentTestCase->m_testData->desc();
 
 		this->ExecTestFixtureSetup();
 		this->ExecStep(this->m_currentTestCase->m_testData->m_setupTime, this->m_testSetup, Case::ST_FAIL_SETUP);
@@ -230,21 +160,6 @@ void Fixture::RunTest(const mr_utils::mr_string& name, const mr_test::TestArgume
 		// Test fixture teardown is called on fixture from outside when no more tests to execute in fixture
 
 		// TODO - add code to catch segfault and convert to exeception for catch and print out the stack info
-
-
-
-		//// TODO - replace this with having a current ptr to test with all info instead or writting over fixture information
-		//this->m_name = (*it)->m_name;
-		//this->m_desc = (*it)->m_description;
-
-		//this->ExecTestFixtureSetup();
-		//this->ExecStep(this->m_setupTime, this->m_testSetup, ST_FAIL_SETUP);
-		//this->ExecStep(this->m_execTime, (*it)->m_test, ST_FAIL_TEST);	
-		//this->ExecStep(this->m_cleanupTime, this->m_testTeardown, ST_FAIL_CLEANUP);
-
-		//// Test fixture teardown called from outside when no more tests to execute in fixture
-
-		//// TODO - add code to catch segfault and convert to exeception for catch and print out the stack info
 	}
 	catch (...) {
 		// TODO - later we may put the writing to buffer here but for now we will do it in the assert methods
@@ -285,17 +200,6 @@ void Fixture::ResetTest() {
 	if (this->m_currentTestCase != 0) {
 		this->m_currentTestCase->Reset();
 	}
-
-	//// Reset the state for the new test
-	//this->m_status = ST_NONE;
-	//this->m_name = _L_("");
-	//this->m_desc = _L_("");
-	//this->m_args.clear();
-	//mr_utils::ResetStringStream(this->m_buffer);
-	//mr_utils::ResetStringStream(this->m_verboseBuffer);
-	//this->m_setupTime = 0;
-	//this->m_execTime = 0;
-	//this->m_cleanupTime = 0;
 }
 
 
