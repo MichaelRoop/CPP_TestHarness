@@ -30,15 +30,16 @@ private:
 
 
 /// @brief	Base test case.
-class queuedDataEventTestBase : public mr_test::testCase
+class QueuedDataEventTests : public mr_test::testCase
 {
 public:
-	queuedDataEventTestBase(  const mr_utils::mr_string& name, const mr_utils::mr_string& desc )
-		: mr_test::testCase( name, desc )
-	{
+	QueuedDataEventTests() : mr_test::testCase( _L_("QueuedDataEventTests"), _L_("") ) {
+		_ADD_TEST_FIXTURE_(this);
+		_FIXTURE_SETUP_(this, &QueuedDataEventTests::FixtureSetup);
+
 	}
 
-	bool setup()
+	void FixtureSetup()
 	{
 		m_data.push_back( mr_utils::mr_string( L("this is") ) );
 		m_data.push_back( mr_utils::mr_string( L("a couple") ) );
@@ -46,7 +47,6 @@ public:
 		m_data.push_back( mr_utils::mr_string( L("objects for") ) );
 		m_data.push_back( mr_utils::mr_string( L("queued events") ) );
 		std::for_each( m_data.begin(), m_data.end(), pushDataEventsFunctor( m_events ) );
-		return true;
 	}
 
 
@@ -82,36 +82,64 @@ public:
 		return false;
 	}
 
+
+//_DECL_TEST_( _mr_queuedDataEventTest1, queuedDataEventTestBase)
+//	bool test()	
+//	{ 
+//		return mr_test::CompareEqual( m_data.size(), m_events.QueuedCount(), this->getMsgBuffer());
+//	}
+//_REG_TEST_( THR_2_2_1, instTHR_2_2_1, _mr_queuedDataEventTest1, L("Matched queued count") )
+//
+//
+//_DECL_TEST_( _mr_queuedDataEventTest2, queuedDataEventTestBase)
+//	bool GetEventData( mr_utils::mr_string& str )
+//	{
+//		m_events.Wait( str );
+//		return true;
+//	}
+//_REG_TEST_( THR_2_2_2, instTHR_2_2_2, _mr_queuedDataEventTest2, L("Matched queued entries-Wait") )
+//
+//
+//_DECL_TEST_( _mr_queuedDataEventTest3, queuedDataEventTestBase)
+//	bool GetEventData( mr_utils::mr_string& str )
+//	{
+//		return m_events.IsSignaled( str );
+//	}
+//_REG_TEST_( THR_2_2_3, instTHR_2_2_3, _mr_queuedDataEventTest3, L("Matched queued entries- IsSelected") )
+
+
+
 protected:
 	std::vector<mr_utils::mr_string>					m_data;
 	mr_threads::mr_queuedDataEvent<mr_utils::mr_string>	m_events;
 
 };
+_REGISTER_FIXTURE_(QueuedDataEventTests);
 
 
-_DECL_TEST_( _mr_queuedDataEventTest1, queuedDataEventTestBase)
-	bool test()	
-	{ 
-		return mr_test::CompareEqual( m_data.size(), m_events.QueuedCount(), this->getMsgBuffer());
-	}
-_REG_TEST_( THR_2_2_1, instTHR_2_2_1, _mr_queuedDataEventTest1, L("Matched queued count") )
-
-
-_DECL_TEST_( _mr_queuedDataEventTest2, queuedDataEventTestBase)
-	bool GetEventData( mr_utils::mr_string& str )
-	{
-		m_events.Wait( str );
-		return true;
-	}
-_REG_TEST_( THR_2_2_2, instTHR_2_2_2, _mr_queuedDataEventTest2, L("Matched queued entries-Wait") )
-
-
-_DECL_TEST_( _mr_queuedDataEventTest3, queuedDataEventTestBase)
-	bool GetEventData( mr_utils::mr_string& str )
-	{
-		return m_events.IsSignaled( str );
-	}
-_REG_TEST_( THR_2_2_3, instTHR_2_2_3, _mr_queuedDataEventTest3, L("Matched queued entries- IsSelected") )
-
+//_DECL_TEST_( _mr_queuedDataEventTest1, queuedDataEventTestBase)
+//	bool test()	
+//	{ 
+//		return mr_test::CompareEqual( m_data.size(), m_events.QueuedCount(), this->getMsgBuffer());
+//	}
+//_REG_TEST_( THR_2_2_1, instTHR_2_2_1, _mr_queuedDataEventTest1, L("Matched queued count") )
+//
+//
+//_DECL_TEST_( _mr_queuedDataEventTest2, queuedDataEventTestBase)
+//	bool GetEventData( mr_utils::mr_string& str )
+//	{
+//		m_events.Wait( str );
+//		return true;
+//	}
+//_REG_TEST_( THR_2_2_2, instTHR_2_2_2, _mr_queuedDataEventTest2, L("Matched queued entries-Wait") )
+//
+//
+//_DECL_TEST_( _mr_queuedDataEventTest3, queuedDataEventTestBase)
+//	bool GetEventData( mr_utils::mr_string& str )
+//	{
+//		return m_events.IsSignaled( str );
+//	}
+//_REG_TEST_( THR_2_2_3, instTHR_2_2_3, _mr_queuedDataEventTest3, L("Matched queued entries- IsSelected") )
+//
 
 
