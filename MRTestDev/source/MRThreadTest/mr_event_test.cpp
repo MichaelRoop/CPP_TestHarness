@@ -3,7 +3,7 @@
 #include "mr_event.h"
 #include "mr_compareFunctions.h"
 #include "mr_lockedWriteOut.h"
-#include "mr_testMacros.h"
+#include "CppTestMacros.h"
 
 
 class MrEventTests : public CppTest::Fixture {

@@ -106,7 +106,7 @@
     <ClInclude Include="include\mr_compareFunctions.h" />
     <ClInclude Include="include\CppTestEngine.h" />
     <ClInclude Include="include\mr_testInfoObject.h" />
-    <ClInclude Include="include\mr_testMacros.h" />
+    <ClInclude Include="include\CppTestMacros.h" />
     <ClInclude Include="include\mr_buildColumnInfoString.h" />
     <ClInclude Include="include\mr_buildColumnValueString.h" />
     <ClInclude Include="include\mr_buildConsoleSummaryString.h" />

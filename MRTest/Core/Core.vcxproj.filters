@@ -134,9 +134,6 @@
     <ClInclude Include="include\mr_testInfoObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\mr_testMacros.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\mr_buildColumnInfoString.h">
       <Filter>Header Files\Logging</Filter>
     </ClInclude>
@@ -222,6 +219,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\CppTestEngine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CppTestMacros.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

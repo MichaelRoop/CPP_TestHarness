@@ -1,6 +1,6 @@
 
 #include "CppTestFixture.h"
-#include "mr_testMacros.h"
+#include "CppTestMacros.h"
 #include "mr_string.h"
 #include "mr_iostream.h"
 #include "mr_sstream.h"

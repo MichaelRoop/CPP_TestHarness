@@ -2,7 +2,7 @@
 // Queued Event Data tests are THR_2_2_n 
 
 
-#include "mr_testMacros.h"
+#include "CppTestMacros.h"
 #include "mr_dataEvent.h"
 #include "mr_queuedDataEvent.h"
 #include "mr_compareFunctions.h"
