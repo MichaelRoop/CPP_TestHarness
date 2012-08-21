@@ -1,7 +1,7 @@
 // Event tests are THR_2_0_n 
 
 #include "mr_event.h"
-#include "mr_compareFunctions.h"
+#include "CppTestCompareFunctions.h"
 #include "mr_lockedWriteOut.h"
 #include "CppTestMacros.h"
 

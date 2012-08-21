@@ -1,5 +1,5 @@
 ///--------------------------------------------------------------------------------------
-/// @file	mr_compareFunctions.h
+/// @file	CppTestCompareFunctions.h
 /// @brief	Compare functions.
 ///
 /// We use template functions because they automaticaly resolve the template arguments.
@@ -13,17 +13,13 @@
 #if !defined(MR_TEST_COMP_FUNC_H)
 #define MR_TEST_COMP_FUNC_H
 
-#include "mr_doCompare.h"
 #include "mr_string.h"
 #include "mr_sstream.h"
-#include "mr_defines.h"
+#include "mr_doCompare.h"
 
 #include <vector>
-#include <algorithm>
 
-
-namespace mr_test
-{
+namespace CppTest {
 
 class testCase;
 
@@ -80,10 +76,8 @@ bool WriteToVerboseBuff(
 	const T&					actual, 
 	mr_utils::mr_stringstream&	buffer, 
 	bool						success 
-)
-{
-	if (!success)
-	{
+) {
+	if (!success) {
 		WriteToVerboseBuffHead(file, line, buffer);
 		mr_utils::ToStream( buffer, expected);
 		WriteToVerboseBuffMid(buffer);
@@ -113,10 +107,8 @@ bool WriteVecToVerboseBuff(
 	const std::vector<T>&		actual, 
 	mr_utils::mr_stringstream&	buffer, 
 	bool						success 
-)
-{
-	if (!success)
-	{
+) {
+	if (!success) {
 		mr_utils::VecStreamLineDelimited<T> lineFormater(buffer);
 		WriteToVerboseBuffHead(file, line, buffer);
 		mr_utils::ToStream(buffer, expected, lineFormater);
@@ -147,8 +139,7 @@ bool CompareEqual(
 	const T&					expected, 
 	const T2&					actual, 
 	mr_utils::mr_stringstream&	buffer, 
-	const mr_utils::mr_string&	msg = L( "Value not as expected" ) )
-{
+	const mr_utils::mr_string&	msg = L("Value not as expected" )) {
 	return WriteToMsgBuff(buffer, msg, mr_utils::CompareEqual(expected, actual));
 }
 
@@ -167,8 +158,7 @@ bool CompareNotEqual(
 	const T&					expected, 
 	const T2&					actual, 
 	mr_utils::mr_stringstream&	buffer, 
-	const mr_utils::mr_string&	msg = L( "Value not as expected" ) )
-{
+	const mr_utils::mr_string&	msg = L("Value not as expected" )) {
 	return WriteToMsgBuff(buffer, msg, mr_utils::CompareNotEqual(expected, actual));
 }
 
@@ -192,8 +182,7 @@ bool VerbCompareEqual(
 	const T&					actual, 
 	mr_utils::mr_stringstream&	buffer, 
 	const mr_utils::mr_string&	msg = L( "Value not as expected" ) 
-)
-{
+) {
 	return WriteToVerboseBuff( 
 		file, line, expected, actual, buffer, CompareEqual(expected, actual, buffer, msg) 
 	);
@@ -219,8 +208,7 @@ bool VerbCompareNotEqual(
 	const T&					actual, 
 	mr_utils::mr_stringstream&	buffer, 
 	const mr_utils::mr_string&	msg = L( "Value not as expected" ) 
-)
-{
+) {
 	return WriteToVerboseBuff( 
 		file, line, expected, actual, buffer, CompareNotEqual(expected, actual, buffer, msg) 
 	);
@@ -247,16 +235,12 @@ bool VerbCompareVecEqual(
 	const std::vector<T>&		actual, 
 	mr_utils::mr_stringstream&	buffer, 
 	const mr_utils::mr_string&	msg = L( "Value not as expected" ) 
-)
-{
+) {
 	return WriteVecToVerboseBuff( 
 		file, line, expected, actual, buffer, CompareEqual( expected, actual, buffer, msg ) 
 	);
 }
 
-
-
-
-}
+} // end namespace
 
 #endif

@@ -15,6 +15,7 @@
 #include "CppTestAsserts.h"
 #include "CppTestEngine.h"
 #include "mr_char.h"
+#include "mr_defines.h"
 
 
 // Adding the test fixture to the engine

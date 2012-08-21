@@ -74,7 +74,7 @@
     <ClCompile Include="source\CppTestAssert.cpp" />
     <ClCompile Include="source\CppTestCase.cpp" />
     <ClCompile Include="source\CppTestFixture.cpp" />
-    <ClCompile Include="source\mr_compareFunctions.cpp" />
+    <ClCompile Include="source\CppTestCompareFunctions.cpp" />
     <ClCompile Include="source\CppTestEngine.cpp" />
     <ClCompile Include="source\CppTestInfoObject.cpp" />
     <ClCompile Include="source\Exceptions\mr_scriptException.cpp" />
@@ -102,7 +102,7 @@
     <ClInclude Include="include\CppTestAsserts.h" />
     <ClInclude Include="include\CppTestCase.h" />
     <ClInclude Include="include\CppTestFixture.h" />
-    <ClInclude Include="include\mr_compareFunctions.h" />
+    <ClInclude Include="include\CppTestCompareFunctions.h" />
     <ClInclude Include="include\CppTestEngine.h" />
     <ClInclude Include="include\CppTestInfoObject.h" />
     <ClInclude Include="include\CppTestMacros.h" />

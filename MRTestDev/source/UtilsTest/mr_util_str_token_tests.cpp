@@ -4,7 +4,7 @@
 #include "mr_string.h"
 #include "mr_iostream.h"
 #include "mr_sstream.h"
-#include "mr_compareFunctions.h"
+#include "CppTestCompareFunctions.h"
 #include "CppTestAsserts.h"
 
 // temp

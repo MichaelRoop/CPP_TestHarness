@@ -9,7 +9,8 @@
 /// Copyright 2012 Michael Roop
 ///--------------------------------------------------------------------------------------
 #include "CppTestAsserts.h"
-#include "mr_compareFunctions.h"
+#include "CppTestCompareFunctions.h"
+#include "mr_toStream.h"
 #include "mr_exception.h"
 
 namespace CppTest {
@@ -33,7 +34,7 @@ void IsTrue(
 	ss << _L_("Did not Expected false condition ");	
 	CreateMsg(ss, file, line, msg);
 
-	if (!mr_test::CompareEqual(true, condition, buffer, ss.str())) {
+	if (!CppTest::CompareEqual(true, condition, buffer, ss.str())) {
 		throw mr_utils::mr_exception(file, line, ss.str());				
 	}																	
 }
@@ -45,7 +46,7 @@ void IsFalse(
 	ss << _L_("Did not Expected true condition ");	
 	CreateMsg(ss, file, line, msg);
 
-	if (!mr_test::CompareEqual(false, condition, buffer, ss.str())) {
+	if (!CppTest::CompareEqual(false, condition, buffer, ss.str())) {
 		throw mr_utils::mr_exception(file, line, ss.str());				
 	}																	
 }

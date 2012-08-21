@@ -5,7 +5,7 @@
 #include "CppTestMacros.h"
 #include "mr_dataEvent.h"
 #include "mr_queuedDataEvent.h"
-#include "mr_compareFunctions.h"
+#include "CppTestCompareFunctions.h"
 
 #include <algorithm>
 
@@ -57,20 +57,20 @@ public:
 
 	bool test()
 	{
-		if (mr_test::CompareEqual( m_data.size(), m_events.QueuedCount(), this->CurrentTestCase().MsgBuffer)) {
+		if (CppTest::CompareEqual( m_data.size(), m_events.QueuedCount(), this->CurrentTestCase().MsgBuffer)) {
 			std::vector<mr_utils::mr_string> target;
 			for (unsigned int i = 0; i < m_data.size(); ++i) {
 				mr_utils::mr_string s;
 				
-				if (!mr_test::CompareEqual(this->GetEventData(s), true, this->CurrentTestCase().MsgBuffer, L("Did not get data"))) {
+				if (!CppTest::CompareEqual(this->GetEventData(s), true, this->CurrentTestCase().MsgBuffer, L("Did not get data"))) {
 					return false;
 				}
 				target.push_back( s );
 			}
 
 			// check for empty queue.
-			if (mr_test::CompareEqual( (unsigned)0, m_events.QueuedCount(), this->CurrentTestCase().MsgBuffer, L("Queue not empty"))) {
-				return mr_test::VerbCompareVecEqual( FL, m_data, target, this->CurrentTestCase().VerboseBuffer, L("Vectors not equal"));
+			if (CppTest::CompareEqual( (unsigned)0, m_events.QueuedCount(), this->CurrentTestCase().MsgBuffer, L("Queue not empty"))) {
+				return CppTest::VerbCompareVecEqual( FL, m_data, target, this->CurrentTestCase().VerboseBuffer, L("Vectors not equal"));
 			}
 		}
 		return false;

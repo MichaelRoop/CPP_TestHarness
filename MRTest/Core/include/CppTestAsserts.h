@@ -34,7 +34,7 @@ void AreEqual(
 	ss << _L_("Expected '") << expected << _L_("' but actual is '") << actual << _L_("'  ");
 	CreateMsg(ss, file, line, msg);
 
-	if (!mr_test::CompareEqual(expected, actual, buffer, ss.str())) {
+	if (!CppTest::CompareEqual(expected, actual, buffer, ss.str())) {
 		throw mr_utils::mr_exception(file, line, ss.str());				
 	}																	
 }
