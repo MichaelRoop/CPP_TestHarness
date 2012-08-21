@@ -12,7 +12,7 @@
 #include "mr_char.h"
 #include "mr_pointerException.h"
 #include "mr_defines.h"
-#include "mr_testEngine.h"
+#include "CppTestEngine.h"
 #include "CppTestCase.h"
 
 namespace mr_test
@@ -103,44 +103,39 @@ void sqlLog::init( mr_utils::SharedPtr<iLogInitialiser>& initialiser )
 		initialiser->load(), FL, L("intialiser failed to load file") 
 	);
 
-	m_sqlData.m_tableName = initialiser->getLogName();
-	if (initialiser->getUseAutoGenUniqueTableName())
-	{
-		m_sqlData.m_tableName = m_sqlData.m_tableName + mr_test::engine::getInstance().getRunId();
+	this->m_sqlData.m_tableName = initialiser->getLogName();
+	if (initialiser->getUseAutoGenUniqueTableName()) {
+		this->m_sqlData.m_tableName = this->m_sqlData.m_tableName + CppTest::Engine::Instance().GetRunId();
 	}
 
-	m_sqlData.m_strQuote  = initialiser->getStringDelimiter( true );
-	m_sqlData.m_fields	  = initialiser->getFields();
+	this->m_sqlData.m_strQuote = initialiser->getStringDelimiter(true);
+	this->m_sqlData.m_fields = initialiser->getFields();
 
-	sqlBuilder::buildCreateStmt( m_sqlData, initialiser->getSqlCreateTemplate() );
-	sqlBuilder::buildDropStmt( m_sqlData, initialiser->getSqlDropTemplate() );
-	sqlBuilder::buildInsertStmt( m_sqlData, initialiser->getSqlInsertTemplate() );
+	sqlBuilder::buildCreateStmt(this->m_sqlData, initialiser->getSqlCreateTemplate());
+	sqlBuilder::buildDropStmt(this->m_sqlData, initialiser->getSqlDropTemplate());
+	sqlBuilder::buildInsertStmt(this->m_sqlData, initialiser->getSqlInsertTemplate());
 
-	m_overwrite = initialiser->getOverwriteLogFlag();
+	this->m_overwrite = initialiser->getOverwriteLogFlag();
 }
 
 
-const mr_utils::mr_string& sqlLog::getDropStmt() const
-{
-	return m_sqlData.m_dropStmt;
+const mr_utils::mr_string& sqlLog::getDropStmt() const {
+	return this->m_sqlData.m_dropStmt;
 }
 
 
-const mr_utils::mr_string& sqlLog::getCreateStmt() const
-{
-	return m_sqlData.m_createStmt;
+const mr_utils::mr_string& sqlLog::getCreateStmt() const {
+	return this->m_sqlData.m_createStmt;
 }
 
 
-mr_utils::mr_string sqlLog::getInsertStmt(CppTest::Case& testCase) const
-{
-	return sqlBuilder::buildInsertStmtWithValues( m_sqlData, testCase);
+mr_utils::mr_string sqlLog::getInsertStmt(CppTest::Case& testCase) const {
+	return sqlBuilder::buildInsertStmtWithValues(this->m_sqlData, testCase);
 }
 
 
-mr_utils::mr_string sqlLog::getInsertStmt(  iTestLog* theLog ) const
-{
-	return sqlBuilder::buildInsertStmtWithValues( m_sqlData, theLog );
+mr_utils::mr_string sqlLog::getInsertStmt(iTestLog* theLog) const {
+	return sqlBuilder::buildInsertStmtWithValues(this->m_sqlData, theLog );
 }
 
 } // end namespace

@@ -13,13 +13,13 @@
 
 #include "CppTestFixture.h"
 #include "CppTestAsserts.h"
-#include "mr_testEngine.h"
+#include "CppTestEngine.h"
 #include "mr_char.h"
 
 
 // Adding the test fixture to the engine
 #define _ADD_TEST_FIXTURE_( _fixtureClass_ )				\
-mr_test::engine::getInstance().regCase( _fixtureClass_ );	\
+CppTest::Engine::Instance().RegisterCase( _fixtureClass_ );	\
 
 
 // Create the fixture instance with a unique variable name. This will trigger the constructor which registers it with the engine

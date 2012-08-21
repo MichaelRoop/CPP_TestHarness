@@ -13,7 +13,7 @@
 #include "mr_exception.h"
 #include "mr_pointerException.h"
 #include "mr_defines.h"
-#include "mr_testEngine.h"
+#include "CppTestEngine.h"
 
 namespace mr_test
 {
@@ -56,7 +56,7 @@ void buildTestCaseColumnValueString::build( const FieldPair& field )
 		m_os << this->m_testCase.CleanupTime;
 	}
 	else if (field.first.compare( L("RunId")) == 0) {
-		m_os << mr_test::engine::getInstance().getRunId();
+		m_os << CppTest::Engine::Instance().GetRunId();
 	}
 	else if (field.first.compare(L("VerboseMessage")) == 0) {
 		this->concatenateVerboseBufferStr( this->m_testCase.VerboseBuffer.str() );

@@ -2,7 +2,7 @@
 //
 
 
-#include "mr_testEngine.h" // change test
+#include "CppTestEngine.h" // change test
 #include "mr_iostream.h"
 //#include "mr_consoleOutput.h"
 #include "mr_exception.h"
@@ -31,31 +31,26 @@ int main(int argc, char* argv[])
 	{
 		try
 		{
-			mr_test::engine& eng = mr_test::engine::getInstance();
-			eng.getLogEngine().loadLoggers( "TestHarnessConfig.ini", L("INI") );
+			CppTest::Engine& eng = CppTest::Engine::Instance();
+			eng.GetLogEngine().loadLoggers( "TestHarnessConfig.ini", L("INI") );
 
 			mr_test::fileScriptReader reader( argv[1] );
 			reader.Open();
-			eng.processScript( reader );
+			eng.ProcessScript( reader );
 		} 
-		catch( const mr_test::scriptException e )
-		{
+		catch( const mr_test::scriptException e ) {
 			mr_cout << e.longMsg() << std::endl;
 		}
-		catch( const mr_utils::fileException e )
-		{
+		catch( const mr_utils::fileException e ) {
 			mr_cout << e.longMsg() << std::endl;
 		}
-		catch( const mr_utils::mr_exception e )
-		{
+		catch( const mr_utils::mr_exception e ) {
 			mr_cout << e.longMsg() << std::endl;
 		}
-		catch( const std::exception e )
-		{
+		catch( const std::exception e ) {
 			mr_cout << e.what() << std::endl;
 		}
-		catch( ... )
-		{
+		catch( ... ) {
 			mr_cout << L("Unknown exception") << std::endl;
 		}
 

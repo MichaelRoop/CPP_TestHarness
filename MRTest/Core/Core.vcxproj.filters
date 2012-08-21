@@ -48,9 +48,6 @@
     <ClCompile Include="source\mr_compareFunctions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\mr_testEngine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="source\mr_testInfoObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -123,15 +120,15 @@
     <ClCompile Include="source\CppTestAssert.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\CppTestEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\mr_compareClasses.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\mr_compareFunctions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\mr_testEngine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\mr_testInfoObject.h">
@@ -222,6 +219,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\CppTestAsserts.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CppTestEngine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

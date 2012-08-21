@@ -75,7 +75,7 @@
     <ClCompile Include="source\CppTestCase.cpp" />
     <ClCompile Include="source\CppTestFixture.cpp" />
     <ClCompile Include="source\mr_compareFunctions.cpp" />
-    <ClCompile Include="source\mr_testEngine.cpp" />
+    <ClCompile Include="source\CppTestEngine.cpp" />
     <ClCompile Include="source\mr_testInfoObject.cpp" />
     <ClCompile Include="source\Exceptions\mr_scriptException.cpp" />
     <ClCompile Include="source\LogOutputs\mr_consoleOutput.cpp" />
@@ -104,7 +104,7 @@
     <ClInclude Include="include\CppTestFixture.h" />
     <ClInclude Include="include\mr_compareClasses.h" />
     <ClInclude Include="include\mr_compareFunctions.h" />
-    <ClInclude Include="include\mr_testEngine.h" />
+    <ClInclude Include="include\CppTestEngine.h" />
     <ClInclude Include="include\mr_testInfoObject.h" />
     <ClInclude Include="include\mr_testMacros.h" />
     <ClInclude Include="include\mr_buildColumnInfoString.h" />

@@ -1,5 +1,5 @@
 ///--------------------------------------------------------------------------------------
-/// @file	mr_testEngine.h
+/// @file	CppTestEngine.cpp
 /// @brief	Class that drives the testing architecture.
 ///
 /// @author		Michael Roop
@@ -8,21 +8,19 @@
 ///
 /// Copyright 2010 Michael Roop
 ///--------------------------------------------------------------------------------------
-#include "mr_testEngine.h"
+#include "CppTestEngine.h"
 #include "CppTestFixture.h"
 #include "mr_pointerException.h"
 #include "mr_defines.h"
-#include "mr_iostream.h"
 
 #include <time.h>
 #include <algorithm>
 
 
-namespace mr_test {
+namespace CppTest {
 
 //---------------------------------------------------------------------------------------
-class HasNamedTestFunctor
-{
+class HasNamedTestFunctor {
 public:
 	HasNamedTestFunctor(const mr_utils::mr_string& name) : m_name(name) {
 	}
@@ -35,31 +33,7 @@ private:
 	const mr_utils::mr_string& m_name;
 };
 
-
-//---------------------------------------------------------------------------------------
-/// @brief	Dummy testCase to carry the not found designation if lookup fails.
-//class NonExistantTest : public CppTest::Fixture
-//{
-//public:
-//
-//	/// @brief	Constructor.
-//	///
-//	/// @param	testName	Unique name for the test.
-//	NonExistantTest( const mr_utils::mr_string& testName ) 
-//		: CppTest::Fixture( testName, L( "Test not found" ) )
-//	{
-//		m_status = ST_NOT_EXISTS;
-//	}
-//
-//	/// @brief	Override of test method to return true.
-//	///
-//	/// @return	Always returns true.
-//	bool test()		{ return true; }
-//};
-
-
-class NonExistantTestData : public CppTest::Case
-{
+class NonExistantTestData : public CppTest::Case {
 public:
 	/// @brief	Constructor.
 	/// @param	testName	Unique name for the test.
@@ -69,38 +43,32 @@ public:
 	}
 };
 
-
-
-
 // End of functors
 //---------------------------------------------------------------------------------------
 
 
 // Declaration of static instance
-engine* engine::m_instance = 0;
+Engine* Engine::m_instance = 0;
 
 
-engine& engine::getInstance()
-{
-	if (m_instance == 0)
-	{
-		m_instance = new engine();
+Engine& Engine::Instance() {
+	if (m_instance == 0) {
+		m_instance = new Engine();
 	}
 	return *m_instance;
 }
 
 
-void engine::regCase(CppTest::Fixture* fixture) {
+void Engine::RegisterCase(CppTest::Fixture* fixture) {
 	mr_utils::mr_pointerException::ptrAssert( fixture, _FL_ );
 	this->m_fixtures.push_back(fixture);
 }
 
 
-void engine::processScript( scriptReader& theReader )
-{
-	m_logEngine.writeHeaders();
+void Engine::ProcessScript( mr_test::scriptReader& theReader ) {
+	this->m_logEngine.writeHeaders();
 
-	testInfoObject info = theReader.getNextTest();
+	mr_test::testInfoObject info = theReader.getNextTest();
 	while (!info.isNull()) {
 		bool infoUnused = false;
 		if (info.isActive()) {
@@ -115,14 +83,14 @@ void engine::processScript( scriptReader& theReader )
 			if (it == this->m_fixtures.end())
 			{
 				NonExistantTestData test( info.getName() );
-				this->logResults(test);
+				this->LogResults(test);
 			}
 			else
 			{
 				while (!info.isNull()) {
 					if (info.isActive()) {
 						(*it)->RunTest(info.getName(), info.getArguments());
-						this->logResults((*it)->CurrentTestCase());
+						this->LogResults((*it)->CurrentTestCase());
 					}
 					info = theReader.getNextTest();
 					if (info.isNull()) {
@@ -144,25 +112,22 @@ void engine::processScript( scriptReader& theReader )
 			info = theReader.getNextTest();
 		}
 	}
-	m_logEngine.writeSummaries();
+	this->m_logEngine.writeSummaries();
 }
 
 
-void engine::logResults(CppTest::Case& testCase) {
-	m_logEngine.log(testCase);
+void Engine::LogResults(CppTest::Case& testCase) {
+	this->m_logEngine.log(testCase);
 }
 
 
-testLogEngine& engine::getLogEngine()
-{
-	return m_logEngine;
+mr_test::testLogEngine& Engine::GetLogEngine() {
+	return this->m_logEngine;
 }
 
 
-mr_utils::mr_string engine::getRunId()
-{
-	if (m_runId.empty())
-	{
+mr_utils::mr_string Engine::GetRunId() {
+	if (m_runId.empty()) {
 		time_t		rawtime;
 		struct tm*	t;
 		char		buff[200];
