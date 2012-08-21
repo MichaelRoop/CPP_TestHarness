@@ -102,7 +102,6 @@
     <ClInclude Include="include\CppTestAsserts.h" />
     <ClInclude Include="include\CppTestCase.h" />
     <ClInclude Include="include\CppTestFixture.h" />
-    <ClInclude Include="include\mr_compareClasses.h" />
     <ClInclude Include="include\mr_compareFunctions.h" />
     <ClInclude Include="include\CppTestEngine.h" />
     <ClInclude Include="include\CppTestInfoObject.h" />
