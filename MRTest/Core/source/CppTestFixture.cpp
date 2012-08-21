@@ -1,21 +1,16 @@
 ///--------------------------------------------------------------------------------------
-/// @file	mr_case.cpp
-/// @brief	Test case base class.
+/// @file	CppTestFixture.cpp
+/// @brief	Provides a mechanism to associate its void member methods as test cases
 ///
 /// @author		Michael Roop
 /// @date		2010
-/// @version	1.0
+/// @version	1.5
 ///
 /// Copyright 2010 Michael Roop
 ///--------------------------------------------------------------------------------------
 #include "CppTestFixture.h"
 #include "mr_staticTimer.h"
-#include "mr_iostream.h"
-#include "mr_exception.h"
-#include "mr_defines.h"
-#include "mr_pointerException.h"
 
-#include <assert.h>
 #include <algorithm>
 
 //// Win32 only
@@ -34,7 +29,7 @@ public:
 	}
 	
 	bool operator () (const TestCaseHolder* testHolder) {
-		return testHolder->m_testData->m_name == this->m_name;
+		return testHolder->Data()->Name == this->m_name;
 	}
 private:
 	const mr_utils::mr_string& m_name;
@@ -49,13 +44,14 @@ public:
 	}
 
 	void operator () (const TestCaseHolder* testHolder) {
-		this->m_names.push_back(testHolder->m_testData->m_name);
+		this->m_names.push_back(testHolder->Data()->Name);
 	}
 
 private:
 	// TODO - look up the const in relation to reference. The reference is not changing but the object
 	std::vector<mr_utils::mr_string>& m_names;
 };
+//---------------------------------------------------------------------------------------
 
 
 Fixture::Fixture(const mr_utils::mr_string& name, const mr_utils::mr_string& desc) 
@@ -115,7 +111,7 @@ void Fixture::RegisterTest(fixture_method_ptr test, const mr_utils::mr_string& n
 }
 
 
-bool Fixture::HasTest(const mr_utils::mr_string& name) {
+bool Fixture::HasTest(const mr_utils::mr_string& name) const {
 	// TODO - look at a scheme where you would have TestFixtureName.TestCaseName
 	return std::find_if(
 		this->m_tests.begin(), 
@@ -124,7 +120,7 @@ bool Fixture::HasTest(const mr_utils::mr_string& name) {
 }
 
 
-const std::vector<mr_utils::mr_string> Fixture::GetTestNames() {
+const std::vector<mr_utils::mr_string> Fixture::GetTestNames() const {
 	// TODO - verify that stack var non pointer will pass out as a copy on return
 	std::vector<mr_utils::mr_string> names;
 	std::for_each(
@@ -138,7 +134,7 @@ const std::vector<mr_utils::mr_string> Fixture::GetTestNames() {
 
 Case& Fixture::CurrentTestCase() const {
 	assert(this->m_currentTestCase);
-	return *(this->m_currentTestCase->m_testData);
+	return *(this->m_currentTestCase->Data());
 }
 
 
@@ -163,9 +159,9 @@ void Fixture::RunTest(const mr_utils::mr_string& name, const mr_test::TestArgume
 		this->m_currentTestCase = (*it);
 
 		this->ExecTestFixtureSetup();
-		this->ExecStep(this->m_currentTestCase->m_testData->m_setupTime, this->m_testSetup, Case::ST_FAIL_SETUP);
-		this->ExecStep(this->m_currentTestCase->m_testData->m_execTime, this->m_currentTestCase->m_test, Case::ST_FAIL_TEST);	
-		this->ExecStep(this->m_currentTestCase->m_testData->m_cleanupTime, this->m_testTeardown, Case::ST_FAIL_CLEANUP);
+		this->ExecStep(this->m_currentTestCase->Data()->SetupTime, this->m_testSetup, Case::ST_FAIL_SETUP);
+		this->ExecStep(this->m_currentTestCase->Data()->ExecTime, this->m_currentTestCase->Pointer(), Case::ST_FAIL_TEST);	
+		this->ExecStep(this->m_currentTestCase->Data()->CleanupTime, this->m_testTeardown, Case::ST_FAIL_CLEANUP);
 
 		// Test fixture teardown is called on fixture from outside when no more tests to execute in fixture
 
@@ -192,9 +188,9 @@ void Fixture::ExecStep(long long& timeVal, fixture_method_ptr funcPtr, Case::Tes
 		mr_utils::StaticTimer timer;
 		timer.start();
 		// set to failed in case it throws
-		this->m_currentTestCase->m_testData->m_status = failStatus;
+		this->m_currentTestCase->Data()->Status = failStatus;
 		(this->*funcPtr)();
-		this->m_currentTestCase->m_testData->m_status = Case::ST_SUCCESS;
+		this->m_currentTestCase->Data()->Status = Case::ST_SUCCESS;
 
 		timer.stop();
 		timeVal = timer.getMsInterval();

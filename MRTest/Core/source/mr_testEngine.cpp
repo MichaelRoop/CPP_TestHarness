@@ -65,7 +65,7 @@ public:
 	/// @param	testName	Unique name for the test.
 	NonExistantTestData(const mr_utils::mr_string& name) 
 		: CppTest::Case(name, L("Test not found") ) {
-		m_status = ST_NOT_EXISTS;
+		this->Status = ST_NOT_EXISTS;
 	}
 };
 

@@ -58,7 +58,7 @@ testLog::~testLog()
 bool testLog::log(CppTest::Case& testCase) {
 	//mr_utils::mr_pointerException::ptrAssert(fixture, FL );
 
-	switch(testCase.statusEnum())
+	switch(testCase.Status)
 	{
 	case CppTest::Case::ST_SUCCESS:
 		++m_stSuccessCount;
@@ -86,7 +86,7 @@ bool testLog::log(CppTest::Case& testCase) {
 
 	default:	
 		mr_utils::mr_stringstream ss;
-		ss << L("Invalid testCase state:") << testCase.statusEnum();
+		ss << L("Invalid testCase state:") << testCase.Status;
 		throw mr_utils::mr_exception( FL, ss.str() );
 	}
 

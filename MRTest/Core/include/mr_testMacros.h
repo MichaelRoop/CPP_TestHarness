@@ -201,17 +201,17 @@ _fixture_->RegisterTest(static_cast<CppTest::Fixture::fixture_method_ptr>( _test
 // comparison assert macros
 
 #define _ARE_EQUAL(_fixture_,_expected_, _actual_) \
-mr_assert::AreEqual(_FL_, (_expected_), (_actual_), (_fixture_)->CurrentTestCase().getMsgBuffer());
+mr_assert::AreEqual(_FL_, (_expected_), (_actual_), (_fixture_)->CurrentTestCase().MsgBuffer);
 
 
 #define _ARE_NOT_EQUAL(_fixture_,_notexpected_, _actual_) \
-mr_assert::AreNotEqual(_FL_, (_notexpected_), (_actual_), (_fixture_)->CurrentTestCase().getMsgBuffer());
+mr_assert::AreNotEqual(_FL_, (_notexpected_), (_actual_), (_fixture_)->CurrentTestCase().MsgBuffer);
 
 #define _IS_TRUE_(_fixture_,_condition_,_msg_)	\
-mr_assert::IsTrue(_FL_, (_condition_), (_fixture_)->CurrentTestCase().getMsgBuffer(), (_msg_));
+mr_assert::IsTrue(_FL_, (_condition_), (_fixture_)->CurrentTestCase().MsgBuffer, (_msg_));
 
 #define _IS_FALSE_(_fixture_,_condition_,_msg_)	\
-mr_assert::IsFalse(_FL_, (_condition_), (_fixture_)->CurrentTestCase().getMsgBuffer(), (_msg_));
+mr_assert::IsFalse(_FL_, (_condition_), (_fixture_)->CurrentTestCase().MsgBuffer, (_msg_));
 
 
 //void IsTrue(

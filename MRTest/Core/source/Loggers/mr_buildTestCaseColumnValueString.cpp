@@ -34,49 +34,39 @@ buildTestCaseColumnValueString::buildTestCaseColumnValueString(
 void buildTestCaseColumnValueString::build( const FieldPair& field )
 {
 	// add upper case conversion later.
-	if (field.first.compare( L("ID") ) == 0)
-	{
-		this->concatenateStr( this->m_testCase.name() );
+	if (field.first.compare(L("ID")) == 0) {
+		this->concatenateStr(this->m_testCase.Name);
 	}
-	else if (field.first.compare( L("Description") ) == 0)
-	{
-		this->concatenateStr( this->m_testCase.desc() );
+	else if (field.first.compare(L("Description")) == 0) {
+		this->concatenateStr(this->m_testCase.Description);
 	}
-	else if (field.first.compare( L("Status") ) == 0)
-	{
-		this->concatenateStr( this->m_testCase.status() );
+	else if (field.first.compare(L("Status")) == 0) {
+		this->concatenateStr(CppTest::Case::ToString(this->m_testCase.Status));
 	}
-	else if (field.first.compare( L("Message") ) == 0)
-	{
-		this->concatenateStr( this->m_testCase.getMsgBuffer().str() );
+	else if (field.first.compare(L("Message")) == 0) {
+		this->concatenateStr(this->m_testCase.MsgBuffer.str() );
 	}
-	else if (field.first.compare( L("SetupTime") ) == 0)
-	{
-		m_os << this->m_testCase.setupTime();
+	else if (field.first.compare(L("SetupTime")) == 0) {
+		m_os << this->m_testCase.SetupTime;
 	}
-	else if (field.first.compare( L("ExecTime") ) == 0)
-	{
-		m_os << this->m_testCase.execTime();
+	else if (field.first.compare(L("ExecTime")) == 0) {
+		m_os << this->m_testCase.ExecTime;
 	}
-	else if (field.first.compare( L("CleanupTime") ) == 0)
-	{
-		m_os << this->m_testCase.cleanupTime();
+	else if (field.first.compare(L("CleanupTime")) == 0) {
+		m_os << this->m_testCase.CleanupTime;
 	}
-	else if (field.first.compare( L("RunId") ) == 0)
-	{
+	else if (field.first.compare( L("RunId")) == 0) {
 		m_os << mr_test::engine::getInstance().getRunId();
 	}
-	else if (field.first.compare( L("VerboseMessage") ) == 0)
-	{
-		this->concatenateVerboseBufferStr( this->m_testCase.getVerboseBuffer().str() );
+	else if (field.first.compare(L("VerboseMessage")) == 0) {
+		this->concatenateVerboseBufferStr( this->m_testCase.VerboseBuffer.str() );
 	}
-	else 
-	{
+	else {
 		//very bad
 		mr_utils::mr_stringstream os;
 		os	<< field.first 
 			<< L(": Illegal field name.  Allowed are ID, Description, Status, SetupTime, ExecTime, CleanupTime, RunId Message, VerboseMessage.");
-		mr_utils::mr_exception::assertCondition( false, FL, os.str() );
+		mr_utils::mr_exception::assertCondition(false, FL, os.str());
 	}
 }
 
