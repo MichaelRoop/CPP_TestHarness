@@ -91,7 +91,7 @@ public:
 	///
 	/// @return	The populated testInfoObject for the test.  If the object has no more
 	///			script lines the testInfoObject.isValid() will return false.
-	testInfoObject getNextTest();
+	CppTest::TestInfoObject getNextTest();
 
 
 private:
@@ -113,7 +113,7 @@ private:
 	///
 	/// @param	testInfo	The testInfoObject to populate from the script file.
 	/// @param	str			The line as read from the file.
-	void processLine( testInfoObject& testInfo, const mr_utils::mr_char* str );
+	void processLine(CppTest::TestInfoObject& testInfo, const mr_utils::mr_char* str );
 
 
 	/// @brief	Helper method to process the arguments portion of the script line.
@@ -122,7 +122,7 @@ private:
 	///
 	/// @param	testInfo	The testInfoObject to populate from the script file.
 	/// @param	args		The args portion of the script line.
-	void processArgs( testInfoObject& testInfo, const mr_utils::mr_string& args );
+	void processArgs(CppTest::TestInfoObject& testInfo, const mr_utils::mr_string& args );
 
 
 	/// @brief	Helper method to process one argument string token.
@@ -133,7 +133,7 @@ private:
 	///
 	/// @param	testInfo	The testInfoObject to populate from the script file.
 	/// @param	args		The arg token from the script line.
-	void processArg( testInfoObject& testInfo, const mr_utils::mr_string& arg );
+	void processArg(CppTest::TestInfoObject& testInfo, const mr_utils::mr_string& arg );
 
 
 	/// @brief	Extracts name on first call and value on second.

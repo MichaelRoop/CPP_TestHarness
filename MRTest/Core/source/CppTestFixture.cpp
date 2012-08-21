@@ -65,7 +65,7 @@ Fixture::Fixture(const mr_utils::mr_string& name, const mr_utils::mr_string& des
 }
 
 
-const mr_test::TestArguments& Fixture::CurrentArgs() const {
+const CppTest::TestArguments& Fixture::CurrentArgs() const {
 	return this->m_args;
 }
 
@@ -138,7 +138,7 @@ Case& Fixture::CurrentTestCase() const {
 }
 
 
-void Fixture::RunTest(const mr_utils::mr_string& name, const mr_test::TestArguments& args ) {
+void Fixture::RunTest(const mr_utils::mr_string& name, const CppTest::TestArguments& args ) {
 	// Clear out any information from a previous test case
 	this->ResetTest();
 

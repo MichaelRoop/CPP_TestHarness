@@ -1,5 +1,5 @@
 ///--------------------------------------------------------------------------------------
-/// @file	mr_testInfoObject.h
+/// @file	CppTestInfoObject.h
 /// @brief	cross platform and char width holder for test information.
 ///
 /// @author		Michael Roop
@@ -8,15 +8,14 @@
 ///
 /// Copyright 2010 Michael Roop
 ///--------------------------------------------------------------------------------------
-#if !defined(MR_TEST_INFO_OBJECT_H)
-#define MR_TEST_INFO_OBJECT_H
+#if !defined(CPP_TEST_INFO_OBJECT_H)
+#define CPP_TEST_INFO_OBJECT_H
 
 #include "mr_string.h"
 #include <vector>
 
 
-namespace mr_test
-{
+namespace CppTest {
 
 /// @typedef Test info pair define.
 typedef std::pair<mr_utils::mr_string,mr_utils::mr_string> TestInfoArgument; 
@@ -37,13 +36,12 @@ typedef std::vector<TestInfoArgument> TestArguments;
 /// case after it is retrieved and before it is executed.
 ///
 ///--------------------------------------------------------------------------------------
-class testInfoObject
-{
+class TestInfoObject {
 
 public:
 
 	/// @brief	Constructor.
-	testInfoObject();
+	TestInfoObject();
 
 
 	/// @brief	Retrieves active status for the test case as indicated by the script line.
@@ -52,7 +50,7 @@ public:
 	/// derived script readers to determine according to its own rules.  
 	///
 	/// @return true if active and ready to be run otherwise false.
-	bool isActive() const;
+	bool IsActive() const;
 
 
 	/// @brief	Sets the active status for the test case as indicated by the script line.
@@ -61,44 +59,44 @@ public:
 	/// derived script readers to determine according to its own rules.  
 	///
 	/// @param	active	true if active and ready to be run otherwise false. Default is true.
-	void setActive( bool active = true );
+	void SetActive( bool active = true );
 
 
 	/// @brief	Indicates that there is no longer any data in the script file to define a test.
 	///
 	/// @return true if the object contains test data from the script otherwise false.
-	bool isNull() const;
+	bool IsNull() const;
 
 
 	/// @brief	Set the state of the object to indicate if it has data.
 	///
 	/// @param	inNull	true if the object contains test data from the script otherwise false.
-	void setNull( bool isNull );
+	void SetNull( bool isNull );
 
 
 	/// @brief	Retrieve the name of the test.
 	///
 	/// @return	The test name.
-	const mr_utils::mr_string& getName() const;
+	const mr_utils::mr_string& GetName() const;
 
 
 	/// @brief	Set the name of the test.
 	///
 	/// @param	name	The test name.
-	void setName( const mr_utils::mr_string& name );
+	void SetName( const mr_utils::mr_string& name );
 
 
 	/// @brief	Retrieve the argument set.
 	///
 	/// @return	The argument set.
-	const TestArguments& getArguments() const;
+	const TestArguments& GetArguments() const;
 
 
 	/// @brief	Add an argument to the argument set.
 	///
 	/// @param	name	The name of the argument.
 	/// @param	value	The value of the argument.
-	void AddArgument( const mr_utils::mr_string& name, const mr_utils::mr_string& value );
+	void AddArgument(const mr_utils::mr_string& name, const mr_utils::mr_string& value);
 
 private:
 	bool							m_isActive;		///< The active status.

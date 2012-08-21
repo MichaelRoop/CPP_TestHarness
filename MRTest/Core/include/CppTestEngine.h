@@ -75,7 +75,7 @@ private:
 	/// feed to the test case.
 	///
 	/// @param	testInfo	The data necessary to look up and run the test case.
-	void ProcessCase(const mr_test::testInfoObject& testInfo);
+	void ProcessCase(const CppTest::TestInfoObject& testInfo);
 
 
 	/// @brief	Log the results of one test case across log outputs.

@@ -49,42 +49,36 @@ void fileScriptReader::Open()
 }
 
 
-testInfoObject fileScriptReader::getNextTest()
-{
+CppTest::TestInfoObject fileScriptReader::getNextTest() {
 	const int			size = 2048;
 	mr_utils::mr_char	buff[size];
-	testInfoObject		testInfo;
+	CppTest::TestInfoObject		testInfo;
 
 	this->fileAssert( m_scriptStream.is_open(), FL, L( "File not open") );
-	if (m_scriptStream.getline( buff, size ))
-	{
-		testInfo.setNull( false );
-		processLine( testInfo, buff );
+	if (m_scriptStream.getline( buff, size )) {
+		testInfo.SetNull( false );
+		processLine(testInfo, buff);
 	}
 	return testInfo;
 }
 
 
-void fileScriptReader::processLine( testInfoObject& testInfo, const mr_utils::mr_char* str )
-{
-	mr_utils::mr_string s( mr_utils::Trim( mr_utils::mr_string( str ) ) );
+void fileScriptReader::processLine(CppTest::TestInfoObject& testInfo, const mr_utils::mr_char* str) {
+	mr_utils::mr_string s(mr_utils::Trim(mr_utils::mr_string(str )));
 
 	// Check for empty line or line starting with # comment indicator.
-	testInfo.setActive( !s.empty() && s[0] != L( '#' ) );
+	testInfo.SetActive( !s.empty() && s[0] != L( '#' ) );
 
-	if (testInfo.isActive())
-	{
+	if (testInfo.IsActive()) {
 		mr_utils::mr_string name;
 		mr_utils::mr_string args;
 		mr_utils::mr_string::size_type pos = 0;
 
-		if (mr_utils::MrTokenize( pos, s, name, m_nameDelimiter ))
-		{
-			testInfo.setName( name );
+		if (mr_utils::MrTokenize( pos, s, name, m_nameDelimiter )) {
+			testInfo.SetName( name );
 
 			// It is possible for the test to have only a name and no arguments.
-			if (mr_utils::MrTokenize( pos, s, args, m_nameDelimiter ))
-			{
+			if (mr_utils::MrTokenize( pos, s, args, m_nameDelimiter )) {
 				this->processArgs( testInfo, args );
 			}
 		}
@@ -92,20 +86,17 @@ void fileScriptReader::processLine( testInfoObject& testInfo, const mr_utils::mr
 }
 
 
-void fileScriptReader::processArgs( testInfoObject& testInfo, const mr_utils::mr_string& args )
-{
+void fileScriptReader::processArgs(CppTest::TestInfoObject& testInfo, const mr_utils::mr_string& args) {
 	mr_utils::mr_string oneArg;
 	mr_utils::mr_string::size_type pos = 0;
 
-	while (mr_utils::MrTokenize( pos, args, oneArg, m_argDelimiter ))
-	{
-		this->processArg( testInfo, oneArg );
+	while (mr_utils::MrTokenize(pos, args, oneArg, m_argDelimiter)) {
+		this->processArg(testInfo, oneArg);
 	}
 }
 
 
-void fileScriptReader::processArg( testInfoObject& testInfo, const mr_utils::mr_string& arg )
-{
+void fileScriptReader::processArg(CppTest::TestInfoObject& testInfo, const mr_utils::mr_string& arg) {
 	mr_utils::mr_string name;
 	mr_utils::mr_string value;
 	mr_utils::mr_string::size_type pos = 0;
@@ -160,4 +151,4 @@ void fileScriptReader::fileAssert(
 
 
 
-}
+} // end of namespace

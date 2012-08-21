@@ -12,7 +12,7 @@
 #define CPP_TEST_FIXTURE_H
 
 #include "mr_string.h"
-#include "mr_testInfoObject.h"
+#include "CppTestInfoObject.h"
 #include "CppTestCase.h"
 
 #include <assert.h>
@@ -63,7 +63,7 @@ public:
 	/// @brief	Run the named test case contained in the fixture
 	/// @param	name	The test case name
 	/// @param	args	Arguments for the named test case
-	void RunTest(const mr_utils::mr_string& name, const mr_test::TestArguments& args);
+	void RunTest(const mr_utils::mr_string& name, const CppTest::TestArguments& args);
 
 
 	/// @brief	Called after the last fixture test case has executed
@@ -118,12 +118,12 @@ protected:
 
 	/// @brief	Retrieve test arguments for current test case.
 	/// @return	The arguments for the test case.
-	const mr_test::TestArguments& CurrentArgs() const;
+	const CppTest::TestArguments& CurrentArgs() const;
 
 private:
 
 	//mr_utils::mr_string			m_name;				// TODO - preserve the fixture name for lookup 
-	mr_test::TestArguments		m_args;				///< Arguments for current Test Case.
+	CppTest::TestArguments		m_args;				///< Arguments for current Test Case.
 	fixture_method_ptr			m_fixtureSetup;		///< setup method for the entire fixture
 	fixture_method_ptr			m_fixtureTeardown;	///< teardown method for the entire fixture
 	fixture_method_ptr			m_testSetup;		///< setup method for each test

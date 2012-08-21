@@ -13,7 +13,7 @@
 #define MR_SCRIPT_READER_H
 
 
-#include "mr_testInfoObject.h"
+#include "CppTestInfoObject.h"
 
 
 namespace mr_test
@@ -39,7 +39,7 @@ public:
 	///
 	/// @return	The populated testInfoObject for the test.  If the object has no more
 	///			script lines the testInfoObject.isValid() will return false.
-	virtual testInfoObject getNextTest() = 0;
+	virtual CppTest::TestInfoObject getNextTest() = 0;
 };
 
 
