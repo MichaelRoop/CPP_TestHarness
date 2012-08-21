@@ -5,7 +5,7 @@
 #include "mr_iostream.h"
 #include "mr_sstream.h"
 #include "mr_compareFunctions.h"
-#include "mr_Assert.h"
+#include "CppTestAsserts.h"
 
 // temp
 #include <exception>

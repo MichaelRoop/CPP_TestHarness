@@ -9,7 +9,6 @@
 /// Copyright 2010 Michael Roop
 ///--------------------------------------------------------------------------------------
 #include "mr_sqlLog.h"
-#include "mr_case.h"
 #include "mr_char.h"
 #include "mr_pointerException.h"
 #include "mr_defines.h"

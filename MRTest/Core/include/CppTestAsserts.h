@@ -1,6 +1,6 @@
 ///--------------------------------------------------------------------------------------
-/// @file	mr_Assert.h
-/// @brief	Compare and assert methods
+/// @file	CppAssert.h
+/// @brief	Assert on compare methods
 ///
 /// @author		Michael Roop
 /// @date		2012
@@ -8,17 +8,14 @@
 ///
 /// Copyright 2012 Michael Roop
 ///--------------------------------------------------------------------------------------
-#if !defined(MR_ASSERT_H)
-#define MR_ASSERT_H
+#if !defined(CPP_TEST_ASSERT_H)
+#define CPP_TEST_ASSERT_H
 
-#include "mr_exception.h"
 #include "mr_sstream.h"
+#include "mr_string.h"
+#include "mr_exception.h"
 
-namespace mr_assert 
-{
-
-	// Forward declaration
-	class testCase;
+namespace CppTest {
 
 /// @brief	Compares two values and asserts if different after a message is written
 ///

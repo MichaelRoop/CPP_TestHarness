@@ -9,7 +9,6 @@
 /// Copyright 2010 Michael Roop
 ///--------------------------------------------------------------------------------------
 #include "mr_compareFunctions.h"
-#include "mr_case.h"
 #include "mr_toStream.h"
 
 

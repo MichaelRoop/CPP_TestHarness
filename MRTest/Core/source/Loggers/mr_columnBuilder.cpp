@@ -14,7 +14,6 @@
 #include "mr_buildSummaryColumnValueString.h"
 #include "mr_buildConsoleSummaryString.h"
 #include "mr_sstream.h"
-#include "mr_case.h"
 #include "mr_iTestLog.h"
 #include <algorithm>
 

@@ -71,10 +71,9 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="source\CppTestAssert.cpp" />
     <ClCompile Include="source\CppTestCase.cpp" />
     <ClCompile Include="source\CppTestFixture.cpp" />
-    <ClCompile Include="source\mr_Assert.cpp" />
-    <ClCompile Include="source\mr_case.cpp" />
     <ClCompile Include="source\mr_compareFunctions.cpp" />
     <ClCompile Include="source\mr_testEngine.cpp" />
     <ClCompile Include="source\mr_testInfoObject.cpp" />
@@ -100,13 +99,11 @@
     <ClCompile Include="source\Factories\mr_logOutputFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\CppTestAsserts.h" />
     <ClInclude Include="include\CppTestCase.h" />
     <ClInclude Include="include\CppTestFixture.h" />
-    <ClInclude Include="include\mr_Assert.h" />
-    <ClInclude Include="include\mr_case.h" />
     <ClInclude Include="include\mr_compareClasses.h" />
     <ClInclude Include="include\mr_compareFunctions.h" />
-    <ClInclude Include="include\mr_TestCase.h" />
     <ClInclude Include="include\mr_testEngine.h" />
     <ClInclude Include="include\mr_testInfoObject.h" />
     <ClInclude Include="include\mr_testMacros.h" />

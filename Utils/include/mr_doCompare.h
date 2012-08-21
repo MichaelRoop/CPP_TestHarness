@@ -23,7 +23,7 @@
 
 #include "mr_char.h"
 #include "mr_iostream.h"
-#include "mr_case.h"
+//#include "mr_case.h"
 #include "mr_toStream.h"
 
 

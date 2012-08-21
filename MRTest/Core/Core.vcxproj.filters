@@ -45,9 +45,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="source\mr_case.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="source\mr_compareFunctions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -117,20 +114,17 @@
     <ClCompile Include="source\Factories\mr_logOutputFactory.cpp">
       <Filter>Source Files\Factories</Filter>
     </ClCompile>
-    <ClCompile Include="source\mr_Assert.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="source\CppTestFixture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\CppTestCase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\CppTestAssert.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\mr_case.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\mr_compareClasses.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -221,16 +215,13 @@
     <ClInclude Include="include\mr_logOutputFactory.h">
       <Filter>Header Files\Factories</Filter>
     </ClInclude>
-    <ClInclude Include="include\mr_Assert.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\mr_TestCase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\CppTestFixture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\CppTestCase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CppTestAsserts.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
