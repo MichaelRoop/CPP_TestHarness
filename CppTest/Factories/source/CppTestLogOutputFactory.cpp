@@ -10,9 +10,9 @@
 ///--------------------------------------------------------------------------------------
 #include "CppTestLogOutputFactory.h"
 #include "mr_iniLogInitialiser.h"
-#include "mr_odbcOutput.h"
-#include "mr_fileOutput.h"
-#include "mr_consoleOutput.h"
+#include "CppTestOdbcOutput.h"
+#include "CppTestFileOutput.h"
+#include "CppTestConsoleOutput.h"
 #include "mr_exception.h"
 #include "mr_sstream.h"
 #include "mr_defines.h"
@@ -26,14 +26,14 @@ LogOutputSharedPtr LogOutputFactory::Create(
 	LogOutputSharedPtr output;
 
 	if (initialiser->getOutputType().compare(_L_("ODBC") ) == 0) {
-		output = new mr_test::odbcOutput(initialiser);
+		output = new CppTest::OdbcOutput(initialiser);
 	}
 	else if (initialiser->getOutputType().compare(_L_("FILE")) == 0) {
 		mr_utils::mr_exception::assertCondition( false, _FL_, _L_("FILE output not ready"));
-		output = new mr_test::fileOutput("Simple log file.txt");
+		output = new CppTest::FileOutput("Simple log file.txt");
 	}
 	else if (initialiser->getOutputType().compare(_L_("CONSOLE")) == 0) {
-		output = new mr_test::consoleOutput();
+		output = new CppTest::ConsoleOutput();
 	}
 	else {
 		mr_utils::mr_stringstream os;

@@ -24,7 +24,7 @@ sqlLog::sqlLog() : testLog()
 
 
 sqlLog::sqlLog( 
-	mr_utils::SharedPtr<iLogOutput>&		output, 
+	mr_utils::SharedPtr<CppTest::ILogOutput>&		output, 
 	mr_utils::SharedPtr<iTestLog>&			summaryLog, 
 	mr_utils::SharedPtr<iLogInitialiser>&	initialiser 
 )
@@ -35,7 +35,7 @@ sqlLog::sqlLog(
 
 
 sqlLog::sqlLog( 
-	mr_utils::SharedPtr<iLogOutput>&		output, 
+	mr_utils::SharedPtr<CppTest::ILogOutput>&		output, 
 	mr_utils::SharedPtr<iLogInitialiser>&	initialiser 
 )
 :	testLog( output, mr_utils::SharedPtr<iTestLog>() )
@@ -50,43 +50,38 @@ sqlLog::~sqlLog()
 
 /// @todo	Get the overwrite bool from ini
 
-bool sqlLog::writeHeader()
-{
-	mr_utils::mr_exception::assertCondition( m_output.isValid(), FL, L( "invalid output" ) );
-	mr_utils::mr_exception::assertCondition( m_output->initOutput(), FL, L( "output failed init" ) );
+bool sqlLog::writeHeader() {
+	mr_utils::mr_exception::assertCondition(this->m_output.isValid(), FL, L( "invalid output" ) );
+	mr_utils::mr_exception::assertCondition(this->m_output->InitOutput(), FL, L( "output failed init" ) );
 
-	if (this->overwriteExistingLog())
-	{
-		m_output->write( this->getDropStmt() );
+	if (this->overwriteExistingLog()) {
+		this->m_output->Write( this->getDropStmt() );
 	}
-	return m_output->write( this->getCreateStmt() );
+	return this->m_output->Write( this->getCreateStmt() );
 }
 
 
-bool sqlLog::writeEntry(CppTest::Case& testCase)
-{
-//	mr_utils::mr_pointerException::ptrAssert(fixture, _FL_);
+bool sqlLog::writeEntry(CppTest::Case& testCase) { 
+	//	mr_utils::mr_pointerException::ptrAssert(fixture, _FL_);
 	mr_utils::mr_exception::assertCondition( m_output.isValid(), FL, L( "invalid output" ) );
-	return m_output->write(this->getInsertStmt(testCase));
+	return this->m_output->Write(this->getInsertStmt(testCase));
 }
 
 
-bool sqlLog::writeSummaryEntry( iTestLog* theLog )
-{
+bool sqlLog::writeSummaryEntry( iTestLog* theLog ) {
 	mr_utils::mr_pointerException::ptrAssert( theLog, FL );
-	mr_utils::mr_exception::assertCondition( m_output.isValid(), FL, L( "invalid output" ) );
+	mr_utils::mr_exception::assertCondition(this->m_output.isValid(), FL, L( "invalid output" ) );
 	
 	// Do not check return as some loggers fail if table already exists.
 	this->writeHeader();
-	bool ret = m_output->write( this->getInsertStmt( theLog ) );
-	m_output->closeOutput();
+	bool ret = this->m_output->Write(this->getInsertStmt(theLog));
+	this->m_output->CloseOutput();
 	return ret;
 }
 
 
-bool sqlLog::writeFooter()
-{
-	mr_utils::mr_exception::assertCondition( m_output.isValid(), FL, L( "invalid output" ) );
+bool sqlLog::writeFooter() {
+	mr_utils::mr_exception::assertCondition(this->m_output.isValid(), FL, L("invalid output"));
 
 	/// @todo	Figure out how to save run totals info to DB.  Is it even required since they can
 	///			get it by querry or dashboard on the table itself?

@@ -106,9 +106,9 @@
     <ClCompile Include="Logging\source\mr_sqlLog.cpp" />
     <ClCompile Include="Logging\source\mr_testLog.cpp" />
     <ClCompile Include="Logging\source\mr_testLogEngine.cpp" />
-    <ClCompile Include="Outputs\source\mr_consoleOutput.cpp" />
-    <ClCompile Include="Outputs\source\mr_fileOutput.cpp" />
-    <ClCompile Include="Outputs\source\mr_odbcOutput.cpp" />
+    <ClCompile Include="Outputs\source\CppTestConsoleOutput.cpp" />
+    <ClCompile Include="Outputs\source\CppTestFileOutput.cpp" />
+    <ClCompile Include="Outputs\source\CppTestOdbcOutput.cpp" />
     <ClCompile Include="ScriptReader\source\CppTestFileScriptReader.cpp" />
     <ClCompile Include="Win\AssemblyInfo.cpp" />
   </ItemGroup>
@@ -139,10 +139,10 @@
     <ClInclude Include="Logging\include\mr_sqlLog.h" />
     <ClInclude Include="Logging\include\mr_testLog.h" />
     <ClInclude Include="Logging\include\mr_testLogEngine.h" />
-    <ClInclude Include="Outputs\include\mr_consoleOutput.h" />
-    <ClInclude Include="Outputs\include\mr_fileOutput.h" />
-    <ClInclude Include="Outputs\include\mr_iLogOutput.h" />
-    <ClInclude Include="Outputs\include\mr_odbcOutput.h" />
+    <ClInclude Include="Outputs\include\CppTestConsoleOutput.h" />
+    <ClInclude Include="Outputs\include\CppTestFileOutput.h" />
+    <ClInclude Include="Outputs\include\ICppTestLogOutput.h" />
+    <ClInclude Include="Outputs\include\CppTestOdbcOutput.h" />
     <ClInclude Include="ScriptReader\include\CppTestFileScriptReader.h" />
     <ClInclude Include="ScriptReader\include\ICppTestScriptReader.h" />
     <ClInclude Include="Win\resource.h" />

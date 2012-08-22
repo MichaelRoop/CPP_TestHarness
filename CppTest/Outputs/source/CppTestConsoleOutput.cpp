@@ -1,5 +1,5 @@
 ///--------------------------------------------------------------------------------------
-/// @file	mr_consoleOutput.h
+/// @file	CppTestConsoleOutput.h
 /// @brief	Output class to output logger information to the console.
 ///
 /// @author		Michael Roop
@@ -8,26 +8,22 @@
 ///
 /// Copyright 2010 Michael Roop
 ///--------------------------------------------------------------------------------------
-#include "mr_consoleOutput.h"
+#include "CppTestConsoleOutput.h"
 #include "mr_iostream.h"
 
-namespace mr_test
-{
+namespace CppTest {
 
-bool consoleOutput::initOutput()	
-{ 
+bool ConsoleOutput::InitOutput() { 
 	return true; 
 }
 
 
-void consoleOutput::closeOutput()	
-{ 
+void ConsoleOutput::CloseOutput() { 
 	; // Nothing to do.
 }
 
 
-bool consoleOutput::write( const mr_utils::mr_string& str )
-{
+bool ConsoleOutput::Write(const mr_utils::mr_string& str) {
 	mr_cout << str.c_str() << std::endl;
 	return true;
 }

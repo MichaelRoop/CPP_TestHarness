@@ -1,5 +1,5 @@
 ///--------------------------------------------------------------------------------------
-/// @file	mr_odbcOutput.h
+/// @file	CppTestOdbcOutput.h
 /// @brief	Output class to output logger information to an ODBC driver.
 ///
 /// @author		Michael Roop
@@ -8,11 +8,11 @@
 ///
 /// Copyright 2010 Michael Roop
 ///--------------------------------------------------------------------------------------
-#if !defined(MR_ODBC_OUTPUT_H)
-#define MR_ODBC_OUTPUT_H
+#if !defined(CPP_TEST_ODBC_OUTPUT_H)
+#define CPP_TEST_ODBC_OUTPUT_H
 
 
-#include "mr_iLogOutput.h"
+#include "ICppTestLogOutput.h"
 #include "mr_iLogInitialiser.h"
 #include "mr_sharedPtr.h"
 
@@ -33,8 +33,7 @@
 #include "mr_iLogInitialiser.h"
 
 
-namespace mr_test
-{
+namespace CppTest {
 
 //----------------------------------------------------------------------------------------
 /// @brief	Class for outputing logging information to an ODBC connection.
@@ -54,39 +53,31 @@ namespace mr_test
 /// This class is used by derived log classes to output the log data after formating.
 ///
 //----------------------------------------------------------------------------------------
-class odbcOutput : public iLogOutput
-{
+class OdbcOutput : public ILogOutput {
 public:
 
 	/// @brief	Constructor.
-	///
 	/// @param	initialiser	A SharedObject reference to an iLogInitialiser.
-	odbcOutput( mr_utils::SharedPtr<iLogInitialiser>& initialiser );
+	OdbcOutput(mr_utils::SharedPtr<mr_test::iLogInitialiser>& initialiser);
 
 
 	/// @brief	Initialise the object.
-	///
 	/// @exception	mr_exception if the file name is empty or the file cannot be opened.
-	///
 	/// @return	true if successful, otherwise false.
-	bool initOutput();
+	bool InitOutput();
 
 
 	/// @brief	Close the object.
-	///
 	/// @return	true if successful, otherwise false.
-	void closeOutput();
+	void CloseOutput();
 
 
 	/// @brief	Write to the output object.
-	///
 	/// @exception mr_utils::mr_exception if file is not open.
-	///
 	/// @return	true if successful, otherwise false.
-	bool write( const mr_utils::mr_string& str );
+	bool Write( const mr_utils::mr_string& str );
 
 private:
-
 	SQLHENV					m_odbcEnv;			///< ODBC Environment handle.
 	SQLHDBC					m_odbcHdbc;			///< ODBC DB Connection handle.
 	mr_utils::mr_string		m_dsn;				///< ODBC DSN name.
@@ -97,7 +88,7 @@ private:
 
 
 	/// @brief	Default constructor hidden to protect against default construction.
-	odbcOutput();
+	OdbcOutput();
 
 	/// @todo Create an adaptor for reading config file and have it saved here.
 
@@ -105,7 +96,7 @@ private:
 	/// @brief	Helper method to free up the ODBC handles.
 	///
 	/// @return Always returns false.
-	bool freeHandles();
+	bool FreeHandles();
 
 };
 

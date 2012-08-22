@@ -46,7 +46,7 @@ private:
 	/// @param	summaryLog		A SharedObject summary logger.
 	/// @param	initialiser		A SharedObject reference to an iLogInitialiser.
 	static LogSharedPtr Create(
-			mr_utils::SharedPtr<mr_test::iLogOutput>&		output, 
+			mr_utils::SharedPtr<CppTest::ILogOutput>&		output, 
 			mr_utils::SharedPtr<mr_test::iTestLog>&			summaryLog, 
 			mr_utils::SharedPtr<mr_test::iLogInitialiser>&	initialiser 
 		);

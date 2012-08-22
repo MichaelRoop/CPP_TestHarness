@@ -12,14 +12,14 @@
 #define CPP_TEST_LOG_OUTPUT_FACTORY_H
 
 
-#include "mr_iLogOutput.h"
+#include "ICppTestLogOutput.h"
 #include "mr_iLogInitialiser.h"
 #include "mr_sharedPtr.h"
 
 
 namespace CppTest {
 
-typedef mr_utils::SharedPtr<mr_test::iLogOutput> LogOutputSharedPtr;
+typedef mr_utils::SharedPtr<CppTest::ILogOutput> LogOutputSharedPtr;
 
 //----------------------------------------------------------------------------------------
 /// @brief	Class for creating iLogInitiser objects.

@@ -25,7 +25,7 @@ simpleLog::simpleLog() : testLog()
 
 
 simpleLog::simpleLog( 
-	mr_utils::SharedPtr<iLogOutput>&		output, 
+	mr_utils::SharedPtr<CppTest::ILogOutput>&		output, 
 	mr_utils::SharedPtr<iTestLog>&			summaryLog, 
 	mr_utils::SharedPtr<iLogInitialiser>&	initialiser 
 ) 
@@ -53,12 +53,12 @@ simpleLog::~simpleLog()
 bool simpleLog::writeHeader()
 {
 	mr_utils::mr_exception::assertCondition( m_output.isValid(), FL, L( "invalid output" ) );
-	mr_utils::mr_exception::assertCondition( m_output->initOutput(), FL, L( "output failed init" ) );
+	mr_utils::mr_exception::assertCondition( m_output->InitOutput(), _FL_, _L_( "output failed init" ) );
 
 	mr_utils::mr_stringstream os;
 	os << columnBuilder::createColumnHeaders( m_formatData.m_fields, m_formatData.m_delimiter );
 	os << std::endl;
-	return m_output->write( os.str() );
+	return m_output->Write( os.str() );
 }
 
 
@@ -75,7 +75,7 @@ bool simpleLog::writeEntry(CppTest::Case& testCase)
 				testCase 
 			);
 	os << std::endl;
-	return m_output->write( os.str() );
+	return m_output->Write( os.str() );
 }
 
 
@@ -95,8 +95,8 @@ bool simpleLog::writeSummaryEntry( iTestLog* theLog )
 			);
 	os << std::endl;
 
-	bool ret = m_output->write( os.str() );
-	m_output->closeOutput();
+	bool ret = this->m_output->Write( os.str() );
+	this->m_output->CloseOutput();
 	return ret;
 }
 
@@ -105,7 +105,7 @@ bool simpleLog::writeFooter()
 {
 	/// @todo	Remove writeFooter methods entirely ? and use the summary call.
 
-	mr_utils::mr_exception::assertCondition( m_output.isValid(), FL, L( "invalid output" ) );
+	mr_utils::mr_exception::assertCondition(this->m_output.isValid(), FL, L( "invalid output" ) );
 
 	mr_utils::mr_stringstream os;
 	os << L( "----------- End of Tests -------------" ) << std::endl
@@ -121,7 +121,7 @@ bool simpleLog::writeFooter()
 		<< L( "\t       Total:" ) << + m_stSuccessCount + m_stFailInitCount + m_stFailSetupCount +
 					  m_stFailTestCount + m_stFailCleanupCount + m_stNotExistCount
 					<< std::endl;
-	return m_output->write( os.str() );
+	return this->m_output->Write( os.str() );
 }
 
 

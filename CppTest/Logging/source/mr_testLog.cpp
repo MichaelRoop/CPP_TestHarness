@@ -30,7 +30,7 @@ testLog::testLog()
 
 
 testLog::testLog( 
-	mr_utils::SharedPtr<iLogOutput>&	output,
+	mr_utils::SharedPtr<CppTest::ILogOutput>&	output,
 	mr_utils::SharedPtr<iTestLog>&		summaryLog
 )
 :	m_output( output ),
@@ -46,11 +46,9 @@ testLog::testLog(
 }
 
 
-testLog::~testLog()
-{
-	if (m_output.isValid())
-	{
-		m_output->closeOutput();
+testLog::~testLog() {
+	if (this->m_output.isValid()) {
+		this->m_output->CloseOutput();
 	}
 }
 
@@ -58,8 +56,7 @@ testLog::~testLog()
 bool testLog::log(CppTest::Case& testCase) {
 	//mr_utils::mr_pointerException::ptrAssert(fixture, FL );
 
-	switch(testCase.Status)
-	{
+	switch(testCase.Status) {
 	case CppTest::Case::ST_SUCCESS:
 		++m_stSuccessCount;
 		break;

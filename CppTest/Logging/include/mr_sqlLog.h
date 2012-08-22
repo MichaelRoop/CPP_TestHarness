@@ -47,7 +47,7 @@ public:
 	/// @param	summaryOutput	A SharedObject reference to a log object for summary output.
 	/// @param	initialiser		A SharedObject reference to an iLogInitialiser.
 	sqlLog( 
-		mr_utils::SharedPtr<iLogOutput>&		output, 
+		mr_utils::SharedPtr<CppTest::ILogOutput>&		output, 
 		mr_utils::SharedPtr<iTestLog>&			summaryLog, 
 		mr_utils::SharedPtr<iLogInitialiser>&	initialiser 
 	);
@@ -58,7 +58,7 @@ public:
 	/// @param	output			A pointer to a logOutput object. It now assumes its ownership. 
 	/// @param	initialiser		A SharedObject reference to an iLogInitialiser.
 	sqlLog( 
-		mr_utils::SharedPtr<iLogOutput>&		output, 
+		mr_utils::SharedPtr<CppTest::ILogOutput>&		output, 
 		mr_utils::SharedPtr<iLogInitialiser>&	initialiser 
 	);
 

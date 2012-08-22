@@ -1,5 +1,5 @@
 ///--------------------------------------------------------------------------------------
-/// @file	mr_fileOutput.h
+/// @file	CppTestFileOutput.h
 /// @brief	Output class to output logger information to a file.
 ///
 /// @author		Michael Roop
@@ -8,16 +8,15 @@
 ///
 /// Copyright 2010 Michael Roop
 ///--------------------------------------------------------------------------------------
-#if !defined(MR_FILE_OUTPUT_H)
-#define MR_FILE_OUTPUT_H
+#if !defined(CPP_TEST_FILE_OUTPUT_H)
+#define CPP_TEST_FILE_OUTPUT_H
 
 
-#include "mr_iLogOutput.h"
+#include "ICppTestLogOutput.h"
 #include "mr_fstream.h"
 
 
-namespace mr_test
-{
+namespace CppTest {
 
 //----------------------------------------------------------------------------------------
 /// @brief	Class for outputing logging information to a file.
@@ -36,49 +35,39 @@ namespace mr_test
 /// This class is used by derived logger classes to output the log data after formating.
 ///
 //----------------------------------------------------------------------------------------
-class fileOutput : public iLogOutput
-{
+class FileOutput : public ILogOutput {
 public:
 
 	/// @brief	Constructor.
-	///
 	/// @param	filename	Name of the output log file.
-	fileOutput( const std::string& filename );
+	FileOutput( const std::string& filename );
 
 
 	/// @brief	Initialise the object.
-	///
 	/// @exception	mr_exception if the file name is empty or the file cannot be opened.
-	///
 	/// @return	true if successful, otherwise false.
-	bool initOutput();
+	bool InitOutput();
 
 
 	/// @brief	Close the object.
-	///
 	/// @return	true if successful, otherwise false.
-	void closeOutput();
+	void CloseOutput();
 
 
 	/// @brief	Write to the output object.
-	///
 	/// @exception mr_utils::mr_exception if file is not open.
-	///
 	/// @return	true if successful, otherwise false.
-	bool write( const mr_utils::mr_string& str );
+	bool Write(const mr_utils::mr_string& str);
 
 private:
-
 	std::string				m_filename;	///< Log file name.
 	mr_utils::mr_ofstream	m_file;		///< Log file object.
 
 
 	/// @brief	Default constructor hidden to protect against default construction.
-	fileOutput();
+	FileOutput();
 };
 
-
-
-}
+} // end namespace
 
 #endif

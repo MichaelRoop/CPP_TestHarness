@@ -42,7 +42,7 @@ public:
 	/// @param	output		A SharedObject reference to a logOutput object for output.
 	/// @param	summaryLog	A SharedObject reference to a log object for summary output.
 	testLog( 
-		mr_utils::SharedPtr<iLogOutput>&		output,
+		mr_utils::SharedPtr<CppTest::ILogOutput>&		output,
 		mr_utils::SharedPtr<iTestLog>&			summaryLog
 	);
 
@@ -100,7 +100,7 @@ public:
 
 
 protected:
-	mr_utils::SharedPtr<iLogOutput>	m_output;		///< logOutput pointer.
+	mr_utils::SharedPtr<CppTest::ILogOutput>	m_output;		///< logOutput pointer.
 	mr_utils::SharedPtr<iTestLog>	m_summaryLog;	///< summary logger pointer.
 	int			m_stSuccessCount;		///< Counter for successful tests.
 	int			m_stFailInitCount;		///< Counter tests that failed on Init.

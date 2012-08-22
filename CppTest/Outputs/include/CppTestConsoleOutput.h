@@ -1,5 +1,5 @@
 ///--------------------------------------------------------------------------------------
-/// @file	mr_consoleOutput.h
+/// @file	CppTestConsoleOutput.h
 /// @brief	Output class to output logger information to the console.
 ///
 /// @author		Michael Roop
@@ -8,15 +8,14 @@
 ///
 /// Copyright 2010 Michael Roop
 ///--------------------------------------------------------------------------------------
-#if !defined(MR_CONSOLE_OUTPUT_H)
-#define MR_CONSOLE_OUTPUT_H
+#if !defined(CPP_TEST_CONSOLE_OUTPUT_H)
+#define CPP_TEST_CONSOLE_OUTPUT_H
 
 
-#include "mr_iLogOutput.h"
+#include "ICppTestLogOutput.h"
 
 
-namespace mr_test
-{
+namespace CppTest {
 
 //----------------------------------------------------------------------------------------
 /// @brief	Class for outputing logging information to the console.
@@ -36,29 +35,25 @@ namespace mr_test
 /// This class is used by derived logger classes to output the log data after formating.
 ///
 //----------------------------------------------------------------------------------------
-class consoleOutput : public iLogOutput
-{
+class ConsoleOutput : public ILogOutput {
 public:
 
 	/// @brief	Initialise the object.
-	///
 	/// @return	true if successful, otherwise false.
-	bool initOutput();
+	bool InitOutput();
 
 
 	/// @brief	Close the object.
-	///
 	/// @return	true if successful, otherwise false.
-	void closeOutput();
+	void CloseOutput();
 
 
 	/// @brief	Write to the output object.
-	///
 	/// @return	true if successful, otherwise false.
-	bool write( const mr_utils::mr_string& str );
+	bool Write( const mr_utils::mr_string& str );
 
 };
 
-}
+} // end namespace
 
 #endif

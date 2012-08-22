@@ -127,15 +127,6 @@
     <ClCompile Include="Logging\source\mr_testLogEngine.cpp">
       <Filter>Logging\source</Filter>
     </ClCompile>
-    <ClCompile Include="Outputs\source\mr_consoleOutput.cpp">
-      <Filter>Outputs\source</Filter>
-    </ClCompile>
-    <ClCompile Include="Outputs\source\mr_fileOutput.cpp">
-      <Filter>Outputs\source</Filter>
-    </ClCompile>
-    <ClCompile Include="Outputs\source\mr_odbcOutput.cpp">
-      <Filter>Outputs\source</Filter>
-    </ClCompile>
     <ClCompile Include="Exceptions\source\CppTestScriptException.cpp">
       <Filter>Exceptions\source</Filter>
     </ClCompile>
@@ -150,6 +141,15 @@
     </ClCompile>
     <ClCompile Include="Factories\source\CppTestLogOutputFactory.cpp">
       <Filter>Factories\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Outputs\source\CppTestConsoleOutput.cpp">
+      <Filter>Outputs\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Outputs\source\CppTestFileOutput.cpp">
+      <Filter>Outputs\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Outputs\source\CppTestOdbcOutput.cpp">
+      <Filter>Outputs\source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -222,18 +222,6 @@
     <ClInclude Include="Logging\include\mr_testLogEngine.h">
       <Filter>Logging\include</Filter>
     </ClInclude>
-    <ClInclude Include="Outputs\include\mr_consoleOutput.h">
-      <Filter>Outputs\include</Filter>
-    </ClInclude>
-    <ClInclude Include="Outputs\include\mr_fileOutput.h">
-      <Filter>Outputs\include</Filter>
-    </ClInclude>
-    <ClInclude Include="Outputs\include\mr_iLogOutput.h">
-      <Filter>Outputs\include</Filter>
-    </ClInclude>
-    <ClInclude Include="Outputs\include\mr_odbcOutput.h">
-      <Filter>Outputs\include</Filter>
-    </ClInclude>
     <ClInclude Include="Exceptions\include\CppTestScriptException.h">
       <Filter>Exceptions\include</Filter>
     </ClInclude>
@@ -251,6 +239,18 @@
     </ClInclude>
     <ClInclude Include="Factories\include\CppTestLogOutputFactory.h">
       <Filter>Factories\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Outputs\include\CppTestConsoleOutput.h">
+      <Filter>Outputs\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Outputs\include\CppTestFileOutput.h">
+      <Filter>Outputs\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Outputs\include\ICppTestLogOutput.h">
+      <Filter>Outputs\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Outputs\include\CppTestOdbcOutput.h">
+      <Filter>Outputs\include</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

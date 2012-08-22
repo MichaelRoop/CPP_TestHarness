@@ -11,7 +11,7 @@
 #if !defined(MR_ITEST_LOG_H)
 #define MR_ITEST_LOG_H
 
-#include "mr_iLogOutput.h"
+#include "ICppTestLogOutput.h"
 #include "mr_sharedPtr.h"
 
 namespace CppTest {
