@@ -9,7 +9,7 @@
 /// Copyright 2010 Michael Roop
 ///--------------------------------------------------------------------------------------
 #include "CppTestLogInitialiserFactory.h"
-#include "mr_iniLogInitialiser.h"
+#include "CppTestIniLogInitialiser.h"
 #include "mr_exception.h"
 #include "mr_sstream.h"
 #include "mr_defines.h"
@@ -25,7 +25,7 @@ LogInitialiserSharedPtr LogInitialiserFactory::Create(
 	LogInitialiserSharedPtr	initialiser;
 
 	if (configFileType.compare(_L_("INI")) == 0) {
-		initialiser = new mr_test::iniLogInitialiser(configFileName, section);
+		initialiser = new CppTest::IniLogInitialiser(configFileName, section);
 	}
 	//else if (configFileType.compare( L("XML") ) == 0)
 	//{
@@ -37,7 +37,7 @@ LogInitialiserSharedPtr LogInitialiserFactory::Create(
 		mr_utils::mr_exception::assertCondition( false, FL, os.str() );
 	}
 
-	if (!initialiser->load()) {
+	if (!initialiser->Load()) {
 		mr_utils::mr_stringstream os;
 		os << configFileName.c_str() << _L_(" failed to load");
 		mr_utils::mr_exception::assertCondition(false, FL, os.str());

@@ -9,7 +9,7 @@
 /// Copyright 2010 Michael Roop
 ///--------------------------------------------------------------------------------------
 #include "CppTestLogOutputFactory.h"
-#include "mr_iniLogInitialiser.h"
+#include "CppTestIniLogInitialiser.h"
 #include "CppTestOdbcOutput.h"
 #include "CppTestFileOutput.h"
 #include "CppTestConsoleOutput.h"
@@ -21,23 +21,23 @@
 namespace CppTest {
 
 LogOutputSharedPtr LogOutputFactory::Create( 
-	mr_utils::SharedPtr<mr_test::iLogInitialiser>& initialiser 
+	mr_utils::SharedPtr<CppTest::ILogInitialiser>& initialiser 
 ) {
 	LogOutputSharedPtr output;
 
-	if (initialiser->getOutputType().compare(_L_("ODBC") ) == 0) {
+	if (initialiser->GetOutputType().compare(_L_("ODBC") ) == 0) {
 		output = new CppTest::OdbcOutput(initialiser);
 	}
-	else if (initialiser->getOutputType().compare(_L_("FILE")) == 0) {
+	else if (initialiser->GetOutputType().compare(_L_("FILE")) == 0) {
 		mr_utils::mr_exception::assertCondition( false, _FL_, _L_("FILE output not ready"));
 		output = new CppTest::FileOutput("Simple log file.txt");
 	}
-	else if (initialiser->getOutputType().compare(_L_("CONSOLE")) == 0) {
+	else if (initialiser->GetOutputType().compare(_L_("CONSOLE")) == 0) {
 		output = new CppTest::ConsoleOutput();
 	}
 	else {
 		mr_utils::mr_stringstream os;
-		os << _L_("Illegal output type:") << initialiser->getOutputType() << _L_(" Allowed types are 'ODBC', 'FILE', 'CONSOLE'");
+		os << _L_("Illegal output type:") << initialiser->GetOutputType() << _L_(" Allowed types are 'ODBC', 'FILE', 'CONSOLE'");
 		mr_utils::mr_exception::assertCondition(false, FL, os.str());
 	}
 

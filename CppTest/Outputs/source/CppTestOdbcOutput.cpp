@@ -23,17 +23,17 @@ namespace CppTest {
 
 
 //odbcOutput::odbcOutput( const mr_utils::mr_string&, const mr_utils::mr_string& )
-OdbcOutput::OdbcOutput(mr_utils::SharedPtr<mr_test::iLogInitialiser>& initialiser)
+OdbcOutput::OdbcOutput(mr_utils::SharedPtr<CppTest::ILogInitialiser>& initialiser)
 :	m_odbcEnv(SQL_NULL_HENV),
 	m_odbcHdbc(SQL_NULL_HDBC),
 	m_odbcVersion(0),
 	m_connectTimeout(0) {
-	initialiser->load();
-	this->m_dsn = initialiser->getOdbcDsnName();
-	this->m_user = initialiser->getOdbcUserName();
-	this->m_authorisation = initialiser->getOdbcAUthorisationStr();
-	this->m_odbcVersion = initialiser->getOdbcVersion();
-	this->m_connectTimeout = initialiser->getOdbcConnectTimeout();
+	initialiser->Load();
+	this->m_dsn = initialiser->GetOdbcDsnName();
+	this->m_user = initialiser->GetOdbcUserName();
+	this->m_authorisation = initialiser->GetOdbcAUthorisationStr();
+	this->m_odbcVersion = initialiser->GetOdbcVersion();
+	this->m_connectTimeout = initialiser->GetOdbcConnectTimeout();
 }
 
 

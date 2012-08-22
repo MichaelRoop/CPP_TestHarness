@@ -1,6 +1,6 @@
 ///--------------------------------------------------------------------------------------
-/// @file	mr_buildTestCaseColumnValueString.h
-/// @brief	Builds strings with for column information for test cases.
+/// @file	CppTestBuildSummaryColumnValueString.h
+/// @brief	Builds strings with for summary columns.
 ///
 /// @author		Michael Roop
 /// @date		2010
@@ -8,22 +8,23 @@
 ///
 /// Copyright 2010 Michael Roop
 ///--------------------------------------------------------------------------------------
-#if !defined(MR_BUILD_TEST_CASE_COLUMN_VALUE_STRING_H)
-#define MR_BUILD_TEST_CASE_COLUMN_VALUE_STRING_H
+#if !defined(CPP_TEST_BUILD_SUMMARY_COLUMN_VALUE_STRING_H)
+#define CPP_TEST_BUILD_SUMMARY_COLUMN_VALUE_STRING_H
 
-#include "mr_buildColumnValueString.h"
+
+#include "CppTestBuildColumnValueString.h"
+
 
 namespace CppTest {
-	class Case;	///< Forward declaration of testCase.
-}
 
-namespace mr_test {
+class ILog;	///< Forward declaration of iTestLog interface.
+
 
 ///--------------------------------------------------------------------------------------
 /// @brief	Functor to Add a value to the value string on each iteration.
 ///
 /// You can use this with the std::for each
-class buildTestCaseColumnValueString : public buildColumnValueString
+class BuildSummaryColumnValueString : public BuildColumnValueString
 {
 
 public:
@@ -33,29 +34,23 @@ public:
 	/// @param	os			The output stringstream.
 	/// @param	delimiter	The delimiter between fields.
 	/// @param	strQuotes	The string delimiter character.
-	buildTestCaseColumnValueString( 
+	/// @param	theLog		The iTestLog to query for the column data.
+	BuildSummaryColumnValueString( 
 		mr_utils::mr_stringstream&	os,
 		const mr_utils::mr_string&	delimiter,
 		const mr_utils::mr_string&	strQuotes,
-		CppTest::Case&				testCase 
+		CppTest::ILog*				theLog 
 	);
 
-private:
+protected:
 
-	CppTest::Case& m_testCase; ///< The testCase to log column values.
+	CppTest::ILog* m_log; ///< Pointer to the testLog;
 
 
 	/// @brief	Handles the building of column data.
 	//
 	/// @param	field	The current field at iteration.
-	virtual void build( const FieldPair& field );
-
-
-	/// @brief	Helper function to concatenate string values to the value string
-	///			with the proper string delimiter, specificaly for the verbose field.
-	///
-	///	@param	str	The string to concatenate.
-	void concatenateVerboseBufferStr( const mr_utils::mr_string& str );
+	virtual void Build(const CppTest::FieldPair& field);
 };
 
 } // end namespace

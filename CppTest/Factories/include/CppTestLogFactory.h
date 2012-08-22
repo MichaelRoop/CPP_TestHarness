@@ -11,14 +11,14 @@
 #if !defined(CPP_TEST_LOG_FACTORY_H)
 #define CPP_TEST_LOG_FACTORY_H
 
-#include "mr_iTestLog.h"
-#include "mr_iLogInitialiser.h"
+#include "ICppTestLog.h"
+#include "ICppTestLogInitialiser.h"
 #include "mr_sharedPtr.h"
 
 
 namespace CppTest {
 
-typedef mr_utils::SharedPtr<mr_test::iTestLog> LogSharedPtr;
+typedef mr_utils::SharedPtr<CppTest::ILog> LogSharedPtr;
 
 //----------------------------------------------------------------------------------------
 /// @brief	Class for creating iLogInitiser objects.
@@ -47,8 +47,8 @@ private:
 	/// @param	initialiser		A SharedObject reference to an iLogInitialiser.
 	static LogSharedPtr Create(
 			mr_utils::SharedPtr<CppTest::ILogOutput>&		output, 
-			mr_utils::SharedPtr<mr_test::iTestLog>&			summaryLog, 
-			mr_utils::SharedPtr<mr_test::iLogInitialiser>&	initialiser 
+			mr_utils::SharedPtr<CppTest::ILog>&			summaryLog, 
+			mr_utils::SharedPtr<CppTest::ILogInitialiser>&	initialiser 
 		);
 };
 

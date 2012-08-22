@@ -1,5 +1,5 @@
 ///--------------------------------------------------------------------------------------
-/// @file	mr_buildColumnInfoString.h
+/// @file	CppTestBuildColumnInfoString.h
 /// @brief	Builds strings with for column information.
 ///
 /// @author		Michael Roop
@@ -8,26 +8,23 @@
 ///
 /// Copyright 2010 Michael Roop
 ///--------------------------------------------------------------------------------------
-#if !defined(MR_BUILD_COLUMN_INFO_STRING_H)
-#define MR_BUILD_COLUMN_INFO_STRING_H
+#if !defined(CPP_TEST_BUILD_COLUMN_INFO_STRING_H)
+#define CPP_TEST_BUILD_COLUMN_INFO_STRING_H
 
 
+#include "CppTestFieldPair.h"
 #include "mr_string.h"
 #include "mr_sstream.h"
-#include "mr_fieldPair.h"
 
 
-namespace mr_test
-{
+namespace CppTest {
 
 ///--------------------------------------------------------------------------------------
 /// @brief	Functor to Add a value to the value string on each iteration.
 ///
 /// You can use this with the std::for each
-struct BuildColumnInfoString
-{
-	typedef enum 
-	{
+struct BuildColumnInfoString {
+	typedef enum {
 		NAME_ONLY,
 		TYPE_ONLY,
 		NAME_TYPE
@@ -51,7 +48,7 @@ struct BuildColumnInfoString
 	/// @brief	Function operator called on each iteration.
 	///
 	/// @param	field	The current field at iteration.
-	void operator () ( const FieldPair& field );
+	void operator () (const FieldPair& field);
 
 private:
 

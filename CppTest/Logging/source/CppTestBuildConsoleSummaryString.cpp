@@ -1,5 +1,5 @@
 ///--------------------------------------------------------------------------------------
-/// @file	mr_BuildConsoleSummaryString.h
+/// @file	CppTestBuildConsoleSummaryString.h
 /// @brief	Builds strings with for summary specially for console.
 ///
 /// @author		Michael Roop
@@ -8,34 +8,29 @@
 ///
 /// Copyright 2010 Michael Roop
 ///--------------------------------------------------------------------------------------
-#include "mr_buildConsoleSummaryString.h"
+#include "CppTestBuildConsoleSummaryString.h"
 
 
-namespace mr_test
-{
+namespace CppTest {
 
-buildConsoleSummaryString::buildConsoleSummaryString( 
+BuildConsoleSummaryString::BuildConsoleSummaryString( 
 	mr_utils::mr_stringstream&	os,
 	const mr_utils::mr_string&	delimiter,
 	const mr_utils::mr_string&	strQuotes,
-	iTestLog*					theLog 
+	CppTest::ILog*				theLog 
 ) 
-:	buildSummaryColumnValueString( os, delimiter, strQuotes, theLog )
-{
+:	BuildSummaryColumnValueString(os, delimiter, strQuotes, theLog) {
 }
 
 
-void buildConsoleSummaryString::operator () ( const FieldPair& field )
-{
-	if ((++m_count) > 1)
-	{
-		m_os << std::endl;
+void BuildConsoleSummaryString::operator () (const FieldPair& field) {
+	if ((++this->m_count) > 1) {
+		this->m_os << std::endl;
 	}
 
 	/// @todo We will eventually left pad to create an allignment
-	m_os << field.first << L(":");
-
-	this->build( field );
+	this->m_os << field.first << _L_(":");
+	this->Build(field);
 }
 
 } // end namespace

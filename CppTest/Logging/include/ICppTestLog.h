@@ -1,5 +1,5 @@
 ///--------------------------------------------------------------------------------------
-/// @file	mr_testLog.h
+/// @file	ICppTestLog.h
 /// @brief	Log interface for test tool.
 ///
 /// @author		Michael Roop
@@ -8,18 +8,16 @@
 ///
 /// Copyright 2010 Michael Roop
 ///--------------------------------------------------------------------------------------
-#if !defined(MR_ITEST_LOG_H)
-#define MR_ITEST_LOG_H
+#if !defined(ICPP_TEST_LOG_H)
+#define ICPP_TEST_LOG_H
 
 #include "ICppTestLogOutput.h"
 #include "mr_sharedPtr.h"
 
-namespace CppTest {
-//	class Fixture;
-	class Case;
-}
 
-namespace mr_test {
+namespace CppTest {
+
+	class Case;
 
 //----------------------------------------------------------------------------------------
 /// @brief	Interface for retrieving and formatting logging information.
@@ -28,75 +26,65 @@ namespace mr_test {
 /// its iLogOutput object.
 ///
 //----------------------------------------------------------------------------------------
-class iTestLog
-{
+class ILog {
 public:
 
 	/// @brief	Write the header for the log output.
-	///
 	/// @exception	throws a mr_utils::mr_pointerException if the testCase object is invalid.
-	///
 	/// @return	true if successful, otherwise false.
-	virtual bool writeHeader() = 0;
+	virtual bool WriteHeader() = 0;
 
 
 	/// @brief	Write the footer for the log output.
-	///
 	/// @exception	throws a mr_utils::mr_pointerException if the testCase object is invalid.
-	///
 	/// @return	true if successful, otherwise false.
-	virtual bool writeFooter() = 0;
+	virtual bool WriteFooter() = 0;
 
 
 	/// @brief	Log the testCase information.
-	///
 	/// @exception	throws a mr_utils::mr_pointerException if the testCase object is invalid.
 	/// @exception	throws a mr_utils::mr_exception if test has a state that is not handled.
-	///
 	/// @param	fixture	Pointer to the test case fixture object that contains information to log.
-	///
 	/// @return	true if successful, otherwise false.
-	virtual bool log(CppTest::Case& testCase) = 0;
+	virtual bool LogTest(CppTest::Case& testCase) = 0;
 
 
 	/// @brief	Write the summary of the logging to the summary log output.
-	///
 	/// @exception	throws a mr_utils::mr_pointerException if the testCase object is invalid.
-	///
 	/// @return	true if successful, otherwise false.
-	virtual bool summarize() = 0;
+	virtual bool Summarize() = 0;
 
 
 	/// @brief	Get the successful test count.
-	virtual int getSuccessCount() const = 0;
+	virtual int GetSuccessCount() const = 0;
 
 
 	/// @brief	Get the failed test init count.
-	virtual int getFailInitCount() const = 0;
+	virtual int GetFailInitCount() const = 0;
 
 
 	/// @brief	Get the failed test setup count.
-	virtual int getFailSetupCount() const = 0;
+	virtual int GetFailSetupCount() const = 0;
 
 
 	/// @brief	Get the failed exec test count.
-	virtual int getFailTestCount() const = 0;
+	virtual int GetFailTestCount() const = 0;
 
 
 	/// @brief	Get the failed cleanup test count.
-	virtual int getFailCleanupCount() const = 0;
+	virtual int GetFailCleanupCount() const = 0;
 
 
 	/// @brief	Get the failed test not exist count.
-	virtual int getNotExistCount() const = 0;	
+	virtual int GetNotExistCount() const = 0;	
 
 
 	/// @brief	Get the total test count.
-	virtual int getTotalCount() const = 0;	
+	virtual int GetTotalCount() const = 0;	
 
 
 	/// @brief	Write a summary entry.
-	virtual bool writeSummaryEntry( iTestLog* theLog ) = 0;
+	virtual bool WriteSummaryEntry(ILog* log) = 0;
 
 };
 

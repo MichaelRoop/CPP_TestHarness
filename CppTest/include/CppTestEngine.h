@@ -11,10 +11,10 @@
 #if !defined(CPP_TEST_ENGINE_H)
 #define CPP_TEST_ENGINE_H
 
-#include "mr_singleton.h"
-#include "mr_testLogEngine.h"
-#include "mr_string.h"
+#include "CppTestLogEngine.h"
 #include "ICppTestScriptReader.h"
+#include "mr_singleton.h"
+#include "mr_string.h"
 
 #include <vector>
 
@@ -55,7 +55,7 @@ public:
 	/// @brief	Retrieve the results logging engine.
 	///
 	/// @return	The results logging engine.
-	mr_test::testLogEngine& GetLogEngine();
+	CppTest::LogEngine& GetLogEngine();
 
 
 	/// @brief	Returns the unique id for the test run.
@@ -66,7 +66,7 @@ private:
 	std::vector<CppTest::Fixture*> m_fixtures;	///< The vector of registered test case fixtures.
 	static Engine*					m_instance;	///< The unique instance of the testEngine.
 	mr_utils::mr_string				m_runId;	///< Unique ID for the run used in log files.
-	mr_test::testLogEngine			m_logEngine;///< The logging engine.
+	CppTest::LogEngine				m_logEngine;///< The logging engine.
 
 
 	/// @brief	Process one test case fixture based on information contained in the testInfoObject.

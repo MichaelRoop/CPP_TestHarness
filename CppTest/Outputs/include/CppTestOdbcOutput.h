@@ -13,7 +13,7 @@
 
 
 #include "ICppTestLogOutput.h"
-#include "mr_iLogInitialiser.h"
+#include "ICppTestLogInitialiser.h"
 #include "mr_sharedPtr.h"
 
 
@@ -30,7 +30,7 @@
 
 //#include <sql.h>
 #include <sqlext.h>
-#include "mr_iLogInitialiser.h"
+#include "ICppTestLogInitialiser.h"
 
 
 namespace CppTest {
@@ -58,7 +58,7 @@ public:
 
 	/// @brief	Constructor.
 	/// @param	initialiser	A SharedObject reference to an iLogInitialiser.
-	OdbcOutput(mr_utils::SharedPtr<mr_test::iLogInitialiser>& initialiser);
+	OdbcOutput(mr_utils::SharedPtr<CppTest::ILogInitialiser>& initialiser);
 
 
 	/// @brief	Initialise the object.

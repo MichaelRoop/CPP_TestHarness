@@ -8,40 +8,34 @@
 ///
 /// Copyright 2010 Michael Roop
 ///--------------------------------------------------------------------------------------
-#include "mr_buildColumnValueString.h"
+#include "CppTestBuildColumnValueString.h"
 #include "mr_exception.h"
 #include "mr_defines.h"
 
 
-namespace mr_test
-{
+namespace CppTest {
 
-buildColumnValueString::buildColumnValueString( 
+BuildColumnValueString::BuildColumnValueString( 
 	mr_utils::mr_stringstream&	os,
 	const mr_utils::mr_string&	delimiter,
 	const mr_utils::mr_string&	strQuotes
-) 
-:	m_os(os), 
-	m_delimiter( delimiter ),
-	m_strQuotes( strQuotes ),
-	m_count( 0 )
-{
+) :	m_os(os), 
+	m_delimiter(delimiter),
+	m_strQuotes(strQuotes),
+	m_count(0) {
 }
 
 
-void buildColumnValueString::operator () ( const FieldPair& field )
-{
-	if ((++m_count) > 1)
-	{
-		m_os << L(",");
+void BuildColumnValueString::operator () (const FieldPair& field) {
+	if ((++this->m_count) > 1) {
+		this->m_os << _L_(",");
 	}
-	this->build( field );
+	this->Build(field);
 }
 
 
-void buildColumnValueString::concatenateStr( const mr_utils::mr_string& str )
-{
-	m_os << m_strQuotes.c_str() << str.c_str() << m_strQuotes.c_str();
+void BuildColumnValueString::ConcatenateStr(const mr_utils::mr_string& str) {
+	this->m_os << this->m_strQuotes.c_str() << str.c_str() << this->m_strQuotes.c_str();
 }
 
 } // end namespace

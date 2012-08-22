@@ -66,7 +66,7 @@ void Engine::RegisterCase(CppTest::Fixture* fixture) {
 
 
 void Engine::ProcessScript(CppTest::IScriptReader& theReader ) {
-	this->m_logEngine.writeHeaders();
+	this->m_logEngine.WriteHeaders();
 
 	CppTest::TestInfoObject info = theReader.getNextTest();
 	while (!info.IsNull()) {
@@ -112,16 +112,16 @@ void Engine::ProcessScript(CppTest::IScriptReader& theReader ) {
 			info = theReader.getNextTest();
 		}
 	}
-	this->m_logEngine.writeSummaries();
+	this->m_logEngine.WriteSummaries();
 }
 
 
 void Engine::LogResults(CppTest::Case& testCase) {
-	this->m_logEngine.log(testCase);
+	this->m_logEngine.Log(testCase);
 }
 
 
-mr_test::testLogEngine& Engine::GetLogEngine() {
+CppTest::LogEngine& Engine::GetLogEngine() {
 	return this->m_logEngine;
 }
 

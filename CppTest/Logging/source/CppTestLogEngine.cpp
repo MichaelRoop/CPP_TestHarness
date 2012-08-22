@@ -1,5 +1,5 @@
 //--------------------------------------------------------------------------------------
-/// @file	mr_testLogEngine.cpp
+/// @file	CppTestLogEngine.cpp
 /// @brief	Engine to drive the logging activity.
 ///
 /// @author		Michael Roop
@@ -8,32 +8,26 @@
 ///
 /// Copyright 2010 Michael Roop
 //--------------------------------------------------------------------------------------
-#include "mr_testLogEngine.h"
-#include "mr_iTestLog.h"  
-#include "mr_pointerException.h"
-#include "mr_exception.h"
-#include "mr_defines.h"
-#include "mr_functors.h"
+#include "CppTestLogEngine.h"
 #include "CppTestLogInitialiserFactory.h"
 #include "CppTestLogFactory.h"
-#include "CppTestFixture.h"
+#include "mr_exception.h"
+#include "mr_defines.h"
 
 #include <algorithm>
 
 
-namespace mr_test
-{
+namespace CppTest {
 
 
 //--------------------------------------------------------------------------------------
 /// @brief	Functor to write a log header per iteration on a container of log objects.
 struct WriteLogHeaders {
 	/// @brief	Function operator called on each iteration.
-	///
 	/// @param	theLog	The log object to call.
-	void operator () ( mr_utils::SharedPtr<iTestLog>& theLog ) { 
-		mr_utils::mr_exception::assertCondition( theLog.isValid(), FL, L("Invalid pointer") );
-		theLog->writeHeader();  
+	void operator () (mr_utils::SharedPtr<CppTest::ILog>& log ) { 
+		mr_utils::mr_exception::assertCondition(log.isValid(), _FL_, _L_("Invalid pointer"));
+		log->WriteHeader();  
 	}
 };
 
@@ -42,11 +36,10 @@ struct WriteLogHeaders {
 /// @brief	Functor to write a log footer per iteration on a container of log objects.
 struct WriteLogSummaries {
 	/// @brief	Function operator called on each iteration.
-	///
 	/// @param	theLog	The log object to call.
-	void operator () ( mr_utils::SharedPtr<iTestLog>& theLog ) { 
-		mr_utils::mr_exception::assertCondition( theLog.isValid(), FL, L("Invalid pointer") );
-		theLog->summarize();  
+	void operator () (mr_utils::SharedPtr<CppTest::ILog>& log) { 
+		mr_utils::mr_exception::assertCondition(log.isValid(), _FL_, _L_("Invalid pointer"));
+		log->Summarize();  
 	}
 };
 
@@ -65,9 +58,9 @@ struct WriteLogEntries {
 	/// @brief	Function operator called on each iteration.
 	///
 	/// @param	theLog	The log object to call.
-	void operator () (mr_utils::SharedPtr<iTestLog>& theLog) { 
-		mr_utils::mr_exception::assertCondition(theLog.isValid(), FL, L("Invalid pointer"));
-		theLog->log(this->m_case);  
+	void operator () (mr_utils::SharedPtr<CppTest::ILog>& log) { 
+		mr_utils::mr_exception::assertCondition(log.isValid(), _FL_, _L_("Invalid pointer"));
+		log->LogTest(this->m_case);  
 	}
 private:
 	CppTest::Case& m_case; ///< The testCase information containing log information.
@@ -76,9 +69,9 @@ private:
 
 //--------------------------------------------------------------------------------------
 /// @brief	Functor to load named test to testLogEngine.
-struct loadLogsFromVector {
-	loadLogsFromVector( 
-		testLogEngine*			logEngine, 
+struct LoadLogsFromVector {
+	LoadLogsFromVector( 
+		CppTest::LogEngine*		logEngine, 
 		std::string&			fileName,
 		mr_utils::mr_string&	fileType
 	) 
@@ -88,10 +81,10 @@ struct loadLogsFromVector {
 	}
 
 	void operator () ( const mr_utils::mr_string& str ) {
-		m_logEngine->addLogger(CppTest::LogFactory::Create(this->m_fileName, this->m_fileType, str));
+		this->m_logEngine->AddLogger(CppTest::LogFactory::Create(this->m_fileName, this->m_fileType, str));
 	}
 
-	testLogEngine*			m_logEngine;
+	CppTest::LogEngine*		m_logEngine;
 	std::string&			m_fileName;
 	mr_utils::mr_string&	m_fileType;
 };
@@ -101,47 +94,45 @@ struct loadLogsFromVector {
 //--------------------------------------------------------------------------------------
 
 
-testLogEngine::testLogEngine()
-{
+LogEngine::LogEngine() {
 }
 
 
-testLogEngine::~testLogEngine() {
+LogEngine::~LogEngine() {
 }
 
 
-bool testLogEngine::writeHeaders() {
-	std::for_each( m_logs.begin(), m_logs.end(), WriteLogHeaders() );
+bool LogEngine::WriteHeaders() {
+	std::for_each(this->m_logs.begin(), this->m_logs.end(), WriteLogHeaders() );
 	return true;
 }
 
 
-bool testLogEngine::log(CppTest::Case& testCase) {
-	//mr_utils::mr_pointerException::ptrAssert(fixture, FL );
-	std::for_each(m_logs.begin(), m_logs.end(), WriteLogEntries(testCase));
+bool LogEngine::Log(CppTest::Case& testCase) {
+	std::for_each(this->m_logs.begin(), this->m_logs.end(), WriteLogEntries(testCase));
 	return true;
 }
 
 
-bool testLogEngine::writeSummaries() {
-	std::for_each( m_logs.begin(), m_logs.end(), WriteLogSummaries() );
+bool LogEngine::WriteSummaries() {
+	std::for_each(this->m_logs.begin(), this->m_logs.end(), WriteLogSummaries() );
 	return true;
 }
 
 
-void testLogEngine::addLogger(const mr_utils::SharedPtr<iTestLog>& theLog) {
-	mr_utils::mr_exception::assertCondition(theLog.isValid(), FL, L("Invalid testLog"));
-	m_logs.push_back( theLog );
+void LogEngine::AddLogger(const mr_utils::SharedPtr<CppTest::ILog>& log) {
+	mr_utils::mr_exception::assertCondition(log.isValid(), _FL_, _L_("Invalid testLog"));
+	this->m_logs.push_back(log);
 }
 
 
-void testLogEngine::loadLoggers(std::string fileName, mr_utils::mr_string fileType) {
-	mr_utils::mr_exception::assertCondition( !fileName.empty(), FL, L("Empty file name") );
+void LogEngine::LoadLoggers(std::string fileName, mr_utils::mr_string fileType) {
+	mr_utils::mr_exception::assertCondition(!fileName.empty(), _FL_, _L_("Empty file name"));
 	std::vector<mr_utils::mr_string> logs = 
-		CppTest::LogInitialiserFactory::Create( fileName, fileType )->getLogList();
+		CppTest::LogInitialiserFactory::Create(fileName, fileType)->GetLogList();
 		
-	std::for_each(logs.begin(), logs.end(), loadLogsFromVector(this, fileName, fileType));		
+	std::for_each(logs.begin(), logs.end(), LoadLogsFromVector(this, fileName, fileType));		
 }
 
 
-}
+} // end namespace

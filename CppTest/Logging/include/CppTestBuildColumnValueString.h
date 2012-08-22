@@ -1,5 +1,5 @@
 ///--------------------------------------------------------------------------------------
-/// @file	mr_buildColumnValueString.h
+/// @file	CppTestBuildColumnValueString.h
 /// @brief	Builds strings with for column information.
 ///
 /// @author		Michael Roop
@@ -12,20 +12,18 @@
 #define MR_BUILD_COLUMN_VALUE_STRING_H
 
 
+#include "CppTestFieldPair.h"
 #include "mr_string.h"
 #include "mr_sstream.h"
-#include "mr_fieldPair.h"
 
 
-namespace mr_test
-{
+namespace CppTest {
 
 ///--------------------------------------------------------------------------------------
 /// @brief	Functor to Add a value to the value string on each iteration.
 ///
 /// You can use this with the std::for each
-class buildColumnValueString //: public iBuildColumnValueString
-{
+class BuildColumnValueString {
 public:
 
 	/// @brief	Constructor.
@@ -33,7 +31,7 @@ public:
 	/// @param	os			The output stringstream.
 	/// @param	delimiter	The delimiter between fields.
 	/// @param	strQuotes	The string delimiter character.
-	buildColumnValueString( 
+	BuildColumnValueString( 
 		mr_utils::mr_stringstream&	os,
 		const mr_utils::mr_string&	delimiter,
 		const mr_utils::mr_string&	strQuotes
@@ -43,10 +41,9 @@ public:
 	/// @brief	Function operator called on each iteration.
 	///
 	/// @param	field	The current field at iteration.
-	virtual void operator () ( const FieldPair& field );
+	virtual void operator () (const CppTest::FieldPair& field);
 
 protected:
-
 	mr_utils::mr_stringstream&	m_os;
 	mr_utils::mr_string			m_delimiter;
 	mr_utils::mr_string			m_strQuotes;
@@ -56,14 +53,14 @@ protected:
 	/// @brief	Handles the building of column data.
 	//
 	/// @param	field	The current field at iteration.
-	virtual void build( const FieldPair& field ) = 0;
+	virtual void Build(const FieldPair& field) = 0;
 
 
 	/// @brief	Helper function to concatenate string values to the value string
 	///			with the proper string delimiter.
 	///
 	///	@param	str	The string to concatenate.
-	void concatenateStr( const mr_utils::mr_string& str );
+	void ConcatenateStr(const mr_utils::mr_string& str);
 };
 
 } // end namespace

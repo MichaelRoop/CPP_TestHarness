@@ -13,7 +13,7 @@
 
 
 #include "ICppTestLogOutput.h"
-#include "mr_iLogInitialiser.h"
+#include "ICppTestLogInitialiser.h"
 #include "mr_sharedPtr.h"
 
 
@@ -31,7 +31,7 @@ public:
 	///	@brief	Creates the appropriate iLogInitialiser.
 	///
 	/// @param	initialiser	Initialiser object. 
-	static LogOutputSharedPtr Create( mr_utils::SharedPtr<mr_test::iLogInitialiser>& initialiser );
+	static LogOutputSharedPtr Create( mr_utils::SharedPtr<CppTest::ILogInitialiser>& initialiser );
 };
 
 

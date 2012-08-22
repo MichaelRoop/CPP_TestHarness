@@ -1,5 +1,5 @@
 ///--------------------------------------------------------------------------------------
-/// @file	mr_BuildSummaryColumnValueString.h
+/// @file	CppTestBuildConsoleSummaryString.h
 /// @brief	Builds strings with for summary columns.
 ///
 /// @author		Michael Roop
@@ -8,27 +8,28 @@
 ///
 /// Copyright 2010 Michael Roop
 ///--------------------------------------------------------------------------------------
-#if !defined(MR_BUILD_SUMMARY_COLUMN_VALUE_STRING_H)
-#define MR_BUILD_SUMMARY_COLUMN_VALUE_STRING_H
+#if !defined(CPP_TEST_BUILD_CONSOLE_SUMMARY_STRING_H)
+#define CPP_TEST_BUILD_CONSOLE_SUMMARY_STRING_H
 
 
-#include "mr_buildColumnValueString.h"
+#include "CppTestBuildSummaryColumnValueString.h"
 
 
-namespace mr_test
-{
-
-class iTestLog;	///< Forward declaration of iTestLog interface.
-
+namespace CppTest {
 
 ///--------------------------------------------------------------------------------------
 /// @brief	Functor to Add a value to the value string on each iteration.
 ///
 /// You can use this with the std::for each
-class buildSummaryColumnValueString : public buildColumnValueString
-{
+class BuildConsoleSummaryString : public BuildSummaryColumnValueString {
 
 public:
+
+	/// @brief	Function operator called on each iteration.
+	///
+	/// @param	field	The current field at iteration.
+	void operator () (const CppTest::FieldPair& field);
+
 
 	/// @brief	Constructor.
 	///
@@ -36,23 +37,14 @@ public:
 	/// @param	delimiter	The delimiter between fields.
 	/// @param	strQuotes	The string delimiter character.
 	/// @param	theLog		The iTestLog to query for the column data.
-	buildSummaryColumnValueString( 
+	BuildConsoleSummaryString( 
 		mr_utils::mr_stringstream&	os,
 		const mr_utils::mr_string&	delimiter,
 		const mr_utils::mr_string&	strQuotes,
-		iTestLog*					theLog 
+		CppTest::ILog*				theLog 
 	);
-
-protected:
-
-	iTestLog* m_log; ///< Pointer to the testLog;
-
-
-	/// @brief	Handles the building of column data.
-	//
-	/// @param	field	The current field at iteration.
-	virtual void build( const FieldPair& field );
 };
+
 
 } // end namespace
 

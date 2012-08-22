@@ -1,5 +1,5 @@
 ///--------------------------------------------------------------------------------------
-/// @file	mr_fieldPair.h
+/// @file	CppTestFieldPair.h
 /// @brief	Data column information type.
 ///
 /// @author		Michael Roop
@@ -8,15 +8,14 @@
 ///
 /// Copyright 2010 Michael Roop
 ///--------------------------------------------------------------------------------------
-#if !defined(MR_FIELD_PAIR_H)
-#define MR_FIELD_PAIR_H
+#if !defined(CPP_TEST_FIELD_PAIR_H)
+#define CPP_TEST_FIELD_PAIR_H
 
 #include "mr_string.h"
 #include <vector>
 
 
-namespace mr_test
-{
+namespace CppTest {
 
 /// @brief Typedef of the basic pair that defines the name and type strings of a SQL field.
 typedef std::pair<mr_utils::mr_string,mr_utils::mr_string> FieldPair;

@@ -8,50 +8,46 @@
 ///
 /// Copyright 2010 Michael Roop
 ///--------------------------------------------------------------------------------------
-#include "mr_columnBuilder.h"
-#include "mr_buildColumnInfoString.h"
-#include "mr_buildTestCaseColumnValueString.h"
-#include "mr_buildSummaryColumnValueString.h"
-#include "mr_buildConsoleSummaryString.h"
+#include "CppTestColumnBuilder.h"
+#include "CppTestBuildColumnInfoString.h"
+#include "CppTestBuildTestCaseColumnValueString.h"
+#include "CppTestBuildSummaryColumnValueString.h"
+#include "CppTestBuildConsoleSummaryString.h"
 #include "mr_sstream.h"
-#include "mr_iTestLog.h"
+#include "ICppTestLog.h"
 #include <algorithm>
 
-namespace mr_test
-{
+namespace CppTest {
 
-mr_utils::mr_string columnBuilder::createColumnHeaders( 
+mr_utils::mr_string ColumnBuilder::CreateColumnHeaders( 
 	const FieldVector&			fieldInfo, 
-	const mr_utils::mr_string&	delimiter 
-)
-{
+	const mr_utils::mr_string&	delimiter) {
 	mr_utils::mr_stringstream os;
 	std::for_each( 
 		fieldInfo.begin(), 
 		fieldInfo.end(), 
-		BuildColumnInfoString( os, L(" "), delimiter, BuildColumnInfoString::NAME_ONLY ) 
+		BuildColumnInfoString(os, _L_(" "), delimiter, BuildColumnInfoString::NAME_ONLY) 
 	);
 	return os.str();
 }
 
 
-mr_utils::mr_string columnBuilder::createColumnNameTypeStr( 
+mr_utils::mr_string ColumnBuilder::CreateColumnNameTypeStr( 
 	const FieldVector&			fieldInfo, 
 	const mr_utils::mr_string&	nameTypeDelimiter, 
 	const mr_utils::mr_string&	colDelimiter 
-)
-{
+) {
 	mr_utils::mr_stringstream os;
 	std::for_each( 
 		fieldInfo.begin(), 
 		fieldInfo.end(), 
-		BuildColumnInfoString( os, nameTypeDelimiter, colDelimiter, BuildColumnInfoString::NAME_TYPE ) 
+		BuildColumnInfoString(os, nameTypeDelimiter, colDelimiter, BuildColumnInfoString::NAME_TYPE) 
 	);
 	return os.str();
 }
 
 
-mr_utils::mr_string columnBuilder::createColumnData( 
+mr_utils::mr_string ColumnBuilder::CreateColumnData( 
 	const FieldVector&			fieldInfo,
 	const mr_utils::mr_string&	delimiter,
 	const mr_utils::mr_string&	strQuotes,
@@ -63,24 +59,23 @@ mr_utils::mr_string columnBuilder::createColumnData(
 	std::for_each( 
 		fieldInfo.begin(), 
 		fieldInfo.end(), 
-		buildTestCaseColumnValueString( os, delimiter, strQuotes, testCase)
+		BuildTestCaseColumnValueString(os, delimiter, strQuotes, testCase)
 	);
 	return os.str();
 }
 
 
-mr_utils::mr_string columnBuilder::createColumnData( 
+mr_utils::mr_string ColumnBuilder::CreateColumnData( 
 	const FieldVector&			fieldInfo,
 	const mr_utils::mr_string&	delimiter,
 	const mr_utils::mr_string&	strQuotes,
-	iTestLog*					theLog 
-)
-{
+	CppTest::ILog*				theLog 
+) {
 	mr_utils::mr_stringstream os;
 	std::for_each( 
 		fieldInfo.begin(), 
 		fieldInfo.end(), 
-		buildSummaryColumnValueString( os, delimiter, strQuotes, theLog )
+		BuildSummaryColumnValueString(os, delimiter, strQuotes, theLog)
 	);
 	return os.str();
 

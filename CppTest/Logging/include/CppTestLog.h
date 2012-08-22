@@ -1,5 +1,5 @@
 ///--------------------------------------------------------------------------------------
-/// @file	mr_testLog.h
+/// @file	ICppTestLog.h
 /// @brief	Log classes for test tool.
 ///
 /// @author		Michael Roop
@@ -8,18 +8,16 @@
 ///
 /// Copyright 2010 Michael Roop
 ///--------------------------------------------------------------------------------------
-#if !defined(MR_TEST_LOG_H)
-#define MR_TEST_LOG_H
+#if !defined(CPP_TEST_LOG_H)
+#define CPP_TEST_LOG_H
 
 
-#include "mr_iTestLog.h"
+#include "ICppTestLog.h"
+
 
 namespace CppTest {
-	class Case;
-}
 
-namespace mr_test
-{
+class Case;
 
 
 //----------------------------------------------------------------------------------------
@@ -29,38 +27,33 @@ namespace mr_test
 /// its logOutput object.
 ///
 //----------------------------------------------------------------------------------------
-class testLog : public iTestLog
-{
+class Log : public ILog {
 public:
 
 	/// @brief	Constructor.
-	testLog();
+	Log();
 
 
 	/// @brief	Constructor.
-	///
 	/// @param	output		A SharedObject reference to a logOutput object for output.
 	/// @param	summaryLog	A SharedObject reference to a log object for summary output.
-	testLog( 
-		mr_utils::SharedPtr<CppTest::ILogOutput>&		output,
-		mr_utils::SharedPtr<iTestLog>&			summaryLog
+	Log( 
+		mr_utils::SharedPtr<CppTest::ILogOutput>&	output,
+		mr_utils::SharedPtr<CppTest::ILog>&			summaryLog
 	);
 
 
 	/// @brief	Destructor.
-	virtual ~testLog();
+	virtual ~Log();
 
 
 	/// @brief	Log the testCase information.
-	///
 	/// @exception	throws a mr_utils::mr_pointerException if the testCase object is invalid.
 	/// @exception	throws a mr_utils::mr_exception if test has a state that is not handled.
 	/// @exception	throws a mr_utils::mr_exception if the output object is invalid.
-	///
 	/// @param	fixture	Pointer to the test case fixture object that contains information to log.
-	///
 	/// @return	true if successful, otherwise false.
-	bool log(CppTest::Case& testCase);
+	bool LogTest(CppTest::Case& testCase);
 
 
 	/// @brief	Write the summary of the logging.
@@ -68,40 +61,40 @@ public:
 	/// @exception	throws a mr_utils::mr_pointerException if the testCase object is invalid.
 	///
 	/// @return	true if successful, otherwise false.
-	virtual bool summarize();
+	virtual bool Summarize();
 
 
 	/// @brief	Get the successful test count.
-	virtual int getSuccessCount() const;
+	virtual int GetSuccessCount() const;
 
 
 	/// @brief	Get the failed init test count.
-	virtual int getFailInitCount() const;
+	virtual int GetFailInitCount() const;
 
 
 	/// @brief	Get the failed setup test count.
-	virtual int getFailSetupCount() const;
+	virtual int GetFailSetupCount() const;
 
 
 	/// @brief	Get the exec cleanup test count.
-	virtual int getFailTestCount() const;
+	virtual int GetFailTestCount() const;
 
 
 	/// @brief	Get the failed cleanup test count.
-	virtual int getFailCleanupCount() const;
+	virtual int GetFailCleanupCount() const;
 
 
 	/// @brief	Get the Not exist test count.
-	virtual int getNotExistCount() const;	
+	virtual int GetNotExistCount() const;	
 
 
 	/// @brief	Get the total test count.
-	virtual int getTotalCount() const;	
+	virtual int GetTotalCount() const;	
 
 
 protected:
-	mr_utils::SharedPtr<CppTest::ILogOutput>	m_output;		///< logOutput pointer.
-	mr_utils::SharedPtr<iTestLog>	m_summaryLog;	///< summary logger pointer.
+	mr_utils::SharedPtr<CppTest::ILogOutput>	m_output;	///< logOutput pointer.
+	mr_utils::SharedPtr<CppTest::ILog>	m_summaryLog;		///< summary logger pointer.
 	int			m_stSuccessCount;		///< Counter for successful tests.
 	int			m_stFailInitCount;		///< Counter tests that failed on Init.
 	int			m_stFailSetupCount;		///< Counter tests that failed on setup.
@@ -118,7 +111,7 @@ protected:
 	/// @param	fixture	Pointer to the test case fixture object that contains information to log.
 	///
 	/// @return	true if successful, otherwise false.
-	virtual bool writeEntry(CppTest::Case& testCase) = 0;
+	virtual bool WriteEntry(CppTest::Case& testCase) = 0;
 
 
 	/// @brief	Determine if the existing log is to be overwritten or appended. 
@@ -127,11 +120,11 @@ protected:
 	///			child class can over
 	///
 	/// @return true if it is to be overwrite, otherwise false to be appended.
-	virtual bool overwriteExistingLog() const;
+	virtual bool OverwriteExistingLog() const;
 
 };
 
 
-}
+} // end namespace
 
 #endif

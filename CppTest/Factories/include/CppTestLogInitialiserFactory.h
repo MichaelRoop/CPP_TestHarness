@@ -12,14 +12,14 @@
 #define CPP_TEST_LOG_INITIALISER_FACTORY_H
 
 
-#include "mr_iLogInitialiser.h"
+#include "ICppTestLogInitialiser.h"
 #include "mr_string.h"
 #include "mr_sharedPtr.h"
 
 
 namespace CppTest {
 
-typedef mr_utils::SharedPtr<mr_test::iLogInitialiser> LogInitialiserSharedPtr;
+typedef mr_utils::SharedPtr<CppTest::ILogInitialiser> LogInitialiserSharedPtr;
 
 //----------------------------------------------------------------------------------------
 /// @brief	Class for creating iLogInitiser objects.

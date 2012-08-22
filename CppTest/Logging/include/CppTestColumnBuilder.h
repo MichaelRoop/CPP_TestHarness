@@ -8,27 +8,22 @@
 ///
 /// Copyright 2010 Michael Roop
 ///--------------------------------------------------------------------------------------
-#if !defined(MR_COLUMN_BUILDER_H)
-#define MR_COLUMN_BUILDER_H
+#if !defined(CPP_TEST_COLUMN_BUILDER_H)
+#define CPP_TEST_COLUMN_BUILDER_H
 
-#include "mr_fieldPair.h"
+#include "CppTestFieldPair.h"
 
 namespace CppTest {
-	class Case;	///< Forward declaration of Case class
-}
 
-namespace mr_test
-{
-
-class iTestLog;	///< Forward declaration of iTestLog.
+class Case;	///< Forward declaration of Case class
+class ILog;	///< Forward declaration of iTestLog.
 
 //----------------------------------------------------------------------------------------
 /// @brief	Class for building CSV strings.
 /// 
 ///			Creates strings dynamicaly according to column order and formats it correctly for
 ///			comma delimited loading.
-class columnBuilder
-{
+class ColumnBuilder {
 public:
 
 	/// @brief	Build the column header string.
@@ -37,7 +32,7 @@ public:
 	/// @param	delimiter	The char that delimits the header fields
 	///		
 	/// @return	Formated header column names string.
-	static mr_utils::mr_string createColumnHeaders( 
+	static mr_utils::mr_string CreateColumnHeaders( 
 		const FieldVector&			fieldInfo, 
 		const mr_utils::mr_string&	delimiter 
 	);
@@ -50,7 +45,7 @@ public:
 	/// @param	colDelimiter		Delimiter of the column's info.
 	///		
 	/// @return	Formated header column names/types string.
-	static mr_utils::mr_string createColumnNameTypeStr( 
+	static mr_utils::mr_string CreateColumnNameTypeStr( 
 		const FieldVector&			fieldInfo, 
 		const mr_utils::mr_string&	nameTypeDelimiter, 
 		const mr_utils::mr_string&	colDelimiter 
@@ -65,7 +60,7 @@ public:
 	/// @param	fixture		The test case fixture that holds the values.
 	///		
 	/// @return	Formated column data string.
-	static mr_utils::mr_string createColumnData( 
+	static mr_utils::mr_string CreateColumnData( 
 		const FieldVector&			fieldInfo,
 		const mr_utils::mr_string&	delimiter,
 		const mr_utils::mr_string&	strQuotes,
@@ -81,16 +76,16 @@ public:
 	/// @param	theCase		The testCase that holds the values.
 	///		
 	/// @return	Formated column data string.
-	static mr_utils::mr_string createColumnData( 
+	static mr_utils::mr_string CreateColumnData( 
 		const FieldVector&			fieldInfo,
 		const mr_utils::mr_string&	delimiter,
 		const mr_utils::mr_string&	strQuotes,
-		iTestLog*					theLog 
+		CppTest::ILog*				theLog 
 	);
 
 };
 
 
-}
+} // end namespace
 
 #endif
