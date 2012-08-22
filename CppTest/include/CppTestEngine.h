@@ -14,7 +14,7 @@
 #include "mr_singleton.h"
 #include "mr_testLogEngine.h"
 #include "mr_string.h"
-#include "mr_scriptReader.h"
+#include "ICppTestScriptReader.h"
 
 #include <vector>
 
@@ -49,7 +49,7 @@ public:
 	/// @brief	Process the test cases using the scriptReader object.
 	/// @param	theReader	The object that parses the script that drives test selection and their
 	///						arguments.
-	void ProcessScript(mr_test::scriptReader& theReader );
+	void ProcessScript(CppTest::IScriptReader& theReader );
 
 
 	/// @brief	Retrieve the results logging engine.

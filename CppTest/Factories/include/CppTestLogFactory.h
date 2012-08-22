@@ -1,6 +1,6 @@
 ///--------------------------------------------------------------------------------------
-/// @file	mr_logInitialiserFactory.h
-/// @brief	Factory to create iLogInitialiser objects.
+/// @file	CppTestLogFactory.h
+/// @brief	Factory to create itestLog objects.
 ///
 /// @author		Michael Roop
 /// @date		2010
@@ -8,26 +8,23 @@
 ///
 /// Copyright 2010 Michael Roop
 ///--------------------------------------------------------------------------------------
-#if !defined(MR_LOG_INITIALISER_FACTORY_H)
-#define MR_LOG_INITIALISER_FACTORY_H
+#if !defined(CPP_TEST_LOG_FACTORY_H)
+#define CPP_TEST_LOG_FACTORY_H
 
-
+#include "mr_iTestLog.h"
 #include "mr_iLogInitialiser.h"
-#include "mr_string.h"
 #include "mr_sharedPtr.h"
 
 
-namespace mr_test
-{
+namespace CppTest {
 
-typedef mr_utils::SharedPtr<mr_test::iLogInitialiser> logInitialiserSharedPtr;
+typedef mr_utils::SharedPtr<mr_test::iTestLog> LogSharedPtr;
 
 //----------------------------------------------------------------------------------------
 /// @brief	Class for creating iLogInitiser objects.
 ///
 /// 
-class logInitialiserFactory
-{
+class LogFactory {
 public:
 
 	///	@brief	Creates the appropriate iLogInitialiser.
@@ -35,25 +32,25 @@ public:
 	/// @param	configFileName	Configuration file name. 
 	/// @param	configFileType	Configuration file type. 
 	/// @param	section			Configuration file section.
-	static logInitialiserSharedPtr create( 
+	static LogSharedPtr Create( 
 		const std::string&			configFileName, 
 		const mr_utils::mr_string&	configFileType, 
 		const mr_utils::mr_string&	section 
 	);
 
+private:
 
-	/// @todo	Review this - different object versus reuse
-	///	@brief	Creates the appropriate iLogInitialiser without a section
+	/// @brief	Constructor.
 	///
-	/// @param	configFileName	Configuration file name. 
-	/// @param	configFileType	Configuration file type. 
-	/// @param	section			Configuration file section.
-	static logInitialiserSharedPtr create( 
-		const std::string&			configFileName, 
-		const mr_utils::mr_string&	configFileType 
-	);
+	/// @param	output			A SharedObject logOutput object.
+	/// @param	summaryLog		A SharedObject summary logger.
+	/// @param	initialiser		A SharedObject reference to an iLogInitialiser.
+	static LogSharedPtr Create(
+			mr_utils::SharedPtr<mr_test::iLogOutput>&		output, 
+			mr_utils::SharedPtr<mr_test::iTestLog>&			summaryLog, 
+			mr_utils::SharedPtr<mr_test::iLogInitialiser>&	initialiser 
+		);
 };
-
 
 
 }// end namespace

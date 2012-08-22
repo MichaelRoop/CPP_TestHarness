@@ -1,5 +1,5 @@
 ///--------------------------------------------------------------------------------------
-/// @file	mr_scriptReader.h
+/// @file	ICppScriptReader.h
 /// @brief	cross platform and char width script exception for dev test platform.
 ///
 /// @author		Michael Roop
@@ -9,15 +9,14 @@
 /// Copyright 2010 Michael Roop
 ///--------------------------------------------------------------------------------------
 
-#if !defined(MR_SCRIPT_READER_H)
-#define MR_SCRIPT_READER_H
+#if !defined(ICPP_TEST_SCRIPT_READER_H)
+#define ICPP_TEST_SCRIPT_READER_H
 
 
 #include "CppTestInfoObject.h"
 
 
-namespace mr_test
-{
+namespace CppTest {
 
 ///--------------------------------------------------------------------------------------
 ///
@@ -27,8 +26,7 @@ namespace mr_test
 /// as they satisfy the interface.  In this case you could have a custom format of script
 /// file or one that used known formats such as ini or XML.
 ///--------------------------------------------------------------------------------------
-class scriptReader
-{
+class IScriptReader {
 public:
 
 	/// @brief	Opens the script.
@@ -36,14 +34,12 @@ public:
 
 
 	/// @brief	Extracts the test information from the current test script line.
-	///
 	/// @return	The populated testInfoObject for the test.  If the object has no more
 	///			script lines the testInfoObject.isValid() will return false.
 	virtual CppTest::TestInfoObject getNextTest() = 0;
 };
 
 
-}
-
+} // end namespace
 
 #endif

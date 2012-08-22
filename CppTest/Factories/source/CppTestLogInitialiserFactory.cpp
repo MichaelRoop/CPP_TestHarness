@@ -1,5 +1,5 @@
 ///--------------------------------------------------------------------------------------
-/// @file	mr_logInitialiserFactory.cpp
+/// @file	CppTestLogInitialiserFactory.cpp
 /// @brief	Factory to create iLogInitialiser objects.
 ///
 /// @author		Michael Roop
@@ -8,59 +8,51 @@
 ///
 /// Copyright 2010 Michael Roop
 ///--------------------------------------------------------------------------------------
-#include "mr_logInitialiserFactory.h"
+#include "CppTestLogInitialiserFactory.h"
 #include "mr_iniLogInitialiser.h"
 #include "mr_exception.h"
 #include "mr_sstream.h"
 #include "mr_defines.h"
 
 
-namespace mr_test
-{
+namespace CppTest {
 
-logInitialiserSharedPtr logInitialiserFactory::create( 
+LogInitialiserSharedPtr LogInitialiserFactory::Create( 
 	const std::string&			configFileName, 
 	const mr_utils::mr_string&	configFileType, 
 	const mr_utils::mr_string&	section 
-)
-{
-	logInitialiserSharedPtr	initialiser;
+) {
+	LogInitialiserSharedPtr	initialiser;
 
-	if (configFileType.compare( L("INI") ) == 0)
-	{
-		initialiser = new iniLogInitialiser( configFileName, section );
+	if (configFileType.compare(_L_("INI")) == 0) {
+		initialiser = new mr_test::iniLogInitialiser(configFileName, section);
 	}
 	//else if (configFileType.compare( L("XML") ) == 0)
 	//{
 	//	mr_utils::mr_exception::assertCondition( false, FL, L("Not implemented") );
 	//}
-	else
-	{
+	else {
 		mr_utils::mr_stringstream os;
-		os << L("Illegal initialiser file type:") << configFileType << L(" Allowed types are 'INI'");
+		os << _L_("Illegal initialiser file type:") << configFileType << _L_(" Allowed types are 'INI'");
 		mr_utils::mr_exception::assertCondition( false, FL, os.str() );
 	}
 
-	if (!initialiser->load())
-	{
+	if (!initialiser->load()) {
 		mr_utils::mr_stringstream os;
-		os << configFileName.c_str() << L(" failed to load");
-		mr_utils::mr_exception::assertCondition( false, FL, os.str() );
+		os << configFileName.c_str() << _L_(" failed to load");
+		mr_utils::mr_exception::assertCondition(false, FL, os.str());
 	}
 	return initialiser;
 }
 
 
-logInitialiserSharedPtr logInitialiserFactory::create( 
+LogInitialiserSharedPtr LogInitialiserFactory::Create( 
 	const std::string&			configFileName, 
 	const mr_utils::mr_string&	configFileType 
-)
-{
+) {
 	/// @todo review this - temp to get an init file to only access test list.
-	return logInitialiserFactory::create( configFileName, configFileType, mr_utils::mr_string() );
+	return LogInitialiserFactory::Create(configFileName, configFileType, mr_utils::mr_string());
 }
-
-
 
 }// end namespace
 

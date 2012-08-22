@@ -1,5 +1,5 @@
 ///--------------------------------------------------------------------------------------
-/// @file	mr_scriptException.h
+/// @file	CppTestScriptException.h
 /// @brief	cross platform and char width script exception for dev test platform.
 ///
 /// @author		Michael Roop
@@ -8,15 +8,14 @@
 ///
 /// Copyright 2010 Michael Roop
 ///--------------------------------------------------------------------------------------
-#if !defined(MR_SCRIPT_EXCEPTION_H)
-#define MR_SCRIPT_EXCEPTION_H
+#if !defined(CPP_TEST_SCRIPT_EXCEPTION_H)
+#define CPP_TEST_SCRIPT_EXCEPTION_H
 
 
 #include "mr_exception.h"
 
 
-namespace mr_test
-{
+namespace CppTest {
 
 ///--------------------------------------------------------------------------------------
 ///
@@ -38,14 +37,12 @@ namespace mr_test
 /// On the catch you can either access the different parts of the message or use the formatted
 /// message.
 ///
-///		catch( const mr_utils::mr_exception& e )
-///		{
+///		catch( const mr_utils::mr_exception& e ) {
 ///			mr_cout << e.longMsg() << std::endl;
 ///		}
 ///
 ///--------------------------------------------------------------------------------------
-class scriptException : public mr_utils::mr_exception
-{
+class ScriptException : public mr_utils::mr_exception {
 public:
 
 	/// @brief	Constructor.
@@ -55,7 +52,7 @@ public:
 	/// @param	msg				The message explaining the exception.
 	/// @param	scriptFileName	The name of the script file being processed.
 	/// @param	scriptLine		The content of the script line being processed.
-	scriptException( 
+	ScriptException( 
 		const char*					file, 
 		int							line, 
 		const mr_utils::mr_string&	msg,
@@ -65,7 +62,7 @@ public:
 
 
 	/// @brief	Destructor.
-	virtual ~scriptException() throw();
+	virtual ~ScriptException() throw();
 
 
 	/// @brief	Returns a formated verbose exception message.
@@ -74,7 +71,7 @@ public:
 	///    	"Exception:SourceFile:SourceLine message : ScriptFile.txt : line contents"
 	///
 	/// @return	Verbose exception message.
-	virtual const mr_utils::mr_string longMsg() const;
+	virtual const mr_utils::mr_string LongMsg() const;
 
 protected:
 
@@ -83,8 +80,6 @@ protected:
 
 };
 
-
-
-}
+} // end of namespace
 
 #endif

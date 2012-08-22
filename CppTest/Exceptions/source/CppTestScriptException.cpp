@@ -8,15 +8,14 @@
 ///
 /// Copyright 2010 Michael Roop
 ///--------------------------------------------------------------------------------------
-#include "mr_scriptException.h"
+#include "CppTestScriptException.h"
 #include "mr_sstream.h"
 #include "mr_toStream.h"
 
 
-namespace mr_test
-{
+namespace CppTest {
 
-scriptException::scriptException( 
+ScriptException::ScriptException( 
 	const char*					file, 
 	int							line, 
 	const mr_utils::mr_string&	msg,
@@ -33,19 +32,16 @@ scriptException::scriptException(
 }
 
 
-scriptException::~scriptException() throw()
-{
+ScriptException::~ScriptException() throw() {
 }
 
 
-const mr_utils::mr_string scriptException::longMsg() const
-{
+const mr_utils::mr_string ScriptException::LongMsg() const {
 	mr_utils::mr_stringstream ss;
 	ss << mr_utils::mr_exception::longMsg() << L(" : ") ;
 	mr_utils::ToStream( ss, mr_utils::ExtractFileName( m_scriptFileName ) );
 
-	if (!m_scriptLine.empty())
-	{
+	if (!m_scriptLine.empty()) {
 		ss << L(" : ") << m_scriptLine.c_str();
 	}
 	return ss.str();

@@ -14,8 +14,8 @@
 #include "mr_exception.h"
 #include "mr_defines.h"
 #include "mr_functors.h"
-#include "mr_logInitialiserFactory.h"
-#include "mr_logFactory.h"
+#include "CppTestLogInitialiserFactory.h"
+#include "CppTestLogFactory.h"
 #include "CppTestFixture.h"
 
 #include <algorithm>
@@ -82,13 +82,13 @@ struct loadLogsFromVector {
 		std::string&			fileName,
 		mr_utils::mr_string&	fileType
 	) 
-	:	m_logEngine( logEngine ),
-		m_fileName( fileName ),
-		m_fileType( fileType ) {
+	:	m_logEngine(logEngine),
+		m_fileName(fileName),
+		m_fileType(fileType) {
 	}
 
 	void operator () ( const mr_utils::mr_string& str ) {
-		m_logEngine->addLogger( mr_test::logFactory::create( m_fileName, m_fileType, str ) );
+		m_logEngine->addLogger(CppTest::LogFactory::Create(this->m_fileName, this->m_fileType, str));
 	}
 
 	testLogEngine*			m_logEngine;
@@ -138,9 +138,9 @@ void testLogEngine::addLogger(const mr_utils::SharedPtr<iTestLog>& theLog) {
 void testLogEngine::loadLoggers(std::string fileName, mr_utils::mr_string fileType) {
 	mr_utils::mr_exception::assertCondition( !fileName.empty(), FL, L("Empty file name") );
 	std::vector<mr_utils::mr_string> logs = 
-		logInitialiserFactory::create( fileName, fileType )->getLogList();
+		CppTest::LogInitialiserFactory::Create( fileName, fileType )->getLogList();
 		
-	std::for_each( logs.begin(), logs.end(), loadLogsFromVector( this, fileName, fileType ) );		
+	std::for_each(logs.begin(), logs.end(), loadLogsFromVector(this, fileName, fileType));		
 }
 
 

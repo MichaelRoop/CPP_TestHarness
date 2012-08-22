@@ -90,10 +90,10 @@
     <ClCompile Include="Core\source\CppTestEngine.cpp" />
     <ClCompile Include="Core\source\CppTestFixture.cpp" />
     <ClCompile Include="Core\source\CppTestInfoObject.cpp" />
-    <ClCompile Include="Exceptions\source\mr_scriptException.cpp" />
-    <ClCompile Include="Factories\source\mr_logFactory.cpp" />
-    <ClCompile Include="Factories\source\mr_logInitialiserFactory.cpp" />
-    <ClCompile Include="Factories\source\mr_logOutputFactory.cpp" />
+    <ClCompile Include="Exceptions\source\CppTestScriptException.cpp" />
+    <ClCompile Include="Factories\source\CppTestLogFactory.cpp" />
+    <ClCompile Include="Factories\source\CppTestLogInitialiserFactory.cpp" />
+    <ClCompile Include="Factories\source\CppTestLogOutputFactory.cpp" />
     <ClCompile Include="Logging\source\mr_buildColumnInfoString.cpp" />
     <ClCompile Include="Logging\source\mr_buildColumnValueString.cpp" />
     <ClCompile Include="Logging\source\mr_buildConsoleSummaryString.cpp" />
@@ -109,14 +109,14 @@
     <ClCompile Include="Outputs\source\mr_consoleOutput.cpp" />
     <ClCompile Include="Outputs\source\mr_fileOutput.cpp" />
     <ClCompile Include="Outputs\source\mr_odbcOutput.cpp" />
-    <ClCompile Include="ScriptReader\source\mr_fileScriptReader.cpp" />
+    <ClCompile Include="ScriptReader\source\CppTestFileScriptReader.cpp" />
     <ClCompile Include="Win\AssemblyInfo.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Exceptions\include\mr_scriptException.h" />
-    <ClInclude Include="Factories\include\mr_logFactory.h" />
-    <ClInclude Include="Factories\include\mr_logInitialiserFactory.h" />
-    <ClInclude Include="Factories\include\mr_logOutputFactory.h" />
+    <ClInclude Include="Exceptions\include\CppTestScriptException.h" />
+    <ClInclude Include="Factories\include\CppTestLogFactory.h" />
+    <ClInclude Include="Factories\include\CppTestLogInitialiserFactory.h" />
+    <ClInclude Include="Factories\include\CppTestLogOutputFactory.h" />
     <ClInclude Include="include\CppTestAsserts.h" />
     <ClInclude Include="include\CppTestCase.h" />
     <ClInclude Include="include\CppTestCompareFunctions.h" />
@@ -143,8 +143,8 @@
     <ClInclude Include="Outputs\include\mr_fileOutput.h" />
     <ClInclude Include="Outputs\include\mr_iLogOutput.h" />
     <ClInclude Include="Outputs\include\mr_odbcOutput.h" />
-    <ClInclude Include="ScriptReader\include\mr_fileScriptReader.h" />
-    <ClInclude Include="ScriptReader\include\mr_scriptReader.h" />
+    <ClInclude Include="ScriptReader\include\CppTestFileScriptReader.h" />
+    <ClInclude Include="ScriptReader\include\ICppTestScriptReader.h" />
     <ClInclude Include="Win\resource.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

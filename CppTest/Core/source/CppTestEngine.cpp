@@ -65,7 +65,7 @@ void Engine::RegisterCase(CppTest::Fixture* fixture) {
 }
 
 
-void Engine::ProcessScript( mr_test::scriptReader& theReader ) {
+void Engine::ProcessScript(CppTest::IScriptReader& theReader ) {
 	this->m_logEngine.writeHeaders();
 
 	CppTest::TestInfoObject info = theReader.getNextTest();

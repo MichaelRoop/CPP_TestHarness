@@ -1,5 +1,5 @@
 ///--------------------------------------------------------------------------------------
-/// @file	mr_logOutputFactory.h
+/// @file	CppTestLogOutputFactory.h
 /// @brief	Factory to create iLogOutput objects.
 ///
 /// @author		Michael Roop
@@ -8,8 +8,8 @@
 ///
 /// Copyright 2010 Michael Roop
 ///--------------------------------------------------------------------------------------
-#if !defined(MR_LOG_OUTPUT_FACTORY_H)
-#define MR_LOG_OUTPUT_FACTORY_H
+#if !defined(CPP_TEST_LOG_OUTPUT_FACTORY_H)
+#define CPP_TEST_LOG_OUTPUT_FACTORY_H
 
 
 #include "mr_iLogOutput.h"
@@ -17,25 +17,22 @@
 #include "mr_sharedPtr.h"
 
 
-namespace mr_test
-{
+namespace CppTest {
 
-typedef mr_utils::SharedPtr<mr_test::iLogOutput> logOutputSharedPtr;
+typedef mr_utils::SharedPtr<mr_test::iLogOutput> LogOutputSharedPtr;
 
 //----------------------------------------------------------------------------------------
 /// @brief	Class for creating iLogInitiser objects.
 ///
 /// 
-class logOutputFactory
-{
+class LogOutputFactory {
 public:
 
 	///	@brief	Creates the appropriate iLogInitialiser.
 	///
 	/// @param	initialiser	Initialiser object. 
-	static logOutputSharedPtr create( mr_utils::SharedPtr<mr_test::iLogInitialiser>& initialiser );
+	static LogOutputSharedPtr Create( mr_utils::SharedPtr<mr_test::iLogInitialiser>& initialiser );
 };
-
 
 
 }// end namespace
