@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="include">
+      <UniqueIdentifier>{f4b7b25a-1806-4706-bb05-e9bf686619f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Win">
+      <UniqueIdentifier>{f16ea2a6-fb06-459c-8b56-90f3c9be8d3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{573cad6b-a142-4b85-965e-dc90bbb6ccbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Exceptions">
+      <UniqueIdentifier>{47c0943a-849a-43dd-bdcd-ea02d329652c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Factories">
+      <UniqueIdentifier>{7519b3c1-6d8a-4f46-bd69-b4ec6ae34f2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Logging">
+      <UniqueIdentifier>{56a83b77-adff-48d5-af79-4ae0602bd098}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Outputs">
+      <UniqueIdentifier>{0ba09e7a-ddb4-4590-912b-b783e2c35078}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ScriptReader">
+      <UniqueIdentifier>{96d802f4-e6d2-4a8d-9e05-f069f852514b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Exceptions\include">
+      <UniqueIdentifier>{a9a824a9-b27f-4425-ad8b-c65a66d53510}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Exceptions\source">
+      <UniqueIdentifier>{d2dd153b-38a2-4dcd-8f1c-86347685d1f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\source">
+      <UniqueIdentifier>{9a4b0c2c-e025-453d-9aaf-94f59a7b2240}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Factories\include">
+      <UniqueIdentifier>{2187cd02-1ce5-410b-986d-cb301bda5019}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Factories\source">
+      <UniqueIdentifier>{3a5f1f21-0575-4d3d-9cc4-291df6752c3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Logging\include">
+      <UniqueIdentifier>{c0493920-ca14-4400-a072-f04966a5be66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Logging\source">
+      <UniqueIdentifier>{7a22c3bf-c0fc-4e8e-9526-ad1cea023c25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ScriptReader\include">
+      <UniqueIdentifier>{f34679bd-dd13-418a-91b2-729a982d528f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ScriptReader\source">
+      <UniqueIdentifier>{579a8dcc-e658-4c8c-b8e9-27c2ad657886}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Outputs\include">
+      <UniqueIdentifier>{74bdda2e-a130-4ac9-8f2a-895f17654597}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Outputs\source">
+      <UniqueIdentifier>{5a02c9c8-8418-471b-a7cb-13db72795372}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Win\app.ico">
+      <Filter>Win</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Win\app.rc">
+      <Filter>Win</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Win\AssemblyInfo.cpp">
+      <Filter>Win</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\source\CppTestAssert.cpp">
+      <Filter>Core\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\source\CppTestCase.cpp">
+      <Filter>Core\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\source\CppTestCompareFunctions.cpp">
+      <Filter>Core\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\source\CppTestEngine.cpp">
+      <Filter>Core\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\source\CppTestFixture.cpp">
+      <Filter>Core\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\source\CppTestInfoObject.cpp">
+      <Filter>Core\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Exceptions\source\mr_scriptException.cpp">
+      <Filter>Exceptions\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Factories\source\mr_logFactory.cpp">
+      <Filter>Factories\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Factories\source\mr_logInitialiserFactory.cpp">
+      <Filter>Factories\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Factories\source\mr_logOutputFactory.cpp">
+      <Filter>Factories\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Logging\source\mr_buildColumnInfoString.cpp">
+      <Filter>Logging\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Logging\source\mr_buildColumnValueString.cpp">
+      <Filter>Logging\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Logging\source\mr_buildConsoleSummaryString.cpp">
+      <Filter>Logging\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Logging\source\mr_buildSummaryColumnValueString.cpp">
+      <Filter>Logging\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Logging\source\mr_buildTestCaseColumnValueString.cpp">
+      <Filter>Logging\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Logging\source\mr_columnBuilder.cpp">
+      <Filter>Logging\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Logging\source\mr_iniLogInitialiser.cpp">
+      <Filter>Logging\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Logging\source\mr_simpleLog.cpp">
+      <Filter>Logging\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Logging\source\mr_sqlBuilder.cpp">
+      <Filter>Logging\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Logging\source\mr_sqlLog.cpp">
+      <Filter>Logging\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Logging\source\mr_testLog.cpp">
+      <Filter>Logging\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Logging\source\mr_testLogEngine.cpp">
+      <Filter>Logging\source</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptReader\source\mr_fileScriptReader.cpp">
+      <Filter>ScriptReader\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Outputs\source\mr_consoleOutput.cpp">
+      <Filter>Outputs\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Outputs\source\mr_fileOutput.cpp">
+      <Filter>Outputs\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Outputs\source\mr_odbcOutput.cpp">
+      <Filter>Outputs\source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Win\resource.h">
+      <Filter>Win</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CppTestAsserts.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CppTestCase.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CppTestCompareFunctions.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CppTestEngine.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CppTestFixture.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CppTestInfoObject.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CppTestMacros.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="Exceptions\include\mr_scriptException.h">
+      <Filter>Exceptions\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Factories\include\mr_logFactory.h">
+      <Filter>Factories\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Factories\include\mr_logInitialiserFactory.h">
+      <Filter>Factories\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Factories\include\mr_logOutputFactory.h">
+      <Filter>Factories\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Logging\include\mr_buildColumnInfoString.h">
+      <Filter>Logging\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Logging\include\mr_buildColumnValueString.h">
+      <Filter>Logging\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Logging\include\mr_buildConsoleSummaryString.h">
+      <Filter>Logging\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Logging\include\mr_buildSummaryColumnValueString.h">
+      <Filter>Logging\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Logging\include\mr_buildTestCaseColumnValueString.h">
+      <Filter>Logging\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Logging\include\mr_columnBuilder.h">
+      <Filter>Logging\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Logging\include\mr_fieldPair.h">
+      <Filter>Logging\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Logging\include\mr_iLogInitialiser.h">
+      <Filter>Logging\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Logging\include\mr_iniLogInitialiser.h">
+      <Filter>Logging\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Logging\include\mr_iTestLog.h">
+      <Filter>Logging\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Logging\include\mr_simpleLog.h">
+      <Filter>Logging\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Logging\include\mr_sqlBuilder.h">
+      <Filter>Logging\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Logging\include\mr_sqlLog.h">
+      <Filter>Logging\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Logging\include\mr_testLog.h">
+      <Filter>Logging\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Logging\include\mr_testLogEngine.h">
+      <Filter>Logging\include</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptReader\include\mr_fileScriptReader.h">
+      <Filter>ScriptReader\include</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptReader\include\mr_scriptReader.h">
+      <Filter>ScriptReader\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Outputs\include\mr_consoleOutput.h">
+      <Filter>Outputs\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Outputs\include\mr_fileOutput.h">
+      <Filter>Outputs\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Outputs\include\mr_iLogOutput.h">
+      <Filter>Outputs\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Outputs\include\mr_odbcOutput.h">
+      <Filter>Outputs\include</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
