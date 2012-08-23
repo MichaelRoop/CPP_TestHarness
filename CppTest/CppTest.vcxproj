@@ -49,7 +49,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>MR_USE_WIDE_STR;WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>MR_USE_WIDE_STR;WIN32;EXPORT_CPP_TEST_CLASSES;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <AdditionalIncludeDirectories>$(ProjectDir)\include;$(ProjectDir)\Exceptions\include;$(ProjectDir)\Factories\include;$(ProjectDir)\Logging\include;$(ProjectDir)\Outputs\include;$(ProjectDir)\ScriptReader\include;$(SolutionDir)\Utils\include;$(SolutionDir)\IniReader\include</AdditionalIncludeDirectories>
     </ClCompile>
@@ -62,7 +62,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>MR_USE_WIDE_STR;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>MR_USE_WIDE_STR;WIN32;EXPORT_CPP_TEST_CLASSES;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <AdditionalIncludeDirectories>$(ProjectDir)\include;$(ProjectDir)\Exceptions\include;$(ProjectDir)\Factories\include;$(ProjectDir)\Logging\include;$(ProjectDir)\Outputs\include;$(ProjectDir)\ScriptReader\include;$(SolutionDir)\Utils\include;$(SolutionDir)\IniReader\include</AdditionalIncludeDirectories>
     </ClCompile>
@@ -113,17 +113,19 @@
     <ClCompile Include="Win\AssemblyInfo.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Exceptions\include\CppTestScriptException.h" />
     <ClInclude Include="Factories\include\CppTestLogFactory.h" />
     <ClInclude Include="Factories\include\CppTestLogInitialiserFactory.h" />
     <ClInclude Include="Factories\include\CppTestLogOutputFactory.h" />
     <ClInclude Include="include\CppTestAsserts.h" />
     <ClInclude Include="include\CppTestCase.h" />
     <ClInclude Include="include\CppTestCompareFunctions.h" />
+    <ClInclude Include="include\CppTestCrossPlatform.h" />
     <ClInclude Include="include\CppTestEngine.h" />
     <ClInclude Include="include\CppTestFixture.h" />
     <ClInclude Include="include\CppTestInfoObject.h" />
+    <ClInclude Include="include\CppTestLogEngine.h" />
     <ClInclude Include="include\CppTestMacros.h" />
+    <ClInclude Include="include\CppTestScriptException.h" />
     <ClInclude Include="Logging\include\CppTestBuildColumnInfoString.h" />
     <ClInclude Include="Logging\include\CppTestBuildColumnValueString.h" />
     <ClInclude Include="Logging\include\CppTestBuildConsoleSummaryString.h" />
@@ -138,7 +140,6 @@
     <ClInclude Include="Logging\include\CppTestSqlBuilder.h" />
     <ClInclude Include="Logging\include\CppTestSqlLog.h" />
     <ClInclude Include="Logging\include\CppTestLog.h" />
-    <ClInclude Include="Logging\include\CppTestLogEngine.h" />
     <ClInclude Include="Outputs\include\CppTestConsoleOutput.h" />
     <ClInclude Include="Outputs\include\CppTestFileOutput.h" />
     <ClInclude Include="Outputs\include\ICppTestLogOutput.h" />

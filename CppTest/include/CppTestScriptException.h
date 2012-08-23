@@ -12,6 +12,7 @@
 #define CPP_TEST_SCRIPT_EXCEPTION_H
 
 
+#include "CppTestCrossPlatform.h"
 #include "mr_exception.h"
 
 
@@ -42,7 +43,7 @@ namespace CppTest {
 ///		}
 ///
 ///--------------------------------------------------------------------------------------
-class ScriptException : public mr_utils::mr_exception {
+class DLL_EXP_IMP ScriptException : public mr_utils::mr_exception {
 public:
 
 	/// @brief	Constructor.

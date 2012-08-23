@@ -12,6 +12,7 @@
 #define CPP_TEST_LOG_ENGINE_H
 
 
+#include "CppTestCrossPlatform.h"
 #include "mr_SharedPtr.h"
 #include "mr_string.h"
 #include <vector>
@@ -24,13 +25,21 @@ class Fixture;
 class Case;
 
 
+#if defined (WIN32)
+
+
+EXP_TEMPLATE template class DLL_EXP_IMP std::allocator<mr_utils::SharedPtr<CppTest::ILog>>;
+EXP_TEMPLATE template class DLL_EXP_IMP std::vector<mr_utils::SharedPtr<CppTest::ILog>>;
+#endif
+
+
 //--------------------------------------------------------------------------------------
 /// 
 /// @brief	Drives the logging of testCase information across a variable number
 ///			of derived Logs.
 ///
 //--------------------------------------------------------------------------------------
-class LogEngine {
+class DLL_EXP_IMP LogEngine {
 public:
 
 	/// @brief	Constructor.

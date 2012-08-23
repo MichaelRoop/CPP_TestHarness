@@ -10,6 +10,7 @@
 ///--------------------------------------------------------------------------------------
 #include "CppTestEngine.h"
 #include "CppTestFixture.h"
+#include "ICppTestScriptReader.h"
 #include "mr_pointerException.h"
 #include "mr_defines.h"
 

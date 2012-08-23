@@ -177,9 +177,6 @@
     <ClInclude Include="include\CppTestMacros.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="Exceptions\include\CppTestScriptException.h">
-      <Filter>Exceptions\include</Filter>
-    </ClInclude>
     <ClInclude Include="ScriptReader\include\CppTestFileScriptReader.h">
       <Filter>ScriptReader\include</Filter>
     </ClInclude>
@@ -243,14 +240,20 @@
     <ClInclude Include="Logging\include\CppTestLog.h">
       <Filter>Logging\include</Filter>
     </ClInclude>
-    <ClInclude Include="Logging\include\CppTestLogEngine.h">
-      <Filter>Logging\include</Filter>
-    </ClInclude>
     <ClInclude Include="Logging\include\ICppTestLog.h">
       <Filter>Logging\include</Filter>
     </ClInclude>
     <ClInclude Include="Logging\include\CppTestIniLogInitialiser.h">
       <Filter>Logging\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CppTestLogEngine.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CppTestScriptException.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CppTestCrossPlatform.h">
+      <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
