@@ -11,18 +11,18 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{13A5454F-566B-445C-8F5F-6DC70048B66D}</ProjectGuid>
+    <ProjectGuid>{BB795E76-4033-411F-9E15-7C4319194D0B}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>CppTestDevConsole</RootNamespace>
+    <RootNamespace>CppTestUtils</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
@@ -45,53 +45,83 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;MR_USE_WIDE_STR;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\CppTestUtils\include;$(SolutionDir)\CppTestUtils\Exceptions\include;$(SolutionDir)\CppTest\include;$(SolutionDir)\CppTest\ScriptReader\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <CompileAsManaged>false</CompileAsManaged>
+      <PreprocessorDefinitions>WIN32;MR_USE_WIDE_STR;CPPTESTUTILS_EXPORTS</PreprocessorDefinitions>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>CppTestUtils.lib;CppTest.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;MR_USE_WIDE_STR;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\CppTestUtils\include;$(SolutionDir)\CppTestUtils\Exceptions\include;$(SolutionDir)\CppTest\include;$(SolutionDir)\CppTest\ScriptReader\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <CompileAsManaged>false</CompileAsManaged>
+      <PreprocessorDefinitions>WIN32;MR_USE_WIDE_STR;CPPTESTUTILS_EXPORTS</PreprocessorDefinitions>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>CppTest.lib;CppTestUtils.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CppTestUtils.h" />
+    <ClInclude Include="include\CrossPlatform.h" />
+    <ClInclude Include="include\mr_char.h" />
+    <ClInclude Include="include\mr_defines.h" />
+    <ClInclude Include="include\mr_doCompare.h" />
+    <ClInclude Include="include\mr_exception.h" />
+    <ClInclude Include="include\mr_fileException.h" />
+    <ClInclude Include="include\mr_fstream.h" />
+    <ClInclude Include="include\mr_functors.h" />
+    <ClInclude Include="include\mr_iostream.h" />
+    <ClInclude Include="include\mr_pointerException.h" />
+    <ClInclude Include="include\mr_SharedPtr.h" />
+    <ClInclude Include="include\mr_singleton.h" />
+    <ClInclude Include="include\mr_sstream.h" />
+    <ClInclude Include="include\mr_staticTimer.h" />
+    <ClInclude Include="include\mr_string.h" />
+    <ClInclude Include="include\mr_toStream.h" />
+    <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="source\CppTestDevConsole.cpp" />
-    <ClCompile Include="source\UtilsTests\mr_testSharedPtr.cpp" />
-    <ClCompile Include="source\UtilsTests\mr_util_str_token_tests.cpp" />
-    <ClCompile Include="source\UtilsTests\mr_util_str_trim_tests.cpp" />
+    <ClCompile Include="CppTestUtils.cpp" />
+    <ClCompile Include="dllmain.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="source\exceptions\mr_fileException.cpp" />
+    <ClCompile Include="source\exceptions\mr_pointerException.cpp" />
+    <ClCompile Include="source\mr_exception.cpp" />
+    <ClCompile Include="source\mr_singleton.cpp" />
+    <ClCompile Include="source\mr_sstream.cpp" />
+    <ClCompile Include="source\mr_staticTimer.cpp" />
+    <ClCompile Include="source\mr_string.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

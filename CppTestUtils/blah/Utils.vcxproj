@@ -11,18 +11,19 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{F1DBA59C-55E6-46F3-B017-084F37270FE2}</ProjectGuid>
-    <RootNamespace>IniReader</RootNamespace>
+    <ProjectGuid>{4E73B269-3FEE-4063-9BCA-A7BBC5810071}</ProjectGuid>
+    <RootNamespace>Utils</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+    <ProjectName>CppTestUtils</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -41,20 +42,19 @@
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\</IntDir>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.dll</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>include;..\CppTestUtils\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>MR_USE_WIDE_STR;WIN32</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>include;..\MRTest\Core\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DLL;WIN32;MR_USE_WIDE_STR;EXPORT_TEST_UTILS_CLASSES;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <UndefinePreprocessorDefinitions>
-      </UndefinePreprocessorDefinitions>
       <CompileAsManaged>false</CompileAsManaged>
     </ClCompile>
   </ItemDefinitionGroup>
@@ -62,30 +62,42 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>include;..\CppTestUtils\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>MR_USE_WIDE_STR;WIN32</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>include;..\MRTest\Core\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DLL;WIN32;MR_USE_WIDE_STR;EXPORT_TEST_UTILS_CLASSES;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <UndefinePreprocessorDefinitions>
-      </UndefinePreprocessorDefinitions>
       <CompileAsManaged>false</CompileAsManaged>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="source\mr_ini_file.cpp" />
-    <ClCompile Include="source\mr_ini_node.cpp" />
-    <ClCompile Include="source\mr_ini_section.cpp" />
-    <ClCompile Include="source\mr_iniInputLine.cpp" />
+    <ClCompile Include="source\mr_singleton.cpp" />
+    <ClCompile Include="source\mr_sstream.cpp" />
+    <ClCompile Include="source\mr_staticTimer.cpp" />
+    <ClCompile Include="source\mr_string.cpp" />
+    <ClCompile Include="source\mr_exception.cpp" />
+    <ClCompile Include="source\exceptions\mr_fileException.cpp" />
+    <ClCompile Include="source\exceptions\mr_pointerException.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\mr_ini_file.h" />
-    <ClInclude Include="include\mr_ini_node.h" />
-    <ClInclude Include="include\mr_ini_section.h" />
-    <ClInclude Include="include\mr_iniInputLine.h" />
+    <ClInclude Include="include\CrossPlatform.h" />
+    <ClInclude Include="include\mr_char.h" />
+    <ClInclude Include="include\mr_defines.h" />
+    <ClInclude Include="include\mr_doCompare.h" />
+    <ClInclude Include="include\mr_fstream.h" />
+    <ClInclude Include="include\mr_functors.h" />
+    <ClInclude Include="include\mr_iostream.h" />
+    <ClInclude Include="include\mr_SharedPtr.h" />
+    <ClInclude Include="include\mr_singleton.h" />
+    <ClInclude Include="include\mr_sstream.h" />
+    <ClInclude Include="include\mr_staticTimer.h" />
+    <ClInclude Include="include\mr_string.h" />
+    <ClInclude Include="include\mr_toStream.h" />
+    <ClInclude Include="include\mr_exception.h" />
+    <ClInclude Include="include\mr_fileException.h" />
+    <ClInclude Include="include\mr_pointerException.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="makefile" />

@@ -1,0 +1,142 @@
+
+#
+# 'make depend' uses makedepend to automatically generate dependencies 
+#               (dependencies are added to end of Makefile)
+# 'make'        build static lib 'libutils.a'
+# 'make clean'  removes all .o and static lib files
+#
+
+# define the C compiler to use
+CC = gcc
+
+# define any compile-time flags
+CFLAGS = -c
+
+# define any archive (static lib) flags
+ARFLAGS=rv
+
+# define any directories containing header files other than /usr/include
+INCLUDES =-Iinclude
+
+# define library paths in addition to /usr/lib
+#   specify path using -Lpath, something like:
+#LFLAGS = -L/home/newhall/lib  -L../lib
+
+# define the CPP source files
+SRCS = \
+	source/mr_string.cpp							\
+	source/mr_exception.cpp							\
+	source/exceptions/mr_fileException.cpp			\
+	source/exceptions/mr_pointerException.cpp		\
+	source/mr_singleton.cpp							\
+	source/mr_staticTimer.cpp
+
+# define the CPP object files 
+#
+# This uses Suffix Replacement within a macro:
+#   $(name:string1=string2)
+#         For each word in 'name' replace 'string1' with 'string2'
+# Below we are replacing the suffix .cpp of all words in the macro SRCS
+# with the .o suffix
+OBJS = $(SRCS:.cpp=.o)
+
+
+# generate object names without compile
+OBJNAMES = $(SRCS:.cpp=.o)
+
+# folder for lib file.
+LIBDIR = lib
+
+# define the static lib file 
+UTILLIB = $(LIBDIR)/libutils.a
+
+# The following part of the makefile is generic; it can be used to 
+# build any static lib just by changing the definitions above and by
+# deleting dependencies appended to the file from 'make depend'
+.PHONY: depend clean
+
+all: $(UTILLIB)
+#all:$(SRCS)
+	@echo  Simple compiler named libutils.a has been compiled
+
+
+#$(UTILLIB): $(SRCS)
+#	@echo  all case
+
+# This will compile of of the object files.
+# - need to modify to use a list made up of $? which is a list of all 
+# - prerequisites newer than target
+#	@echo Compiling object files.
+#	$(foreach i,$(SRCS:.cpp=),						\
+#		$(shell echo $i.cpp to $i.o > /dev/stderr)	\
+#	 )
+
+
+# rule to archive all of the object files into the static lib
+# chains to the OBJS macro which calls the .cpp.o to do the compilation first.
+$(UTILLIB): $(SRCS) 
+
+	@echo target=$@
+	@echo
+	@echo filenames of prerequisites=$^
+	@echo
+	@echo prerequisite names newer than target=$?
+	@echo
+	@echo no extension on prerequisite names newer than target=$(?:.cpp=)
+	@echo
+	
+	
+	
+	mkdir -p $(LIBDIR)
+	
+	@echo Compiling object files.
+#	@echo Caret var  $^
+#	@echo Caret var with sub of .cpp with space  $(SRCS:.cpp= )
+#	@echo srcs with sub of .cpp with space  $(SRCS:.cpp=)
+#	@echo make objs macro $(MAKE_OBJS)
+	
+
+#	$(foreach i,$(SRCS:.cpp=),						\
+#		$(shell echo *+*src compiling $i.cpp to $i.o > /dev/stderr)	\
+#	 )
+
+	
+	$(foreach i,$(?:.cpp=),						\
+		$(shell echo ***compiling $i.cpp to $i.o > /dev/stderr)	\
+	 )
+	
+#	$(AR) $(ARFLAGS) $@ $?
+
+
+
+
+
+
+# this is a suffix replacement rule for building .o's from .cpp's
+# it uses automatic variables $<: the name of the prerequisite of
+# the rule(a .cpp file) and $@: the name of the target of the rule (a .o file) 
+# (see the gnu make manual section about automatic variables)
+#.cpp.o:
+#	$(CC) $(CFLAGS) $(INCLUDES) -c $<  -o $@
+
+
+# This will compile of of the object files.
+# - need to modify to use a list made up of $? which is a list of all 
+# - prerequisites newer than target
+$(MAKE_OBJS):
+	@echo Compiling object files.
+	$(foreach i,$(SRCS:.cpp=),						\
+		$(shell echo $i.cpp to $i.o > /dev/stderr)	\
+	 )
+
+
+
+clean: 
+	$(RM) $(OBJNAMES)
+	$(RM) *~ $(UTILLIB)
+
+
+depend: $(SRCS)
+	makedepend $(INCLUDES) $^
+
+# DO NOT DELETE THIS LINE -- make depend needs it

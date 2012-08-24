@@ -11,6 +11,8 @@
 
 //#include <iostream>
 
+#include "mr_SharedPtr.h"
+
 
 
 bool checkParams( int required, int argc, char* argv[] );

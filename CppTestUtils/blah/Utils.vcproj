@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="IniReader"
-	ProjectGUID="{F1DBA59C-55E6-46F3-B017-084F37270FE2}"
-	RootNamespace="IniReader"
+	Name="Utils"
+	ProjectGUID="{4E73B269-3FEE-4063-9BCA-A7BBC5810071}"
+	RootNamespace="Utils"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
 	>
@@ -41,13 +41,13 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="include;..\Utils\include"
+				AdditionalIncludeDirectories="include;..\MRTest\Core\include"
 				PreprocessorDefinitions="MR_USE_WIDE_STR"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				UsePrecompiledHeader="0"
-				WarningLevel="3"
+				WarningLevel="4"
 				DebugInformationFormat="4"
 			/>
 			<Tool
@@ -105,12 +105,12 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="include;..\Utils\include"
+				AdditionalIncludeDirectories="include;..\MRTest\Core\include"
 				PreprocessorDefinitions="MR_USE_WIDE_STR"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
-				WarningLevel="3"
+				WarningLevel="4"
 				DebugInformationFormat="3"
 			/>
 			<Tool
@@ -151,21 +151,33 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\source\mr_ini_file.cpp"
+				RelativePath=".\source\mr_singleton.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\source\mr_ini_node.cpp"
+				RelativePath=".\source\mr_staticTimer.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\source\mr_ini_section.cpp"
+				RelativePath=".\source\mr_string.cpp"
 				>
 			</File>
-			<File
-				RelativePath=".\source\mr_iniInputLine.cpp"
+			<Filter
+				Name="exceptions"
 				>
-			</File>
+				<File
+					RelativePath=".\source\mr_exception.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\source\exceptions\mr_fileException.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\source\exceptions\mr_pointerException.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -173,24 +185,72 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\include\mr_ini_file.h"
+				RelativePath=".\include\mr_char.h"
 				>
 			</File>
 			<File
-				RelativePath=".\include\mr_ini_node.h"
+				RelativePath=".\include\mr_defines.h"
 				>
 			</File>
 			<File
-				RelativePath=".\include\mr_ini_section.h"
+				RelativePath=".\include\mr_doCompare.h"
 				>
 			</File>
 			<File
-				RelativePath=".\include\mr_iniInputLine.h"
+				RelativePath=".\include\mr_fstream.h"
 				>
 			</File>
+			<File
+				RelativePath=".\include\mr_functors.h"
+				>
+			</File>
+			<File
+				RelativePath=".\include\mr_iostream.h"
+				>
+			</File>
+			<File
+				RelativePath=".\include\mr_SharedPtr.h"
+				>
+			</File>
+			<File
+				RelativePath=".\include\mr_singleton.h"
+				>
+			</File>
+			<File
+				RelativePath=".\include\mr_sstream.h"
+				>
+			</File>
+			<File
+				RelativePath=".\include\mr_staticTimer.h"
+				>
+			</File>
+			<File
+				RelativePath=".\include\mr_string.h"
+				>
+			</File>
+			<File
+				RelativePath=".\include\mr_toStream.h"
+				>
+			</File>
+			<Filter
+				Name="Exceptions"
+				>
+				<File
+					RelativePath=".\include\mr_exception.h"
+					>
+				</File>
+				<File
+					RelativePath=".\include\mr_fileException.h"
+					>
+				</File>
+				<File
+					RelativePath=".\include\mr_pointerException.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
-			Name="resources"
+			Name="makefiles"
 			>
 			<File
 				RelativePath=".\makefile"
