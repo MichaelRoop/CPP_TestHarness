@@ -82,7 +82,10 @@ void SqlBuilder::VerifyPlaceHolder(
 	mr_utils::mr_char			placeholder,
 	const char*					file,
 	int							line) {
-	if (str.find_first_of( &placeholder, 0 ) == mr_utils::mr_string::npos) {
+	// TODO - fix when linker problem solved in VS2010
+	size_t end = (size_t) -1;
+	if (str.find_first_of( &placeholder, 0 ) == end) {
+	//if (str.find_first_of( &placeholder, 0 ) == mr_utils::mr_string::npos) {
 		mr_utils::mr_stringstream os;
 		os << _L_("No ") << placeholder << _L_(" in statement: ") << str.c_str();
 		mr_utils::mr_exception::assertCondition(false, file, line, os.str());

@@ -49,7 +49,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>MR_USE_WIDE_STR;WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>MR_USE_WIDE_STR;WIN32;CPPTESTCASE_EXPORTS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <AdditionalIncludeDirectories>$(ProjectDir)\include;$(ProjectDir)\Exceptions\include;$(ProjectDir)\Factories\include;$(ProjectDir)\Logging\include;$(ProjectDir)\Outputs\include;$(ProjectDir)\ScriptReader\include;$(SolutionDir)\CppTestUtils\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -64,7 +64,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>MR_USE_WIDE_STR;WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>MR_USE_WIDE_STR;WIN32;CPPTESTCASE_EXPORTS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <AdditionalIncludeDirectories>$(ProjectDir)\include;$(ProjectDir)\Exceptions\include;$(ProjectDir)\Factories\include;$(ProjectDir)\Logging\include;$(ProjectDir)\Outputs\include;$(ProjectDir)\ScriptReader\include;$(SolutionDir)\CppTestUtils\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>

@@ -105,7 +105,11 @@ void Fixture::RegisterTest(fixture_method_ptr test, const mr_utils::mr_string& n
 	// When using the macro it uses the # and will insert the full &ClassName::MethodName
 	mr_utils::mr_string scratch(name);
 	size_t pos = scratch.find(_L_("::"));
-	if (pos != mr_utils::mr_string::npos) {
+	
+	// TODO - fix when linker problem solved in VS2010
+	size_t end = (size_t) -1;
+	if (pos != end) {
+	//if (pos != mr_utils::mr_string::npos) {
 		scratch = name.substr(pos + 2);
 	}
 

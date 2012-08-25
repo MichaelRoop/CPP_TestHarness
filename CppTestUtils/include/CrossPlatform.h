@@ -1,6 +1,7 @@
 #if !defined(CPP_UTILS_CROSS_PLATFORM_H)
 #define CPP_UTILS_CROSS_PLATFORM_H
 
+
 #include <string>
 //#include <sstream>
 #include <iostream>
@@ -53,6 +54,20 @@
 
 	EXP_TEMPLATE template class CPPTESTUTILS_API std::basic_string<wchar_t, struct std::char_traits<wchar_t>, std::allocator<wchar_t> >;
 	EXP_TEMPLATE template class CPPTESTUTILS_API std::basic_string<char, struct std::char_traits<char>, std::allocator<char> >;
+
+	//EXP_TEMPLATE template class CPPTESTUTILS_API std::allocator<wchar_t, struct std::char_traits<wchar_t>, std::allocator<wchar_t> >;
+	//EXP_TEMPLATE template class CPPTESTUTILS_API std::allocator<char, struct std::char_traits<char>, std::allocator<char> >;
+
+	EXP_TEMPLATE template class CPPTESTUTILS_API std::allocator< std::basic_string<wchar_t, struct std::char_traits<wchar_t>, std::allocator<wchar_t> > >;
+	EXP_TEMPLATE template class CPPTESTUTILS_API std::vector< std::basic_string<wchar_t, struct std::char_traits<wchar_t>, std::allocator<wchar_t> > >;
+
+	EXP_TEMPLATE template class CPPTESTUTILS_API std::allocator< std::basic_string<char, struct std::char_traits<char>, std::allocator<char> > >;
+	EXP_TEMPLATE template class CPPTESTUTILS_API std::vector< std::basic_string<char, struct std::char_traits<char>, std::allocator<char> > >;
+
+
+	//EXP_TEMPLATE template class CPPTESTUTILS_API std::vector<wchar_t, struct std::char_traits<wchar_t>, std::allocator<wchar_t> >;
+	//EXP_TEMPLATE template class CPPTESTUTILS_API std::vector<char, struct std::char_traits<char>, std::allocator<char> >;
+
 
 
 //		std::allocator<char>::n:npos;
@@ -131,8 +146,9 @@
 //
 //
 #else
-	#define CPPTESTUTILS_EXPORTS
-	#define EXP_TEMPLATE
+#	pragma message("*** WIN32 Not defined ***")
+#	define CPPTESTUTILS_EXPORTS
+#	define EXP_TEMPLATE
 #endif
 //
 //

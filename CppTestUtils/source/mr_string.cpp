@@ -45,7 +45,9 @@ mr_utils::mr_string TrimRight( const mr_string& str )
 	}
 
 	mr_string::size_type end = str.find_last_not_of(  L(" \n\t\r") );
-	if (end == mr_string::npos)
+	size_t stringEnd = (size_t) -1;
+	if (end == stringEnd)
+	//if (end == mr_string::npos)
 	{
 		// only blanks in string.
 		return str;
@@ -62,7 +64,9 @@ mr_utils::mr_string TrimLeft( const mr_string& str )
 	}
 
 	mr_string::size_type start = str.find_first_not_of( L(" \n\t\r") );
-	if (start == mr_string::npos)
+	size_t stringEnd = (size_t) -1;
+	if (start == stringEnd)
+	//if (start == mr_string::npos)
 	{
 		// only blanks in string.
 		return str;
@@ -86,7 +90,9 @@ std::string ExtractFileName( const std::string& pathAndFile )
 	}
 
 	std::string::size_type pos = pathAndFile.find_last_of( "\\/" );
-	if (pos == mr_string::npos )
+	size_t stringEnd = (size_t) -1;
+	if (pos == stringEnd)
+	//if (pos == mr_string::npos )
 	{
 		return pathAndFile;
 	}
@@ -127,7 +133,9 @@ std::wstring NarrowToWideString( const std::string& str )
 
 bool MrTokenize( mr_string::size_type& currentPos, const mr_string& str, mr_string& token, mr_char delimiter )
 {
-	if (currentPos == mr_string::npos || currentPos > str.length() - 1 )
+	size_t stringEnd = (size_t) -1;
+	if (currentPos == stringEnd || currentPos > str.length() - 1 )
+	//if (currentPos == mr_string::npos || currentPos > str.length() - 1 )
 	{
 		return false;
 	}
@@ -138,7 +146,8 @@ bool MrTokenize( mr_string::size_type& currentPos, const mr_string& str, mr_stri
 	if (str[currentPos] == delimiter)
 	{
 		currentPos = str.find_first_not_of( delimiter, currentPos );
-		if (currentPos == mr_string::npos)
+		if (currentPos == stringEnd)
+		//if (currentPos == mr_string::npos)
 		{
 			// End case - string only has delimiters.
 			return false;
@@ -148,7 +157,8 @@ bool MrTokenize( mr_string::size_type& currentPos, const mr_string& str, mr_stri
 	token.clear();
 
 	mr_string::size_type delimiterPos = str.find_first_of( &delimiter, currentPos );
-	if (delimiterPos == mr_string::npos)
+	if (delimiterPos == stringEnd)
+	//if (delimiterPos == mr_string::npos)
 	{
 		// If the delimiter is not found then the entire remaining string is the token.
 		mr_string::size_type tmp = currentPos;
