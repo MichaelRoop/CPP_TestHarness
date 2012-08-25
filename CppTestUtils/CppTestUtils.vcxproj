@@ -90,6 +90,10 @@
     <ClInclude Include="include\mr_fileException.h" />
     <ClInclude Include="include\mr_fstream.h" />
     <ClInclude Include="include\mr_functors.h" />
+    <ClInclude Include="include\mr_iniInputLine.h" />
+    <ClInclude Include="include\mr_ini_file.h" />
+    <ClInclude Include="include\mr_ini_node.h" />
+    <ClInclude Include="include\mr_ini_section.h" />
     <ClInclude Include="include\mr_iostream.h" />
     <ClInclude Include="include\mr_pointerException.h" />
     <ClInclude Include="include\mr_SharedPtr.h" />
@@ -113,6 +117,10 @@
     </ClCompile>
     <ClCompile Include="source\exceptions\mr_fileException.cpp" />
     <ClCompile Include="source\exceptions\mr_pointerException.cpp" />
+    <ClCompile Include="source\IniReader\mr_iniInputLine.cpp" />
+    <ClCompile Include="source\IniReader\mr_ini_file.cpp" />
+    <ClCompile Include="source\IniReader\mr_ini_node.cpp" />
+    <ClCompile Include="source\IniReader\mr_ini_section.cpp" />
     <ClCompile Include="source\mr_exception.cpp" />
     <ClCompile Include="source\mr_singleton.cpp" />
     <ClCompile Include="source\mr_sstream.cpp" />

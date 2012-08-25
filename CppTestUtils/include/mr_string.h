@@ -14,8 +14,10 @@
 #include "CrossPlatform.h"
 #include "mr_char.h"
 
+
 namespace mr_utils
 {
+
 
 #if defined(MR_USE_WIDE_STR)
 	typedef std::wstring	mr_string;

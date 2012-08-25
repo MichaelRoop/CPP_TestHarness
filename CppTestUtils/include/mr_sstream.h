@@ -15,13 +15,13 @@
 
 #include <sstream>
 
-
-namespace mr_utils {
-
 #if defined(WIN32) 
 	EXP_TEMPLATE template class CPPTESTUTILS_API std::basic_stringstream<wchar_t, std::char_traits<wchar_t>, std::allocator<wchar_t> >;
 	EXP_TEMPLATE template class CPPTESTUTILS_API std::basic_stringstream<char, std::char_traits<char>, std::allocator<char> >;
 #endif
+
+namespace mr_utils {
+
 
 #if defined(MR_USE_WIDE_STR)
 	typedef std::wstringstream	mr_stringstream;

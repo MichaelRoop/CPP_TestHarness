@@ -8,6 +8,9 @@
 ///
 /// Copyright 2010 Michael Roop
 ///--------------------------------------------------------------------------------------
+
+//#include <string>
+
 #include "CppTestFixture.h"
 #include "mr_staticTimer.h"
 

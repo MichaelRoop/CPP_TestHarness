@@ -18,97 +18,80 @@
 #include <assert.h>
 
 
-namespace mr_utils
-{
+namespace mr_utils {
 
 template<class T>
-class CPPTESTUTILS_API SharedPtr
-{
+class SharedPtr {
 public:
 
-	SharedPtr() : m_ptr( NULL ), m_count( NULL )
-	{
+	SharedPtr() : m_ptr(NULL), m_count(NULL) {
 	}
 
 
-	SharedPtr( T* ptr ) : m_ptr( NULL ), m_count( NULL )
-	{
-		this->AssignPtr( ptr );
+	SharedPtr(T* ptr) : m_ptr(NULL), m_count(NULL) {
+		this->AssignPtr(ptr);
 	}
 
 	
-	SharedPtr( const SharedPtr& sp ) : m_ptr( NULL ), m_count( NULL )
-	{
-		this->AssignSharedPtr( sp );
+	SharedPtr(const SharedPtr& sp) : m_ptr(NULL), m_count(NULL) {
+		this->AssignSharedPtr(sp);
 	}
 
 
-	~SharedPtr()
-	{
+	~SharedPtr() {
 		this->Decrement();
 	}
 
 
-	SharedPtr& operator = ( const SharedPtr& sp )
-	{
-		if (&sp != this)
-		{
+	SharedPtr& operator = (const SharedPtr& sp) {
+		if (&sp != this) {
 			this->AssignSharedPtr( sp );
 		}
 		return *this;
 	}
 
 
-	SharedPtr& operator = ( T* ptr )
-	{
-		this->AssignPtr( ptr );
+	SharedPtr& operator = (T* ptr) {
+		this->AssignPtr(ptr);
 		return *this;
 	}
 
 
-	T* operator -> ()
-	{
+	T* operator -> () {
 		return this->getPtr();
 	}
 
 
-	T& operator *()
-	{
+	T& operator *() {
 		return this->getRef();
 	}
 
 
-	T* getPtr()
-	{
+	T* getPtr() {
 		assert( m_ptr );
 		return m_ptr;
 	}
 
 
-	T& getRef() 
-	{
+	T& getRef() {
 		return *(this->getPtr());
 	}
 
 
-	unsigned getCount() const
-	{
-		if ( m_count != NULL)
-		{
+	unsigned getCount() const {
+		if (m_count != NULL) {
 			return *m_count;
 		}
 		return 0;
 	}
 
 	
-	bool isValid() const
-	{
+	bool isValid() const {
 		return m_ptr != NULL;
 	}
 
 
-	void reset()
-	{
+	void reset() {
 		this->AssignPtr( NULL );
 	}
 
@@ -118,11 +101,9 @@ private:
 	unsigned*	m_count;
 
 
-	void AssignPtr( T* ptr)
-	{
+	void AssignPtr(T* ptr) {
 		this->Decrement();
-		if (ptr != NULL)
-		{
+		if (ptr != NULL) {
 			m_count = new unsigned();
 			*m_count = 1;
 		}
@@ -130,11 +111,9 @@ private:
 	}
 
 
-	void AssignSharedPtr( const SharedPtr& sp )
-	{
+	void AssignSharedPtr(const SharedPtr& sp) {
 		this->Decrement();
-		if (sp.m_count != NULL)
-		{
+		if (sp.m_count != NULL) {
 			++(*sp.m_count);
 		}
 		m_count = sp.m_count;
@@ -142,13 +121,10 @@ private:
 	}
 
 
-	void Decrement()
-	{
-		if (m_count != NULL)
-		{
+	void Decrement() {
+		if (m_count != NULL) {
 			--(*m_count);
-			if (*m_count == 0)
-			{
+			if (*m_count == 0) {
 				delete m_ptr;
 				m_ptr = NULL;
 				delete m_count;
@@ -160,14 +136,6 @@ private:
 
 };
 
-
-
-
-}
-
-
-
-
-
+} // End namespace
 
 #endif

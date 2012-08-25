@@ -17,8 +17,24 @@
 #include <algorithm>
 
 
+	//EXP_TEMPLATE template class CPPTESTUTILS_API std::basic_string<wchar_t, struct std::char_traits<wchar_t>, std::allocator<wchar_t> >;
+	//EXP_TEMPLATE template class CPPTESTUTILS_API std::basic_string<char, struct std::char_traits<char>, std::allocator<char> >;
+
+
+//static size_t posWToForceExport = std::basic_string<wchar_t, struct std::char_traits<wchar_t>, std::allocator<wchar_t> >::npos;
+//static size_t posNToForceExport = std::basic_string<char, struct std::char_traits<char>, std::allocator<char> >::npos;
+
+
+//CPPTESTUTILS_API 
+//	std::basic_string<wchar_t, struct std::char_traits<wchar_t>, std::allocator<wchar_t> >::size_type ziffle;
+//	//std::basic_string<wchar_t, struct std::char_traits<wchar_t>, std::allocator<wchar_t> >::npos;
+
+
 namespace mr_utils
 {
+
+	//static std::string::size_type std::string::npos nposNarrow;
+	//template std::wstring::size_type std::wstring::npos;
 
 
 mr_utils::mr_string TrimRight( const mr_string& str )

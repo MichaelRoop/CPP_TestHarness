@@ -22,6 +22,9 @@
     <Filter Include="source\exceptions">
       <UniqueIdentifier>{6593f393-6ba9-4ef4-a75e-8f18e04d4fa7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\IniReader">
+      <UniqueIdentifier>{7ad83194-53fa-41da-92a4-cc516f060f1c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -84,6 +87,18 @@
     <ClInclude Include="include\mr_toStream.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\mr_ini_file.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mr_ini_node.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mr_ini_section.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mr_iniInputLine.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -115,6 +130,18 @@
     </ClCompile>
     <ClCompile Include="source\exceptions\mr_pointerException.cpp">
       <Filter>source\exceptions</Filter>
+    </ClCompile>
+    <ClCompile Include="source\IniReader\mr_ini_file.cpp">
+      <Filter>source\IniReader</Filter>
+    </ClCompile>
+    <ClCompile Include="source\IniReader\mr_ini_node.cpp">
+      <Filter>source\IniReader</Filter>
+    </ClCompile>
+    <ClCompile Include="source\IniReader\mr_ini_section.cpp">
+      <Filter>source\IniReader</Filter>
+    </ClCompile>
+    <ClCompile Include="source\IniReader\mr_iniInputLine.cpp">
+      <Filter>source\IniReader</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

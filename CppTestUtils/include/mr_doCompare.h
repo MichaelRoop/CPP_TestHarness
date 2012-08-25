@@ -21,14 +21,8 @@
 #if !defined(MR_DO_COMPARE_H)
 #define MR_DO_COMPARE_H
 
-#include "CrossPlatform.h"
-#include "mr_char.h"
-#include "mr_iostream.h"
-#include "mr_toStream.h"
 
-
-namespace mr_utils
-{
+namespace mr_utils {
 
 ///--------------------------------------------------------------------------------------
 ///
@@ -39,8 +33,7 @@ namespace mr_utils
 ///
 ///------------------------------------------------------------------------------------------------
 template<class T, class T2>
-class CPPTESTUTILS_API DoCompare
-{
+class DoCompare {
 public:
 
 	/// @brief	Equal operator for two instances of the same type.
@@ -49,8 +42,7 @@ public:
 	///	@param	rhs	Variable on right hand side operator.
 	///
 	/// @return	true if both values are the same, otherwise false.
-	static bool equal( const T& lhs, const T2& rhs )
-	{
+	static bool equal(const T& lhs, const T2& rhs) {
 		return lhs == rhs;
 	}
 
@@ -61,8 +53,7 @@ public:
 	///	@param	rhs	Variable on right hand side operator.
 	///
 	/// @return	true if both values are different, otherwise false.
-	static bool notEqual( const T& lhs, const T2& rhs )
-	{
+	static bool notEqual(const T& lhs, const T2& rhs) {
 		return !equal( lhs, rhs );
 	}
 };
@@ -78,8 +69,7 @@ public:
 ///
 /// @return	true if both values are the same, otherwise false.
 template<class T, class T2>
-bool CompareEqual( const T&	lhs, const T2& rhs ) 
-{
+bool CompareEqual(const T&	lhs, const T2& rhs) {
 	return DoCompare<T,T2>::equal( lhs, rhs );
 }
 
@@ -93,8 +83,7 @@ bool CompareEqual( const T&	lhs, const T2& rhs )
 ///
 /// @return	true if both values are different, otherwise false.
 template<class T, class T2>
-bool CompareNotEqual( const T&	lhs, const T2& rhs ) 
-{
+bool CompareNotEqual(const T&	lhs, const T2& rhs) {
 	return DoCompare<T,T2>::notEqual( lhs, rhs );
 }
 
@@ -137,5 +126,6 @@ bool CompareNotEqual( const T&	lhs, const T2& rhs )
 
 
 } // end namespace
+
 
 #endif

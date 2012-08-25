@@ -11,9 +11,10 @@
 #if !defined(MR_FILE_EXCEPTIONS_H)
 #define MR_FILE_EXCEPTIONS_H
 
+#include "CrossPlatform.h"
+//#include "mr_exception.h"
 
 #include "mr_exception.h"
-
 
 namespace mr_utils
 {

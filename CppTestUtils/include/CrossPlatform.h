@@ -5,6 +5,9 @@
 //#include <sstream>
 #include <iostream>
 
+#include <vector>
+
+//#include <xstring>
 
 //#ifdef CPPTESTUTILS_EXPORTS
 //#define CPPTESTUTILS_API __declspec(dllexport)
@@ -42,14 +45,42 @@
    //disable warnings on extern before template instantiation
     #pragma warning (disable : 4231)
 
+
+
 	// We will put the most common template classes here
 	EXP_TEMPLATE template class CPPTESTUTILS_API std::allocator<wchar_t>;
 	EXP_TEMPLATE template class CPPTESTUTILS_API std::allocator<char>;
 
-	EXP_TEMPLATE template class CPPTESTUTILS_API std::basic_string<wchar_t, std::char_traits<wchar_t>, std::allocator<wchar_t> >;
-	EXP_TEMPLATE template class CPPTESTUTILS_API std::basic_string<char, std::char_traits<char>, std::allocator<char> >;
+	EXP_TEMPLATE template class CPPTESTUTILS_API std::basic_string<wchar_t, struct std::char_traits<wchar_t>, std::allocator<wchar_t> >;
+	EXP_TEMPLATE template class CPPTESTUTILS_API std::basic_string<char, struct std::char_traits<char>, std::allocator<char> >;
 
 
+//		std::allocator<char>::n:npos;
+
+	//CPPTESTUTILS_API std::basic_string<char, struct std::char_traits<char>, std::allocator<char> >::size_type std::basic_string<char, struct std::char_traits<char>, std::allocator<char> >::npos;
+
+	//CPPTESTUTILS_API  static const size_type npos;	// bad/missing length/position
+
+
+
+//template std::string::size_type std::string::npos;
+//template std::wstring::size_type std::wstring::npos;
+
+
+
+//EXP_TEMPLATE int const std::basic_string<wchar_t,struct std::char_traits<wchar_t>,class std::allocator<wchar_t> >::npos;
+
+
+	//EXP_TEMPLATE template class CPPTESTUTILS_API std::basic_string<wchar_t, struct std::char_traits<wchar_t>, std::allocator<wchar_t> >::npos;
+	//EXP_TEMPLATE template class CPPTESTUTILS_API std::basic_string<char, struct std::char_traits<char>, std::allocator<char> >::npos;
+
+	//// force export
+	//EXP_TEMPLATE template class CPPTESTUTILS_API std::allocator< std::basic_string<wchar_t, struct std::char_traits<wchar_t>, std::allocator<wchar_t> > >;
+	//EXP_TEMPLATE template class CPPTESTUTILS_API std::allocator< std::basic_string<char, struct std::char_traits<char>, std::allocator<char> > >;
+
+	//// force export
+	//EXP_TEMPLATE template class CPPTESTUTILS_API std::vector< std::basic_string<wchar_t, struct std::char_traits<wchar_t>, std::allocator<wchar_t> > >;
+	//EXP_TEMPLATE template class CPPTESTUTILS_API std::vector< std::basic_string<char, struct std::char_traits<char>, std::allocator<char> > >;
 
 
 //

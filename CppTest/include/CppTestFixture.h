@@ -11,6 +11,8 @@
 #if !defined(CPP_TEST_FIXTURE_H)
 #define CPP_TEST_FIXTURE_H
 
+//#include <string>
+
 #include "mr_string.h"
 #include "CppTestInfoObject.h"
 #include "CppTestCase.h"
@@ -145,9 +147,10 @@ private:
 	/// @brief	Execute the Fixture setup 
 	void ExecTestFixtureSetup();
 
+public:  // temp to check for linking
 	
-	/// @brief	Protected default constructor to force use of regular constructor.
-	Fixture() ;
+	///// @brief	Protected default constructor to force use of regular constructor.
+	//Fixture() ;
 
 
 	/// @brief	Protected copy constructor to force use of regular constructor.
