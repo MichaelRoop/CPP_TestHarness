@@ -14,6 +14,8 @@
 #include <string>
 
 #include "ICppTestFixture.h"
+#include "ICppTestCaseHolder.h"
+
 #include "CppTestCrossPlatform.h"
 
 
@@ -166,76 +168,76 @@ public:  // temp to check for linking
 };
 
 
-///--------------------------------------------------------------------------------------
-///
-///	@brief	Associates the test pointer with the Case object that stores test results
-///
-///--------------------------------------------------------------------------------------
-class TestCaseHolder {
-
-public:
-
-	/// @brief	Constructor
-	/// @param	testPtr	Pointer to the test method
-	/// @param	name	Test name
-	/// @param	description	Test description
-	TestCaseHolder(IFixture::Ifixture_method_ptr testPtr, const mr_utils::mr_string& name, const mr_utils::mr_string& description) :	
-		m_test(testPtr),
-		m_testData(new Case(name, description)) {
-	}
-
-	
-	/// @brief	Destructor
-	virtual ~TestCaseHolder() {
-		if (this->m_testData != 0) {
-			delete this->m_testData;
-			this->m_testData = 0;
-		}
-	}
-
-
-	/// @brief	Return the test method pointer
-	IFixture::Ifixture_method_ptr Pointer() const {
-		return this->m_test;
-	}
-
-
-	/// @brief	Return the test data capture object
-	ICase* Data() const {
-		return this->m_testData;
-	}
-
-
-	/// @brief	Reset the test case data object to non run state
-	void Reset() {
-		assert(this->m_testData);
-		this->m_testData->Reset();
-	}
-
-private:
-	IFixture::Ifixture_method_ptr	m_test;		///< Pointer to the test method
-	ICase*							m_testData;	///< Pointer to the test data capture object
-
-
-	TestCaseHolder() {
-	}
-
-	TestCaseHolder(const TestCaseHolder&) {
-	}
-
-	TestCaseHolder& operator = (const TestCaseHolder&) {
-	}
-
-
+/////--------------------------------------------------------------------------------------
+/////
+/////	@brief	Associates the test pointer with the Case object that stores test results
+/////
+/////--------------------------------------------------------------------------------------
+//class TestCaseHolder {
+//
 //public:
+//
+//	/// @brief	Constructor
+//	/// @param	testPtr	Pointer to the test method
+//	/// @param	name	Test name
+//	/// @param	description	Test description
+//	TestCaseHolder(IFixture::Ifixture_method_ptr testPtr, const mr_utils::mr_string& name, const mr_utils::mr_string& description) :	
+//		m_test(testPtr),
+//		m_testData(new Case(name, description)) {
+//	}
+//
+//	
+//	/// @brief	Destructor
+//	virtual ~TestCaseHolder() {
+//		if (this->m_testData != 0) {
+//			delete this->m_testData;
+//			this->m_testData = 0;
+//		}
+//	}
+//
+//
+//	/// @brief	Return the test method pointer
+//	IFixture::Ifixture_method_ptr Pointer() const {
+//		return this->m_test;
+//	}
+//
+//
+//	/// @brief	Return the test data capture object
+//	ICase* Data() const {
+//		return this->m_testData;
+//	}
+//
+//
+//	/// @brief	Reset the test case data object to non run state
+//	void Reset() {
+//		assert(this->m_testData);
+//		this->m_testData->Reset();
+//	}
+//
+//private:
+//	IFixture::Ifixture_method_ptr	m_test;		///< Pointer to the test method
+//	ICase*							m_testData;	///< Pointer to the test data capture object
+//
+//
 //	TestCaseHolder() {
 //	}
 //
 //	TestCaseHolder(const TestCaseHolder&) {
 //	}
-
-
-};
+//
+//	TestCaseHolder& operator = (const TestCaseHolder&) {
+//	}
+//
+//
+////public:
+////	TestCaseHolder() {
+////	}
+////
+////	TestCaseHolder(const TestCaseHolder&) {
+////	}
+//
+//
+//};
 
 
 

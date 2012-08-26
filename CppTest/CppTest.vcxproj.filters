@@ -151,6 +151,9 @@
     <ClCompile Include="Logging\source\CppTestLogEngine.cpp">
       <Filter>Logging\source</Filter>
     </ClCompile>
+    <ClCompile Include="Core\source\CppTestCaseHolder.cpp">
+      <Filter>Core\source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Win\resource.h">
@@ -264,7 +267,10 @@
     <ClInclude Include="include\ICppTestCaseArgument.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\ITestCaseHolder.h">
+    <ClInclude Include="include\ICppTestCaseHolder.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CppTestCaseHolder.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

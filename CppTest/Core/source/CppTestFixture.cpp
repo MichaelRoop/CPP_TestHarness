@@ -12,6 +12,8 @@
 //#include <string>
 
 #include "CppTestFixture.h"
+#include "CppTestCaseHolder.h"
+
 #include "mr_staticTimer.h"
 
 #include "mr_iostream.h"
@@ -36,7 +38,7 @@ public:
 	HasNamedTestFunctor(const mr_utils::mr_string& name) : m_name(name) {
 	}
 	
-	bool operator () (const TestCaseHolder* testHolder) {
+	bool operator () (const ITestCaseHolder* testHolder) {
 		return testHolder->Data()->Name == this->m_name;
 	}
 private:
@@ -53,7 +55,7 @@ public:
 		: m_names(names) {
 	}
 
-	void operator () (const TestCaseHolder* testHolder) {
+	void operator () (const ITestCaseHolder* testHolder) {
 		this->m_names.push_back(testHolder->Data()->Name);
 	}
 

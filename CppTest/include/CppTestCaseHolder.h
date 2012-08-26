@@ -12,8 +12,10 @@
 #if !defined(CPP_TEST_CASE_HOLDER_H)
 #define CPP_TEST_CASE_HOLDER_H
 
-#include "CppTestCrossPlatform.h"
+#include "ICppTestCaseHolder.h"
+#include "ICppTestCase.h"
 #include "ICppTestFixture.h"
+
 
 namespace CppTest {
 
@@ -22,48 +24,52 @@ namespace CppTest {
 ///	@brief	Associates the test pointer with the Case object that stores test results
 ///
 ///--------------------------------------------------------------------------------------
-class CPPTESCASE_API ITestCaseHolder {
+class TestCaseHolder : public CppTest::ITestCaseHolder {
 
 public:
 
 	/// @brief	Constructor
-	ITestCaseHolder() {
-	}
-
-
-	ITestCaseHolder(const ITestCaseHolder&) {
-	}
+	/// @param	testPtr	Pointer to the test method
+	/// @param	name	Test name
+	/// @param	description	Test description
+	TestCaseHolder(
+		IFixture::Ifixture_method_ptr testPtr, 
+		const mr_utils::mr_string& name, 
+		const mr_utils::mr_string& description);
 
 
 	/// @brief	Destructor
-	virtual ~ITestCaseHolder() {
-	}
+	virtual ~TestCaseHolder();
 
 
 	/// @brief	Return the test method pointer
-	virtual IFixture::Ifixture_method_ptr Pointer() const = 0;
+	virtual IFixture::Ifixture_method_ptr Pointer() const;
 
 
 	/// @brief	Return the test data capture object
-	virtual ICase* Data() const = 0;
+	virtual ICase* Data() const;
 
 
 	/// @brief	Reset the test case data object to non run state
-	virtual void Reset() = 0;
+	virtual void Reset();
+
 
 private:
+	IFixture::Ifixture_method_ptr	m_test;		///< Pointer to the test method
+	ICase*							m_testData;	///< Pointer to the test data capture object
 
-	//TestCaseHolder& operator = (const TestCaseHolder&) {
-	//}
+	/// @brief	Constructor
+	TestCaseHolder() {
+	}
+
+
+	TestCaseHolder(const ITestCaseHolder&) {
+	}
 
 };
 
 
-
 } // end namespace cppTest
-
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::ITestCaseHolder>;
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::ITestCaseHolder>;
 
 
 #endif

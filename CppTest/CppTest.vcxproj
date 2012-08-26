@@ -90,6 +90,7 @@
   <ItemGroup>
     <ClCompile Include="Core\source\CppTestAssert.cpp" />
     <ClCompile Include="Core\source\CppTestCase.cpp" />
+    <ClCompile Include="Core\source\CppTestCaseHolder.cpp" />
     <ClCompile Include="Core\source\CppTestCompareFunctions.cpp" />
     <ClCompile Include="Core\source\CppTestEngine.cpp" />
     <ClCompile Include="Core\source\CppTestFixture.cpp" />
@@ -122,6 +123,7 @@
     <ClInclude Include="Factories\include\CppTestLogOutputFactory.h" />
     <ClInclude Include="include\CppTestAsserts.h" />
     <ClInclude Include="include\CppTestCase.h" />
+    <ClInclude Include="include\CppTestCaseHolder.h" />
     <ClInclude Include="include\CppTestCompareFunctions.h" />
     <ClInclude Include="include\CppTestCrossPlatform.h" />
     <ClInclude Include="include\CppTestEngine.h" />
@@ -133,7 +135,7 @@
     <ClInclude Include="include\ICppTestCaseArgument.h" />
     <ClInclude Include="include\ICppTestCase.h" />
     <ClInclude Include="include\ICppTestFixture.h" />
-    <ClInclude Include="include\ITestCaseHolder.h" />
+    <ClInclude Include="include\ICppTestCaseHolder.h" />
     <ClInclude Include="Logging\include\CppTestBuildColumnInfoString.h" />
     <ClInclude Include="Logging\include\CppTestBuildColumnValueString.h" />
     <ClInclude Include="Logging\include\CppTestBuildConsoleSummaryString.h" />
