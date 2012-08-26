@@ -13,9 +13,6 @@
 #define CPP_TEST_CASE_HOLDER_H
 
 #include "ICppTestCaseHolder.h"
-#include "ICppTestCase.h"
-#include "ICppTestFixture.h"
-
 
 namespace CppTest {
 
@@ -58,19 +55,9 @@ private:
 	IFixture::Ifixture_method_ptr	m_test;		///< Pointer to the test method
 	ICase*							m_testData;	///< Pointer to the test data capture object
 
-	/// @brief	Constructor
-	TestCaseHolder() {
-	}
-
-
-	TestCaseHolder(const ITestCaseHolder&) {
-	}
-
 };
 
-
 } // end namespace cppTest
-
 
 #endif
 
