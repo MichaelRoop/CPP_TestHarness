@@ -13,10 +13,9 @@
 
 #include <string>
 
+#include "CppTestCrossPlatform.h"
 #include "ICppTestFixture.h"
 #include "ICppTestCaseHolder.h"
-
-#include "CppTestCrossPlatform.h"
 
 
 #include "mr_string.h"
@@ -170,7 +169,7 @@ public:  // temp to check for linking
 
 
 
-//#include <vector>
+////#include <vector>
 //CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::Fixture>;
 //CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::Fixture>;
 

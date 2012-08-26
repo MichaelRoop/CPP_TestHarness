@@ -12,6 +12,7 @@
 #if !defined(ICPP_TEST_CASE_HOLDER_H)
 #define ICPP_TEST_CASE_HOLDER_H
 
+#include "CppTestCrossPlatform.h"
 #include "ICppTestFixture.h"
 
 namespace CppTest {
@@ -21,7 +22,7 @@ namespace CppTest {
 ///	@brief	Associates the test pointer with the Case object that stores test results
 ///
 ///--------------------------------------------------------------------------------------
-class ITestCaseHolder {
+class /*CPPTESCASE_API*/ ITestCaseHolder {
 
 public:
 
@@ -61,6 +62,11 @@ private:
 };
 
 } // end namespace cppTest
+
+//#include <vector>
+//CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::ITestCaseHolder>;
+//CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::ITestCaseHolder>;
+
 
 
 #endif
