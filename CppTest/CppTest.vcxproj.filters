@@ -255,5 +255,14 @@
     <ClInclude Include="include\CppTestCrossPlatform.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\ICppTestFixture.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ICppTestCase.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ICppTestCaseArgument.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

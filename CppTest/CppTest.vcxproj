@@ -130,6 +130,9 @@
     <ClInclude Include="include\CppTestLogEngine.h" />
     <ClInclude Include="include\CppTestMacros.h" />
     <ClInclude Include="include\CppTestScriptException.h" />
+    <ClInclude Include="include\ICppTestCaseArgument.h" />
+    <ClInclude Include="include\ICppTestCase.h" />
+    <ClInclude Include="include\ICppTestFixture.h" />
     <ClInclude Include="Logging\include\CppTestBuildColumnInfoString.h" />
     <ClInclude Include="Logging\include\CppTestBuildColumnValueString.h" />
     <ClInclude Include="Logging\include\CppTestBuildConsoleSummaryString.h" />
