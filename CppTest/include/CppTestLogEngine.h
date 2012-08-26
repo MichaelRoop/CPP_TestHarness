@@ -11,6 +11,7 @@
 #if !defined(CPP_TEST_LOG_ENGINE_H)
 #define CPP_TEST_LOG_ENGINE_H
 
+#include "ICppTestCase.h"
 #include "mr_SharedPtr.h"
 #include "mr_string.h"
 #include <vector>
@@ -58,7 +59,7 @@ public:
 	/// @exception	throws a mr_utils::mr_pointerException on invalid loggers.
 	///
 	/// @return	true if successful, otherwise false.
-	bool Log(CppTest::Case& testCase);
+	bool Log(CppTest::ICase& testCase);
 
 
 	/// @brief	Add a logger object to the logger group.

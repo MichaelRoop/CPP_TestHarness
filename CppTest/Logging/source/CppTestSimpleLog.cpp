@@ -54,7 +54,7 @@ bool SimpleLog::WriteHeader() {
 }
 
 
-bool SimpleLog::WriteEntry(CppTest::Case& testCase) {
+bool SimpleLog::WriteEntry(CppTest::ICase& testCase) {
 	mr_utils::mr_exception::assertCondition(this->m_output.isValid(), _FL_, _L_("invalid output"));
 
 	mr_utils::mr_stringstream os;

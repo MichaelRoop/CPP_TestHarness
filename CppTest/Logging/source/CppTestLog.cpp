@@ -50,29 +50,29 @@ Log::~Log() {
 }
 
 
-bool Log::LogTest(CppTest::Case& testCase) {
+bool Log::LogTest(CppTest::ICase& testCase) {
 	switch(testCase.Status) {
-		case CppTest::Case::ST_SUCCESS:
+		case CppTest::ICase::ST_SUCCESS:
 			++this->m_stSuccessCount;
 			break;
-		case CppTest::Case::ST_FAIL_SETUP:		
+		case CppTest::ICase::ST_FAIL_SETUP:		
 			++this->m_stFailSetupCount;
 			break;
-		case CppTest::Case::ST_FAIL_TEST:		
+		case CppTest::ICase::ST_FAIL_TEST:		
 			++this->m_stFailTestCount;
 			break;
-		case CppTest::Case::ST_FAIL_CLEANUP:	
+		case CppTest::ICase::ST_FAIL_CLEANUP:	
 			++this->m_stFailCleanupCount;
 			break;
-		case CppTest::Case::ST_NOT_EXISTS:		
+		case CppTest::ICase::ST_NOT_EXISTS:		
 			++this->m_stNotExistCount;
 			break;
 
 		// TODO - Need to modify this with fixture specific counters?
-		case CppTest::Case::ST_FAIL_FIXTURE_SETUP:
+		case CppTest::ICase::ST_FAIL_FIXTURE_SETUP:
 			++this->m_stFailSetupCount;
 			break;
-		case CppTest::Case::ST_FAIL_FIXTURE_TEARDOWN:
+		case CppTest::ICase::ST_FAIL_FIXTURE_TEARDOWN:
 			++this->m_stFailCleanupCount;
 			break;
 

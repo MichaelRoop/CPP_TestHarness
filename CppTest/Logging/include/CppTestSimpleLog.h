@@ -17,7 +17,7 @@
 #include "ICppTestLogInitialiser.h"
 
 namespace CppTest {
-	class Case;
+	class ICase;
 
 /// @brief	Structure to hold the loaded field.
 /// @todo	Need to move this.
@@ -77,7 +77,7 @@ public:
 	/// @exception	throws a mr_utils::mr_exception if the output object is invalid.
 	/// @param	fixture	Pointer to the test case fixture object that contains information to log.
 	/// @return	true if successful, otherwise false.
-	bool WriteEntry(CppTest::Case& testCase);
+	bool WriteEntry(CppTest::ICase& testCase);
 
 
 	/// @brief	Write the summary of the logging.

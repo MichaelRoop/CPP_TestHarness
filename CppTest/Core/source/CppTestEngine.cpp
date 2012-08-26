@@ -26,7 +26,7 @@ public:
 	HasNamedTestFunctor(const mr_utils::mr_string& name) : m_name(name) {
 	}
 
-	bool operator () (CppTest::Fixture* fixture) {
+	bool operator () (CppTest::IFixture* fixture) {
 		mr_utils::mr_pointerException::ptrAssert(fixture, _FL_ );
 		return fixture->HasTest(this->m_name);
 	}
@@ -60,7 +60,7 @@ Engine& Engine::Instance() {
 }
 
 
-void Engine::RegisterCase(CppTest::Fixture* fixture) {
+void Engine::RegisterCase(CppTest::IFixture* fixture) {
 	mr_utils::mr_pointerException::ptrAssert( fixture, _FL_ );
 	this->m_fixtures.push_back(fixture);
 }
@@ -74,7 +74,7 @@ void Engine::ProcessScript(CppTest::IScriptReader& theReader ) {
 		bool infoUnused = false;
 		if (info.IsActive()) {
 			// search vector for right test case per name.
-			std::vector<CppTest::Fixture*>::iterator it = 
+			std::vector<CppTest::IFixture*>::iterator it = 
 				std::find_if(
 					this->m_fixtures.begin(), 
 					this->m_fixtures.end(), 
@@ -117,7 +117,7 @@ void Engine::ProcessScript(CppTest::IScriptReader& theReader ) {
 }
 
 
-void Engine::LogResults(CppTest::Case& testCase) {
+void Engine::LogResults(CppTest::ICase& testCase) {
 	this->m_logEngine.Log(testCase);
 }
 

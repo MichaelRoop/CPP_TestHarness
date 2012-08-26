@@ -14,30 +14,31 @@
 
 namespace CppTest {
 
-mr_utils::mr_string Case::ToString(Case::TestCaseStatus status) { 
-	switch (status) {
-		case Case::ST_NONE:			return L( "NONE" );
-		case Case::ST_SUCCESS:		return L( "SUCCESS" );
-		case Case::ST_FAIL_SETUP:		return L( "FAIL_SETUP" );
-		case Case::ST_FAIL_TEST:		return L( "FAIL_TEST" );
-		case Case::ST_FAIL_CLEANUP:	return L( "FAIL_CLEANUP" );
-		case Case::ST_NOT_EXISTS:		return L( "NOT_EXISTS" );
-		case Case::ST_FAIL_FIXTURE_SETUP: return _L_("FAIL_FIXTURE_SETUP");
-		case Case::ST_FAIL_FIXTURE_TEARDOWN: return _L_("FAIL_FIXTURE_TEARDOWN");
-	default:				
-		mr_utils::mr_exception::assertCondition(false, _FL_, _L_( "ERROR-NO-STATUS" ) );
-		return L( "ERROR-NO-STATUS" );
-	}
-}
+//mr_utils::mr_string Case::ToString(Case::TestCaseStatus status) { 
+//	switch (status) {
+//		case Case::ST_NONE:			return L( "NONE" );
+//		case Case::ST_SUCCESS:		return L( "SUCCESS" );
+//		case Case::ST_FAIL_SETUP:		return L( "FAIL_SETUP" );
+//		case Case::ST_FAIL_TEST:		return L( "FAIL_TEST" );
+//		case Case::ST_FAIL_CLEANUP:	return L( "FAIL_CLEANUP" );
+//		case Case::ST_NOT_EXISTS:		return L( "NOT_EXISTS" );
+//		case Case::ST_FAIL_FIXTURE_SETUP: return _L_("FAIL_FIXTURE_SETUP");
+//		case Case::ST_FAIL_FIXTURE_TEARDOWN: return _L_("FAIL_FIXTURE_TEARDOWN");
+//	default:				
+//		mr_utils::mr_exception::assertCondition(false, _FL_, _L_( "ERROR-NO-STATUS" ) );
+//		return L( "ERROR-NO-STATUS" );
+//	}
+//}
 
 
 Case::Case(const mr_utils::mr_string& name, const mr_utils::mr_string& desc) 
-:	Name( name ),
-	Description( desc ),
-	SetupTime( 0 ),
-	ExecTime( 0 ),
-	CleanupTime( 0 ),
-	Status( ST_NONE ) {
+:	ICase() {
+	this->Name = name;
+	this->Description = desc;
+	this->SetupTime = 0;
+	this->ExecTime = 0;
+	this->CleanupTime = 0;
+	this->Status = ST_NONE; 
 }
 
 

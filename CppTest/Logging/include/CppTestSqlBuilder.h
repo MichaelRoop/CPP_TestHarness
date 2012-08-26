@@ -12,6 +12,7 @@
 #define CPP_TEST_SQL_BUILDER_H
 
 
+#include "ICppTestCase.h"
 #include "CppTestFieldPair.h"
 
 namespace CppTest {
@@ -59,7 +60,7 @@ public:
 	///							field information and order.
 	/// @param	fixture			The test case fixture that holds the values.
 	/// @return	The INSERT statement with the data values.
-	static mr_utils::mr_string BuildInsertStmtWithValues(const CppTest::SQLData& sqlData, CppTest::Case& fixture);
+	static mr_utils::mr_string BuildInsertStmtWithValues(const CppTest::SQLData& sqlData, CppTest::ICase& fixture);
 
 
 	/// @brief	Build the INSERT statement from the built template and values.

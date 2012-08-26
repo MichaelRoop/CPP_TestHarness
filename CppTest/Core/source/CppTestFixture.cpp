@@ -84,31 +84,31 @@ const CppTest::TestCaseArguments& Fixture::CurrentArgs() const {
 }
 
 
-void Fixture::RegisterFixtureSetup(fixture_method_ptr setup) {
+void Fixture::RegisterFixtureSetup(IFixture::Ifixture_method_ptr setup) {
 	assert(setup);
 	this->m_fixtureSetup = setup;
 }
 
 
-void Fixture::RegisterFixtureTeardown(fixture_method_ptr teardown) {
+void Fixture::RegisterFixtureTeardown(IFixture::Ifixture_method_ptr teardown) {
 	assert(teardown);
 	this->m_fixtureTeardown = teardown;
 }
 
 
-void Fixture::RegisterTestSetup(fixture_method_ptr setup) {
+void Fixture::RegisterTestSetup(IFixture::Ifixture_method_ptr setup) {
 	assert(setup);
 	this->m_testSetup = setup;
 }
 
 
-void Fixture::RegisterTestTeardown(fixture_method_ptr teardown) {
+void Fixture::RegisterTestTeardown(IFixture::Ifixture_method_ptr teardown) {
 	assert(teardown);
 	this->m_testTeardown = teardown;
 }
 
 
-void Fixture::RegisterTest(fixture_method_ptr test, const mr_utils::mr_string& name, const mr_utils::mr_string& description) {
+void Fixture::RegisterTest(IFixture::Ifixture_method_ptr test, const mr_utils::mr_string& name, const mr_utils::mr_string& description) {
 	assert(test);
 	// TODO - test if already there?
 	// TODO - look at a scheme where you would have TestFixtureName.TestCaseName
@@ -149,7 +149,7 @@ const std::vector<mr_utils::mr_string> Fixture::GetTestNames() const {
 }
 
 
-Case& Fixture::CurrentTestCase() const {
+ICase& Fixture::CurrentTestCase() const {
 	assert(this->m_currentTestCase);
 	return *(this->m_currentTestCase->Data());
 }
@@ -199,7 +199,7 @@ void Fixture::RunTest(const mr_utils::mr_string& name, const CppTest::TestCaseAr
 }
 
 
-void Fixture::ExecStep(long long& timeVal, fixture_method_ptr funcPtr, Case::TestCaseStatus failStatus) {
+void Fixture::ExecStep(long long& timeVal, IFixture::Ifixture_method_ptr funcPtr, Case::TestCaseStatus failStatus) {
 	// In this case there may not even be a step registered
 	timeVal = 0;
 	if (funcPtr != 0) {

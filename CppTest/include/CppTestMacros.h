@@ -11,7 +11,7 @@
 #if !defined(MR_TEST_MACROS_H)
 #define MR_TEST_MACROS_H
 
-#include "CppTestFixture.h"
+#include "ICppTestFixture.h"
 #include "CppTestAsserts.h"
 #include "CppTestEngine.h"
 #include "mr_char.h"
@@ -31,27 +31,27 @@ _fixture_*  ##_fixture_##Instance  = new _fixture_();		\
 
 // Register the class void method as the fixture setup method
 #define _FIXTURE_SETUP_( _fixture_,  _setup_ )		\
-	_fixture_->RegisterFixtureSetup(static_cast<CppTest::Fixture::fixture_method_ptr>( _setup_  ));			\
+	_fixture_->RegisterFixtureSetup(static_cast<CppTest::IFixture::Ifixture_method_ptr>( _setup_  ));			\
 
 
 // Register the class void method as the fixture teardown method
 #define _FIXTURE_TEARDOWN_( _fixture_,  _teardown_ )		\
-_fixture_->RegisterFixtureTeardown(static_cast<CppTest::Fixture::fixture_method_ptr>( _teardown_  ));			\
+_fixture_->RegisterFixtureTeardown(static_cast<CppTest::IFixture::Ifixture_method_ptr>( _teardown_  ));			\
 
 
 // Register the class void method as the test setup method
 #define _TEST_SETUP_( _fixture_,  _setup_ )		\
-_fixture_->RegisterTestSetup(static_cast<CppTest::Fixture::fixture_method_ptr>( _setup_  ));			\
+_fixture_->RegisterTestSetup(static_cast<CppTest::IFixture::Ifixture_method_ptr>( _setup_  ));			\
 
 
 // Register the class void method as the test teardown method
 #define _TEST_TEARDOWN_( _fixture_,  _teardown_ )		\
-_fixture_->RegisterTestTeardown(static_cast<CppTest::Fixture::fixture_method_ptr>( _teardown_  ));			\
+_fixture_->RegisterTestTeardown(static_cast<CppTest::IFixture::Ifixture_method_ptr>( _teardown_  ));			\
 
 
 // Register the class void method as the test method
 #define _REGISTER_TEST_( _fixture_, _test_, _desc_ )												\
-_fixture_->RegisterTest(static_cast<CppTest::Fixture::fixture_method_ptr>( _test_ ), _L_((#_test_)), _L_((_desc_)) );			\
+_fixture_->RegisterTest(static_cast<CppTest::IFixture::Ifixture_method_ptr>( _test_ ), _L_((#_test_)), _L_((_desc_)) );			\
 
 
 //----------------------------------------------------------------------------------

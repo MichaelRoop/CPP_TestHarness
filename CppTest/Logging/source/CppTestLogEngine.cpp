@@ -51,7 +51,7 @@ struct WriteLogEntries {
 	/// @brief	Constructor.
 	///
 	/// @param	ptr	The testCase object that contains the information to log.
-	WriteLogEntries(CppTest::Case& testCase) : m_case(testCase) { 
+	WriteLogEntries(CppTest::ICase& testCase) : m_case(testCase) { 
 	}
 
 
@@ -63,7 +63,7 @@ struct WriteLogEntries {
 		log->LogTest(this->m_case);  
 	}
 private:
-	CppTest::Case& m_case; ///< The testCase information containing log information.
+	CppTest::ICase& m_case; ///< The testCase information containing log information.
 };
 
 
@@ -108,7 +108,7 @@ bool LogEngine::WriteHeaders() {
 }
 
 
-bool LogEngine::Log(CppTest::Case& testCase) {
+bool LogEngine::Log(CppTest::ICase& testCase) {
 	std::for_each(this->m_logs.begin(), this->m_logs.end(), WriteLogEntries(testCase));
 	return true;
 }

@@ -15,7 +15,7 @@
 
 namespace CppTest {
 
-class Case;	///< Forward declaration of Case class
+class ICase;	///< Forward declaration of Case class
 class ILog;	///< Forward declaration of iTestLog.
 
 //----------------------------------------------------------------------------------------
@@ -64,7 +64,7 @@ public:
 		const FieldVector&			fieldInfo,
 		const mr_utils::mr_string&	delimiter,
 		const mr_utils::mr_string&	strQuotes,
-		CppTest::Case&			fixture 
+		CppTest::ICase&			fixture 
 	);
 
 

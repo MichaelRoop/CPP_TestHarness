@@ -21,7 +21,7 @@ BuildTestCaseColumnValueString::BuildTestCaseColumnValueString(
 	mr_utils::mr_stringstream&	os,
 	const mr_utils::mr_string&	delimiter,
 	const mr_utils::mr_string&	strQuotes,
-	CppTest::Case&				testCase) 
+	CppTest::ICase&				testCase) 
 :	BuildColumnValueString(os, delimiter, strQuotes),
 	m_testCase(testCase) {
 }

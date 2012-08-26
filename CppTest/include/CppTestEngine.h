@@ -13,6 +13,8 @@
 
 #include "CppTestLogEngine.h"
 #include "ICppTestScriptReader.h"
+#include "ICppTestCase.h"
+#include "ICppTestFixture.h"
 #include "mr_singleton.h"
 #include "mr_string.h"
 
@@ -43,7 +45,7 @@ public:
 	/// takes ownership of the created test case.
 	///
 	/// @exception	Throws a mr_utils::mr_pointerException if the test case fixture pointer is invalid.
-	void RegisterCase(CppTest::Fixture* fixture);
+	void RegisterCase(CppTest::IFixture* fixture);
 
 
 	/// @brief	Process the test cases using the scriptReader object.
@@ -63,7 +65,7 @@ public:
 
 private:
 
-	std::vector<CppTest::Fixture*> m_fixtures;	///< The vector of registered test case fixtures.
+	std::vector<CppTest::IFixture*> m_fixtures;	///< The vector of registered test case fixtures.
 	static Engine*					m_instance;	///< The unique instance of the testEngine.
 	mr_utils::mr_string				m_runId;	///< Unique ID for the run used in log files.
 	CppTest::LogEngine				m_logEngine;///< The logging engine.
@@ -83,7 +85,7 @@ private:
 	/// @exception	Throws a mr_utils::mr_pointerException if the testCase pointer is invalid.
 	///
 	/// @param	fixture	The test case fixture whose results are to be logged.
-	void LogResults(CppTest::Case& caseData);
+	void LogResults(CppTest::ICase& caseData);
 
 };
 

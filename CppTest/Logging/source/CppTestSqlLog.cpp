@@ -55,7 +55,7 @@ bool SqlLog::WriteHeader() {
 }
 
 
-bool SqlLog::WriteEntry(CppTest::Case& testCase) { 
+bool SqlLog::WriteEntry(CppTest::ICase& testCase) { 
 	mr_utils::mr_exception::assertCondition(this->m_output.isValid(), FL, L("invalid output"));
 	return this->m_output->Write(this->GetInsertStmt(testCase));
 }
@@ -114,7 +114,7 @@ const mr_utils::mr_string& SqlLog::GetCreateStmt() const {
 }
 
 
-mr_utils::mr_string SqlLog::GetInsertStmt(CppTest::Case& testCase) const {
+mr_utils::mr_string SqlLog::GetInsertStmt(CppTest::ICase& testCase) const {
 	return SqlBuilder::BuildInsertStmtWithValues(this->m_sqlData, testCase);
 }
 

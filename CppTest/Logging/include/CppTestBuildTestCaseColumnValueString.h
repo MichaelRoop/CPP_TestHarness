@@ -15,7 +15,7 @@
 
 namespace CppTest {
 
-class Case;	///< Forward declaration of testCase.
+class ICase;	///< Forward declaration of testCase.
 
 ///--------------------------------------------------------------------------------------
 /// @brief	Functor to Add a value to the value string on each iteration.
@@ -34,12 +34,12 @@ public:
 		mr_utils::mr_stringstream&	os,
 		const mr_utils::mr_string&	delimiter,
 		const mr_utils::mr_string&	strQuotes,
-		CppTest::Case&				testCase 
+		CppTest::ICase&				testCase 
 	);
 
 private:
 
-	CppTest::Case& m_testCase; ///< The testCase to log column values.
+	CppTest::ICase& m_testCase; ///< The testCase to log column values.
 
 
 	/// @brief	Handles the building of column data.

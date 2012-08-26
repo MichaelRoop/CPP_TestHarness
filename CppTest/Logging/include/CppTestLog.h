@@ -17,7 +17,7 @@
 
 namespace CppTest {
 
-class Case;
+class ICase;
 
 
 //----------------------------------------------------------------------------------------
@@ -53,7 +53,7 @@ public:
 	/// @exception	throws a mr_utils::mr_exception if the output object is invalid.
 	/// @param	fixture	Pointer to the test case fixture object that contains information to log.
 	/// @return	true if successful, otherwise false.
-	bool LogTest(CppTest::Case& testCase);
+	bool LogTest(CppTest::ICase& testCase);
 
 
 	/// @brief	Write the summary of the logging.
@@ -111,7 +111,7 @@ protected:
 	/// @param	fixture	Pointer to the test case fixture object that contains information to log.
 	///
 	/// @return	true if successful, otherwise false.
-	virtual bool WriteEntry(CppTest::Case& testCase) = 0;
+	virtual bool WriteEntry(CppTest::ICase& testCase) = 0;
 
 
 	/// @brief	Determine if the existing log is to be overwritten or appended. 

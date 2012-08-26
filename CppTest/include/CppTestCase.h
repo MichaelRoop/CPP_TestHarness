@@ -11,6 +11,7 @@
 #if !defined(CPP_TEST_CASE_H)
 #define CPP_TEST_CASE_H
 
+#include "ICppTestCase.h"
 #include "mr_string.h"
 #include "mr_sstream.h"
 
@@ -27,27 +28,31 @@ namespace CppTest {
 /// The test case object can be querried by the logger derived objects to assemble the 
 /// information required.
 ///--------------------------------------------------------------------------------------
-class Case {
+class Case : public CppTest::ICase {
 
 public:
 
-	/// @brief	Status indicator for the test case.
-	typedef enum Status {
-		ST_NONE,					///< No status. Default
-		ST_NOT_EXISTS,				///< Test does not exist
-		ST_SUCCESS,					///< Successful
-		ST_FAIL_SETUP,				///< Failed on test setup
-		ST_FAIL_TEST,				///< Failed on test
-		ST_FAIL_CLEANUP,			///< Failed on test teardown
-		ST_FAIL_FIXTURE_SETUP,		///< Failed on Fixture setup
-		ST_FAIL_FIXTURE_TEARDOWN	///< Failed on Fixture teardown
+	///// @brief	Status indicator for the test case.
+	//typedef enum Status {
+	//	ST_NONE,					///< No status. Default
+	//	ST_NOT_EXISTS,				///< Test does not exist
+	//	ST_SUCCESS,					///< Successful
+	//	ST_FAIL_SETUP,				///< Failed on test setup
+	//	ST_FAIL_TEST,				///< Failed on test
+	//	ST_FAIL_CLEANUP,			///< Failed on test teardown
+	//	ST_FAIL_FIXTURE_SETUP,		///< Failed on Fixture setup
+	//	ST_FAIL_FIXTURE_TEARDOWN	///< Failed on Fixture teardown
 
-	} TestCaseStatus;
+	//} TestCaseStatus;
 
 
-	/// @brief	Static method to convert status enum to string
-	/// @param	status	The enum to convert
-	static mr_utils::mr_string ToString(Case::TestCaseStatus status);
+	///// @brief	Static method to convert status enum to string
+	///// @param	status	The enum to convert
+	//static mr_utils::mr_string ToString(Case::TestCaseStatus status);
+
+	/// @brief	Protected default constructor to force use of regular constructor.
+	Case() {
+	}
 
 
 	/// @brief	Constructor
@@ -61,23 +66,26 @@ public:
 	Case(const Case& testCase);
 	
 
+	virtual ~Case() {
+	}
+
 	/// @brief	Called to reset internal state
-	void Reset();
+	virtual void Reset();
 
 public:
-	Case::TestCaseStatus		Status;			///< Status of the test case.
-	mr_utils::mr_string			Name;			///< Test name.
-	mr_utils::mr_string			Description;	///< Test description.
-	//mr_test::TestArguments	m_args;			///< Test arguments.
-	mr_utils::mr_stringstream	MsgBuffer;		///< Short message buffer.
-	mr_utils::mr_stringstream	VerboseBuffer;	///< Verbose message buffer.
-	long long					SetupTime;		///< Setup time in ms.
-	long long					ExecTime;		///< Test time in ms.
-	long long					CleanupTime;	///< Cleanup time in ms.
+	//Case::TestCaseStatus		Status;			///< Status of the test case.
+	//mr_utils::mr_string			Name;			///< Test name.
+	//mr_utils::mr_string			Description;	///< Test description.
+	////mr_test::TestArguments	m_args;			///< Test arguments.
+	//mr_utils::mr_stringstream	MsgBuffer;		///< Short message buffer.
+	//mr_utils::mr_stringstream	VerboseBuffer;	///< Verbose message buffer.
+	//long long					SetupTime;		///< Setup time in ms.
+	//long long					ExecTime;		///< Test time in ms.
+	//long long					CleanupTime;	///< Cleanup time in ms.
 
-private:
-	/// @brief	Protected default constructor to force use of regular constructor.
-	Case() ;
+//private:
+//	/// @brief	Protected default constructor to force use of regular constructor.
+//	Case() ;
 
 };
 

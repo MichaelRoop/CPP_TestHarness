@@ -18,7 +18,7 @@
 
 namespace CppTest {
 
-class Case;
+class ICase;
 
 
 //----------------------------------------------------------------------------------------
@@ -77,7 +77,7 @@ public:
 	/// @exception	throws a mr_utils::mr_exception if the output object is invalid.
 	/// @param	fixture	Pointer to the test case fixture object that contains information to log.
 	/// @return	true if successful, otherwise false.
-	bool WriteEntry(CppTest::Case& testCase);
+	bool WriteEntry(CppTest::ICase& testCase);
 
 
 	/// @brief	Write the summary of the logging.
@@ -107,7 +107,7 @@ private:
 
 	/// @brief	Returns the SQL INSERT statement.
 	/// @return	The insert statement.
-	mr_utils::mr_string GetInsertStmt(CppTest::Case& testCase) const;
+	mr_utils::mr_string GetInsertStmt(CppTest::ICase& testCase) const;
 
 
 	/// @brief	Returns the SQL INSERT statement.

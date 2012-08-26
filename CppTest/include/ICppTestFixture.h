@@ -54,7 +54,8 @@ public:
 public:
 
 	/// @brief	Protected default constructor to force use of regular constructor.
-	IFixture() ;
+	IFixture() {
+	}
 
 
 	/// @brief	Protected copy constructor to force use of regular constructor.

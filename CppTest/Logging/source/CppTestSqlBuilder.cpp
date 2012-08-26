@@ -34,7 +34,7 @@ void SqlBuilder::BuildInsertStmt(CppTest::SQLData& sqlData, const mr_utils::mr_s
 }
 
 
-mr_utils::mr_string SqlBuilder::BuildInsertStmtWithValues(const CppTest::SQLData& sqlData, CppTest::Case& fixture) {
+mr_utils::mr_string SqlBuilder::BuildInsertStmtWithValues(const CppTest::SQLData& sqlData, CppTest::ICase& fixture) {
 	mr_utils::mr_char delimiter = _L_('&');
 	VerifyPlaceHolder( sqlData.m_insertStmt, delimiter, _FL_);
 
