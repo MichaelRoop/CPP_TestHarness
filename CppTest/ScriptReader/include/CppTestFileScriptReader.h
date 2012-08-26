@@ -12,6 +12,7 @@
 #define CPP_TEST_FILE_SCRIPT_READER_H
 
 
+#include "CppTestCrossPlatform.h"
 #include "ICppTestScriptReader.h"
 #include "mr_fstream.h"
 #include "mr_char.h" 
@@ -46,7 +47,7 @@ namespace CppTest {
 /// If the first non whitespace on a line is '#' it will be considered as a comment or 
 /// inactive test case and be discarded.
 ///--------------------------------------------------------------------------------------
-class FileScriptReader : public CppTest::IScriptReader {
+class CPPTESCASE_API FileScriptReader : public CppTest::IScriptReader {
 public:
 
 	/// @brief	Constructor.
@@ -75,6 +76,24 @@ public:
 	);
 
 
+	/// @brief	Default constructor in private scope to avoid construction.
+	FileScriptReader() {
+		// put public to force export of class
+	};
+
+
+	/// @brief	Default constructor in private scope to avoid construction.
+	FileScriptReader(const FileScriptReader& obj) {
+		// TODO - check effect  put public to force export of class
+	};
+
+
+	FileScriptReader FileScriptReader::operator=(class CppTest::FileScriptReader const &) {
+		// TODO - check effect  put public to force export of class
+		return *this;
+	}
+
+
 	/// @brief	Opens the file containing the script.
 	///	@throw	Throws a scriptException on empty file name or file not found.
 	void Open();
@@ -86,17 +105,11 @@ public:
 	///			script lines the testInfoObject.isValid() will return false.
 	CppTest::TestInfoObject getNextTest();
 
-
 private:
 	std::string				m_filename;		///< The file name of the script.
 	mr_utils::mr_ifstream	m_scriptStream;	///< The file object.
 	mr_utils::mr_char		m_nameDelimiter;///< Name delimiter.
 	mr_utils::mr_char		m_argDelimiter;	///< Argument delimiter.
-	
-
-	/// @brief	Default constructor in private scope to avoid construction.
-	FileScriptReader() {
-	};
 
 
 	/// @brief	Helper method to process one line of the script file.
@@ -165,6 +178,10 @@ private:
 };
 
 } // end namespace
+
+
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::FileScriptReader>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::FileScriptReader>;
 
 
 #endif

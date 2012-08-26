@@ -11,8 +11,11 @@
 #if !defined(ICPP_TEST_CASE_H)
 #define ICPP_TEST_CASE_H
 
+#include "CppTestCrossPlatform.h"
 #include "mr_string.h"
 #include "mr_sstream.h"
+#include "mr_exception.h"
+#include "mr_defines.h"
 #include <assert.h>
 
 namespace CppTest {
@@ -28,7 +31,7 @@ namespace CppTest {
 /// The test case object can be querried by the logger derived objects to assemble the 
 /// information required.
 ///--------------------------------------------------------------------------------------
-class ICase {
+class CPPTESCASE_API ICase {
 
 public:
 
@@ -77,7 +80,15 @@ public:
 	
 
 	/// @brief	Called to reset internal state
-	virtual void Reset() = 0;
+	virtual void Reset()  {
+		// Should be pure virtual but cannot export the class
+		throw mr_utils::mr_exception(_FL_, _L_("Do not use base directly - public only for forced export"));
+	}
+
+
+	ICase ICase::operator=(class CppTest::ICase const &) {
+		throw mr_utils::mr_exception(_FL_, _L_("Do not use base directly - public only for forced export"));
+	}
 
 public:
 	ICase::TestCaseStatus		Status;			///< Status of the test case.
@@ -94,5 +105,10 @@ public:
 };
 
 } // end namespace cppTest::Case
+
+
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::ICase>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::ICase>;
+
 
 #endif

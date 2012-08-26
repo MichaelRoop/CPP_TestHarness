@@ -11,6 +11,7 @@
 #if !defined(CPP_TEST_ASSERT_H)
 #define CPP_TEST_ASSERT_H
 
+#include "CppTestCrossPlatform.h"
 #include "mr_sstream.h"
 #include "mr_string.h"
 #include "mr_exception.h"
@@ -69,7 +70,7 @@ void AreNotEqual(
 /// @param	file	The file where the method was executing
 /// @param	line	The line being executed
 /// @param	msg		The user message. Default is empty.
-void CreateMsg(mr_utils::mr_stringstream& ss, const char* file, int line, const mr_utils::mr_string& msg);
+CPPTESCASE_API void CreateMsg(mr_utils::mr_stringstream& ss, const char* file, int line, const mr_utils::mr_string& msg);
 
 //{
 //	mr_utils::ToStream( ss, mr_utils::ExtractFileName( file ));
@@ -81,10 +82,10 @@ void CreateMsg(mr_utils::mr_stringstream& ss, const char* file, int line, const 
 //}
 
 
-void IsTrue(
+CPPTESCASE_API void IsTrue(
 	const char* file, int line, bool condition, mr_utils::mr_stringstream& buffer, const mr_utils::mr_string& msg = _L_( "" ));
 
-void IsFalse(
+CPPTESCASE_API void IsFalse(
 	const char* file, int line, bool condition, mr_utils::mr_stringstream& buffer, const mr_utils::mr_string& msg = _L_( "" ));
 
 

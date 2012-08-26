@@ -63,6 +63,15 @@ private:
 };
 //---------------------------------------------------------------------------------------
 
+Fixture::Fixture() {
+	// Only to force export
+}
+
+Fixture::Fixture( const Fixture& tc ) {
+	assert(0);
+}
+
+
 
 Fixture::Fixture(const mr_utils::mr_string& name, const mr_utils::mr_string& desc) 
 :	//m_name( name ), // TODO - have the name of the Fixture preserved

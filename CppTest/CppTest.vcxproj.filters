@@ -154,6 +154,9 @@
     <ClCompile Include="Core\source\CppTestCaseHolder.cpp">
       <Filter>Core\source</Filter>
     </ClCompile>
+    <ClCompile Include="Core\source\dllmain.cpp">
+      <Filter>Core\source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Win\resource.h">
@@ -243,9 +246,6 @@
     <ClInclude Include="Logging\include\CppTestLog.h">
       <Filter>Logging\include</Filter>
     </ClInclude>
-    <ClInclude Include="Logging\include\ICppTestLog.h">
-      <Filter>Logging\include</Filter>
-    </ClInclude>
     <ClInclude Include="Logging\include\CppTestIniLogInitialiser.h">
       <Filter>Logging\include</Filter>
     </ClInclude>
@@ -271,6 +271,12 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include\CppTestCaseHolder.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ICppTestLog.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ICppTestLogOutput.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

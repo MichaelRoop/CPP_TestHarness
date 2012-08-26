@@ -11,6 +11,7 @@
 #if !defined(CPP_TEST_ENGINE_H)
 #define CPP_TEST_ENGINE_H
 
+#include "CppTestCrossPlatform.h"
 #include "CppTestLogEngine.h"
 #include "ICppTestScriptReader.h"
 #include "ICppTestCase.h"
@@ -30,7 +31,7 @@ namespace CppTest {
 /// @brief	A Singleton class to drive the test case architecture.
 ///
 ///--------------------------------------------------------------------------------------
-class Engine : public mr_utils::singleton
+class CPPTESCASE_API Engine : public mr_utils::singleton
 {
 public:
 

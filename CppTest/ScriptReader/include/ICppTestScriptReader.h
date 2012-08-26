@@ -12,8 +12,9 @@
 #if !defined(ICPP_TEST_SCRIPT_READER_H)
 #define ICPP_TEST_SCRIPT_READER_H
 
-
+#include "CppTestCrossPlatform.h"
 #include "CppTestInfoObject.h"
+#include "mr_exception.h"
 
 
 namespace CppTest {
@@ -26,18 +27,27 @@ namespace CppTest {
 /// as they satisfy the interface.  In this case you could have a custom format of script
 /// file or one that used known formats such as ini or XML.
 ///--------------------------------------------------------------------------------------
-class IScriptReader {
+class CPPTESCASE_API IScriptReader {
 public:
 
 	/// @brief	Opens the script.
-	virtual void Open() = 0;
+	virtual void Open()  {
+		// Should be pure virtual but cannot export the class
+		throw mr_utils::mr_exception(_FL_, _L_("Do not use base directly - public only for forced export"));
+	}
 
 
 	/// @brief	Extracts the test information from the current test script line.
 	/// @return	The populated testInfoObject for the test.  If the object has no more
 	///			script lines the testInfoObject.isValid() will return false.
-	virtual CppTest::TestInfoObject getNextTest() = 0;
+	virtual CppTest::TestInfoObject getNextTest()  {
+		// Should be pure virtual but cannot export the class
+		throw mr_utils::mr_exception(_FL_, _L_("Do not use base directly - public only for forced export"));
+	}
 };
+
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::IScriptReader>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::IScriptReader>;
 
 
 } // end namespace

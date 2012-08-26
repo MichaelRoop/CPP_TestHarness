@@ -143,4 +143,9 @@ protected: // the register test methods could be public
 } // end namespace cppTest
 
 
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::IFixture*>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::IFixture*>;
+
+
+
 #endif

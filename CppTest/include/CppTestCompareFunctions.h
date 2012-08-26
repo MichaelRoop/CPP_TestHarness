@@ -13,6 +13,7 @@
 #if !defined(MR_TEST_COMP_FUNC_H)
 #define MR_TEST_COMP_FUNC_H
 
+#include "CppTestCrossPlatform.h"
 #include "mr_string.h"
 #include "mr_sstream.h"
 #include "mr_doCompare.h"
@@ -36,7 +37,7 @@ class testCase;
 /// @param	success	Then condition to test.
 ///
 /// @return	The value of the success argument.
-bool WriteToMsgBuff(mr_utils::mr_stringstream& buffer, const mr_utils::mr_string& msg, bool success);
+CPPTESCASE_API bool WriteToMsgBuff(mr_utils::mr_stringstream& buffer, const mr_utils::mr_string& msg, bool success);
 
 
 /// @brief	Writes the first part of the verbose message to the testCase verbose message buffer.
@@ -46,7 +47,7 @@ bool WriteToMsgBuff(mr_utils::mr_stringstream& buffer, const mr_utils::mr_string
 /// @param	file	The code file where the call originates.
 /// @param	line	The code line where the call originates.
 /// @param	theCase	The test case to write to.
-void WriteToVerboseBuffHead(const char* file, int line, mr_utils::mr_stringstream& buffer);
+CPPTESCASE_API void WriteToVerboseBuffHead(const char* file, int line, mr_utils::mr_stringstream& buffer);
 
 
 /// @brief	Writes the middle part of the verbose message to the testCase verbose message buffer.
@@ -54,7 +55,7 @@ void WriteToVerboseBuffHead(const char* file, int line, mr_utils::mr_stringstrea
 ///	Message creates the template and is ready for 'actual value'
 ///
 /// @param	theCase	The test case to write to.
-void WriteToVerboseBuffMid(mr_utils::mr_stringstream& buffer);
+CPPTESCASE_API void WriteToVerboseBuffMid(mr_utils::mr_stringstream& buffer);
 
 
 /// @brief	Template function to write to the testCase verbose buffer on a false condition.

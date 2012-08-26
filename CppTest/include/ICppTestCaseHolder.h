@@ -14,6 +14,7 @@
 
 #include "CppTestCrossPlatform.h"
 #include "ICppTestFixture.h"
+#include "mr_exception.h"
 
 namespace CppTest {
 
@@ -22,7 +23,7 @@ namespace CppTest {
 ///	@brief	Associates the test pointer with the Case object that stores test results
 ///
 ///--------------------------------------------------------------------------------------
-class /*CPPTESCASE_API*/ ITestCaseHolder {
+class CPPTESCASE_API ITestCaseHolder {
 
 public:
 
@@ -36,27 +37,37 @@ public:
 	}
 
 
+	/// @brief	Copy constructor
+	ITestCaseHolder(const ITestCaseHolder& obj) {
+		// Must be public to use vector to force the export
+	}
+
+	/// @brief	Assignement operator
+	ITestCaseHolder& operator = (const ITestCaseHolder& rhs) {
+		// Must be public to use vector to force the export
+		return *this;
+	}
+
+
 	/// @brief	Return the test method pointer
-	virtual IFixture::Ifixture_method_ptr Pointer() const = 0;
+	virtual IFixture::Ifixture_method_ptr Pointer() const {
+		// Should be pure virtual but cannot export the class
+		throw mr_utils::mr_exception(_FL_, _L_("Do not use base directly - public only for forced export"));
+	}
 
 
 	/// @brief	Return the test data capture object
 	virtual ICase* Data() const = 0;
+	//{
+	//	// Should be pure virtual but cannot export the class
+	//	throw mr_utils::mr_exception(_FL_, _L_("Do not use base directly - public only for forced export"));
+	//}
 
 
 	/// @brief	Reset the test case data object to non run state
-	virtual void Reset() = 0;
-
-private:
-
-	/// @brief	Copy constructor
-	ITestCaseHolder(const ITestCaseHolder& obj) {
-	}
-
-
-	/// @brief	Assignement operator
-	ITestCaseHolder& operator = (const ITestCaseHolder& rhs) {
-		return *this;
+	virtual void Reset() {
+		// Should be pure virtual but cannot export the class
+		throw mr_utils::mr_exception(_FL_, _L_("Do not use base directly - public only for forced export"));
 	}
 
 };
@@ -66,6 +77,10 @@ private:
 //#include <vector>
 //CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::ITestCaseHolder>;
 //CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::ITestCaseHolder>;
+
+
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::ITestCaseHolder*>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::ITestCaseHolder*>;
 
 
 

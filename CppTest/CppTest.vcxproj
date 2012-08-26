@@ -18,13 +18,13 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CLRSupport>false</CLRSupport>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CLRSupport>false</CLRSupport>
     <CharacterSet>Unicode</CharacterSet>
@@ -41,9 +41,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <TargetExt>.dll</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <TargetExt>.dll</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -57,8 +59,8 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>CppTestUtils.lib;IniReader.lib;Odbc32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)\CppTestUtils\$(Configuration);$(SolutionDir)\IniReader\$(Configuration);$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>CppTestUtils.lib;Odbc32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\$(Configuration)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -72,8 +74,8 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>CppTestUtils.lib;IniReader.lib;Odbc32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)\CppTestUtils\$(Configuration);$(SolutionDir)\IniReader\$(Configuration);$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>CppTestUtils.lib;Odbc32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\$(Configuration)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -95,6 +97,7 @@
     <ClCompile Include="Core\source\CppTestEngine.cpp" />
     <ClCompile Include="Core\source\CppTestFixture.cpp" />
     <ClCompile Include="Core\source\CppTestInfoObject.cpp" />
+    <ClCompile Include="Core\source\dllmain.cpp" />
     <ClCompile Include="Exceptions\source\CppTestScriptException.cpp" />
     <ClCompile Include="Factories\source\CppTestLogFactory.cpp" />
     <ClCompile Include="Factories\source\CppTestLogInitialiserFactory.cpp" />
@@ -136,6 +139,8 @@
     <ClInclude Include="include\ICppTestCase.h" />
     <ClInclude Include="include\ICppTestFixture.h" />
     <ClInclude Include="include\ICppTestCaseHolder.h" />
+    <ClInclude Include="include\ICppTestLog.h" />
+    <ClInclude Include="include\ICppTestLogOutput.h" />
     <ClInclude Include="Logging\include\CppTestBuildColumnInfoString.h" />
     <ClInclude Include="Logging\include\CppTestBuildColumnValueString.h" />
     <ClInclude Include="Logging\include\CppTestBuildConsoleSummaryString.h" />
@@ -145,7 +150,6 @@
     <ClInclude Include="Logging\include\CppTestFieldPair.h" />
     <ClInclude Include="Logging\include\ICppTestLogInitialiser.h" />
     <ClInclude Include="Logging\include\CppTestIniLogInitialiser.h" />
-    <ClInclude Include="Logging\include\ICppTestLog.h" />
     <ClInclude Include="Logging\include\CppTestSimpleLog.h" />
     <ClInclude Include="Logging\include\CppTestSqlBuilder.h" />
     <ClInclude Include="Logging\include\CppTestSqlLog.h" />

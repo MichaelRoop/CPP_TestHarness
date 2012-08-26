@@ -34,12 +34,12 @@ static void ExceptionFunc() {
 	mr_cout << _L_("mr_exception msg:") << e.msg() << std::endl;
 }
 
-#include "CppTestCase.h"
-static void TestCaseFunc() {
-	CppTest::Case c(_L_("My nifty test case"), _L_("test case description"));
-
-	mr_cout << _L_("Test Case Name:") << c.Name << std::endl;
-}
+//#include "CppTestCase.h"
+//static void TestCaseFunc() {
+//	CppTest::Case c(_L_("My nifty test case"), _L_("test case description"));
+//
+//	mr_cout << _L_("Test Case Name:") << c.Name << std::endl;
+//}
 
 #include "mr_SharedPtr.h"
 static void SharedPtrFunc() {
@@ -66,7 +66,7 @@ int main(int argc, char* argv[]) {
 
 	CompareFunc();
 	ExceptionFunc();
-	TestCaseFunc();
+	//TestCaseFunc();
 	SharedPtrFunc();
 	IniFileFunc();
 

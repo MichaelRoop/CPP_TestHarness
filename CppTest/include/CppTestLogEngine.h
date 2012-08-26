@@ -11,7 +11,9 @@
 #if !defined(CPP_TEST_LOG_ENGINE_H)
 #define CPP_TEST_LOG_ENGINE_H
 
+#include "CppTestCrossPlatform.h"
 #include "ICppTestCase.h"
+#include "ICppTestLog.h"
 #include "mr_SharedPtr.h"
 #include "mr_string.h"
 #include <vector>
@@ -19,7 +21,7 @@
 
 namespace CppTest {
 
-class ILog;
+//class ILog;
 class Fixture;
 class Case;
 
@@ -30,7 +32,7 @@ class Case;
 ///			of derived Logs.
 ///
 //--------------------------------------------------------------------------------------
-class LogEngine {
+class CPPTESCASE_API LogEngine {
 public:
 
 	/// @brief	Constructor.
@@ -82,6 +84,14 @@ protected:
 
 	std::vector< mr_utils::SharedPtr<CppTest::ILog> >	m_logs; ///< Vector of derived logger objects.
 };
+
+
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::LogEngine>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::LogEngine>;
+
+
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator< mr_utils::SharedPtr<CppTest::LogEngine> >;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector< mr_utils::SharedPtr<CppTest::LogEngine> >;
 
 
 
