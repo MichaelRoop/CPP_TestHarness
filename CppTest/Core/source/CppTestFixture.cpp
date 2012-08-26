@@ -118,24 +118,10 @@ void Fixture::RegisterTest(fixture_method_ptr test, const mr_utils::mr_string& n
 	size_t pos = scratch.find(_L_("::"));
 	
 	// TODO - fix when linker problem solved in VS2010
-	size_t end = (size_t) -1;
-	if (pos != end) {
-	//if (pos != mr_utils::mr_string::npos) {
-		// TOTALLY WACKED - fails with npos not exported if I do a substring.
-
-		//scratch = name.substr(pos + 2);
+	// Need to use exported method to access string global npos within the DLL
+	if (pos != mr_utils::StrNPos()) {
 		scratch = mr_utils::SubString(name, pos +2);
-
-
-		// if we invoke without the length param it will revert to default value npos and cause a link failure
-//		scratch = name.substr(pos + 2, (name.length() - (pos + 3) ));
-		//scratch = name.substr(pos + 2, 2); // TODO figure out what to do
-
-		//name.substr(pos + 2);
 	}
-
-	mr_cout << _L_("Registering test : ") << scratch << std::endl;
-	mr_cout << _L_("Before Parse:") << name << std::endl;
 
 	this->m_tests.push_back(new TestCaseHolder(test, scratch, description));
 	// TODO - destructor to clean up holders
@@ -148,8 +134,6 @@ bool Fixture::HasTest(const mr_utils::mr_string& name) const {
 		this->m_tests.begin(), 
 		this->m_tests.end(), 
 		HasNamedTestFunctor(name)) != this->m_tests.end();
-
-	//return false;
 }
 
 
@@ -178,6 +162,7 @@ void Fixture::RunTest(const mr_utils::mr_string& name, const CppTest::TestArgume
 	// Get a copy of the optional arguments for the current named test case
 	this->m_args = args;
 	
+	// TODO - catch the segfault
 	// Windows specific test code
 //#if defined (_WIN32)
 //__try {
