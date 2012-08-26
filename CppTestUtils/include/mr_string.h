@@ -92,6 +92,24 @@ CPPTESTUTILS_API bool MrTokenize(
 
 
 
+/// @brief	Function to substring a string. Needed because reference to the npos causing 
+///			a link failure
+/// @param	pos	The start position 0 indexed.
+/// @param	length	The length of the substring.
+/// @return	the substring
+CPPTESTUTILS_API mr_utils::mr_string SubString(
+	const mr_utils::mr_string& s, 
+	mr_utils::mr_string::size_type pos, 
+	mr_utils::mr_string::size_type length);
+
+
+/// @brief	Function to substring a string from pos to end of string. Needed because reference 
+//			to the npos causing a link failure
+/// @param	pos	The start position 0 indexed.
+/// @return	the substring
+CPPTESTUTILS_API mr_utils::mr_string SubString(const mr_utils::mr_string& s, mr_utils::mr_string::size_type pos);
+
+
 
 } // end namespace.
 

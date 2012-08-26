@@ -7,30 +7,30 @@
 //#include "mr_singleton.h"
 //#include "mr_fstream.h"
 
-#	define CPPTESCASE_API
-#	define CPPTESCASE_EXP_TEMPLATE
-
-
-//#if defined(WIN32) 
-//	#if defined(CPPTESTCASE_EXPORTS)
-//		#pragma message("Exporting CppTestCase DLL Classes")
-//		#define CPPTESCASE_API __declspec(dllexport)
-//		#define CPPTESCASE_EXP_TEMPLATE
-//	#else
-//		#pragma message("Importing CppTestCase DLL Classes")
-//		#define CPPTESCASE_API __declspec(dllimport)
-//		#define CPPTESCASE_EXP_TEMPLATE extern
-//	#endif
-//
-//   //disable warnings on 255 char debug symbols
-//    #pragma warning (disable : 4786)
-//   //disable warnings on extern before template instantiation
-//    #pragma warning (disable : 4231)
-//#else
-//#	pragma message("*** WIN32 Not defined ***")
 //#	define CPPTESCASE_API
 //#	define CPPTESCASE_EXP_TEMPLATE
-//#endif
+
+
+#if defined(WIN32) 
+#	if defined(CPPTESTCASE_EXPORTS)
+#		pragma message("Exporting CppTestCase DLL Classes")
+#		define CPPTESCASE_API __declspec(dllexport)
+#		define CPPTESCASE_EXP_TEMPLATE
+#	else
+#		pragma message("Importing CppTestCase DLL Classes")
+#		define CPPTESCASE_API __declspec(dllimport)
+#		define CPPTESCASE_EXP_TEMPLATE extern
+#	endif
+
+   //disable warnings on 255 char debug symbols
+#	pragma warning (disable : 4786)
+   //disable warnings on extern before template instantiation
+#	pragma warning (disable : 4231)
+#else
+#	pragma message("*** WIN32 Not defined ***")
+#	define CPPTESCASE_API
+#	define CPPTESCASE_EXP_TEMPLATE
+#endif
 
 
 

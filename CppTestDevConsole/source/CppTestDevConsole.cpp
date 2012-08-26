@@ -74,9 +74,6 @@ int main(int argc, char* argv[]) {
 	if (checkParams( 1, argc, argv )) {
 		try {
 			mr_cout << _L_("Loading Configuration from ./CppTestConfig.ini") << std::endl;
-
-
-			mr_cout << _L_("Loading Configuration from ./CppTestConfig.ini") << std::endl;
 			CppTest::Engine& eng = CppTest::Engine::Instance();
 			eng.GetLogEngine().LoadLoggers("CppTestConfig.ini", _L_("INI"));
 
@@ -92,7 +89,7 @@ int main(int argc, char* argv[]) {
 			mr_cout << e.longMsg() << std::endl;
 		}
 		catch( const mr_utils::mr_exception e ) {
-			mr_cout << e.longMsg() << std::endl;
+			mr_cout << e.longMsg() << std::endl; 
 		}
 		catch( const std::exception e ) {
 			mr_cout << e.what() << std::endl;

@@ -10,12 +10,12 @@
 ///--------------------------------------------------------------------------------------
 #include "mr_char.h"
 #include "mr_string.h"
+#include "mr_sstream.h"
 #include "mr_exception.h"
 #include "mr_defines.h"
 #include "mr_functors.h"
 
 #include <algorithm>
-
 
 	//EXP_TEMPLATE template class CPPTESTUTILS_API std::basic_string<wchar_t, struct std::char_traits<wchar_t>, std::allocator<wchar_t> >;
 	//EXP_TEMPLATE template class CPPTESTUTILS_API std::basic_string<char, struct std::char_traits<char>, std::allocator<char> >;
@@ -176,6 +176,39 @@ bool MrTokenize( mr_string::size_type& currentPos, const mr_string& str, mr_stri
 	return true;
 }
 
+
+mr_utils::mr_string SubString(
+	const mr_utils::mr_string& s, 
+	mr_utils::mr_string::size_type pos, 
+	mr_utils::mr_string::size_type length) {
+		//return s.substr(pos, length);
+
+		if(pos >= s.length()) {
+			throw mr_utils::mr_exception(_FL_, _L_("The position is passed the end of line"));
+		}
+
+		mr_utils::mr_string::size_type end = -1;
+		if (length == end) {
+			length = s.length() - pos;
+		}
+
+		if((pos + length) > s.length()) {
+			throw mr_utils::mr_exception(_FL_, _L_("The start position plus length requested is passed the end of line"));
+		}
+
+		// bit of pointer arithmetic since we cannot use the substring
+		mr_utils::mr_string copy;
+		copy.append((s.c_str() + pos), length);
+		return copy;
+}
+
+
+mr_utils::mr_string SubString(
+	const mr_utils::mr_string& s, mr_utils::mr_string::size_type pos) {
+
+		mr_utils::mr_string::size_type end = -1;
+		return mr_utils::SubString(s, pos, end);
+}
 
 
 

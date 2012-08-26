@@ -11,17 +11,32 @@
 #if !defined(CPP_TEST_INFO_OBJECT_H)
 #define CPP_TEST_INFO_OBJECT_H
 
+#include "CppTestCrossPlatform.h"
 #include "mr_string.h"
 #include <vector>
 
 
+CPPTESCASE_EXP_TEMPLATE template struct CPPTESCASE_API std::pair<mr_utils::mr_string,mr_utils::mr_string>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator< std::pair<mr_utils::mr_string,mr_utils::mr_string> >;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector< std::pair<mr_utils::mr_string,mr_utils::mr_string> >;
+
+
 namespace CppTest {
+
 
 /// @typedef Test info pair define.
 typedef std::pair<mr_utils::mr_string,mr_utils::mr_string> TestInfoArgument; 
 
 /// @typedef Typedef for a vector of argument pairs.
 typedef std::vector<TestInfoArgument> TestArguments; 
+
+
+
+
+//CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTestCase::TestInfoArgument>;
+//CPPTESCASE_EXP_TEMPLATE template struct CPPTESCASE_API std::pair<mr_utils::mr_string,mr_utils::mr_string>;
+//CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTestCase::TestInfoArgument>;
+
 
 
 ///--------------------------------------------------------------------------------------
@@ -36,7 +51,7 @@ typedef std::vector<TestInfoArgument> TestArguments;
 /// case after it is retrieved and before it is executed.
 ///
 ///--------------------------------------------------------------------------------------
-class TestInfoObject {
+class CPPTESCASE_API TestInfoObject {
 
 public:
 
@@ -109,6 +124,11 @@ private:
 
 
 } // end namespace
+
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::TestInfoObject>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::TestInfoObject>;
+
+
 
 
 #endif

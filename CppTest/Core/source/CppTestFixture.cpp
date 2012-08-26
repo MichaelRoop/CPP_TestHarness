@@ -14,6 +14,8 @@
 #include "CppTestFixture.h"
 #include "mr_staticTimer.h"
 
+#include "mr_iostream.h"
+
 #include <algorithm>
 
 //// Win32 only
@@ -24,9 +26,12 @@
 
 namespace CppTest {
 
+
+
+
 //---------------------------------------------------------------------------------------
 /// @brief Functor to determine if the name is a match for the test case name.
-class HasNamedTestFunctor {
+struct HasNamedTestFunctor {
 public:
 	HasNamedTestFunctor(const mr_utils::mr_string& name) : m_name(name) {
 	}
@@ -37,6 +42,8 @@ public:
 private:
 	const mr_utils::mr_string& m_name;
 };
+
+
 
 
 /// @brief Functor to vector of test names held by fixture
@@ -55,6 +62,10 @@ private:
 	std::vector<mr_utils::mr_string>& m_names;
 };
 //---------------------------------------------------------------------------------------
+
+// Functors require the npos internally and linkning fails
+
+
 
 
 Fixture::Fixture(const mr_utils::mr_string& name, const mr_utils::mr_string& desc) 
@@ -110,8 +121,21 @@ void Fixture::RegisterTest(fixture_method_ptr test, const mr_utils::mr_string& n
 	size_t end = (size_t) -1;
 	if (pos != end) {
 	//if (pos != mr_utils::mr_string::npos) {
-		scratch = name.substr(pos + 2);
+		// TOTALLY WACKED - fails with npos not exported if I do a substring.
+
+		//scratch = name.substr(pos + 2);
+		scratch = mr_utils::SubString(name, pos +2);
+
+
+		// if we invoke without the length param it will revert to default value npos and cause a link failure
+//		scratch = name.substr(pos + 2, (name.length() - (pos + 3) ));
+		//scratch = name.substr(pos + 2, 2); // TODO figure out what to do
+
+		//name.substr(pos + 2);
 	}
+
+	mr_cout << _L_("Registering test : ") << scratch << std::endl;
+	mr_cout << _L_("Before Parse:") << name << std::endl;
 
 	this->m_tests.push_back(new TestCaseHolder(test, scratch, description));
 	// TODO - destructor to clean up holders
@@ -124,6 +148,8 @@ bool Fixture::HasTest(const mr_utils::mr_string& name) const {
 		this->m_tests.begin(), 
 		this->m_tests.end(), 
 		HasNamedTestFunctor(name)) != this->m_tests.end();
+
+	//return false;
 }
 
 

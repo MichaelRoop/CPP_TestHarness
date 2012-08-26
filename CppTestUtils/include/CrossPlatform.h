@@ -46,7 +46,28 @@
    //disable warnings on extern before template instantiation
     #pragma warning (disable : 4231)
 
+	// The order is important. Do not change
+	EXP_TEMPLATE template class CPPTESTUTILS_API std::allocator<char>;
+	EXP_TEMPLATE template class CPPTESTUTILS_API std::basic_string<char, struct std::char_traits<char>, std::allocator<char> >;
+	EXP_TEMPLATE template class CPPTESTUTILS_API std::allocator< std::basic_string<char, struct std::char_traits<char>, std::allocator<char> > >;
+	EXP_TEMPLATE template class CPPTESTUTILS_API std::vector< std::basic_string<char, struct std::char_traits<char>, std::allocator<char> > >;
 
+
+	EXP_TEMPLATE template class CPPTESTUTILS_API std::allocator<wchar_t>;
+	EXP_TEMPLATE template class CPPTESTUTILS_API std::basic_string<wchar_t, struct std::char_traits<wchar_t>, std::allocator<wchar_t> >;
+	EXP_TEMPLATE template class CPPTESTUTILS_API std::allocator< std::basic_string<wchar_t, struct std::char_traits<wchar_t>, std::allocator<wchar_t> > >;
+	EXP_TEMPLATE template class CPPTESTUTILS_API std::vector< std::basic_string<wchar_t, struct std::char_traits<wchar_t>, std::allocator<wchar_t> > >;
+
+
+	// TODO try and figure out how to for string::npos to export
+
+	//CPPTESTUTILS_API static const size_type  std::basic_string<wchar_t, struct std::char_traits<wchar_t>, std::allocator<wchar_t> >::npos;
+
+//CPPTESTUTILS_API static const mr_utils::mr_string::size_type mr_utils::mr_string::npos;
+
+
+
+/*
 
 	// We will put the most common template classes here
 	EXP_TEMPLATE template class CPPTESTUTILS_API std::allocator<wchar_t>;
@@ -67,7 +88,7 @@
 
 	//EXP_TEMPLATE template class CPPTESTUTILS_API std::vector<wchar_t, struct std::char_traits<wchar_t>, std::allocator<wchar_t> >;
 	//EXP_TEMPLATE template class CPPTESTUTILS_API std::vector<char, struct std::char_traits<char>, std::allocator<char> >;
-
+	*/
 
 
 //		std::allocator<char>::n:npos;

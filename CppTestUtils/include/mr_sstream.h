@@ -16,8 +16,14 @@
 #include <sstream>
 
 #if defined(WIN32) 
-	EXP_TEMPLATE template class CPPTESTUTILS_API std::basic_stringstream<wchar_t, std::char_traits<wchar_t>, std::allocator<wchar_t> >;
+
 	EXP_TEMPLATE template class CPPTESTUTILS_API std::basic_stringstream<char, std::char_traits<char>, std::allocator<char> >;
+	//EXP_TEMPLATE template class CPPTESTUTILS_API std::allocator< std::basic_stringstream<char, std::char_traits<char>, std::allocator<char> > >;
+	//EXP_TEMPLATE template class CPPTESTUTILS_API std::vector< std::basic_stringstream<char, std::char_traits<char>, std::allocator<char> > >;
+
+	EXP_TEMPLATE template class CPPTESTUTILS_API std::basic_stringstream<wchar_t, std::char_traits<wchar_t>, std::allocator<wchar_t> >;
+	//EXP_TEMPLATE template class CPPTESTUTILS_API std::allocator< std::basic_stringstream<wchar_t, std::char_traits<wchar_t>, std::allocator<wchar_t> > >;
+	//EXP_TEMPLATE template class CPPTESTUTILS_API std::vector< std::basic_stringstream<wchar_t, std::char_traits<wchar_t>, std::allocator<wchar_t> > , std::allocator< std::basic_stringstream<wchar_t, std::char_traits<wchar_t>, std::allocator<wchar_t> > > > ;
 #endif
 
 namespace mr_utils {
