@@ -17,27 +17,7 @@
 #include <vector>
 
 
-//CPPTESCASE_EXP_TEMPLATE template struct CPPTESCASE_API std::pair<mr_utils::mr_string,mr_utils::mr_string>;
-//CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator< std::pair<mr_utils::mr_string,mr_utils::mr_string> >;
-//CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector< std::pair<mr_utils::mr_string,mr_utils::mr_string> >;
-
-
 namespace CppTest {
-
-
-/// @typedef Test info pair define.
-//typedef std::pair<mr_utils::mr_string,mr_utils::mr_string> TestInfoArgument; 
-
-/// @typedef Typedef for a vector of argument pairs.
-//typedef std::vector<TestInfoArgument> TestArguments; 
-
-
-
-
-//CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTestCase::TestInfoArgument>;
-//CPPTESCASE_EXP_TEMPLATE template struct CPPTESCASE_API std::pair<mr_utils::mr_string,mr_utils::mr_string>;
-//CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTestCase::TestInfoArgument>;
-
 
 
 ///--------------------------------------------------------------------------------------
@@ -75,7 +55,7 @@ public:
 	/// derived script readers to determine according to its own rules.  
 	///
 	/// @param	active	true if active and ready to be run otherwise false. Default is true.
-	void SetActive( bool active = true );
+	void SetActive(bool active = true);
 
 
 	/// @brief	Indicates that there is no longer any data in the script file to define a test.
@@ -123,13 +103,10 @@ private:
 };
 
 
-
 } // end namespace
 
-//CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::TestInfoObject>;
-//CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::TestInfoObject>;
-
-
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::TestInfoObject>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::TestInfoObject>;
 
 
 #endif

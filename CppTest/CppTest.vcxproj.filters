@@ -264,5 +264,8 @@
     <ClInclude Include="include\ICppTestCaseArgument.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\ITestCaseHolder.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
