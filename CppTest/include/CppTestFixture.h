@@ -69,7 +69,7 @@ public:
 	/// @brief	Run the named test case contained in the fixture
 	/// @param	name	The test case name
 	/// @param	args	Arguments for the named test case
-	void RunTest(const mr_utils::mr_string& name, const CppTest::TestArguments& args);
+	void RunTest(const mr_utils::mr_string& name, const CppTest::TestCaseArguments& args);
 
 
 	/// @brief	Called after the last fixture test case has executed
@@ -124,12 +124,12 @@ protected:
 
 	/// @brief	Retrieve test arguments for current test case.
 	/// @return	The arguments for the test case.
-	const CppTest::TestArguments& CurrentArgs() const;
+	const CppTest::TestCaseArguments& CurrentArgs() const;
 
 private:
 
 	//mr_utils::mr_string			m_name;				// TODO - preserve the fixture name for lookup 
-	CppTest::TestArguments		m_args;				///< Arguments for current Test Case.
+	CppTest::TestCaseArguments	m_args;				///< Arguments for current Test Case.
 	fixture_method_ptr			m_fixtureSetup;		///< setup method for the entire fixture
 	fixture_method_ptr			m_fixtureTeardown;	///< teardown method for the entire fixture
 	fixture_method_ptr			m_testSetup;		///< setup method for each test

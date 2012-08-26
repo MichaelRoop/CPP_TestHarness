@@ -12,23 +12,24 @@
 #define CPP_TEST_INFO_OBJECT_H
 
 #include "CppTestCrossPlatform.h"
+#include "ICppTestCaseArgument.h"
 #include "mr_string.h"
 #include <vector>
 
 
-CPPTESCASE_EXP_TEMPLATE template struct CPPTESCASE_API std::pair<mr_utils::mr_string,mr_utils::mr_string>;
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator< std::pair<mr_utils::mr_string,mr_utils::mr_string> >;
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector< std::pair<mr_utils::mr_string,mr_utils::mr_string> >;
+//CPPTESCASE_EXP_TEMPLATE template struct CPPTESCASE_API std::pair<mr_utils::mr_string,mr_utils::mr_string>;
+//CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator< std::pair<mr_utils::mr_string,mr_utils::mr_string> >;
+//CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector< std::pair<mr_utils::mr_string,mr_utils::mr_string> >;
 
 
 namespace CppTest {
 
 
 /// @typedef Test info pair define.
-typedef std::pair<mr_utils::mr_string,mr_utils::mr_string> TestInfoArgument; 
+//typedef std::pair<mr_utils::mr_string,mr_utils::mr_string> TestInfoArgument; 
 
 /// @typedef Typedef for a vector of argument pairs.
-typedef std::vector<TestInfoArgument> TestArguments; 
+//typedef std::vector<TestInfoArgument> TestArguments; 
 
 
 
@@ -104,7 +105,7 @@ public:
 	/// @brief	Retrieve the argument set.
 	///
 	/// @return	The argument set.
-	const TestArguments& GetArguments() const;
+	const TestCaseArguments& GetArguments() const;
 
 
 	/// @brief	Add an argument to the argument set.
@@ -117,7 +118,7 @@ private:
 	bool							m_isActive;		///< The active status.
 	bool							m_isNull;		///< The NULL status.
 	mr_utils::mr_string				m_name;			///< Test Name.
-	std::vector<TestInfoArgument>	m_arguments;	///< Test arguments.
+	std::vector<CppTest::ICaseArgument>	m_arguments;	///< Test arguments.
 
 };
 
@@ -125,8 +126,8 @@ private:
 
 } // end namespace
 
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::TestInfoObject>;
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::TestInfoObject>;
+//CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::TestInfoObject>;
+//CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::TestInfoObject>;
 
 
 

@@ -49,13 +49,13 @@ void TestInfoObject::SetName(const mr_utils::mr_string& name) {
 }
 
 
-const std::vector<TestInfoArgument>& TestInfoObject::GetArguments() const {
+const std::vector<CppTest::ICaseArgument>& TestInfoObject::GetArguments() const {
 	return this->m_arguments;
 }
 
 
 void TestInfoObject::AddArgument(const mr_utils::mr_string& name, const mr_utils::mr_string& value) {
-	this->m_arguments.push_back( TestInfoArgument( name, value ) );
+	this->m_arguments.push_back(CppTest::ICaseArgument(name, value));
 }
 
 

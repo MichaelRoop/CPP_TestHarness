@@ -11,12 +11,34 @@
 #if !defined(ICPP_TEST_CASE_ARGUMENT_H)
 #define ICPP_TEST_CASE_ARGUMENT_H
 
+#include "CppTestCrossPlatform.h"
+#include "mr_defines.h"
 #include "mr_string.h"
 
 namespace CppTest {
 
-class ICaseArgument {
+class CPPTESCASE_API ICaseArgument {
 public:
+
+	ICaseArgument(const mr_utils::mr_string& name, const mr_utils::mr_string& value)
+	: Name(name),
+	Value(value) {
+	}
+
+
+	/// @brief	Default constructor to satisfy vector requirements
+	ICaseArgument()
+	: Name(_L_("")),
+	Value(_L_("")) {
+	}
+
+
+	/// @brief	Default constructor to satisfy vector requirements
+	ICaseArgument(const ICaseArgument& obj) {
+		this->Name = obj.Name;
+		this->Value = obj.Value;
+	}
+
 
 	/// @brief	The argument name so the test case can identify it
 	mr_utils::mr_string Name;
@@ -26,8 +48,8 @@ public:
 
 };
 
-
-// TODO put the force macro here for export
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::ICaseArgument>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::ICaseArgument>;
 
 /// @typedef Typedef for a vector of argument pairs.
 typedef std::vector<ICaseArgument> TestCaseArguments; 
