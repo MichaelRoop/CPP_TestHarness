@@ -11,6 +11,7 @@
 #include "CppTestEngine.h"
 #include "CppTestFixture.h"
 #include "ICppTestScriptReader.h"
+#include "CppTestCase.h"
 #include "mr_pointerException.h"
 #include "mr_defines.h"
 
@@ -40,7 +41,7 @@ public:
 	/// @param	testName	Unique name for the test.
 	NonExistantTestData(const mr_utils::mr_string& name) 
 		: CppTest::Case(name, L("Test not found") ) {
-		this->Status = ST_NOT_EXISTS;
+			this->Status = CppTest::ICase::ST_NOT_EXISTS;
 	}
 };
 

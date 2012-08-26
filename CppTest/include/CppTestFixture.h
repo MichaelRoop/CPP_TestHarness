@@ -11,19 +11,10 @@
 #if !defined(CPP_TEST_FIXTURE_H)
 #define CPP_TEST_FIXTURE_H
 
-#include <string>
-
 #include "CppTestCrossPlatform.h"
 #include "ICppTestFixture.h"
 #include "ICppTestCaseHolder.h"
-
-
 #include "mr_string.h"
-#include "CppTestInfoObject.h"
-#include "CppTestCase.h"
-
-#include <assert.h>
-#include <vector>
 
 namespace CppTest {
 
@@ -63,7 +54,6 @@ public:
 	/// @bried	Destructor
 	virtual ~Fixture();
 	
-
 
 	/// @brief	Run the named test case contained in the fixture
 	/// @param	name	The test case name
@@ -152,27 +142,23 @@ private:
 	/// @brief	Execute the Fixture setup 
 	void ExecTestFixtureSetup();
 
-public:  // temp to check for linking
+private:  // temp to check for linking
 	
-	///// @brief	Protected default constructor to force use of regular constructor.
+	///// @brief Protected default constructor to force use of regular constructor.
 	Fixture() ;
 
 
 	/// @brief	Protected copy constructor to force use of regular constructor.
 	/// @param	tc	The testCase used for construction.
-	Fixture( const Fixture& tc );
+	Fixture(const Fixture& tc);
 
 };
 
 
 } // end namespace cppTest
 
-
-
 ////#include <vector>
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::Fixture>;
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::Fixture>;
-
-
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::Fixture*>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::Fixture*>;
 
 #endif

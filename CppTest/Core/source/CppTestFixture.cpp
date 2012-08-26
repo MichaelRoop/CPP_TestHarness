@@ -9,15 +9,11 @@
 /// Copyright 2010 Michael Roop
 ///--------------------------------------------------------------------------------------
 
-//#include <string>
-
 #include "CppTestFixture.h"
 #include "CppTestCaseHolder.h"
-
 #include "mr_staticTimer.h"
 #include "mr_iostream.h"
 #include "mr_functors.h"
-
 #include <algorithm>
 
 //// Win32 only
@@ -27,8 +23,6 @@
 //#endif
 
 namespace CppTest {
-
-
 
 
 //---------------------------------------------------------------------------------------
@@ -63,15 +57,6 @@ private:
 };
 //---------------------------------------------------------------------------------------
 
-Fixture::Fixture() {
-	// Only to force export
-}
-
-Fixture::Fixture( const Fixture& tc ) {
-	assert(0);
-}
-
-
 
 Fixture::Fixture(const mr_utils::mr_string& name, const mr_utils::mr_string& desc) 
 :	//m_name( name ), // TODO - have the name of the Fixture preserved
@@ -88,7 +73,6 @@ Fixture::~Fixture() {
 	mr_utils::DeletePtr<ITestCaseHolder> deleter;
 	std::for_each(this->m_tests.begin(), this->m_tests.end(), deleter);
 }
-
 
 
 const CppTest::TestCaseArguments& Fixture::CurrentArgs() const {
@@ -189,9 +173,9 @@ void Fixture::RunTest(const mr_utils::mr_string& name, const CppTest::TestCaseAr
 		this->m_currentTestCase = (*it);
 
 		this->ExecTestFixtureSetup();
-		this->ExecStep(this->m_currentTestCase->Data()->SetupTime, this->m_testSetup, Case::ST_FAIL_SETUP);
-		this->ExecStep(this->m_currentTestCase->Data()->ExecTime, this->m_currentTestCase->Pointer(), Case::ST_FAIL_TEST);	
-		this->ExecStep(this->m_currentTestCase->Data()->CleanupTime, this->m_testTeardown, Case::ST_FAIL_CLEANUP);
+		this->ExecStep(this->m_currentTestCase->Data()->SetupTime, this->m_testSetup, ICase::ST_FAIL_SETUP);
+		this->ExecStep(this->m_currentTestCase->Data()->ExecTime, this->m_currentTestCase->Pointer(), ICase::ST_FAIL_TEST);	
+		this->ExecStep(this->m_currentTestCase->Data()->CleanupTime, this->m_testTeardown, ICase::ST_FAIL_CLEANUP);
 
 		// Test fixture teardown is called on fixture from outside when no more tests to execute in fixture
 
@@ -211,7 +195,7 @@ void Fixture::RunTest(const mr_utils::mr_string& name, const CppTest::TestCaseAr
 }
 
 
-void Fixture::ExecStep(long long& timeVal, IFixture::Ifixture_method_ptr funcPtr, Case::TestCaseStatus failStatus) {
+void Fixture::ExecStep(long long& timeVal, IFixture::Ifixture_method_ptr funcPtr, ICase::TestCaseStatus failStatus) {
 	// In this case there may not even be a step registered
 	timeVal = 0;
 	if (funcPtr != 0) {
@@ -220,7 +204,7 @@ void Fixture::ExecStep(long long& timeVal, IFixture::Ifixture_method_ptr funcPtr
 		// set to failed in case it throws
 		this->m_currentTestCase->Data()->Status = failStatus;
 		(this->*funcPtr)();
-		this->m_currentTestCase->Data()->Status = Case::ST_SUCCESS;
+		this->m_currentTestCase->Data()->Status = ICase::ST_SUCCESS;
 
 		timer.stop();
 		timeVal = timer.getMsInterval();
@@ -233,7 +217,7 @@ void Fixture::ExecTestFixtureSetup() {
 	if (!this->m_isFixtureCalled) {
 		// The fixture setup is not presently timed
 		long long bogusTimeVal = 0;
-		this->ExecStep(bogusTimeVal, this->m_fixtureSetup, Case::ST_FAIL_FIXTURE_SETUP);
+		this->ExecStep(bogusTimeVal, this->m_fixtureSetup, ICase::ST_FAIL_FIXTURE_SETUP);
 		this->m_isFixtureCalled = true;
 	}
 }

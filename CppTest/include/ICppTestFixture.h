@@ -19,8 +19,6 @@
 
 
 namespace CppTest {
-	
-//class TestCaseHolder;
 
 ///--------------------------------------------------------------------------------------
 ///
@@ -54,20 +52,8 @@ public:
 
 public:
 
-	/// @brief	Protected default constructor to force use of regular constructor.
+	/// @brief	Default constructor
 	IFixture() {
-	}
-
-
-	/// @brief	Protected copy constructor to force use of regular constructor.
-	/// @param	tc	The testCase used for construction.
-	IFixture(const IFixture& tc) {
-		// TODO - how to implement
-	}
-
-
-	/// @brief	Destructor
-	virtual ~IFixture() {
 	}
 
 
@@ -135,17 +121,19 @@ protected: // the register test methods could be public
 	/// @return	The arguments for the test case.
 	virtual const CppTest::TestCaseArguments& CurrentArgs() const = 0;
 
-	// TODO - get from interface
+private:
+
+	/// @brief	Protected copy constructor to force use of regular constructor.
+	/// @param	tc	The testCase used for construction.
+	IFixture(const IFixture& tc) {
+	}
 
 };
 
-
 } // end namespace cppTest
 
-
+// Force exposure of class using std objects
 CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::IFixture*>;
 CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::IFixture*>;
-
-
 
 #endif
