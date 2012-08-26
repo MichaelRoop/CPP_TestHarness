@@ -27,7 +27,7 @@ namespace mr_utils
 ///
 	/// You can use this with the std::for each to delete out a container of pointers.
 template<class T>
-struct CPPTESTUTILS_API DeletePtr
+struct DeletePtr
 {
 	/// @brief	Function operator called on each iteration.
 	///
@@ -173,7 +173,7 @@ private:
 //
 ///--------------------------------------------------------------------------------------
 template<class T, class T2>
-class CPPTESTUTILS_API isNamed
+class isNamed
 {
 public:
 

@@ -27,8 +27,6 @@
 #include <vector>
 
 namespace CppTest {
-	
-class TestCaseHolder;
 
 ///--------------------------------------------------------------------------------------
 ///
@@ -55,11 +53,6 @@ class TestCaseHolder;
 ///--------------------------------------------------------------------------------------
 class /*CPPTESCASE_API*/ Fixture : public IFixture {
 
-//public:
-//
-//	/// @brief	Typdef of a class method pointer with no param and no return 
-//	typedef void (Fixture::*  fixture_method_ptr) (void);
-
 public:
 
 	/// @brief	Constructor
@@ -67,8 +60,11 @@ public:
 	///	@param	desc	Description of test case fixture.
 	Fixture(const mr_utils::mr_string& name, const mr_utils::mr_string& desc);
 
-	virtual ~Fixture() {
-	}
+
+	/// @bried	Destructor
+	virtual ~Fixture();
+	
+
 
 	/// @brief	Run the named test case contained in the fixture
 	/// @param	name	The test case name
@@ -119,7 +115,10 @@ protected:
 	/// @param	test	The test method pointer
 	/// @param	name	The test name
 	/// @param	description	The test description
-	virtual void RegisterTest(IFixture::Ifixture_method_ptr test, const mr_utils::mr_string& name, const mr_utils::mr_string& description);
+	virtual void RegisterTest(
+		IFixture::Ifixture_method_ptr test, 
+		const mr_utils::mr_string& name, 
+		const mr_utils::mr_string& description);
 
 
 	///	@brief	Reset any data from previous test TODO - replace with current test.data
@@ -139,17 +138,16 @@ private:
 	IFixture::Ifixture_method_ptr	m_testSetup;		///< setup method for each test
 	IFixture::Ifixture_method_ptr	m_testTeardown;		///< teardown method for each test
 	bool							m_isFixtureCalled;	///< Determines if a test has been called on the fixture yet
-	std::vector<TestCaseHolder*>	m_tests;			///< The list of test cases
-	TestCaseHolder*					m_currentTestCase;	///< The currently executing test case holder
+	std::vector<ITestCaseHolder*>	m_tests;			///< The list of test cases
+	ITestCaseHolder*				m_currentTestCase;	///< The currently executing test case holder
 
 private:
 
 	/// @brief	Wrapper function to wrap performance logging for various methods.
 	/// @param	timeVal	A reference to hold the timing information.
 	/// @param	funcPtr	A pointer to the function to time.
-	///
 	/// @return	true if the function timed is successful, otherwise false.
-	void ExecStep(long long& timeVal, IFixture::Ifixture_method_ptr funcPtr, Case::TestCaseStatus failStatus);
+	void ExecStep(long long& timeVal, IFixture::Ifixture_method_ptr funcPtr, ICase::TestCaseStatus failStatus);
 
 
 	/// @brief	Execute the Fixture setup 
@@ -168,79 +166,6 @@ public:  // temp to check for linking
 };
 
 
-/////--------------------------------------------------------------------------------------
-/////
-/////	@brief	Associates the test pointer with the Case object that stores test results
-/////
-/////--------------------------------------------------------------------------------------
-//class TestCaseHolder {
-//
-//public:
-//
-//	/// @brief	Constructor
-//	/// @param	testPtr	Pointer to the test method
-//	/// @param	name	Test name
-//	/// @param	description	Test description
-//	TestCaseHolder(IFixture::Ifixture_method_ptr testPtr, const mr_utils::mr_string& name, const mr_utils::mr_string& description) :	
-//		m_test(testPtr),
-//		m_testData(new Case(name, description)) {
-//	}
-//
-//	
-//	/// @brief	Destructor
-//	virtual ~TestCaseHolder() {
-//		if (this->m_testData != 0) {
-//			delete this->m_testData;
-//			this->m_testData = 0;
-//		}
-//	}
-//
-//
-//	/// @brief	Return the test method pointer
-//	IFixture::Ifixture_method_ptr Pointer() const {
-//		return this->m_test;
-//	}
-//
-//
-//	/// @brief	Return the test data capture object
-//	ICase* Data() const {
-//		return this->m_testData;
-//	}
-//
-//
-//	/// @brief	Reset the test case data object to non run state
-//	void Reset() {
-//		assert(this->m_testData);
-//		this->m_testData->Reset();
-//	}
-//
-//private:
-//	IFixture::Ifixture_method_ptr	m_test;		///< Pointer to the test method
-//	ICase*							m_testData;	///< Pointer to the test data capture object
-//
-//
-//	TestCaseHolder() {
-//	}
-//
-//	TestCaseHolder(const TestCaseHolder&) {
-//	}
-//
-//	TestCaseHolder& operator = (const TestCaseHolder&) {
-//	}
-//
-//
-////public:
-////	TestCaseHolder() {
-////	}
-////
-////	TestCaseHolder(const TestCaseHolder&) {
-////	}
-//
-//
-//};
-
-
-
 } // end namespace cppTest
 
 
@@ -248,20 +173,6 @@ public:  // temp to check for linking
 //#include <vector>
 //CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::Fixture>;
 //CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::Fixture>;
-//
-//CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::TestCaseHolder>;
-//CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::TestCaseHolder>;
-//
-//CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::TestCaseHolder*>;
-//CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::TestCaseHolder*>;
-
-
-//EXP_TEMPLATE template class CPPTESTUTILS_API std::allocator<CppTest::Fixture>;
-//EXP_TEMPLATE template class CPPTESTUTILS_API std::vector<CppTest::Fixture>;
-
-
-		//#define CPPTESCASE_API __declspec(dllexport)
-		//#define CPPTESCASE_EXP_TEMPLATE
 
 
 

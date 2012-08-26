@@ -15,8 +15,8 @@
 #include "CppTestCaseHolder.h"
 
 #include "mr_staticTimer.h"
-
 #include "mr_iostream.h"
+#include "mr_functors.h"
 
 #include <algorithm>
 
@@ -46,8 +46,6 @@ private:
 };
 
 
-
-
 /// @brief Functor to vector of test names held by fixture
 class BuildNamesVectorFunctor {
 public:
@@ -65,10 +63,6 @@ private:
 };
 //---------------------------------------------------------------------------------------
 
-// Functors require the npos internally and linkning fails
-
-
-
 
 Fixture::Fixture(const mr_utils::mr_string& name, const mr_utils::mr_string& desc) 
 :	//m_name( name ), // TODO - have the name of the Fixture preserved
@@ -79,6 +73,13 @@ Fixture::Fixture(const mr_utils::mr_string& name, const mr_utils::mr_string& des
 	m_testTeardown(0),
 	m_isFixtureCalled(false) {
 }
+
+
+Fixture::~Fixture() {
+	mr_utils::DeletePtr<ITestCaseHolder> deleter;
+	std::for_each(this->m_tests.begin(), this->m_tests.end(), deleter);
+}
+
 
 
 const CppTest::TestCaseArguments& Fixture::CurrentArgs() const {
@@ -171,7 +172,7 @@ void Fixture::RunTest(const mr_utils::mr_string& name, const CppTest::TestCaseAr
 //#endif
 	try {
 		// lookup the test
-		std::vector<TestCaseHolder*>::iterator it = 
+		std::vector<ITestCaseHolder*>::iterator it = 
 			std::find_if(this->m_tests.begin(), this->m_tests.end(), HasNamedTestFunctor(name));
 		
 		// TODO - report this as an error instead ?
