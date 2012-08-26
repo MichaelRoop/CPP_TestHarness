@@ -26,7 +26,7 @@ CppTest::Engine::Instance().RegisterCase( _fixtureClass_ );	\
 // Create the fixture instance with a unique variable name. This will trigger the constructor which registers it with the engine
 // You can only register a fixture class once
 #define _REGISTER_FIXTURE_( _fixture_ )						\
-_fixture_*  ##_fixture_##Instance  = new _fixture_();		\
+	_fixture_*  ##_fixture_##Instance  = new _fixture_(_L_((#_fixture_)));		\
 
 
 // Register the class void method as the fixture setup method

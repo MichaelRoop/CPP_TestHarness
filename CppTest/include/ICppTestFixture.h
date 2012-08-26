@@ -81,6 +81,9 @@ public:
 	virtual ICase& CurrentTestCase() const = 0;
 
 
+	/// @brief	Test Fixture name
+	virtual const mr_utils::mr_string& Name() const = 0;
+
 protected: // the register test methods could be public
 
 	/// @brief	Register a setup method to be executed once for the entire fixture

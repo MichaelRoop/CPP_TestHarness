@@ -14,8 +14,8 @@
 class TokenizerTests1 : public CppTest::Fixture {
 public:
 
-	TokenizerTests1() 
-		: CppTest::Fixture( _L_("testName"), _L_("argStr") ) {
+	TokenizerTests1(const mr_utils::mr_string& name) 
+		: CppTest::Fixture(name) {
 
 		// This will add the test fixture to the test engine list when it is constructed
 		// The Register Fixture macro at the end of the class creates an instance which
@@ -42,7 +42,7 @@ public:
 	}
 	
 	void FixtureSetup()	{ 
-		printf("++++ TokenizerTests1 Registered Fixture Setup Executed ++++\n");
+		mr_cout << _L_("**** ") << this->Name() << _L_(" Registered Fixture Setup Executed ****") << std::endl;
 		//_ARE_EQUAL(this, 1, 99);
 		m_tokens.push_back( _L_("This" ) );
 		m_tokens.push_back( _L_("is" ) );
@@ -55,12 +55,12 @@ public:
 	}
 
 	void FixtureTeardown() {
-		printf("++++ TokenizerTests1Registered Fixture Teardown Executed ++++\n");
+		mr_cout << _L_("**** ") << this->Name() << _L_(" Registered Fixture Teardown Executed ****") << std::endl;
 		//_ARE_EQUAL(this, 1, 99);
 	}
 
 	void TestSetup()	{ 
-		printf("**** TokenizerTests1 Registered Test Setup Executed ****\n");
+		mr_cout << _L_("**** ") << this->Name() << _L_(" Registered Test Setup Executed ****") << std::endl;
 		//_ARE_EQUAL(this, 1, 99);
 		//_ARE_NOT_EQUAL(this, 1, 1);
 		//_DOES_THROW(this, Exception, { this->ThrowTest());
@@ -69,7 +69,7 @@ public:
 	}
 
 	void TestTeardown()	{ 
-		printf("**** TokenizerTests1 Registered Test Teardown Executed ****\n");
+		mr_cout << _L_("**** ") << this->Name() << _L_(" Registered Test Teardown Executed ****") << std::endl;
 		//_ARE_EQUAL(this, 1, 99);
 	}
 	
@@ -139,8 +139,8 @@ _REGISTER_FIXTURE_(TokenizerTests1)
 class TokenizerTests2 : public CppTest::Fixture {
 
 public:
-	TokenizerTests2()
-		: CppTest::Fixture( _L_( "Ziffle" ), _L_( "Pig" ) )	{
+	TokenizerTests2(const mr_utils::mr_string& name)
+		: CppTest::Fixture(name)	{
 		_ADD_TEST_FIXTURE_( this );
 
 		_FIXTURE_SETUP_(this, &TokenizerTests2::FixtureSetup );
@@ -152,15 +152,15 @@ public:
 	}																				
 
 	void TestSetup()	{ 
-		printf("**** TokenizerTests2 Registered Test Setup Executed ****\n");
+		mr_cout << _L_("**** ") << this->Name() << _L_(" Registered Test Setup Executed ****") << std::endl;
 	}
 
 	void TestTeardown()	{ 
-		printf("**** TokenizerTests2 Registered Test Teardown Executed ****\n");
+		mr_cout << _L_("**** ") << this->Name() << _L_(" Registered Test Teardown Executed ****") << std::endl;
 	}
 	
 	void FixtureSetup()		{ 
-		printf("++++ TokenizerTests2 Registered Fixture Setup Executed ++++\n");
+		mr_cout << _L_("**** ") << this->Name() << _L_(" Registered Fixture Setup Executed ****") << std::endl;
 		this->m_tokens.push_back( _L_("This" ) );
 		this->m_tokens.push_back( _L_("is" ) );
 		this->m_tokens.push_back( _L_("a" ) );
@@ -172,7 +172,7 @@ public:
 	}
 
 	void FixtureTeardown() {
-		printf("++++ TokenizerTests2 Registered Fixture Teardown Executed ++++\n");
+		mr_cout << _L_("**** ") << this->Name() << _L_(" Registered Fixture Teardown Executed ****") << std::endl;
 	}
 
 	void UTL_TOK_1_7() { 

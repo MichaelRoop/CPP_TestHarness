@@ -47,8 +47,7 @@ public:
 
 	/// @brief	Constructor
 	///	@param	name	Name of the test case fixture.
-	///	@param	desc	Description of test case fixture.
-	Fixture(const mr_utils::mr_string& name, const mr_utils::mr_string& desc);
+	Fixture(const mr_utils::mr_string& name);
 
 
 	/// @bried	Destructor
@@ -77,6 +76,10 @@ public:
 
 	/// @brief	Retrieve a copy of the currently executed test case
 	virtual ICase& CurrentTestCase() const;
+
+
+	/// @brief	Test Fixture name
+	virtual const mr_utils::mr_string& Name() const;
 
 protected:
 
@@ -120,7 +123,7 @@ protected:
 
 private:
 
-	//mr_utils::mr_string			m_name;				// TODO - preserve the fixture name for lookup 
+	mr_utils::mr_string				m_name;				///< Fixture name 
 	CppTest::TestCaseArguments		m_args;				///< Arguments for current Test Case.
 	IFixture::Ifixture_method_ptr	m_fixtureSetup;		///< setup method for the entire fixture
 	IFixture::Ifixture_method_ptr	m_fixtureTeardown;	///< teardown method for the entire fixture

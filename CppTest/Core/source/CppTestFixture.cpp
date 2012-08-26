@@ -58,8 +58,8 @@ private:
 //---------------------------------------------------------------------------------------
 
 
-Fixture::Fixture(const mr_utils::mr_string& name, const mr_utils::mr_string& desc) 
-:	//m_name( name ), // TODO - have the name of the Fixture preserved
+Fixture::Fixture(const mr_utils::mr_string& name) 
+:	m_name( name ),
 	m_currentTestCase(0),
 	m_fixtureSetup(0),
 	m_fixtureTeardown(0),
@@ -148,6 +148,11 @@ const std::vector<mr_utils::mr_string> Fixture::GetTestNames() const {
 ICase& Fixture::CurrentTestCase() const {
 	assert(this->m_currentTestCase);
 	return *(this->m_currentTestCase->Data());
+}
+
+
+const mr_utils::mr_string& Fixture::Name() const {
+	return this->m_name;
 }
 
 
