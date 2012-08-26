@@ -8,47 +8,26 @@
 ///
 /// Copyright 2010 Michael Roop
 ///--------------------------------------------------------------------------------------
-#include "mr_char.h"
 #include "mr_string.h"
-#include "mr_sstream.h"
 #include "mr_exception.h"
 #include "mr_defines.h"
 #include "mr_functors.h"
 
 #include <algorithm>
 
-	//EXP_TEMPLATE template class CPPTESTUTILS_API std::basic_string<wchar_t, struct std::char_traits<wchar_t>, std::allocator<wchar_t> >;
-	//EXP_TEMPLATE template class CPPTESTUTILS_API std::basic_string<char, struct std::char_traits<char>, std::allocator<char> >;
 
+namespace mr_utils {
 
-//static size_t posWToForceExport = std::basic_string<wchar_t, struct std::char_traits<wchar_t>, std::allocator<wchar_t> >::npos;
-//static size_t posNToForceExport = std::basic_string<char, struct std::char_traits<char>, std::allocator<char> >::npos;
-
-
-//CPPTESTUTILS_API 
-//	std::basic_string<wchar_t, struct std::char_traits<wchar_t>, std::allocator<wchar_t> >::size_type ziffle;
-//	//std::basic_string<wchar_t, struct std::char_traits<wchar_t>, std::allocator<wchar_t> >::npos;
-
-
-namespace mr_utils
-{
-
-	//static std::string::size_type std::string::npos nposNarrow;
-	//template std::wstring::size_type std::wstring::npos;
-
-
-mr_utils::mr_string TrimRight( const mr_string& str )
-{
-	if (str.empty())
-	{
+mr_utils::mr_string TrimRight(const mr_string& str) {
+	if (str.empty()) {
 		return str;
 	}
 
 	mr_string::size_type end = str.find_last_not_of(  L(" \n\t\r") );
-	size_t stringEnd = (size_t) -1;
-	if (end == stringEnd)
-	//if (end == mr_string::npos)
-	{
+
+	// TODO - follow up. Seems we can use the npos within the DLL
+	//if (end == mr_utils::StrNPos()) {
+	if (end == mr_utils::mr_string::npos) {
 		// only blanks in string.
 		return str;
 	}
@@ -56,44 +35,33 @@ mr_utils::mr_string TrimRight( const mr_string& str )
 }
 
 
-mr_utils::mr_string TrimLeft( const mr_string& str )
-{
-	if (str.empty())
-	{
+mr_utils::mr_string TrimLeft(const mr_string& str) {
+	if (str.empty()) {
 		return str;
 	}
 
 	mr_string::size_type start = str.find_first_not_of( L(" \n\t\r") );
-	size_t stringEnd = (size_t) -1;
-	if (start == stringEnd)
-	//if (start == mr_string::npos)
-	{
+	if (start == mr_utils::StrNPos()) {
 		// only blanks in string.
 		return str;
 	}
-	return str.substr( start ); 
+	return str.substr(start); 
 }
 
 
 
-mr_utils::mr_string Trim( const mr_string& str )
-{
+mr_utils::mr_string Trim(const mr_string& str) {
 	return TrimLeft( TrimRight( str ) );
 }
 
 
-std::string ExtractFileName( const std::string& pathAndFile )
-{
-	if (pathAndFile.empty())
-	{
+std::string ExtractFileName(const std::string& pathAndFile) {
+	if (pathAndFile.empty()) {
 		return pathAndFile;
 	}
 
 	std::string::size_type pos = pathAndFile.find_last_of( "\\/" );
-	size_t stringEnd = (size_t) -1;
-	if (pos == stringEnd)
-	//if (pos == mr_string::npos )
-	{
+	if (pos == mr_utils::StrNPos()) {
 		return pathAndFile;
 	}
 
@@ -131,24 +99,17 @@ std::wstring NarrowToWideString( const std::string& str )
 }
 
 
-bool MrTokenize( mr_string::size_type& currentPos, const mr_string& str, mr_string& token, mr_char delimiter )
-{
-	size_t stringEnd = (size_t) -1;
-	if (currentPos == stringEnd || currentPos > str.length() - 1 )
-	//if (currentPos == mr_string::npos || currentPos > str.length() - 1 )
-	{
+bool MrTokenize(mr_string::size_type& currentPos, const mr_string& str, mr_string& token, mr_char delimiter) {
+	if (currentPos == mr_utils::StrNPos() || currentPos > str.length() - 1 ) {
 		return false;
 	}
 
 	// End case Skip leading delimiters
-	mr_exception::assertCondition( currentPos < str.length(), FL, L("Exceeded receptor limits") );
+	mr_exception::assertCondition(currentPos < str.length(), FL, L("Exceeded receptor limits"));
 
-	if (str[currentPos] == delimiter)
-	{
+	if (str[currentPos] == delimiter) {
 		currentPos = str.find_first_not_of( delimiter, currentPos );
-		if (currentPos == stringEnd)
-		//if (currentPos == mr_string::npos)
-		{
+		if (currentPos == mr_utils::StrNPos()) {
 			// End case - string only has delimiters.
 			return false;
 		}
@@ -157,18 +118,15 @@ bool MrTokenize( mr_string::size_type& currentPos, const mr_string& str, mr_stri
 	token.clear();
 
 	mr_string::size_type delimiterPos = str.find_first_of( &delimiter, currentPos );
-	if (delimiterPos == stringEnd)
-	//if (delimiterPos == mr_string::npos)
-	{
+	if (delimiterPos == mr_utils::StrNPos()) {
 		// If the delimiter is not found then the entire remaining string is the token.
 		mr_string::size_type tmp = currentPos;
 		
 		// Move current position passed length of string to fail on next iteration
 		currentPos = str.length() ;
 		token = str.substr( tmp );
-	}
-	else
-	{
+	} 
+	else {
 		// Get token and skip to next non delimiter position.
 		token = str.substr( currentPos, delimiterPos - currentPos );
 		currentPos = str.find_first_not_of( delimiter, delimiterPos );
@@ -181,33 +139,38 @@ mr_utils::mr_string SubString(
 	const mr_utils::mr_string& s, 
 	mr_utils::mr_string::size_type pos, 
 	mr_utils::mr_string::size_type length) {
-		//return s.substr(pos, length);
+	
+	return s.substr(pos, length); // Now it is working. Go figure
 
-		if(pos >= s.length()) {
-			throw mr_utils::mr_exception(_FL_, _L_("The position is passed the end of line"));
-		}
+	//if(pos >= s.length()) {
+	//	throw mr_utils::mr_exception(_FL_, _L_("The position is passed the end of line"));
+	//}
 
-		mr_utils::mr_string::size_type end = -1;
-		if (length == end) {
-			length = s.length() - pos;
-		}
+	//if (length == mr_utils::StrNPos()) {
+	//	length = s.length() - pos;
+	//}
 
-		if((pos + length) > s.length()) {
-			throw mr_utils::mr_exception(_FL_, _L_("The start position plus length requested is passed the end of line"));
-		}
+	//if((pos + length) > s.length()) {
+	//	throw mr_utils::mr_exception(_FL_, _L_("The start position plus length requested is passed the end of line"));
+	//}
 
-		// bit of pointer arithmetic since we cannot use the substring
-		mr_utils::mr_string copy;
-		copy.append((s.c_str() + pos), length);
-		return copy;
+	//// bit of pointer arithmetic since we cannot use the substring
+	//mr_utils::mr_string copy;
+	//copy.append((s.c_str() + pos), length);
+	//return copy;
 }
 
 
-mr_utils::mr_string SubString(
-	const mr_utils::mr_string& s, mr_utils::mr_string::size_type pos) {
+mr_utils::mr_string SubString(const mr_utils::mr_string& s, mr_utils::mr_string::size_type pos) {
+	//return mr_utils::SubString(s, pos, mr_utils::StrNPos());
+	return s.substr(pos);
+}
 
-		mr_utils::mr_string::size_type end = -1;
-		return mr_utils::SubString(s, pos, end);
+
+// TODO - validate this.  Seems to be enough to access the npos within the DLL and send back the value 
+// via an exported function
+mr_utils::mr_string::size_type StrNPos() {
+	return mr_utils::mr_string::npos;
 }
 
 

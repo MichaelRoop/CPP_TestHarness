@@ -26,6 +26,8 @@ namespace mr_utils
 #endif
 
 
+
+
 /// @brief	Function to trim white space from the right of a string.
 ///
 /// @param	str	The string to trim.
@@ -108,6 +110,11 @@ CPPTESTUTILS_API mr_utils::mr_string SubString(
 /// @param	pos	The start position 0 indexed.
 /// @return	the substring
 CPPTESTUTILS_API mr_utils::mr_string SubString(const mr_utils::mr_string& s, mr_utils::mr_string::size_type pos);
+
+
+/// @ replace the static npos with a function that returns the same value. The function will be exported
+CPPTESTUTILS_API mr_utils::mr_string::size_type StrNPos();
+
 
 
 
