@@ -1,6 +1,6 @@
 ///--------------------------------------------------------------------------------------
-/// @file	CppTestCase.h
-/// @brief	Holder for test case execution results data
+/// @file	ICppTestCase.h
+/// @brief	Interface for Holder for test case execution results data
 ///
 /// @author		Michael Roop
 /// @date		2010
@@ -14,8 +14,6 @@
 #include "CppTestCrossPlatform.h"
 #include "mr_string.h"
 #include "mr_sstream.h"
-#include "mr_exception.h"
-#include "mr_defines.h"
 #include <assert.h>
 
 namespace CppTest {
@@ -65,30 +63,24 @@ public:
 			assert(false);
 			return L( "ERROR-NO-STATUS" );
 		}
-}
+	}
 
 
 	/// @brief	Constructor
-	ICase() {
+	///	@param	name	Name of the test case.
+	///	@param	description	Description of test case.
+	ICase(const mr_utils::mr_string& name, const mr_utils::mr_string& desc) :	
+		Name(name),	
+		Description(desc),
+		SetupTime(0),
+		ExecTime( 0),
+		CleanupTime(0),
+		Status(ST_NONE) {
 	}
 
-
-	/// @brief	Copy constructor
-	/// @param	testCase	The testCase used for construction.
-	ICase(const ICase& testCase) {
-	}
-	
 
 	/// @brief	Called to reset internal state
-	virtual void Reset()  {
-		// Should be pure virtual but cannot export the class
-		throw mr_utils::mr_exception(_FL_, _L_("Do not use base directly - public only for forced export"));
-	}
-
-
-	ICase ICase::operator=(class CppTest::ICase const &) {
-		throw mr_utils::mr_exception(_FL_, _L_("Do not use base directly - public only for forced export"));
-	}
+	virtual void Reset() = 0;
 
 public:
 	ICase::TestCaseStatus		Status;			///< Status of the test case.
@@ -101,14 +93,25 @@ public:
 	long long					ExecTime;		///< Test time in ms.
 	long long					CleanupTime;	///< Cleanup time in ms.
 
+private:
+
+	/// @brief	Constructor
+	ICase() {
+	}
+
+
+	/// @brief	Copy constructor
+	/// @param	testCase	The testCase used for construction.
+	ICase(const ICase& testCase) {
+	}
 
 };
 
 } // end namespace cppTest::Case
 
-
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::ICase>;
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::ICase>;
+// Force export of std items
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::ICase*>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::ICase*>;
 
 
 #endif

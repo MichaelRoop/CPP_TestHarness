@@ -43,16 +43,6 @@ public:
 	/// @brief	Called to reset internal state
 	virtual void Reset();
 
-private:
-
-	/// @brief	Default constructor
-	Case();
-
-
-	/// @brief	Copy constructor
-	/// @param	testCase	The testCase used for construction.
-	Case(const Case& testCase);
-
 };
 
 } // end namespace cppTest::Case
