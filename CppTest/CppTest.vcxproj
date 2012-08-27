@@ -96,12 +96,14 @@
     <ClCompile Include="Core\source\CppTestCompareFunctions.cpp" />
     <ClCompile Include="Core\source\CppTestEngine.cpp" />
     <ClCompile Include="Core\source\CppTestFixture.cpp" />
+    <ClCompile Include="Core\source\CppTestFixtureTestCaseNames.cpp" />
     <ClCompile Include="Core\source\CppTestInfoObject.cpp" />
     <ClCompile Include="Core\source\dllmain.cpp" />
     <ClCompile Include="Exceptions\source\CppTestScriptException.cpp" />
     <ClCompile Include="Factories\source\CppTestLogFactory.cpp" />
     <ClCompile Include="Factories\source\CppTestLogInitialiserFactory.cpp" />
     <ClCompile Include="Factories\source\CppTestLogOutputFactory.cpp" />
+    <ClCompile Include="include\ICppTestFixtureTestCaseNames.h" />
     <ClCompile Include="Logging\source\CppTestBuildColumnInfoString.cpp" />
     <ClCompile Include="Logging\source\CppTestBuildColumnValueString.cpp" />
     <ClCompile Include="Logging\source\CppTestBuildConsoleSummaryString.cpp" />
@@ -131,6 +133,7 @@
     <ClInclude Include="include\CppTestCrossPlatform.h" />
     <ClInclude Include="include\CppTestEngine.h" />
     <ClInclude Include="include\CppTestFixture.h" />
+    <ClInclude Include="include\CppTestFixtureTestCaseNames.h" />
     <ClInclude Include="include\CppTestInfoObject.h" />
     <ClInclude Include="include\CppTestLogEngine.h" />
     <ClInclude Include="include\CppTestMacros.h" />

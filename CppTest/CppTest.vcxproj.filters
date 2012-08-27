@@ -157,6 +157,12 @@
     <ClCompile Include="Core\source\dllmain.cpp">
       <Filter>Core\source</Filter>
     </ClCompile>
+    <ClCompile Include="include\ICppTestFixtureTestCaseNames.h">
+      <Filter>include</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\source\CppTestFixtureTestCaseNames.cpp">
+      <Filter>Core\source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Win\resource.h">
@@ -277,6 +283,9 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include\ICppTestLogOutput.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CppTestFixtureTestCaseNames.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
