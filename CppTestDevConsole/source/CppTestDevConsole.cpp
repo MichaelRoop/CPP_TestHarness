@@ -2,6 +2,8 @@
 //
 
 
+// TODO - temp for win tests
+#include "windows.h"
 
 #include "CppTestEngine.h"
 //#include "CppTestLogEngine.h"
@@ -15,49 +17,6 @@
 #include "mr_pointerException.h"
 #include <algorithm>
 
-//
-////#include <iostream>
-//
-//#include "mr_SharedPtr.h"
-
-
-//// Test in including the Utils
-//#include "mr_doCompare.h"
-//static void CompareFunc() {
-//	int i = 2;
-//	int j = 2;
-//	mr_cout << _L_("DoCompare::equals(2,2):") << mr_utils::DoCompare<int,int>::equal(2, 2) << std::endl;
-//
-//	mr_cout << _L_("Compare::equals(2,2):") << mr_utils::DoCompare<int,int>::equal(2, 1) << std::endl;
-//	mr_cout << _L_("Compare::notequals(2,2):") << mr_utils::DoCompare<int,int>::equal(3, 4) << std::endl;
-//}
-//
-//#include "mr_exception.h"
-//static void ExceptionFunc() {
-//	mr_utils::mr_exception e("filename", 1000, _L_("My message contained in exception"));
-//	mr_cout << _L_("mr_exception msg:") << e.msg() << std::endl;
-//}
-//
-////#include "CppTestCase.h"
-////static void TestCaseFunc() {
-////	CppTest::Case c(_L_("My nifty test case"), _L_("test case description"));
-////
-////	mr_cout << _L_("Test Case Name:") << c.Name << std::endl;
-////}
-//
-//#include "mr_SharedPtr.h"
-//static void SharedPtrFunc() {
-//	mr_utils::SharedPtr<mr_utils::mr_exception> p(new mr_utils::mr_exception("filename", 1000, _L_("My message contained in exception")));
-//	mr_cout << _L_("mr_exception msg from within shared pointer:") << p->msg() << std::endl;
-//}
-//
-//#include "mr_ini_file.h"
-//static void IniFileFunc() {
-//	mr_inireader::iniFile fx;
-//
-//	mr_inireader::iniFile f(std::string("MyFileName"));
-//	//std::cout << _L_("mr_reader::iniFile:") << f.name() << std::endl;
-//}
 
 
 
@@ -86,13 +45,39 @@ public:
 };
 
 
+typedef void (__cdecl *ptrFunc)();
+
+
 int main(int argc, char* argv[]) {
 
-	//CompareFunc();
-	//ExceptionFunc();
-	//TestCaseFunc();
-	//SharedPtrFunc();
-	//IniFileFunc();
+
+	//std::cout << "Before load library" << std::endl;
+	//HINSTANCE handle = LoadLibrary(L"..\\Debug\\CppTestUtils.dll") ;
+
+
+	//std::cout << "After load library" << std::endl;
+	//if (handle == NULL) {
+	//	std::cout << "library load failed" << std::endl;
+	//	return 1;
+	//}
+	//
+	//std::cout << "Before getting function pointer:" << std::endl;
+	//ptrFunc Func = (ptrFunc) ( GetProcAddress(handle, "MyFunc") );
+	//std::cout << "After getting function pointer" << std::endl;
+	//if (Func == NULL) {
+	//	std::cout << "Function load failed" << std::endl;
+	//	FreeLibrary(handle);
+	//	return 1;
+	//}
+	//
+	//Func() ;
+	//std::cout << "After calling function pointer" << std::endl;
+
+
+
+
+
+	//std::for_each(namesV.begin(), namesV.end(), ExecDllFunctionFunctor(handle));
 
 
 	if (checkParams( 1, argc, argv )) {
@@ -129,6 +114,12 @@ int main(int argc, char* argv[]) {
 		}
 		//holdScreen();
 	}
+
+	// Temp DLL load test
+//	FreeLibrary(handle);
+
+
+
 	return 0;
 	
 

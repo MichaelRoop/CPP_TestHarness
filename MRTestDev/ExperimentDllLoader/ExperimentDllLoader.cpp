@@ -32,7 +32,7 @@ public:
 	}
 
 	void operator () (const std::string& s) {
-		std::cout << "Before getting function pointer:" << s << std::endl;
+		std::cout << "Before getting function pointer '" << s << "'" << std::endl;
 		ptrFunc Func = (ptrFunc) ( GetProcAddress(this->m_handle,s.c_str()) );
 		std::cout << "After getting function pointer" << std::endl;
 		Func() ;
