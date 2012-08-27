@@ -11,10 +11,10 @@
 #if !defined(ICPP_TEST_FIXTURE_H)
 #define ICPP_TEST_FIXTURE_H
 
-
 #include "CppTestCrossPlatform.h"
 #include "ICppTestCase.h"
 #include "ICppTestCaseArgument.h"
+#include "ICppTestFixtureTestCaseNames.h"
 #include "mr_string.h"
 
 
@@ -72,9 +72,8 @@ public:
 	virtual bool HasTest(const mr_utils::mr_string& name) const = 0;
 
 
-	/// @brief	Retrieve a list of test case names from fixture
-	// TODO - decide on name format.  Probably should be TestFixtureName.TestCaseName
-	virtual const std::vector<mr_utils::mr_string> GetTestNames() const = 0;
+	/// @brief	Retrieve the Fixture and test case names
+	virtual mr_utils::SharedPtr<CppTest::IFixutureTestCaseNames> GetTestNames() const = 0;
 
 
 	/// @brief	Retrieve a copy of the currently executed test case
