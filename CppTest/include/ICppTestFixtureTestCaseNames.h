@@ -38,6 +38,7 @@ public:
 };
 
 // Force the export of the std objects in the class
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API mr_utils::SharedPtr<CppTest::IFixutureTestCaseNames>;
 CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator< mr_utils::SharedPtr<CppTest::IFixutureTestCaseNames> >;
 CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector< mr_utils::SharedPtr<CppTest::IFixutureTestCaseNames> >;
 

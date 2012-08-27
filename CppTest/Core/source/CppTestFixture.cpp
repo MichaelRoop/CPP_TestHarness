@@ -11,6 +11,7 @@
 
 #include "CppTestFixture.h"
 #include "CppTestCaseHolder.h"
+#include "CppTestFixtureTestCaseNames.h"
 #include "mr_staticTimer.h"
 #include "mr_iostream.h"
 #include "mr_functors.h"
@@ -40,24 +41,6 @@ private:
 };
 
 
-/// @brief Functor to vector of test names held by fixture
-class BuildNamesVectorFunctor {
-public:
-	BuildNamesVectorFunctor(std::vector<mr_utils::mr_string>& names) 
-		: m_names(names) {
-	}
-
-	void operator () (const ITestCaseHolder* testHolder) {
-		this->m_names.push_back(testHolder->Data()->Name);
-	}
-
-private:
-	// TODO - look up the const in relation to reference. The reference is not changing but the object
-	std::vector<mr_utils::mr_string>& m_names;
-};
-//---------------------------------------------------------------------------------------
-
-
 Fixture::Fixture(const mr_utils::mr_string& name) 
 :	m_name( name ),
 	m_currentTestCase(0),
@@ -65,7 +48,8 @@ Fixture::Fixture(const mr_utils::mr_string& name)
 	m_fixtureTeardown(0),
 	m_testSetup(0),
 	m_testTeardown(0),
-	m_isFixtureCalled(false) {
+	m_isFixtureCalled(false),
+	m_testCaseNames(new CppTest::FixutureTestCaseNames(name)) {
 }
 
 
@@ -120,7 +104,7 @@ void Fixture::RegisterTest(IFixture::Ifixture_method_ptr test, const mr_utils::m
 	}
 
 	this->m_tests.push_back(new TestCaseHolder(test, scratch, description));
-	// TODO - destructor to clean up holders
+	this->m_testCaseNames->AddTestCaseName(scratch);
 }
 
 
@@ -133,15 +117,8 @@ bool Fixture::HasTest(const mr_utils::mr_string& name) const {
 }
 
 
-const std::vector<mr_utils::mr_string> Fixture::GetTestNames() const {
-	// TODO - verify that stack var non pointer will pass out as a copy on return
-	std::vector<mr_utils::mr_string> names;
-	std::for_each(
-		this->m_tests.begin(),
-		this->m_tests.end(),
-		BuildNamesVectorFunctor(names));
-
-	return names;
+mr_utils::SharedPtr<CppTest::IFixutureTestCaseNames> Fixture::GetTestNames() const {
+	return this->m_testCaseNames;
 }
 
 

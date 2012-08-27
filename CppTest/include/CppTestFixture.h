@@ -69,9 +69,8 @@ public:
 	virtual bool HasTest(const mr_utils::mr_string& name) const;
 
 
-	/// @brief	Retrieve a list of test case names from fixture
-	// TODO - decide on name format.  Probably should be TestFixtureName.TestCaseName
-	virtual const std::vector<mr_utils::mr_string> GetTestNames() const;
+	/// @brief	Retrieve the Fixture and test case names
+	virtual mr_utils::SharedPtr<CppTest::IFixutureTestCaseNames> GetTestNames() const;
 
 
 	/// @brief	Retrieve a copy of the currently executed test case
@@ -132,6 +131,7 @@ private:
 	bool							m_isFixtureCalled;	///< Determines if a test has been called on the fixture yet
 	std::vector<ITestCaseHolder*>	m_tests;			///< The list of test cases
 	ITestCaseHolder*				m_currentTestCase;	///< The currently executing test case holder
+	mr_utils::SharedPtr<CppTest::IFixutureTestCaseNames> m_testCaseNames; ///< Object that holds test case name information
 
 private:
 

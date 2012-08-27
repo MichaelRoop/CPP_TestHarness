@@ -18,7 +18,7 @@ namespace CppTest {
 //----------------------------------------------------------------------------------------
 /// @brief	Storage for test fixture name and its test case names.
 //----------------------------------------------------------------------------------------
-class FixutureTestCaseNames {
+class FixutureTestCaseNames : public IFixutureTestCaseNames {
 public:
 
 	/// @brief The name of the fixture
