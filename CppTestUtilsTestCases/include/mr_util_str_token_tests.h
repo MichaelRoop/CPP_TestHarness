@@ -1,9 +1,8 @@
 
 
-#if !defined(BLAHBLAHBLAH)
-#define BLAHBLAHBLAH
-
-#pragma message("including the cpp file")
+#if !defined(WIN32)
+#	pragma unmanaged
+#endif
 
 
 #include "CppTestFixture.h"
@@ -197,4 +196,3 @@ private:
 //_REGISTER_FIXTURE_(TokenizerTests2);
 
 
-#endif

@@ -49,12 +49,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>MR_USE_WIDE_STR;WIN32;_DEBUG</PreprocessorDefinitions>
-      <CompileAsManaged>true</CompileAsManaged>
+      <CompileAsManaged>false</CompileAsManaged>
       <ExceptionHandling>Async</ExceptionHandling>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <MinimalRebuild>false</MinimalRebuild>
-      <AdditionalIncludeDirectories>$(SolutionDir)\CppTestUtils\include;$(SolutionDir)\CppTestUtils\Exceptions\include;$(SolutionDir)\CppTest\include;$(SolutionDir)\CppTest\ScriptReader\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\CppTestUtils\include;$(SolutionDir)\CppTestUtils\Exceptions\include;$(SolutionDir)\CppTest\include;$(SolutionDir)\CppTest\ScriptReader\include;include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -73,7 +73,8 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>MR_USE_WIDE_STR;WIN32;NDEBUG</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\CppTestUtils\include;$(SolutionDir)\CppTestUtils\Exceptions\include;$(SolutionDir)\CppTest\include;$(SolutionDir)\CppTest\ScriptReader\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\CppTestUtils\include;$(SolutionDir)\CppTestUtils\Exceptions\include;$(SolutionDir)\CppTest\include;$(SolutionDir)\CppTest\ScriptReader\include;include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <CompileAsManaged>false</CompileAsManaged>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -85,15 +86,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="dllmain.cpp">
-      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </PrecompiledHeader>
-      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="mr_util_str_token_tests.cpp" />
+    <ClCompile Include="source\dllmain.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\mr_util_str_token_tests.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
