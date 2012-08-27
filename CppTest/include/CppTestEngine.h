@@ -16,6 +16,7 @@
 #include "ICppTestScriptReader.h"
 #include "ICppTestCase.h"
 #include "ICppTestFixture.h"
+#include "CppTestFixtureTestCaseNames.h"
 #include "mr_singleton.h"
 #include "mr_string.h"
 
@@ -63,6 +64,9 @@ public:
 
 	/// @brief	Returns the unique id for the test run.
 	mr_utils::mr_string GetRunId();
+
+	/// @brief Get all the test case names that have been registered
+	std::vector<mr_utils::SharedPtr<CppTest::IFixutureTestCaseNames> > GetTestNames();
 
 private:
 

@@ -11,49 +11,53 @@
 #include "mr_iostream.h"
 #include "mr_fileException.h"
 #include "CppTestScriptException.h"
+
+#include "mr_pointerException.h"
+#include <algorithm>
+
 //
 ////#include <iostream>
 //
 //#include "mr_SharedPtr.h"
 
 
-// Test in including the Utils
-#include "mr_doCompare.h"
-static void CompareFunc() {
-	int i = 2;
-	int j = 2;
-	mr_cout << _L_("DoCompare::equals(2,2):") << mr_utils::DoCompare<int,int>::equal(2, 2) << std::endl;
-
-	mr_cout << _L_("Compare::equals(2,2):") << mr_utils::DoCompare<int,int>::equal(2, 1) << std::endl;
-	mr_cout << _L_("Compare::notequals(2,2):") << mr_utils::DoCompare<int,int>::equal(3, 4) << std::endl;
-}
-
-#include "mr_exception.h"
-static void ExceptionFunc() {
-	mr_utils::mr_exception e("filename", 1000, _L_("My message contained in exception"));
-	mr_cout << _L_("mr_exception msg:") << e.msg() << std::endl;
-}
-
-//#include "CppTestCase.h"
-//static void TestCaseFunc() {
-//	CppTest::Case c(_L_("My nifty test case"), _L_("test case description"));
+//// Test in including the Utils
+//#include "mr_doCompare.h"
+//static void CompareFunc() {
+//	int i = 2;
+//	int j = 2;
+//	mr_cout << _L_("DoCompare::equals(2,2):") << mr_utils::DoCompare<int,int>::equal(2, 2) << std::endl;
 //
-//	mr_cout << _L_("Test Case Name:") << c.Name << std::endl;
+//	mr_cout << _L_("Compare::equals(2,2):") << mr_utils::DoCompare<int,int>::equal(2, 1) << std::endl;
+//	mr_cout << _L_("Compare::notequals(2,2):") << mr_utils::DoCompare<int,int>::equal(3, 4) << std::endl;
 //}
-
-#include "mr_SharedPtr.h"
-static void SharedPtrFunc() {
-	mr_utils::SharedPtr<mr_utils::mr_exception> p(new mr_utils::mr_exception("filename", 1000, _L_("My message contained in exception")));
-	mr_cout << _L_("mr_exception msg from within shared pointer:") << p->msg() << std::endl;
-}
-
-#include "mr_ini_file.h"
-static void IniFileFunc() {
-	mr_inireader::iniFile fx;
-
-	mr_inireader::iniFile f(std::string("MyFileName"));
-	//std::cout << _L_("mr_reader::iniFile:") << f.name() << std::endl;
-}
+//
+//#include "mr_exception.h"
+//static void ExceptionFunc() {
+//	mr_utils::mr_exception e("filename", 1000, _L_("My message contained in exception"));
+//	mr_cout << _L_("mr_exception msg:") << e.msg() << std::endl;
+//}
+//
+////#include "CppTestCase.h"
+////static void TestCaseFunc() {
+////	CppTest::Case c(_L_("My nifty test case"), _L_("test case description"));
+////
+////	mr_cout << _L_("Test Case Name:") << c.Name << std::endl;
+////}
+//
+//#include "mr_SharedPtr.h"
+//static void SharedPtrFunc() {
+//	mr_utils::SharedPtr<mr_utils::mr_exception> p(new mr_utils::mr_exception("filename", 1000, _L_("My message contained in exception")));
+//	mr_cout << _L_("mr_exception msg from within shared pointer:") << p->msg() << std::endl;
+//}
+//
+//#include "mr_ini_file.h"
+//static void IniFileFunc() {
+//	mr_inireader::iniFile fx;
+//
+//	mr_inireader::iniFile f(std::string("MyFileName"));
+//	//std::cout << _L_("mr_reader::iniFile:") << f.name() << std::endl;
+//}
 
 
 
@@ -61,20 +65,46 @@ static void IniFileFunc() {
 bool checkParams( int required, int argc, char* argv[] );
 void holdScreen();
 
+class PrintCaseNames {
+public:
+//	PrintCaseNames() {}
+	void operator () (const mr_utils::mr_string& name) {
+		mr_cout << _L_("\t") << name << std::endl;
+	}
+};
+
+//std::vector<mr_utils::SharedPtr<CppTest::IFixutureTestCaseNames> >
+class PrintFixtureCaseNames {
+public:
+	void operator () (mr_utils::SharedPtr<CppTest::IFixutureTestCaseNames> fixture) {
+		mr_utils::mr_pointerException::ptrAssert(fixture.getPtr(), _FL_ );
+		mr_cout << fixture->FixtureName() << std::endl;
+		std::for_each(
+			fixture->TestCaseNames().begin(), 
+			fixture->TestCaseNames().end(), PrintCaseNames());
+	}
+};
+
 
 int main(int argc, char* argv[]) {
 
-	CompareFunc();
-	ExceptionFunc();
+	//CompareFunc();
+	//ExceptionFunc();
 	//TestCaseFunc();
-	SharedPtrFunc();
-	IniFileFunc();
+	//SharedPtrFunc();
+	//IniFileFunc();
 
 
 	if (checkParams( 1, argc, argv )) {
 		try {
 			mr_cout << _L_("Loading Configuration from ./CppTestConfig.ini") << std::endl;
 			CppTest::Engine& eng = CppTest::Engine::Instance();
+
+			// Print out list of loaded tests
+			std::vector<mr_utils::SharedPtr<CppTest::IFixutureTestCaseNames> > testNames = eng.GetTestNames();
+			std::for_each(testNames.begin(), testNames.end(), PrintFixtureCaseNames());
+
+
 			eng.GetLogEngine().LoadLoggers("CppTestConfig.ini", _L_("INI"));
 
 			// The include path is provided for now until we can replace with test runner concept

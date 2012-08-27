@@ -35,6 +35,26 @@ private:
 	const mr_utils::mr_string& m_name;
 };
 
+//---------------------------------------------------------------------------------------
+/// @brief Populate a list of registered fixtures with their test cases
+class BuildTestCaseList {
+public:
+	BuildTestCaseList(std::vector<mr_utils::SharedPtr<CppTest::IFixutureTestCaseNames> >& names) 
+		: m_names(names) {
+	}
+
+	void operator () (CppTest::IFixture* fixture) {
+		mr_utils::mr_pointerException::ptrAssert(fixture, _FL_ );
+		this->m_names.push_back(fixture->GetTestNames());
+	}
+private:
+	std::vector<mr_utils::SharedPtr<CppTest::IFixutureTestCaseNames> >& m_names;
+};
+
+// End of functors
+//---------------------------------------------------------------------------------------
+
+
 class NonExistantTestData : public CppTest::Case {
 public:
 	/// @brief	Constructor.
@@ -44,9 +64,6 @@ public:
 			this->Status = CppTest::ICase::ST_NOT_EXISTS;
 	}
 };
-
-// End of functors
-//---------------------------------------------------------------------------------------
 
 
 // Declaration of static instance
@@ -143,6 +160,13 @@ mr_utils::mr_string Engine::GetRunId() {
 		m_runId = os.str();
 	}
 	return m_runId;
+}
+
+
+std::vector<mr_utils::SharedPtr<CppTest::IFixutureTestCaseNames> > Engine::GetTestNames() {
+	std::vector<mr_utils::SharedPtr<CppTest::IFixutureTestCaseNames> > testNames;
+	std::for_each(this->m_fixtures.begin(), this->m_fixtures.end(), BuildTestCaseList(testNames));
+	return testNames;
 }
 
 

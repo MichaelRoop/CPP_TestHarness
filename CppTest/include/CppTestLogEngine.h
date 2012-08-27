@@ -21,11 +21,6 @@
 
 namespace CppTest {
 
-//class ILog;
-class Fixture;
-class Case;
-
-
 //--------------------------------------------------------------------------------------
 /// 
 /// @brief	Drives the logging of testCase information across a variable number
@@ -85,15 +80,9 @@ protected:
 	std::vector< mr_utils::SharedPtr<CppTest::ILog> >	m_logs; ///< Vector of derived logger objects.
 };
 
-
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::LogEngine>;
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::LogEngine>;
-
-
+// Force export
 CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator< mr_utils::SharedPtr<CppTest::LogEngine> >;
 CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector< mr_utils::SharedPtr<CppTest::LogEngine> >;
-
-
 
 }
 
