@@ -16,7 +16,7 @@
 #include "ICppTestScriptReader.h"
 #include "ICppTestCase.h"
 #include "ICppTestFixture.h"
-#include "CppTestFixtureTestCaseNames.h"
+#include "ICppTestFixtureTestCaseNames.h"
 #include "mr_singleton.h"
 #include "mr_string.h"
 
@@ -24,16 +24,12 @@
 
 namespace CppTest {
 
-	class Fixture;
-	class Case;
-
 ///--------------------------------------------------------------------------------------
 /// 
 /// @brief	A Singleton class to drive the test case architecture.
 ///
 ///--------------------------------------------------------------------------------------
-class CPPTESCASE_API Engine : public mr_utils::singleton
-{
+class CPPTESCASE_API Engine : public mr_utils::singleton {
 public:
 
 	/// @brief	Static method to retrieve the unique instance of this class.
@@ -69,7 +65,6 @@ public:
 	std::vector<mr_utils::SharedPtr<CppTest::IFixutureTestCaseNames> > GetTestNames();
 
 private:
-
 	std::vector<CppTest::IFixture*> m_fixtures;	///< The vector of registered test case fixtures.
 	static Engine*					m_instance;	///< The unique instance of the testEngine.
 	mr_utils::mr_string				m_runId;	///< Unique ID for the run used in log files.
@@ -86,15 +81,12 @@ private:
 
 
 	/// @brief	Log the results of one test case across log outputs.
-	///
 	/// @exception	Throws a mr_utils::mr_pointerException if the testCase pointer is invalid.
-	///
 	/// @param	fixture	The test case fixture whose results are to be logged.
 	void LogResults(CppTest::ICase& caseData);
 
 };
 
 }
-
 
 #endif

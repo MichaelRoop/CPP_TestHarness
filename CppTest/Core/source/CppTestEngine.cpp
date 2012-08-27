@@ -10,7 +10,6 @@
 ///--------------------------------------------------------------------------------------
 #include "CppTestEngine.h"
 #include "CppTestFixture.h"
-#include "ICppTestScriptReader.h"
 #include "CppTestCase.h"
 #include "mr_pointerException.h"
 #include "mr_defines.h"
@@ -54,7 +53,7 @@ private:
 // End of functors
 //---------------------------------------------------------------------------------------
 
-
+/// @brief Dummy test case to report to the loggers that the names test case was not found
 class NonExistantTestData : public CppTest::Case {
 public:
 	/// @brief	Constructor.
