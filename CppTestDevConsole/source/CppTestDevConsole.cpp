@@ -46,35 +46,88 @@ public:
 
 
 typedef void (__cdecl *ptrFunc)();
-
+//typedef void (__stdcall *ptrFunc)();
+//#define PROC_OFFSET 0x000112C1
 
 int main(int argc, char* argv[]) {
 
-
-	//std::cout << "Before load library" << std::endl;
-	//HINSTANCE handle = LoadLibrary(L"..\\Debug\\CppTestUtils.dll") ;
+	std::vector<std::string> namesVector;
 
 
-	//std::cout << "After load library" << std::endl;
-	//if (handle == NULL) {
-	//	std::cout << "library load failed" << std::endl;
-	//	return 1;
-	//}
-	//
-	//std::cout << "Before getting function pointer:" << std::endl;
-	//ptrFunc Func = (ptrFunc) ( GetProcAddress(handle, "MyFunc") );
-	//std::cout << "After getting function pointer" << std::endl;
-	//if (Func == NULL) {
-	//	std::cout << "Function load failed" << std::endl;
+
+//
+//		//HMODULE handle = LoadLibraryEx(L"C:\\Dev\\ExperimentDll.dll", NULL, DONT_RESOLVE_DLL_REFERENCES); 
+//		HMODULE handle = LoadLibraryEx(L"..\\Debug\\CppTestUtilsTestCases.dll", NULL, DONT_RESOLVE_DLL_REFERENCES); 
+//		if (handle == NULL) {
+//			std::cout << "library load failed" << std::endl;
+//			FreeLibrary(handle);
+//			return 1;
+//		}
+//			std::cout << "library loaded" << std::endl;
+//
+//
+//
+//		assert(((PIMAGE_DOS_HEADER)handle)->e_magic == IMAGE_DOS_SIGNATURE);
+//
+//		PIMAGE_NT_HEADERS header = (PIMAGE_NT_HEADERS) ((BYTE *)handle + ((PIMAGE_DOS_HEADER)handle)->e_lfanew);
+//		assert(header->Signature == IMAGE_NT_SIGNATURE);
+//		assert(header->OptionalHeader.NumberOfRvaAndSizes > 0);
+//
+//		PIMAGE_EXPORT_DIRECTORY exports = (PIMAGE_EXPORT_DIRECTORY) 
+//			((BYTE *)handle + header->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_EXPORT].VirtualAddress);
+//		PVOID names = (BYTE *)handle + exports->AddressOfNames;
+//
+//		
+//				
+//		for (unsigned int i = 0; i < exports->NumberOfNames; i++) {
+//			printf("Export Function Name: |%s|\n", (BYTE *)handle + ((DWORD *)names)[i]);
+//			namesVector.push_back( (char*)((BYTE *)handle + ((DWORD *)names)[i]));
+//		}
+//		//FreeLibrary(handle);
+//
+//
+////return 0;
+
+
+	std::cout << "Before load library" << std::endl;
+	HINSTANCE handle = LoadLibrary(L"..\\Debug\\CppTestUtilsTestCases.dll") ;
+//	//HANDLE handle = LoadLibrary(L"..\\Debug\\CppTestUtils.dll") ;
+//
+//
+//	std::cout << "After load library" << std::endl;
+//	if (handle == NULL) {
+//		std::cout << "library load failed" << std::endl;
+//		return 1;
+//	}
+//	
+//
+//	std:: wcout << "Func Name:" << MAKEINTRESOURCEA(1) << std::endl;
+//
+//	std::cout << "Before getting function pointer:" << std::endl;
+	ptrFunc Func = (ptrFunc) ( GetProcAddress(handle, "MyFunc") );
+////	ptrFunc Func = (ptrFunc) ( GetProcAddress(handle, "MyFunc") );
+////	ptrFunc Func = (ptrFunc) ( (handle + PROC_OFFSET) );
+//
+//	ptrFunc Func = (ptrFunc) ( GetProcAddress(handle, MAKEINTRESOURCEA(1)) );
+//
+//
+	std::cout << "After getting function pointer" << std::endl;
+	if (Func == NULL) {
+		std::cout << "Function load failed" << std::endl;
+		FreeLibrary(handle);
+		return 1;
+	}
+
+	std::cout << "Function load succeeded" << std::endl;
+
+
+//	
+	Func() ;
+	std::cout << "After calling function pointer" << std::endl;
+//
+
 	//	FreeLibrary(handle);
-	//	return 1;
-	//}
-	//
-	//Func() ;
-	//std::cout << "After calling function pointer" << std::endl;
-
-
-
+	//return 0;
 
 
 	//std::for_each(namesV.begin(), namesV.end(), ExecDllFunctionFunctor(handle));
@@ -116,7 +169,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	// Temp DLL load test
-//	FreeLibrary(handle);
+	FreeLibrary(handle);
 
 
 
