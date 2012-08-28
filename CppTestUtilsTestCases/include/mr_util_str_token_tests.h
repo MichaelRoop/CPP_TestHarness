@@ -1,5 +1,3 @@
-
-
 #if !defined(WIN32)
 #	pragma unmanaged
 #endif

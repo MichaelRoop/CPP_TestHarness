@@ -104,13 +104,17 @@ int main(int argc, char* argv[]) {
 //	std:: wcout << "Func Name:" << MAKEINTRESOURCEA(1) << std::endl;
 //
 //	std::cout << "Before getting function pointer:" << std::endl;
-	ptrFunc Func = (ptrFunc) ( GetProcAddress(handle, "MyFunc") );
-////	ptrFunc Func = (ptrFunc) ( GetProcAddress(handle, "MyFunc") );
+
+	//	ptrFunc Func = (ptrFunc) ( GetProcAddress(handle, "MyFunc") );
+
+	////	ptrFunc Func = (ptrFunc) ( GetProcAddress(handle, "MyFunc") );
 ////	ptrFunc Func = (ptrFunc) ( (handle + PROC_OFFSET) );
 //
 //	ptrFunc Func = (ptrFunc) ( GetProcAddress(handle, MAKEINTRESOURCEA(1)) );
 //
 //
+
+	/*
 	std::cout << "After getting function pointer" << std::endl;
 	if (Func == NULL) {
 		std::cout << "Function load failed" << std::endl;
@@ -125,7 +129,7 @@ int main(int argc, char* argv[]) {
 	Func() ;
 	std::cout << "After calling function pointer" << std::endl;
 //
-
+*/
 	//	FreeLibrary(handle);
 	//return 0;
 

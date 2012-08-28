@@ -8,6 +8,7 @@
 #include <cstdio>
 
 #include "mr_util_str_token_tests.h"
+#include "mr_util_str_trim_tests.h"
 
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved ) { 
 	switch (ul_reason_for_call)
@@ -15,8 +16,10 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
 	case DLL_PROCESS_ATTACH:
 		printf("-----------------------------DLL_PROCESS_ATTACH - Utils Test Cases\n");
 		{
-			_REGISTER_FIXTURE_(TokenizerTests1)
-			_REGISTER_FIXTURE_(TokenizerTests2)
+			_REGISTER_FIXTURE_(TokenizerTests1);
+			_REGISTER_FIXTURE_(TokenizerTests2);
+			_REGISTER_FIXTURE_(UtilStrTrimTests);
+		
 		}
 		break;
 	case DLL_THREAD_ATTACH:

@@ -21,5 +21,11 @@
     <ClInclude Include="include\mr_util_str_token_tests.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\mr_testSharedPtr.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mr_util_str_trim_tests.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
