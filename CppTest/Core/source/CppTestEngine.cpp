@@ -141,10 +141,9 @@ void Engine::ProcessScript(CppTest::IScriptReader& theReader ) {
 						this->LogResults((*it)->CurrentTestCase());
 					}
 					else {
-						this->LogResults(DisabledTestData(info.GetName()));
+						// TODO - Nope do not do this with script reader. It uses IsActive == false to also to indicate blank lines to skip
+						//this->LogResults(DisabledTestData(info.GetName()));
 					}
-
-
 					info = theReader.getNextTest();
 					if (info.IsNull()) {
 						(*it)->ResetFixture();
