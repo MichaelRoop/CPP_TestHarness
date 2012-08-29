@@ -67,6 +67,7 @@ private:
 	std::vector<mr_utils::SharedPtr<CppTest::IFixutureTestCaseNames> >& m_names;
 };
 
+
 // End of functors
 //---------------------------------------------------------------------------------------
 
@@ -78,6 +79,18 @@ public:
 	NonExistantTestData(const mr_utils::mr_string& name) 
 		: CppTest::Case(name, L("Test not found") ) {
 			this->Status = CppTest::ICase::ST_NOT_EXISTS;
+	}
+};
+
+
+/// @brief Dummy test case to report to the loggers that the names test case was not found
+class DisabledTestData : public CppTest::Case {
+public:
+	/// @brief	Constructor.
+	/// @param	testName	Unique name for the test.
+	DisabledTestData(const mr_utils::mr_string& name) 
+		: CppTest::Case(name, L("Test Disabled") ) {
+			this->Status = CppTest::ICase::ST_DISABLED;
 	}
 };
 
@@ -127,6 +140,11 @@ void Engine::ProcessScript(CppTest::IScriptReader& theReader ) {
 						(*it)->RunTest(info.GetName(), info.GetArguments());
 						this->LogResults((*it)->CurrentTestCase());
 					}
+					else {
+						this->LogResults(DisabledTestData(info.GetName()));
+					}
+
+
 					info = theReader.getNextTest();
 					if (info.IsNull()) {
 						(*it)->ResetFixture();
@@ -181,17 +199,14 @@ void Engine::ProcessTestList(std::vector< mr_utils::SharedPtr<CppTest::ITestFixt
 							this->LogResults((*itFixture)->CurrentTestCase());
 						}
 						else {
-							// TODO Run a replacement InActive dummy Test with DISABLED state
+							this->LogResults(DisabledTestData(name));
 						}
 					}
 					else {
-						NonExistantTestData test(name);
-						this->LogResults(test);
+						this->LogResults(NonExistantTestData(name));
 					}
 				}
-
 			}
-
 		}
 		else {
 			// No test infos in fixture info

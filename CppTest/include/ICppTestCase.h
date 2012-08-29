@@ -36,6 +36,7 @@ public:
 	/// @brief	Status indicator for the test case.
 	typedef enum Status {
 		ST_NONE,					///< No status. Default
+		ST_DISABLED,				///< Test exists but marked disabled in script
 		ST_NOT_EXISTS,				///< Test does not exist
 		ST_SUCCESS,					///< Successful
 		ST_FAIL_SETUP,				///< Failed on test setup
@@ -52,6 +53,7 @@ public:
 	static mr_utils::mr_string ToString(ICase::TestCaseStatus status) {
 		switch (status) {
 			case ICase::ST_NONE:			return L( "NONE" );
+			case ICase::ST_DISABLED:		return L("ST_DISABLED");
 			case ICase::ST_SUCCESS:		return L( "SUCCESS" );
 			case ICase::ST_FAIL_SETUP:		return L( "FAIL_SETUP" );
 			case ICase::ST_FAIL_TEST:		return L( "FAIL_TEST" );
