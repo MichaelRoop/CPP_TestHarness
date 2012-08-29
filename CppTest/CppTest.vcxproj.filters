@@ -169,6 +169,9 @@
     <ClCompile Include="Core\source\CppTestFixtureInfoObject.cpp">
       <Filter>Core\source</Filter>
     </ClCompile>
+    <ClCompile Include="Core\source\CppTestListBuilder.cpp">
+      <Filter>Core\source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Win\resource.h">
@@ -298,6 +301,12 @@
       <Filter>Core\include</Filter>
     </ClInclude>
     <ClInclude Include="include\ICppTestFixtureInfoObject.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ICppTestListBuilder.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CppTestListBuilder.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

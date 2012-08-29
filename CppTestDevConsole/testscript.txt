@@ -1,20 +1,20 @@
 #TC1
 #TC2
 #TC3
-UTL_STR_RTRIM_1
-UTL_STR_RTRIM_2
-UTL_STR_LTRIM_1
-UTL_STR_LTRIM_2
-UTL_STR_TRIM_1
-UTL_STR_TRIM_2
+UtilStrTrimTests.UTL_STR_RTRIM_1
+UtilStrTrimTests.UTL_STR_RTRIM_2
+UtilStrTrimTests.UTL_STR_LTRIM_1
+UtilStrTrimTests.UTL_STR_LTRIM_2
+UtilStrTrimTests.UTL_STR_TRIM_1
+UtilStrTrimTests.UTL_STR_TRIM_2
 
-UTL_TOK_1_1
-UTL_TOK_1_2$
-UTL_TOK_1_3$arg1=3434||arg2=jjf
-UTL_TOK_1_4$arg1=3434|
-UTL_TOK_1_5$arg1=3434
-UTL_TOK_1_6
-UTL_TOK_1_7
+TokenizerTests1.UTL_TOK_1_1
+TokenizerTests1.UTL_TOK_1_2$
+TokenizerTests1.UTL_TOK_1_3$arg1=3434||arg2=jjf
+TokenizerTests1.UTL_TOK_1_4$arg1=3434|
+TokenizerTests1.UTL_TOK_1_5$arg1=3434
+@TokenizerTests1.UTL_TOK_1_6
+TokenizerTests2.UTL_TOK_1_7
 
 
 #Test SharedPtr object

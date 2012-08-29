@@ -68,6 +68,11 @@ bool Log::LogTest(CppTest::ICase& testCase) {
 			++this->m_stNotExistCount;
 			break;
 
+		case CppTest::ICase::ST_DISABLED:		
+			//++this->m_stNotExistCount;
+			// TODO - add disabled count
+			break;
+
 		// TODO - Need to modify this with fixture specific counters?
 		case CppTest::ICase::ST_FAIL_FIXTURE_SETUP:
 			++this->m_stFailSetupCount;

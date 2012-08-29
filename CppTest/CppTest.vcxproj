@@ -99,6 +99,7 @@
     <ClCompile Include="Core\source\CppTestFixtureInfoObject.cpp" />
     <ClCompile Include="Core\source\CppTestFixtureTestCaseNames.cpp" />
     <ClCompile Include="Core\source\CppTestInfoObject.cpp" />
+    <ClCompile Include="Core\source\CppTestListBuilder.cpp" />
     <ClCompile Include="Core\source\dllmain.cpp" />
     <ClCompile Include="Exceptions\source\CppTestScriptException.cpp" />
     <ClCompile Include="Factories\source\CppTestLogFactory.cpp" />
@@ -137,6 +138,7 @@
     <ClInclude Include="include\CppTestFixture.h" />
     <ClInclude Include="include\CppTestFixtureTestCaseNames.h" />
     <ClInclude Include="include\CppTestInfoObject.h" />
+    <ClInclude Include="include\CppTestListBuilder.h" />
     <ClInclude Include="include\CppTestLogEngine.h" />
     <ClInclude Include="include\CppTestMacros.h" />
     <ClInclude Include="include\CppTestScriptException.h" />
@@ -144,6 +146,7 @@
     <ClInclude Include="include\ICppTestCase.h" />
     <ClInclude Include="include\ICppTestFixture.h" />
     <ClInclude Include="include\ICppTestCaseHolder.h" />
+    <ClInclude Include="include\ICppTestListBuilder.h" />
     <ClInclude Include="include\ICppTestLog.h" />
     <ClInclude Include="include\ICppTestLogOutput.h" />
     <ClInclude Include="include\ICppTestFixtureInfoObject.h" />

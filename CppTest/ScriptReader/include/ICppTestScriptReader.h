@@ -38,9 +38,10 @@ public:
 
 
 	/// @brief	Extracts the test information from the current test script line.
+	/// @param	fixtureName	Name of the fixture for the test case.
 	/// @return	The populated testInfoObject for the test.  If the object has no more
 	///			script lines the testInfoObject.isValid() will return false.
-	virtual CppTest::TestInfoObject getNextTest()  {
+	virtual CppTest::TestInfoObject getNextTest(mr_utils::mr_string& fixtureName)  {
 		// Should be pure virtual but cannot export the class
 		throw mr_utils::mr_exception(_FL_, _L_("Do not use base directly - public only for forced export"));
 	}

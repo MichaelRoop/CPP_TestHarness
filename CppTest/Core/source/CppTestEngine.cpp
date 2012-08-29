@@ -116,7 +116,10 @@ void Engine::RegisterCase(CppTest::IFixture* fixture) {
 void Engine::ProcessScript(CppTest::IScriptReader& theReader ) {
 	this->m_logEngine.WriteHeaders();
 
-	CppTest::TestInfoObject info = theReader.getNextTest();
+	mr_utils::mr_string fixtureName;
+
+
+	CppTest::TestInfoObject info = theReader.getNextTest(fixtureName);
 	while (!info.IsNull()) {
 		bool infoUnused = false;
 		if (info.IsActive()) {
@@ -141,10 +144,9 @@ void Engine::ProcessScript(CppTest::IScriptReader& theReader ) {
 						this->LogResults((*it)->CurrentTestCase());
 					}
 					else {
-						// TODO - Nope do not do this with script reader. It uses IsActive == false to also to indicate blank lines to skip
-						//this->LogResults(DisabledTestData(info.GetName()));
+						this->LogResults(DisabledTestData(info.GetName()));
 					}
-					info = theReader.getNextTest();
+					info = theReader.getNextTest(fixtureName);
 					if (info.IsNull()) {
 						(*it)->ResetFixture();
 						break;
@@ -158,10 +160,14 @@ void Engine::ProcessScript(CppTest::IScriptReader& theReader ) {
 				}
 			}
 		}
+		else {
+			this->LogResults(DisabledTestData(info.GetName()));
+		}
+
 
 		// Only get next if not already hit end. Another case is when the info is valid but unused
 		if (!info.IsNull() && !infoUnused) {
-			info = theReader.getNextTest();
+			info = theReader.getNextTest(fixtureName);
 		}
 	}
 	this->m_logEngine.WriteSummaries();

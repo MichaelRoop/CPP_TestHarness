@@ -100,10 +100,11 @@ public:
 
 
 	/// @brief	Extracts the test information from the current test script line.
+	/// @param	fixtureName	Name of the fixture for the test case.
 	///	@throw	Throws a scriptException on syntax failure.
 	/// @return	The populated testInfoObject for the test.  If the object has no more
 	///			script lines the testInfoObject.isValid() will return false.
-	CppTest::TestInfoObject getNextTest();
+	CppTest::TestInfoObject getNextTest(mr_utils::mr_string& fixtureName);
 
 private:
 	std::string				m_filename;		///< The file name of the script.
@@ -113,10 +114,11 @@ private:
 
 
 	/// @brief	Helper method to process one line of the script file.
+	/// @param	fixtureName	Name of the fixture for the test case.
 	///	@throw	Throws a scriptException on failure
 	/// @param	testInfo	The testInfoObject to populate from the script file.
 	/// @param	str			The line as read from the file.
-	void ProcessLine(CppTest::TestInfoObject& testInfo, const mr_utils::mr_char* str);
+	void ProcessLine(mr_utils::mr_string& fixtureName, CppTest::TestInfoObject& testInfo, mr_utils::mr_string str);
 
 
 	/// @brief	Helper method to process the arguments portion of the script line.

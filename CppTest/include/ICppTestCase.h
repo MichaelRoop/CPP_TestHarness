@@ -53,7 +53,7 @@ public:
 	static mr_utils::mr_string ToString(ICase::TestCaseStatus status) {
 		switch (status) {
 			case ICase::ST_NONE:			return L( "NONE" );
-			case ICase::ST_DISABLED:		return L("ST_DISABLED");
+			case ICase::ST_DISABLED:		return L("DISABLED");
 			case ICase::ST_SUCCESS:		return L( "SUCCESS" );
 			case ICase::ST_FAIL_SETUP:		return L( "FAIL_SETUP" );
 			case ICase::ST_FAIL_TEST:		return L( "FAIL_TEST" );
