@@ -11,6 +11,7 @@
 #include "CppTestEngine.h"
 #include "CppTestFixture.h"
 #include "CppTestCase.h"
+#include "CppTestInfoObject.h"
 #include "mr_pointerException.h"
 #include "mr_defines.h"
 
@@ -33,6 +34,22 @@ public:
 private:
 	const mr_utils::mr_string& m_name;
 };
+
+
+class HasNamedFixtureFunctor {
+public:
+	HasNamedFixtureFunctor(const mr_utils::mr_string& name) : m_name(name) {
+	}
+
+	bool operator () (CppTest::IFixture* fixture) {
+		mr_utils::mr_pointerException::ptrAssert(fixture, _FL_ );
+		return fixture->Name() == this->m_name;
+	}
+private:
+	const mr_utils::mr_string& m_name;
+};
+
+
 
 //---------------------------------------------------------------------------------------
 /// @brief Populate a list of registered fixtures with their test cases
@@ -132,6 +149,56 @@ void Engine::ProcessScript(CppTest::IScriptReader& theReader ) {
 	}
 	this->m_logEngine.WriteSummaries();
 }
+
+
+void Engine::ProcessTestList(std::vector< mr_utils::SharedPtr<CppTest::ITestFixtureInfoObject> >& list) {
+	// Iterate through each Fixture info
+	std::vector< mr_utils::SharedPtr<CppTest::ITestFixtureInfoObject> >::iterator itFixtureInfo = list.begin();
+	for (; itFixtureInfo != list.end(); itFixtureInfo++) {
+
+		// Only look up the actual fixture if the Fixture Info has test infos
+		const std::vector<CppTest::TestInfoObject>& testInfos = (*itFixtureInfo)->GetTestInfoVector();
+		if (testInfos.size() > 0) {
+			// Retrieve the actual fixture pointer
+			std::vector<CppTest::IFixture*>::iterator itFixture = 
+				std::find_if(
+					this->m_fixtures.begin(), 
+					this->m_fixtures.end(), 
+					HasNamedTestFunctor((*itFixtureInfo)->GetName()));
+
+			// check if the fixture is registered with the engine
+			if (itFixture == this->m_fixtures.end()) {
+				// TODO - Log failure to find the Fixture
+			}
+			else {
+				// iterate through each test info in the fixture info to find the tests
+				std::vector<CppTest::TestInfoObject>::const_iterator itTestInfo = testInfos.begin();
+				for (; itTestInfo != testInfos.end(); ++itTestInfo) {
+					mr_utils::mr_string name = itTestInfo->GetName(); 
+					if ((*itFixture)->HasTest(name)) {
+						if (itTestInfo->IsActive()) {
+							(*itFixture)->RunTest(name, itTestInfo->GetArguments());
+							this->LogResults((*itFixture)->CurrentTestCase());
+						}
+						else {
+							// TODO Run a replacement InActive dummy Test with DISABLED state
+						}
+					}
+					else {
+						NonExistantTestData test(name);
+						this->LogResults(test);
+					}
+				}
+
+			}
+
+		}
+		else {
+			// No test infos in fixture info
+		}
+	}
+}
+
 
 
 void Engine::LogResults(CppTest::ICase& testCase) {

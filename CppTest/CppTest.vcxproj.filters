@@ -58,6 +58,9 @@
     <Filter Include="Outputs\source">
       <UniqueIdentifier>{5a02c9c8-8418-471b-a7cb-13db72795372}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\include">
+      <UniqueIdentifier>{eba5a6fe-4d4f-451d-bc7d-0321e6111038}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Win\app.ico">
@@ -161,6 +164,9 @@
       <Filter>include</Filter>
     </ClCompile>
     <ClCompile Include="Core\source\CppTestFixtureTestCaseNames.cpp">
+      <Filter>Core\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\source\CppTestFixtureInfoObject.cpp">
       <Filter>Core\source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -286,6 +292,12 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include\CppTestFixtureTestCaseNames.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\CppTestFixtureInfoObject.h">
+      <Filter>Core\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ICppTestFixtureInfoObject.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
