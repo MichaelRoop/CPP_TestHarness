@@ -99,7 +99,7 @@ void FileScriptReader::ProcessLine(mr_utils::mr_string& fixtureName, CppTest::Te
 			}
 		}
 
-		mr_cout << _L_("Fixture:") << fixtureName << _L_("  TestCase:") << name << std::endl;
+		//mr_cout << _L_("Fixture:") << fixtureName << _L_("  TestCase:") << name << std::endl;
 //	}
 }
 

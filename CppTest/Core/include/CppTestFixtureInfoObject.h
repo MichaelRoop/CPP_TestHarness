@@ -3,19 +3,20 @@
 /// @brief	cross platform and char width holder for test information.
 ///
 /// @author		Michael Roop
-/// @date		2010
+/// @date		2012
 /// @version	1.0
 ///
-/// Copyright 2010 Michael Roop
+/// Copyright 2012 Michael Roop
 ///--------------------------------------------------------------------------------------
 #if !defined(CPP_TEST_FIXTURE_INFO_OBJECT_H)
 #define CPP_TEST_FIXTURE_INFO_OBJECT_H
 
-#include "ICppTestFixtureInfoObject.h"
-
+#include "CppTestInfoObject.h"
+#include "mr_string.h"
+#include "mr_SharedPtr.h"
+#include <vector>
 
 namespace CppTest {
-
 
 ///--------------------------------------------------------------------------------------
 ///
@@ -25,7 +26,6 @@ namespace CppTest {
 class CPPTESCASE_API TestFixtureInfoObject {
 
 public:
-
 
 	/// @brief Constructor
 	TestFixtureInfoObject(const mr_utils::mr_string& name);
@@ -74,10 +74,8 @@ private:
 };
 
 // Force export of class with std objects
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API mr_utils::SharedPtr<CppTest::TestFixtureInfoObject>;
 CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator< mr_utils::SharedPtr<CppTest::TestFixtureInfoObject> >;
 CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector< mr_utils::SharedPtr<CppTest::TestFixtureInfoObject> >;
-
 
 } // end namespace
 

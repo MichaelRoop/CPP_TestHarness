@@ -12,23 +12,16 @@
 #define ICPP_TEST_LIST_BUILDER_H
 
 #include "CppTestCrossPlatform.h"
-//#include "CppTestLogEngine.h"
 #include "ICppTestScriptReader.h"
-//#include "ICppTestCase.h"
-//#include "ICppTestFixture.h"
-//#include "ICppTestFixtureTestCaseNames.h"
-//#include "ICppTestFixtureInfoObject.h"
 #include "CppTestFixtureInfoObject.h"
-//#include "mr_string.h"
 #include "mr_SharedPtr.h"
-
 #include <vector>
 
 namespace CppTest {
 
 ///--------------------------------------------------------------------------------------
 /// 
-/// @brief	A Singleton class to drive the test case architecture.
+/// @brief	Build a list of tests grouped by fixture
 ///
 ///--------------------------------------------------------------------------------------
 class CPPTESCASE_API IListBuilder {

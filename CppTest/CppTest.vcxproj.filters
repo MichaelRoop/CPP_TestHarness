@@ -300,9 +300,6 @@
     <ClInclude Include="Core\include\CppTestFixtureInfoObject.h">
       <Filter>Core\include</Filter>
     </ClInclude>
-    <ClInclude Include="include\ICppTestFixtureInfoObject.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="include\ICppTestListBuilder.h">
       <Filter>include</Filter>
     </ClInclude>

@@ -15,7 +15,7 @@
 #include "mr_pointerException.h"
 #include "mr_defines.h"
 
-#include "mr_iostream.h"
+//#include "mr_iostream.h"
 
 #include <time.h>
 #include <algorithm>
@@ -114,7 +114,7 @@ void Engine::RegisterCase(CppTest::IFixture* fixture) {
 	this->m_fixtures.push_back(fixture);
 }
 
-
+#ifdef THIS_IS_REDUNDANT_NEED_TO_DELETE
 void Engine::ProcessScript(CppTest::IScriptReader& theReader ) {
 	this->m_logEngine.WriteHeaders();
 
@@ -174,24 +174,20 @@ void Engine::ProcessScript(CppTest::IScriptReader& theReader ) {
 	}
 	this->m_logEngine.WriteSummaries();
 }
+#endif
 
 
 void Engine::ProcessTestList(std::vector< mr_utils::SharedPtr<CppTest::TestFixtureInfoObject> >& list) {
+
+	this->m_logEngine.WriteHeaders();
+
 	// Iterate through each Fixture info
-
-	mr_cout << _L_("**** Engine Process list - size:") << list.size() <<  std::endl;
-
 	std::vector< mr_utils::SharedPtr<CppTest::TestFixtureInfoObject> >::iterator itFixtureInfo = list.begin();
 	for (; itFixtureInfo != list.end(); itFixtureInfo++) {
 
-mr_cout << _L_("****  Engine Fixture Info iteration") <<  std::endl;
-
-		// Only look up the actual fixture if the Fixture Info has test infos
+		// Only look up the actual fixture if the Fixture Info has test case infos
 		const std::vector<CppTest::TestInfoObject>& testInfos = (*itFixtureInfo)->GetTestInfoVector();
 		if (testInfos.size() > 0) {
-
-			mr_cout << _L_("****  Has Test Info quantity:") << testInfos.size()  <<  std::endl;
-
 
 			// Retrieve the actual fixture pointer
 			std::vector<CppTest::IFixture*>::iterator itFixture = 
@@ -202,39 +198,39 @@ mr_cout << _L_("****  Engine Fixture Info iteration") <<  std::endl;
 
 			// check if the fixture is registered with the engine
 			if (itFixture == this->m_fixtures.end()) {
-mr_cout << _L_("****  No fixture registered of name:") << (*itFixtureInfo)->GetName() << std::endl;
 				// TODO - Log failure to find the Fixture
 			}
 			else {
-mr_cout << _L_(" Iterate through tests in fixture") <<  std::endl;
-
 				// iterate through each test info in the fixture info to find the tests
 				std::vector<CppTest::TestInfoObject>::const_iterator itTestInfo = testInfos.begin();
 				for (; itTestInfo != testInfos.end(); ++itTestInfo) {
+
 					mr_utils::mr_string name = itTestInfo->GetName(); 
 					if ((*itFixture)->HasTest(name)) {
-mr_cout << _L_("**** fixture has test name") <<  std::endl;
 						if (itTestInfo->IsActive()) {
-mr_cout << _L_("**** Active - run test") <<  std::endl;
 							(*itFixture)->RunTest(name, itTestInfo->GetArguments());
 							this->LogResults((*itFixture)->CurrentTestCase());
 						}
 						else {
+							// Test found but marked disabled
 							this->LogResults(DisabledTestData(name));
 						}
 					}
 					else {
+						// test not found by name
 						this->LogResults(NonExistantTestData(name));
 					}
 				}
-				// Last test in fixture
+				// Last test in fixture. Need to close off the fixture
 				(*itFixture)->ResetFixture();
 			}
 		}
 		else {
-			// No test infos in fixture info
+			// No test case infos in fixture info - log this
 		}
 	}
+
+	this->m_logEngine.WriteSummaries();
 }
 
 

@@ -1,12 +1,12 @@
 ///--------------------------------------------------------------------------------------
 /// @file	CppTestFixtureInfoObject.cpp
-/// @brief	cross platform and char width holder for test information.
+/// @brief	cross platform and char width holder for test fixture information.
 ///
 /// @author		Michael Roop
-/// @date		2010
+/// @date		2012
 /// @version	1.0
 ///
-/// Copyright 2010 Michael Roop
+/// Copyright 2012 Michael Roop
 ///--------------------------------------------------------------------------------------
 
 #include "CppTestFixtureInfoObject.h"
@@ -21,7 +21,7 @@ TestFixtureInfoObject::TestFixtureInfoObject(const mr_utils::mr_string& name)
 
 
 TestFixtureInfoObject::~TestFixtureInfoObject() {
-	// TODO
+	// Nothing to do
 }
 
 

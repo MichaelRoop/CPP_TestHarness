@@ -13,19 +13,6 @@
 
 #include "ICppTestListBuilder.h"
 
-
-//#include "CppTestCrossPlatform.h"
-////#include "CppTestLogEngine.h"
-//#include "ICppTestScriptReader.h"
-////#include "ICppTestCase.h"
-////#include "ICppTestFixture.h"
-////#include "ICppTestFixtureTestCaseNames.h"
-//#include "ICppTestFixtureInfoObject.h"
-////#include "mr_string.h"
-//#include "mr_SharedPtr.h"
-//
-//#include <vector>
-
 namespace CppTest {
 
 ///--------------------------------------------------------------------------------------
@@ -49,5 +36,5 @@ public:
 CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator< mr_utils::SharedPtr<CppTest::ListBuilder> >;
 CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector< mr_utils::SharedPtr<CppTest::ListBuilder> >;
 
-
 #endif
+

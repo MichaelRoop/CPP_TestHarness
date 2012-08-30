@@ -48,11 +48,12 @@ public:
 	void RegisterCase(CppTest::IFixture* fixture);
 
 
+#if defined(THIS_IS_REDUNDANT_NEED_TO_DELETE)
 	/// @brief	Process the test cases using the scriptReader object.
 	/// @param	theReader	The object that parses the script that drives test selection and their
 	///						arguments.
 	void ProcessScript(CppTest::IScriptReader& theReader );
-
+#endif
 
 	/// @brief	Process the test cases using the vector of info objects that were assembled
 	/// @param	list	The test fixture info objects and their tests
