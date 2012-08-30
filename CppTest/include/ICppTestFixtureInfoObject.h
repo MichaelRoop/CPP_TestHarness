@@ -57,6 +57,7 @@ public:
 } // end namespace
 
 // Force export of class with std objects
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API mr_utils::SharedPtr<CppTest::ITestFixtureInfoObject>;
 CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator< mr_utils::SharedPtr<CppTest::ITestFixtureInfoObject> >;
 CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector< mr_utils::SharedPtr<CppTest::ITestFixtureInfoObject> >;
 

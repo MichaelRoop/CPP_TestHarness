@@ -13,6 +13,7 @@
 #include "mr_iostream.h"
 #include "mr_fileException.h"
 #include "CppTestScriptException.h"
+#include "CppTestListBuilder.h"
 
 #include "mr_pointerException.h"
 #include <algorithm>
@@ -152,7 +153,13 @@ int main(int argc, char* argv[]) {
 			// The include path is provided for now until we can replace with test runner concept
 			CppTest::FileScriptReader reader( argv[1] );
 			reader.Open();
-			eng.ProcessScript( reader );
+
+			CppTest::ListBuilder listBuilder;
+			//listBuilder.Build(reader);
+
+			//CppTest::ListBuilder listBuilder;
+			eng.ProcessTestList(listBuilder.Build(reader));
+			//eng.ProcessScript( reader );
 		} 
 		catch( const CppTest::ScriptException e ) {
 			mr_cout << e.longMsg() << std::endl;

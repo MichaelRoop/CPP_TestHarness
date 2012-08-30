@@ -14,6 +14,18 @@
 
 namespace CppTest {
 
+
+TestFixtureInfoObject::TestFixtureInfoObject(const mr_utils::mr_string& name) 
+	: m_name(name) {
+}
+
+
+TestFixtureInfoObject::~TestFixtureInfoObject() {
+	// TODO
+}
+
+
+
 const mr_utils::mr_string& TestFixtureInfoObject::GetName() const {
 	return this->m_name;
 }

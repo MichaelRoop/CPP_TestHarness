@@ -17,7 +17,8 @@
 //#include "ICppTestCase.h"
 //#include "ICppTestFixture.h"
 //#include "ICppTestFixtureTestCaseNames.h"
-#include "ICppTestFixtureInfoObject.h"
+//#include "ICppTestFixtureInfoObject.h"
+#include "CppTestFixtureInfoObject.h"
 //#include "mr_string.h"
 #include "mr_SharedPtr.h"
 
@@ -35,8 +36,8 @@ public:
 
 	/// @brief	Process the test cases using the vector of info objects that were assembled
 	/// @param	list	The test fixture info objects and their tests
-	virtual std::vector< mr_utils::SharedPtr<CppTest::ITestFixtureInfoObject> > 
-		Build(CppTest::IScriptReader& theReader) = 0;
+	virtual std::vector< mr_utils::SharedPtr<CppTest::TestFixtureInfoObject> > 
+		Build(CppTest::IScriptReader& theReader) const = 0;
 
 };
 

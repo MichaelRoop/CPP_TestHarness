@@ -22,9 +22,19 @@ namespace CppTest {
 /// @brief	Class to abstract the information necessary to retrieve a Fixture of test cases
 ///
 ///--------------------------------------------------------------------------------------
-class TestFixtureInfoObject {
+class CPPTESCASE_API TestFixtureInfoObject {
 
 public:
+
+
+	/// @brief Constructor
+	TestFixtureInfoObject(const mr_utils::mr_string& name);
+
+
+	/// @brief Destructor
+	virtual ~TestFixtureInfoObject();
+
+
 
 	/// @brief Retrieve Test fixture name
 	virtual const mr_utils::mr_string& GetName() const;
@@ -62,6 +72,11 @@ private:
 	}
 
 };
+
+// Force export of class with std objects
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API mr_utils::SharedPtr<CppTest::TestFixtureInfoObject>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator< mr_utils::SharedPtr<CppTest::TestFixtureInfoObject> >;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector< mr_utils::SharedPtr<CppTest::TestFixtureInfoObject> >;
 
 
 } // end namespace

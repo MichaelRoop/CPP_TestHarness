@@ -15,6 +15,8 @@
 #include "mr_pointerException.h"
 #include "mr_defines.h"
 
+#include "mr_iostream.h"
+
 #include <time.h>
 #include <algorithm>
 
@@ -174,32 +176,46 @@ void Engine::ProcessScript(CppTest::IScriptReader& theReader ) {
 }
 
 
-void Engine::ProcessTestList(std::vector< mr_utils::SharedPtr<CppTest::ITestFixtureInfoObject> >& list) {
+void Engine::ProcessTestList(std::vector< mr_utils::SharedPtr<CppTest::TestFixtureInfoObject> >& list) {
 	// Iterate through each Fixture info
-	std::vector< mr_utils::SharedPtr<CppTest::ITestFixtureInfoObject> >::iterator itFixtureInfo = list.begin();
+
+	mr_cout << _L_("**** Engine Process list - size:") << list.size() <<  std::endl;
+
+	std::vector< mr_utils::SharedPtr<CppTest::TestFixtureInfoObject> >::iterator itFixtureInfo = list.begin();
 	for (; itFixtureInfo != list.end(); itFixtureInfo++) {
+
+mr_cout << _L_("****  Engine Fixture Info iteration") <<  std::endl;
 
 		// Only look up the actual fixture if the Fixture Info has test infos
 		const std::vector<CppTest::TestInfoObject>& testInfos = (*itFixtureInfo)->GetTestInfoVector();
 		if (testInfos.size() > 0) {
+
+			mr_cout << _L_("****  Has Test Info quantity:") << testInfos.size()  <<  std::endl;
+
+
 			// Retrieve the actual fixture pointer
 			std::vector<CppTest::IFixture*>::iterator itFixture = 
 				std::find_if(
 					this->m_fixtures.begin(), 
 					this->m_fixtures.end(), 
-					HasNamedTestFunctor((*itFixtureInfo)->GetName()));
+					HasNamedFixtureFunctor((*itFixtureInfo)->GetName()));
 
 			// check if the fixture is registered with the engine
 			if (itFixture == this->m_fixtures.end()) {
+mr_cout << _L_("****  No fixture registered of name:") << (*itFixtureInfo)->GetName() << std::endl;
 				// TODO - Log failure to find the Fixture
 			}
 			else {
+mr_cout << _L_(" Iterate through tests in fixture") <<  std::endl;
+
 				// iterate through each test info in the fixture info to find the tests
 				std::vector<CppTest::TestInfoObject>::const_iterator itTestInfo = testInfos.begin();
 				for (; itTestInfo != testInfos.end(); ++itTestInfo) {
 					mr_utils::mr_string name = itTestInfo->GetName(); 
 					if ((*itFixture)->HasTest(name)) {
+mr_cout << _L_("**** fixture has test name") <<  std::endl;
 						if (itTestInfo->IsActive()) {
+mr_cout << _L_("**** Active - run test") <<  std::endl;
 							(*itFixture)->RunTest(name, itTestInfo->GetArguments());
 							this->LogResults((*itFixture)->CurrentTestCase());
 						}
@@ -211,6 +227,8 @@ void Engine::ProcessTestList(std::vector< mr_utils::SharedPtr<CppTest::ITestFixt
 						this->LogResults(NonExistantTestData(name));
 					}
 				}
+				// Last test in fixture
+				(*itFixture)->ResetFixture();
 			}
 		}
 		else {
