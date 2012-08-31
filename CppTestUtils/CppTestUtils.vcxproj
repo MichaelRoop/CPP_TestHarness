@@ -90,7 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CppTestUtils.h" />
-    <ClInclude Include="include\CrossPlatform.h" />
+    <ClInclude Include="include\CppTestUtilsDefine.h" />
     <ClInclude Include="include\mr_char.h" />
     <ClInclude Include="include\mr_defines.h" />
     <ClInclude Include="include\mr_doCompare.h" />

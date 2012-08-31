@@ -11,7 +11,7 @@
 #if !defined(MR_STATIC_TIMER_H)
 #define MR_STATIC_TIMER_H
 
-#include "CrossPlatform.h"
+#include "CppTestUtilsDefine.h"
 
 namespace mr_utils
 {

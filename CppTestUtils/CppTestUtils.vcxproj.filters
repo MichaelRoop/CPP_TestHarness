@@ -39,9 +39,6 @@
     <ClInclude Include="CppTestUtils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\CrossPlatform.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="include\mr_char.h">
       <Filter>include</Filter>
     </ClInclude>
@@ -97,6 +94,9 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include\mr_iniInputLine.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CppTestUtilsDefine.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

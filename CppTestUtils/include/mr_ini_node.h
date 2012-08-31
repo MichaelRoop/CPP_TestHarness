@@ -12,7 +12,7 @@
 #define MR_INI_NODE_H
 
 
-#include "CrossPlatform.h"
+#include "CppTestUtilsDefine.h"
 #include "mr_string.h"
 #include "mr_iostream.h"
 #include "mr_iniInputLine.h"

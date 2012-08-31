@@ -11,7 +11,7 @@
 #if !defined(MR_INI_FILE_H)
 #define MR_INI_FILE_H
 
-#include "CrossPlatform.h"
+#include "CppTestUtilsDefine.h"
 #include "mr_ini_section.h"
 
 #include <vector>

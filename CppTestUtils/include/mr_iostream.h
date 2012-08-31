@@ -11,8 +11,7 @@
 #if !defined(MR_IOSTREAM_H)
 #define MR_IOSTREAM_H
 
-#include "CrossPlatform.h"
-
+#include "CppTestUtilsDefine.h"
 #include <iostream>
 #include <ostream>
 

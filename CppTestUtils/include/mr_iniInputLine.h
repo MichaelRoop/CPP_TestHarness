@@ -14,7 +14,7 @@
 #if !defined(MR_INI_INPUT_LINE_H)
 #define MR_INI_INPUT_LINE_H
 
-#include "CrossPlatform.h"
+#include "CppTestUtilsDefine.h"
 #include "mr_string.h"
 
 namespace mr_inireader

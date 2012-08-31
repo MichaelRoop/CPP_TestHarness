@@ -11,7 +11,7 @@
 #if !defined(MR_INI_SECTION_H)
 #define MR_INI_SECTION_H
 
-#include "CrossPlatform.h"
+#include "CppTestUtilsDefine.h"
 #include "mr_ini_node.h"
 #include "mr_iniInputLine.h"
 

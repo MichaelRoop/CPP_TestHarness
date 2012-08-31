@@ -11,7 +11,7 @@
 #if !defined(MR_STRING_H)
 #define MR_STRING_H
 
-#include "CrossPlatform.h"
+#include "CppTestUtilsDefine.h"
 #include "mr_char.h"
 
 

@@ -13,7 +13,7 @@
 #if !defined(MR_SHARED_PTR_H) 
 #define MR_SHARED_PTR_H
 
-#include "CrossPlatform.h"
+#include "CppTestUtilsDefine.h"
 #include "mr_string.h"
 #include <assert.h>
 

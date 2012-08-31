@@ -11,8 +11,7 @@
 #if !defined(MR_FSTREAM_H)
 #define MR_FSTREAM_H
 
-#include "CrossPlatform.h"
-
+#include "CppTestUtilsDefine.h"
 #include <fstream>
 
 #if defined(WIN32) 

@@ -1,5 +1,5 @@
-#if !defined(CPP_UTILS_CROSS_PLATFORM_H)
-#define CPP_UTILS_CROSS_PLATFORM_H
+#if !defined(CPP_TEST_UTILS_DEFINES_H)
+#define CPP_TEST_UTILS_DEFINES_H
 
 
 #include <string>

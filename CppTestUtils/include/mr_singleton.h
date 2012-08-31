@@ -11,7 +11,7 @@
 #if !defined(MR_SINGLETON_H)
 #define MR_SINGLETON_H
 
-#include "CrossPlatform.h"
+#include "CppTestUtilsDefine.h"
 
 namespace mr_utils
 {

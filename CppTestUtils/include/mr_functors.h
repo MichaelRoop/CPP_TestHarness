@@ -11,7 +11,7 @@
 #if !defined(MR_FUNCTORS_H)
 #define MR_FUNCTORS_H
 
-#include "CrossPlatform.h"
+#include "CppTestUtilsDefine.h"
 #include "mr_exception.h"
 #include "mr_defines.h"
 #include "string.h" //memcpy
