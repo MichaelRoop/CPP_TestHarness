@@ -50,6 +50,16 @@ typedef void (__cdecl *ptrFunc)();
 //typedef void (__stdcall *ptrFunc)();
 //#define PROC_OFFSET 0x000112C1
 
+
+static void MyLoggedEventHandler(const CppTest::ICase& testCase) {
+	mr_cout << _L_(" # # # # Received a log event for test:") << testCase.Name << _L_(" with results:") << CppTest::ICase::ToString(testCase.Status) << std::endl;
+}
+
+static void MySecondLoggedEventHandler(const CppTest::ICase& testCase) {
+	mr_cout << _L_(" @ @ @ @ Received a log event for test:") << testCase.Name << _L_(" with results:") << CppTest::ICase::ToString(testCase.Status) << std::endl;
+}
+
+
 int main(int argc, char* argv[]) {
 
 	//std::vector<std::string> namesVector;
@@ -162,6 +172,10 @@ int main(int argc, char* argv[]) {
 
 
 			eng.GetLogEngine().LoadLoggers("CppTestConfig.ini", _L_("INI"));
+
+			// Test register event call backs
+			eng.RegisterLoggedEvent(MyLoggedEventHandler);
+			eng.RegisterLoggedEvent(MySecondLoggedEventHandler);
 
 			// The include path is provided for now until we can replace with test runner concept
 			CppTest::FileScriptReader reader( argv[1] );

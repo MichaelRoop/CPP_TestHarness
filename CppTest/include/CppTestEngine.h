@@ -24,8 +24,12 @@
 
 #include <vector>
 
+// TODO Disable warning on 'needs to have dll-interface' because of typedef on function pointer. Look into it.
+#pragma warning (disable : 4251)
+
 namespace CppTest {
 
+			
 ///--------------------------------------------------------------------------------------
 /// 
 /// @brief	A Singleton class to drive the test case architecture.
@@ -34,11 +38,25 @@ namespace CppTest {
 class CPPTESCASE_API Engine : public mr_utils::singleton {
 public:
 
+	/// @brief	Typdef of a call back event that will be called to 
+	typedef void (* DataLoggedEvent) (const CppTest::ICase&);
+
+	/// @brief Method to register a callback on the logged event
+	void RegisterLoggedEvent(DataLoggedEvent loggedCallbackEvent);
+
+	// TODO - unregister functionality on events
+
+public:
+
 	/// @brief	Static method to retrieve the unique instance of this class.
 	/// The engine will be created on first call.
 	/// @return	The unique instance of the test engine.
 	static Engine& Instance();
 
+
+	/// @brief Override on the intialiser called by singleton default construction
+	virtual void Initialise();
+	
 
 	/// @brief	Register a test case to the system for later recall.
 	/// It is easier to use the macros to create and register the test case. The engine
@@ -77,6 +95,7 @@ private:
 	static Engine*					m_instance;	///< The unique instance of the testEngine.
 	mr_utils::mr_string				m_runId;	///< Unique ID for the run used in log files.
 	CppTest::LogEngine				m_logEngine;///< The logging engine.
+	std::vector<CppTest::Engine::DataLoggedEvent>	m_logEvents;///< Vector of registered log events
 
 
 	/// @brief	Process one test case fixture based on information contained in the testInfoObject.
@@ -95,6 +114,15 @@ private:
 
 };
 
-}
+} // end namespace
+
+
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::Engine::DataLoggedEvent*>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::Engine::DataLoggedEvent*>;
+
+
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::Engine*>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::Engine*>;
+
 
 #endif

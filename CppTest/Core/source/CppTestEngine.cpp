@@ -70,6 +70,21 @@ private:
 };
 
 
+/// @brief Fire off each log callback event
+class FireLoggedEventsFunctor {
+public:
+	FireLoggedEventsFunctor(const CppTest::ICase& testCase) : m_case(testCase) {
+	}
+
+	void operator () (const CppTest::Engine::DataLoggedEvent logEvent) {
+		mr_utils::mr_pointerException::ptrAssert(logEvent, _FL_ );
+		(*logEvent)(this->m_case);
+	}
+
+	const CppTest::ICase& m_case;
+};
+
+
 // End of functors
 //---------------------------------------------------------------------------------------
 
@@ -107,6 +122,12 @@ Engine& Engine::Instance() {
 	}
 	return *m_instance;
 }
+
+
+// TODO - look at singleton and figure out an intialiaser to call 
+void Engine::Initialise() {
+}
+
 
 
 void Engine::RegisterCase(CppTest::IFixture* fixture) {
@@ -237,6 +258,16 @@ void Engine::ProcessTestList(std::vector< mr_utils::SharedPtr<CppTest::ITestFixt
 
 void Engine::LogResults(CppTest::ICase& testCase) {
 	this->m_logEngine.Log(testCase);
+
+	std::for_each(
+		this->m_logEvents.begin(), 
+		this->m_logEvents.end(), 
+		FireLoggedEventsFunctor(testCase));
+
+	//// TODO - change to vector of events
+	//if (this->m_loggedEvent != 0) {
+	//	(*this->m_loggedEvent)(testCase);
+	//}
 }
 
 
@@ -268,6 +299,21 @@ std::vector<mr_utils::SharedPtr<CppTest::IFixutureTestCaseNames> > Engine::GetTe
 	std::for_each(this->m_fixtures.begin(), this->m_fixtures.end(), BuildTestCaseList(testNames));
 	return testNames;
 }
+
+
+void Engine::RegisterLoggedEvent(CppTest::Engine::DataLoggedEvent loggedCallbackEvent) {
+	mr_utils::mr_pointerException::ptrAssert(loggedCallbackEvent, _FL_);
+	this->m_logEvents.push_back(loggedCallbackEvent);
+}
+
+//void Engine::RegisterLoggedEvent(CppTest::DataLoggedEvent loggedCallbackEvent) {
+//
+//	mr_utils::mr_pointerException.ptrAssert(loggedCallbackEvent, _FL_);
+//	this->m_logEvents.push_back(loggedCallbackEvent);
+//}
+
+
+
 
 
 }

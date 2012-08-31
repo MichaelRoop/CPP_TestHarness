@@ -30,6 +30,13 @@ namespace mr_utils
 		///
 		/// @param	obj	The Singleton object used to contruct an instance.
 		singleton( const singleton& obj );
+
+
+		/// @brief	An optional intialiser is called on the default constructor and can be
+		///			overriden to guarantee initialisation on construction
+		virtual void Initialise();
+
+
 	};
 
 

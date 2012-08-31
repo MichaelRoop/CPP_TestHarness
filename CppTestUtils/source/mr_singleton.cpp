@@ -10,17 +10,18 @@
 ///--------------------------------------------------------------------------------------
 #include "mr_singleton.h"
 
-namespace mr_utils
-{
+namespace mr_utils {
 
-	singleton::singleton()
-	{
+	singleton::singleton() {
+		this->Initialise();
 	}
 
 
-	singleton::singleton( const singleton& )
-	{
+	singleton::singleton( const singleton& ) {
 	}
 
 
+	void singleton::Initialise() {
+	}
+	
 } // end of namespace.
