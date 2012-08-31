@@ -56,6 +56,8 @@
       <AdditionalIncludeDirectories>$(ProjectDir)\include;$(ProjectDir)\Core\include;$(ProjectDir)\Exceptions\include;$(ProjectDir)\Factories\include;$(ProjectDir)\Logging\include;$(ProjectDir)\Outputs\include;$(ProjectDir)\ScriptReader\include;$(SolutionDir)\CppTestUtils\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <CompileAsManaged>false</CompileAsManaged>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MinimalRebuild>true</MinimalRebuild>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -71,6 +73,8 @@
       <AdditionalIncludeDirectories>$(ProjectDir)\include;$(ProjectDir)\Core\include;$(ProjectDir)\Exceptions\include;$(ProjectDir)\Factories\include;$(ProjectDir)\Logging\include;$(ProjectDir)\Outputs\include;$(ProjectDir)\ScriptReader\include;$(SolutionDir)\CppTestUtils\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <CompileAsManaged>false</CompileAsManaged>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MinimalRebuild>true</MinimalRebuild>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

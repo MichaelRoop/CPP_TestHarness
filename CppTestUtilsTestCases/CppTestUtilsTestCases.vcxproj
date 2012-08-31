@@ -50,19 +50,22 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>MR_USE_WIDE_STR;WIN32;_DEBUG</PreprocessorDefinitions>
       <CompileAsManaged>false</CompileAsManaged>
-      <ExceptionHandling>Async</ExceptionHandling>
-      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <MinimalRebuild>false</MinimalRebuild>
-      <AdditionalIncludeDirectories>$(SolutionDir)\CppTestUtils\include;$(SolutionDir)\CppTestUtils\Exceptions\include;$(SolutionDir)\CppTest\include;$(SolutionDir)\CppTest\ScriptReader\include;include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MinimalRebuild>true</MinimalRebuild>
+      <AdditionalIncludeDirectories>include;$(SolutionDir)\CppTest\include;$(SolutionDir)\CppTest\Core\include;$(SolutionDir)\CppTestUtils\include;$(SolutionDir)\CppTestUtils\Exceptions\include;$(SolutionDir)\CppTest\ScriptReader\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
       </SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <FixedBaseAddress>false</FixedBaseAddress>
+      <FixedBaseAddress>
+      </FixedBaseAddress>
       <AdditionalDependencies>CppTestUtils.lib;CppTest.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)\$(Configuration)</AdditionalLibraryDirectories>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -73,8 +76,10 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>MR_USE_WIDE_STR;WIN32;NDEBUG</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\CppTestUtils\include;$(SolutionDir)\CppTestUtils\Exceptions\include;$(SolutionDir)\CppTest\include;$(SolutionDir)\CppTest\ScriptReader\include;include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;$(SolutionDir)\CppTest\include;$(SolutionDir)\CppTest\Core\include;$(SolutionDir)\CppTestUtils\include;$(SolutionDir)\CppTestUtils\Exceptions\include;$(SolutionDir)\CppTest\ScriptReader\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CompileAsManaged>false</CompileAsManaged>
+      <MinimalRebuild>true</MinimalRebuild>
+      <ExceptionHandling>Sync</ExceptionHandling>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
