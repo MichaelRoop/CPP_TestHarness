@@ -93,8 +93,8 @@ class NonExistantTestData : public CppTest::Case {
 public:
 	/// @brief	Constructor.
 	/// @param	testName	Unique name for the test.
-	NonExistantTestData(const mr_utils::mr_string& name) 
-		: CppTest::Case(name, L("Test not found") ) {
+	NonExistantTestData(const mr_utils::mr_string& fixtureName, const mr_utils::mr_string& name) 
+		: CppTest::Case(fixtureName, name, L("Test not found") ) {
 			this->Status = CppTest::ICase::ST_NOT_EXISTS;
 	}
 };
@@ -105,8 +105,8 @@ class DisabledTestData : public CppTest::Case {
 public:
 	/// @brief	Constructor.
 	/// @param	testName	Unique name for the test.
-	DisabledTestData(const mr_utils::mr_string& name) 
-		: CppTest::Case(name, L("Test Disabled") ) {
+	DisabledTestData(const mr_utils::mr_string& fixtureName, const mr_utils::mr_string& name) 
+		: CppTest::Case(fixtureName, name, L("Test Disabled") ) {
 			this->Status = CppTest::ICase::ST_DISABLED;
 	}
 };
@@ -234,12 +234,12 @@ void Engine::ProcessTestList(std::vector< mr_utils::SharedPtr<CppTest::ITestFixt
 						}
 						else {
 							// Test found but marked disabled
-							this->LogResults(DisabledTestData(name));
+							this->LogResults(DisabledTestData((*itFixture)->Name(), name));
 						}
 					}
 					else {
 						// test not found by name
-						this->LogResults(NonExistantTestData(name));
+						this->LogResults(NonExistantTestData((*itFixture)->Name(), name));
 					}
 				}
 				// Last test in fixture. Need to close off the fixture

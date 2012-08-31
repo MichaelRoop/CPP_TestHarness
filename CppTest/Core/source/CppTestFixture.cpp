@@ -103,7 +103,7 @@ void Fixture::RegisterTest(IFixture::Ifixture_method_ptr test, const mr_utils::m
 		scratch = mr_utils::SubString(name, pos +2);
 	}
 
-	this->m_tests.push_back(new TestCaseHolder(test, scratch, description));
+	this->m_tests.push_back(new TestCaseHolder(test, this->Name(), scratch, description));
 	this->m_testCaseNames->AddTestCaseName(scratch);
 }
 

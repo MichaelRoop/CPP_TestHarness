@@ -33,7 +33,10 @@ public:
 	/// @brief	Constructor
 	///	@param	name	Name of the test case.
 	///	@param	description	Description of test case.
-	Case(const mr_utils::mr_string& name, const mr_utils::mr_string& description);
+	Case(
+		const mr_utils::mr_string& fixtureName, 
+		const mr_utils::mr_string& name, 
+		const mr_utils::mr_string& description);
 
 
 	/// @brief	Destructor

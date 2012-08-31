@@ -31,7 +31,8 @@ public:
 	/// @param	description	Test description
 	TestCaseHolder(
 		IFixture::Ifixture_method_ptr testPtr, 
-		const mr_utils::mr_string& name, 
+		const mr_utils::mr_string& fixtureName, 
+		const mr_utils::mr_string& testName, 
 		const mr_utils::mr_string& description);
 
 

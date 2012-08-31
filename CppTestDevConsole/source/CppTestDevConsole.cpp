@@ -52,11 +52,11 @@ typedef void (__cdecl *ptrFunc)();
 
 
 static void MyLoggedEventHandler(const CppTest::ICase& testCase) {
-	mr_cout << _L_(" # # # # Received a log event for test:") << testCase.Name << _L_(" with results:") << CppTest::ICase::ToString(testCase.Status) << std::endl;
+	mr_cout << _L_(" # # # # Received a log event for test:") << testCase.FixtureName << _L_(".") << testCase.Name << _L_(" with results:") << CppTest::ICase::ToString(testCase.Status) << std::endl;
 }
 
 static void MySecondLoggedEventHandler(const CppTest::ICase& testCase) {
-	mr_cout << _L_(" @ @ @ @ Received a log event for test:") << testCase.Name << _L_(" with results:") << CppTest::ICase::ToString(testCase.Status) << std::endl;
+	mr_cout << _L_(" @ @ @ @ Received a log event for test:") << testCase.FixtureName << _L_(".") << testCase.Name << _L_(" with results:") << CppTest::ICase::ToString(testCase.Status) << std::endl;
 }
 
 

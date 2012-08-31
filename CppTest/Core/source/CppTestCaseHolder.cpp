@@ -6,9 +6,9 @@
 namespace CppTest {
 
 TestCaseHolder::TestCaseHolder(
-	IFixture::Ifixture_method_ptr testPtr, const mr_utils::mr_string& name, const mr_utils::mr_string& description) 
+	IFixture::Ifixture_method_ptr testPtr, const mr_utils::mr_string& fixtureName,  const mr_utils::mr_string& name, const mr_utils::mr_string& description) 
 	: 	m_test(testPtr),
-		m_testData(new CppTest::Case(name, description)) {
+		m_testData(new CppTest::Case(fixtureName, name, description)) {
 }
 
 	

@@ -13,8 +13,11 @@
 namespace CppTest {
 
 
-Case::Case(const mr_utils::mr_string& name, const mr_utils::mr_string& desc) : 	
-	ICase(name, desc) {
+Case::Case(
+	const mr_utils::mr_string& fixtureName, 
+	const mr_utils::mr_string& name, 
+	const mr_utils::mr_string& desc) : 	
+	ICase(fixtureName, name, desc) {
 }
 
 

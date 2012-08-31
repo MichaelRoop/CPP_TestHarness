@@ -71,7 +71,12 @@ public:
 	/// @brief	Constructor
 	///	@param	name	Name of the test case.
 	///	@param	description	Description of test case.
-	ICase(const mr_utils::mr_string& name, const mr_utils::mr_string& desc) :	
+	ICase(
+		const mr_utils::mr_string& fixtureName, 
+		const mr_utils::mr_string& name, 
+		const mr_utils::mr_string& desc) :	
+
+		FixtureName(fixtureName),	
 		Name(name),	
 		Description(desc),
 		SetupTime(0),
@@ -86,6 +91,7 @@ public:
 
 public:
 	ICase::TestCaseStatus		Status;			///< Status of the test case.
+	mr_utils::mr_string			FixtureName;	///< Test name.
 	mr_utils::mr_string			Name;			///< Test name.
 	mr_utils::mr_string			Description;	///< Test description.
 	//mr_test::TestArguments	m_args;			///< Test arguments.
