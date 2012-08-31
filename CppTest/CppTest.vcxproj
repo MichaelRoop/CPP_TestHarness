@@ -150,6 +150,7 @@
     <ClInclude Include="include\ICppTestCase.h" />
     <ClInclude Include="include\ICppTestFixture.h" />
     <ClInclude Include="include\ICppTestCaseHolder.h" />
+    <ClInclude Include="include\ICppTestFixtureInfoObject.h" />
     <ClInclude Include="include\ICppTestListBuilder.h" />
     <ClInclude Include="include\ICppTestLog.h" />
     <ClInclude Include="include\ICppTestLogOutput.h" />

@@ -177,12 +177,12 @@ void Engine::ProcessScript(CppTest::IScriptReader& theReader ) {
 #endif
 
 
-void Engine::ProcessTestList(std::vector< mr_utils::SharedPtr<CppTest::TestFixtureInfoObject> >& list) {
+void Engine::ProcessTestList(std::vector< mr_utils::SharedPtr<CppTest::ITestFixtureInfoObject> >& list) {
 
 	this->m_logEngine.WriteHeaders();
 
 	// Iterate through each Fixture info
-	std::vector< mr_utils::SharedPtr<CppTest::TestFixtureInfoObject> >::iterator itFixtureInfo = list.begin();
+	std::vector< mr_utils::SharedPtr<CppTest::ITestFixtureInfoObject> >::iterator itFixtureInfo = list.begin();
 	for (; itFixtureInfo != list.end(); itFixtureInfo++) {
 
 		// Only look up the actual fixture if the Fixture Info has test case infos

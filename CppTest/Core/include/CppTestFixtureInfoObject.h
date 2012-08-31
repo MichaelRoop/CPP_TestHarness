@@ -11,10 +11,7 @@
 #if !defined(CPP_TEST_FIXTURE_INFO_OBJECT_H)
 #define CPP_TEST_FIXTURE_INFO_OBJECT_H
 
-#include "CppTestInfoObject.h"
-#include "mr_string.h"
-#include "mr_SharedPtr.h"
-#include <vector>
+#include "ICppTestFixtureInfoObject.h"
 
 namespace CppTest {
 
@@ -23,7 +20,7 @@ namespace CppTest {
 /// @brief	Class to abstract the information necessary to retrieve a Fixture of test cases
 ///
 ///--------------------------------------------------------------------------------------
-class CPPTESCASE_API TestFixtureInfoObject {
+class CPPTESCASE_API TestFixtureInfoObject : public ITestFixtureInfoObject {
 
 public:
 
@@ -33,7 +30,6 @@ public:
 
 	/// @brief Destructor
 	virtual ~TestFixtureInfoObject();
-
 
 
 	/// @brief Retrieve Test fixture name
@@ -74,10 +70,9 @@ private:
 };
 
 // Force export of class with std objects
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator< mr_utils::SharedPtr<CppTest::TestFixtureInfoObject> >;
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector< mr_utils::SharedPtr<CppTest::TestFixtureInfoObject> >;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::TestFixtureInfoObject*>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::TestFixtureInfoObject*>;
 
 } // end namespace
-
 
 #endif

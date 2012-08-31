@@ -57,7 +57,7 @@ public:
 
 	/// @brief	Process the test cases using the vector of info objects that were assembled
 	/// @param	list	The test fixture info objects and their tests
-	void ProcessTestList(std::vector< mr_utils::SharedPtr<CppTest::TestFixtureInfoObject> >& list);
+	void ProcessTestList(std::vector< mr_utils::SharedPtr<CppTest::ITestFixtureInfoObject> >& list);
 
 
 	/// @brief	Retrieve the results logging engine.

@@ -25,7 +25,7 @@ public:
 
 	/// @brief	Process the test cases using the vector of info objects that were assembled
 	/// @param	list	The test fixture info objects and their tests
-	virtual std::vector< mr_utils::SharedPtr<CppTest::TestFixtureInfoObject> > 
+	virtual std::vector< mr_utils::SharedPtr<CppTest::ITestFixtureInfoObject> > 
 		Build(CppTest::IScriptReader& theReader) const;
 
 };

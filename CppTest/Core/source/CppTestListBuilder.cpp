@@ -5,16 +5,16 @@
 namespace CppTest {
 
 
-std::vector< mr_utils::SharedPtr<CppTest::TestFixtureInfoObject> > 
+std::vector< mr_utils::SharedPtr<CppTest::ITestFixtureInfoObject> > 
 	ListBuilder::Build(CppTest::IScriptReader& theReader) const {
 
-	std::vector< mr_utils::SharedPtr<CppTest::TestFixtureInfoObject> > list;
+	std::vector< mr_utils::SharedPtr<CppTest::ITestFixtureInfoObject> > list;
 
 	mr_utils::mr_string currentFixtureName = _L_("");
 	mr_utils::mr_string newFixtureName = _L_("");
 	CppTest::TestInfoObject info = theReader.getNextTest(newFixtureName);
 
-	mr_utils::SharedPtr<CppTest::TestFixtureInfoObject> fixtureInfo;
+	mr_utils::SharedPtr<CppTest::ITestFixtureInfoObject> fixtureInfo;
 
 	// Create the initial fixture info object if there is any date to accumulate
 	if (!info.IsNull()) {

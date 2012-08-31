@@ -18,8 +18,8 @@
 #include "mr_pointerException.h"
 #include <algorithm>
 
-
-
+// temp
+#include "CppTestFixture.h"
 
 
 bool checkParams( int required, int argc, char* argv[] );
@@ -52,7 +52,20 @@ typedef void (__cdecl *ptrFunc)();
 
 int main(int argc, char* argv[]) {
 
-	std::vector<std::string> namesVector;
+	//std::vector<std::string> namesVector;
+
+
+	//std::vector< mr_utils::SharedPtr<CppTest::IFixture> > fixtures;
+	//fixtures.push_back(mr_utils::SharedPtr<CppTest::IFixture>(new CppTest::Fixture(_L_("MyFixture"))));
+	//mr_cout << _L_("Fixture Name:") << fixtures[0]->Name();
+
+
+	//mr_utils::SharedPtr<CppTest::IFixture> fixture(new CppTest::Fixture(_L_("MyFixture")));
+	//fixture = new CppTest::Fixture(_L_("MyFixture"));
+
+	////mr_cout << _L_("Fixture Name:") << fixture->Name();
+
+	//return 0;
 
 
 
