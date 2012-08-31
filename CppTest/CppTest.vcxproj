@@ -137,7 +137,6 @@
     <ClInclude Include="include\CppTestCase.h" />
     <ClInclude Include="include\CppTestCaseHolder.h" />
     <ClInclude Include="include\CppTestCompareFunctions.h" />
-    <ClInclude Include="include\CppTestCrossPlatform.h" />
     <ClInclude Include="include\CppTestDefines.h" />
     <ClInclude Include="include\CppTestEngine.h" />
     <ClInclude Include="include\CppTestFixture.h" />

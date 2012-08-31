@@ -11,7 +11,7 @@
 #if !defined(ICPP_TEST_LOG_H)
 #define ICPP_TEST_LOG_H
 
-#include "CppTestCrossPlatform.h"
+#include "CppTestDefines.h"
 #include "ICppTestLogOutput.h"
 #include "mr_sharedPtr.h"
 

@@ -13,7 +13,7 @@
 #if !defined(MR_TEST_COMP_FUNC_H)
 #define MR_TEST_COMP_FUNC_H
 
-#include "CppTestCrossPlatform.h"
+#include "CppTestDefines.h"
 #include "mr_string.h"
 #include "mr_sstream.h"
 #include "mr_doCompare.h"

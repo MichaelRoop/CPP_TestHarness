@@ -11,7 +11,7 @@
 #if !defined(CPP_TEST_INFO_OBJECT_H)
 #define CPP_TEST_INFO_OBJECT_H
 
-#include "CppTestCrossPlatform.h"
+#include "CppTestDefines.h"
 #include "ICppTestCaseArgument.h"
 #include "mr_string.h"
 #include <vector>

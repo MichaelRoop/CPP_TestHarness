@@ -12,7 +12,7 @@
 #if !defined(ICPP_TEST_SCRIPT_READER_H)
 #define ICPP_TEST_SCRIPT_READER_H
 
-#include "CppTestCrossPlatform.h"
+#include "CppTestDefines.h"
 #include "CppTestInfoObject.h"
 #include "mr_exception.h"
 

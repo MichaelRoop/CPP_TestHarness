@@ -11,8 +11,7 @@
 #if !defined(CPP_TEST_FILE_SCRIPT_READER_H)
 #define CPP_TEST_FILE_SCRIPT_READER_H
 
-
-#include "CppTestCrossPlatform.h"
+#include "CppTestDefines.h"
 #include "ICppTestScriptReader.h"
 #include "mr_fstream.h"
 #include "mr_char.h" 

@@ -11,7 +11,7 @@
 #if !defined(CPP_TEST_LOG_ENGINE_H)
 #define CPP_TEST_LOG_ENGINE_H
 
-#include "CppTestCrossPlatform.h"
+#include "CppTestDefines.h"
 #include "ICppTestCase.h"
 #include "ICppTestLog.h"
 #include "mr_SharedPtr.h"

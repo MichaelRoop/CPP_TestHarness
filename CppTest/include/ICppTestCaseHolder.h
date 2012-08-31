@@ -12,7 +12,7 @@
 #if !defined(ICPP_TEST_CASE_HOLDER_H)
 #define ICPP_TEST_CASE_HOLDER_H
 
-#include "CppTestCrossPlatform.h"
+#include "CppTestDefines.h"
 #include "ICppTestFixture.h"
 
 namespace CppTest {

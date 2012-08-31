@@ -11,34 +11,29 @@
 #if !defined(CPP_TEST_DEFINES_H)
 #define CPP_TEST_DEFINES_H
 
-#include "CppTestCrossPlatform.h"
-//#include "CppTestLogEngine.h"
-//#include "ICppTestScriptReader.h"
-//#include "ICppTestCase.h"
-//#include "ICppTestFixture.h"
-//#include "ICppTestFixtureTestCaseNames.h"
-//#include "CppTestFixtureInfoObject.h"
-//#include "mr_singleton.h"
-//#include "mr_string.h"
-//#include "mr_SharedPtr.h"
+// This should apply both to win 32 and Nix
+//#if defined(WIN32) 
+#	if defined(CPPTESTCASE_EXPORTS)
+#		pragma message("Exporting CppTestCase DLL Classes")
+#		define CPPTESCASE_API __declspec(dllexport)
+#		define CPPTESCASE_EXP_TEMPLATE
+#	else
+#		pragma message("Importing CppTestCase DLL Classes")
+#		define CPPTESCASE_API __declspec(dllimport)
+#		define CPPTESCASE_EXP_TEMPLATE extern
+#	endif
 
-//#include <vector>
+   //disable warnings on 255 char debug symbols
+#	pragma warning (disable : 4786)
+   //disable warnings on extern before template instantiation
+#	pragma warning (disable : 4231)
+//#else
+//#	pragma message("*** WIN32 Not defined ***")
+//#	define CPPTESCASE_API
+//#	define CPPTESCASE_EXP_TEMPLATE
+//#endif
 
-// TODO Disable warning on 'needs to have dll-interface' because of typedef on function pointer. Look into it.
-//#pragma warning (disable : 4251)
 
-//namespace CppTest {
-//
-//
-//	/// @brief	Typdef of a call back event that will be called to 
-//	typedef void (* DataLoggedEvent) (const CppTest::ICase&);
-//
-//
-//}
-//
-//
-//CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::DataLoggedEvent>;
-//CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::DataLoggedEvent>;
 
 
 #endif

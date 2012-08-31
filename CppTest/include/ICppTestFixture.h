@@ -11,7 +11,7 @@
 #if !defined(ICPP_TEST_FIXTURE_H)
 #define ICPP_TEST_FIXTURE_H
 
-#include "CppTestCrossPlatform.h"
+#include "CppTestDefines.h"
 #include "ICppTestCase.h"
 #include "ICppTestCaseArgument.h"
 #include "ICppTestFixtureTestCaseNames.h"

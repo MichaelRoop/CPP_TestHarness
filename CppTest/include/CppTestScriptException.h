@@ -11,7 +11,7 @@
 #if !defined(CPP_TEST_SCRIPT_EXCEPTION_H)
 #define CPP_TEST_SCRIPT_EXCEPTION_H
 
-#include "CppTestCrossPlatform.h"
+#include "CppTestDefines.h"
 #include "mr_exception.h"
 
 

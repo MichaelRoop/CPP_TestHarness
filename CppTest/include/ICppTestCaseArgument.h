@@ -11,7 +11,7 @@
 #if !defined(ICPP_TEST_CASE_ARGUMENT_H)
 #define ICPP_TEST_CASE_ARGUMENT_H
 
-#include "CppTestCrossPlatform.h"
+#include "CppTestDefines.h"
 #include "mr_defines.h"
 #include "mr_string.h"
 

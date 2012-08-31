@@ -11,7 +11,7 @@
 #if !defined(ICPP_TEST_CASE_H)
 #define ICPP_TEST_CASE_H
 
-#include "CppTestCrossPlatform.h"
+#include "CppTestDefines.h"
 #include "mr_string.h"
 #include "mr_sstream.h"
 #include <assert.h>

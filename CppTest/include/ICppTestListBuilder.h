@@ -11,7 +11,7 @@
 #if !defined(ICPP_TEST_LIST_BUILDER_H)
 #define ICPP_TEST_LIST_BUILDER_H
 
-#include "CppTestCrossPlatform.h"
+#include "CppTestDefines.h"
 #include "ICppTestScriptReader.h"
 #include "ICppTestFixtureInfoObject.h"
 #include "mr_SharedPtr.h"

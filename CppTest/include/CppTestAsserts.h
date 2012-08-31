@@ -11,7 +11,7 @@
 #if !defined(CPP_TEST_ASSERT_H)
 #define CPP_TEST_ASSERT_H
 
-#include "CppTestCrossPlatform.h"
+#include "CppTestDefines.h"
 #include "mr_sstream.h"
 #include "mr_string.h"
 #include "mr_exception.h"

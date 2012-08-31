@@ -11,7 +11,7 @@
 #if !defined(ICPP_TEST_FIXTURE_INFO_OBJECT_H)
 #define ICPP_TEST_FIXTURE_INFO_OBJECT_H
 
-#include "CppTestCrossPlatform.h"
+#include "CppTestDefines.h"
 #include "CppTestInfoObject.h"
 #include "mr_string.h"
 #include "mr_SharedPtr.h"

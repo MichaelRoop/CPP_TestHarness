@@ -11,7 +11,7 @@
 #if !defined(CPP_TEST_FIXTURE_H)
 #define CPP_TEST_FIXTURE_H
 
-#include "CppTestCrossPlatform.h"
+#include "CppTestDefines.h"
 #include "ICppTestFixture.h"
 #include "ICppTestCaseHolder.h"
 #include "mr_string.h"
