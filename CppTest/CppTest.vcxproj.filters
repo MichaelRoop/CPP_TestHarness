@@ -309,5 +309,8 @@
     <ClInclude Include="include\ICppTestFixtureInfoObject.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\CppTestDefines.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

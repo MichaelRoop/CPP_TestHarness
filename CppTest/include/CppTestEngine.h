@@ -12,6 +12,7 @@
 #define CPP_TEST_ENGINE_H
 
 #include "CppTestCrossPlatform.h"
+#include "CppTestDefines.h"
 #include "CppTestLogEngine.h"
 #include "ICppTestScriptReader.h"
 #include "ICppTestCase.h"
@@ -21,13 +22,17 @@
 #include "mr_singleton.h"
 #include "mr_string.h"
 #include "mr_SharedPtr.h"
-
 #include <vector>
 
-// TODO Disable warning on 'needs to have dll-interface' because of typedef on function pointer. Look into it.
-#pragma warning (disable : 4251)
 
 namespace CppTest {
+
+/// @brief	Typdef of a call back event that will be called to 
+typedef void (* DataLoggedEvent) (const CppTest::ICase&);
+
+// Force export so it can be used in of std contained object 
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::DataLoggedEvent>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::DataLoggedEvent>;
 
 			
 ///--------------------------------------------------------------------------------------
@@ -36,16 +41,6 @@ namespace CppTest {
 ///
 ///--------------------------------------------------------------------------------------
 class CPPTESCASE_API Engine : public mr_utils::singleton {
-public:
-
-	/// @brief	Typdef of a call back event that will be called to 
-	typedef void (* DataLoggedEvent) (const CppTest::ICase&);
-
-	/// @brief Method to register a callback on the logged event
-	void RegisterLoggedEvent(DataLoggedEvent loggedCallbackEvent);
-
-	// TODO - unregister functionality on events
-
 public:
 
 	/// @brief	Static method to retrieve the unique instance of this class.
@@ -64,6 +59,12 @@ public:
 	///
 	/// @exception	Throws a mr_utils::mr_pointerException if the test case fixture pointer is invalid.
 	void RegisterCase(CppTest::IFixture* fixture);
+
+
+	/// @brief Method to register a callback handler on the logged event
+	void RegisterLoggedEvent(CppTest::DataLoggedEvent loggedCallbackEvent);
+
+	// TODO - unregister functionality on events
 
 
 #if defined(THIS_IS_REDUNDANT_NEED_TO_DELETE)
@@ -95,7 +96,7 @@ private:
 	static Engine*					m_instance;	///< The unique instance of the testEngine.
 	mr_utils::mr_string				m_runId;	///< Unique ID for the run used in log files.
 	CppTest::LogEngine				m_logEngine;///< The logging engine.
-	std::vector<CppTest::Engine::DataLoggedEvent>	m_logEvents;///< Vector of registered log events
+	std::vector<CppTest::DataLoggedEvent>	m_logEvents;///< Vector of registered log events
 
 
 	/// @brief	Process one test case fixture based on information contained in the testInfoObject.
@@ -116,13 +117,8 @@ private:
 
 } // end namespace
 
-
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::Engine::DataLoggedEvent*>;
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::Engine::DataLoggedEvent*>;
-
-
+// Force export so it can be used in of std contained object 
 CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::Engine*>;
 CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::Engine*>;
-
 
 #endif

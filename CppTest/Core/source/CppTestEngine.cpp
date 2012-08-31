@@ -24,6 +24,7 @@
 namespace CppTest {
 
 //---------------------------------------------------------------------------------------
+/// @brief Functor to check for existence of named test case in fixture
 class HasNamedTestFunctor {
 public:
 	HasNamedTestFunctor(const mr_utils::mr_string& name) : m_name(name) {
@@ -38,6 +39,7 @@ private:
 };
 
 
+/// @brief Functor to check for existence of named test fixture 
 class HasNamedFixtureFunctor {
 public:
 	HasNamedFixtureFunctor(const mr_utils::mr_string& name) : m_name(name) {
@@ -52,8 +54,6 @@ private:
 };
 
 
-
-//---------------------------------------------------------------------------------------
 /// @brief Populate a list of registered fixtures with their test cases
 class BuildTestCaseList {
 public:
@@ -76,7 +76,7 @@ public:
 	FireLoggedEventsFunctor(const CppTest::ICase& testCase) : m_case(testCase) {
 	}
 
-	void operator () (const CppTest::Engine::DataLoggedEvent logEvent) {
+	void operator () (const CppTest::DataLoggedEvent logEvent) {
 		mr_utils::mr_pointerException::ptrAssert(logEvent, _FL_ );
 		(*logEvent)(this->m_case);
 	}
@@ -301,19 +301,10 @@ std::vector<mr_utils::SharedPtr<CppTest::IFixutureTestCaseNames> > Engine::GetTe
 }
 
 
-void Engine::RegisterLoggedEvent(CppTest::Engine::DataLoggedEvent loggedCallbackEvent) {
+void Engine::RegisterLoggedEvent(CppTest::DataLoggedEvent loggedCallbackEvent) {
 	mr_utils::mr_pointerException::ptrAssert(loggedCallbackEvent, _FL_);
 	this->m_logEvents.push_back(loggedCallbackEvent);
 }
-
-//void Engine::RegisterLoggedEvent(CppTest::DataLoggedEvent loggedCallbackEvent) {
-//
-//	mr_utils::mr_pointerException.ptrAssert(loggedCallbackEvent, _FL_);
-//	this->m_logEvents.push_back(loggedCallbackEvent);
-//}
-
-
-
 
 
 }
