@@ -18,7 +18,9 @@
 #include "ICppTestCase.h"
 #include "ICppTestFixture.h"
 #include "ICppTestFixtureTestCaseNames.h"
+#include "ICppTestRunSummary.h"
 #include "CppTestFixtureInfoObject.h"
+#include "CppTestCaseCounter.h"
 #include "mr_singleton.h"
 #include "mr_string.h"
 #include "mr_SharedPtr.h"
@@ -33,6 +35,14 @@ typedef void (* DataLoggedEvent) (const CppTest::ICase&);
 // Force export so it can be used in of std contained object 
 CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::DataLoggedEvent>;
 CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::DataLoggedEvent>;
+
+
+/// @brief	Typdef of a call back event that will be called to 
+typedef void (* TestRunSummaryData) (const CppTest::IRunSummary&);
+
+// Force export so it can be used in of std contained object 
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::TestRunSummaryData>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::TestRunSummaryData>;
 
 			
 ///--------------------------------------------------------------------------------------
@@ -63,6 +73,11 @@ public:
 
 	/// @brief Method to register a callback handler on the logged event
 	void RegisterLoggedEvent(CppTest::DataLoggedEvent loggedCallbackEvent);
+
+
+	/// @brief Method to register a callback handler on the summary event
+	void RegisterSummaryEvent(CppTest::TestRunSummaryData summrayCallbackEvent);
+
 
 	// TODO - unregister functionality on events
 
@@ -97,6 +112,9 @@ private:
 	mr_utils::mr_string				m_runId;	///< Unique ID for the run used in log files.
 	CppTest::LogEngine				m_logEngine;///< The logging engine.
 	std::vector<CppTest::DataLoggedEvent>	m_logEvents;///< Vector of registered log events
+	std::vector<CppTest::TestRunSummaryData> m_summaryEvents;///< Vector of registered log events
+
+	CppTest::CaseCounter			m_caseCounter; ///< track test case summary data
 
 
 	/// @brief	Process one test case fixture based on information contained in the testInfoObject.

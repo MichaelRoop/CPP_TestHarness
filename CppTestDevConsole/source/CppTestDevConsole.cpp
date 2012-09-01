@@ -14,6 +14,7 @@
 #include "mr_fileException.h"
 #include "CppTestScriptException.h"
 #include "CppTestListBuilder.h"
+#include "ICppTestRunSummary.h"
 
 #include "mr_pointerException.h"
 #include <algorithm>
@@ -57,6 +58,17 @@ static void MyLoggedEventHandler(const CppTest::ICase& testCase) {
 
 static void MySecondLoggedEventHandler(const CppTest::ICase& testCase) {
 	mr_cout << _L_(" @ @ @ @ Received a log event for test:") << testCase.FixtureName << _L_(".") << testCase.Name << _L_(" with results:") << CppTest::ICase::ToString(testCase.Status) << std::endl;
+}
+
+static void MySummaryEventHandler(const CppTest::IRunSummary& summary) {
+	mr_cout << _L_("& & & & & Summary Event") << std::endl
+		<< _L_("Success") << summary.Total(CppTest::ICase::ST_SUCCESS) << std::endl
+		<< _L_("Fixture Setup Failure") << summary.Total(CppTest::ICase::ST_FAIL_FIXTURE_SETUP) << std::endl
+		<< _L_("Setup Failure") << summary.Total(CppTest::ICase::ST_FAIL_SETUP) << std::endl
+		<< _L_("Test Failure") << summary.Total(CppTest::ICase::ST_FAIL_TEST) << std::endl
+		<< _L_("Teardown Failure") << summary.Total(CppTest::ICase::ST_FAIL_CLEANUP) << std::endl
+		<< _L_("Disabled") << summary.Total(CppTest::ICase::ST_DISABLED) << std::endl
+		<< _L_("Not Found") << summary.Total(CppTest::ICase::ST_NOT_EXISTS) << std::endl;
 }
 
 
@@ -176,6 +188,8 @@ int main(int argc, char* argv[]) {
 			// Test register event call backs
 			eng.RegisterLoggedEvent(MyLoggedEventHandler);
 			eng.RegisterLoggedEvent(MySecondLoggedEventHandler);
+			eng.RegisterSummaryEvent(MySummaryEventHandler);
+
 
 			// The include path is provided for now until we can replace with test runner concept
 			CppTest::FileScriptReader reader( argv[1] );

@@ -12,6 +12,7 @@
 #include "CppTestFixture.h"
 #include "CppTestCase.h"
 #include "CppTestInfoObject.h"
+#include "CppTestRunSummary.h"
 #include "mr_pointerException.h"
 #include "mr_defines.h"
 
@@ -82,6 +83,22 @@ public:
 	}
 
 	const CppTest::ICase& m_case;
+};
+
+
+/// @brief Fire off each summary callback event
+class FireSummaryEventsFunctor {
+public:
+	FireSummaryEventsFunctor(const CppTest::CaseCounter& caseCounter) {
+		this->m_summary = new CppTest::RunSummary(caseCounter);
+	}
+
+	void operator () (const CppTest::TestRunSummaryData summaryEvent) {
+		mr_utils::mr_pointerException::ptrAssert(summaryEvent, _FL_ );
+		(*summaryEvent)((*this->m_summary));
+	}
+
+	mr_utils::SharedPtr<CppTest::IRunSummary> m_summary;
 };
 
 
@@ -199,7 +216,7 @@ void Engine::ProcessScript(CppTest::IScriptReader& theReader ) {
 
 
 void Engine::ProcessTestList(std::vector< mr_utils::SharedPtr<CppTest::ITestFixtureInfoObject> >& list) {
-
+	this->m_caseCounter.Reset();
 	this->m_logEngine.WriteHeaders();
 
 	// Iterate through each Fixture info
@@ -251,23 +268,23 @@ void Engine::ProcessTestList(std::vector< mr_utils::SharedPtr<CppTest::ITestFixt
 		}
 	}
 
+	std::for_each(
+		this->m_summaryEvents.begin(), 
+		this->m_summaryEvents.end(), 
+		FireSummaryEventsFunctor(this->m_caseCounter));
+
 	this->m_logEngine.WriteSummaries();
 }
 
 
-
 void Engine::LogResults(CppTest::ICase& testCase) {
 	this->m_logEngine.Log(testCase);
+	this->m_caseCounter.Count(testCase);
 
 	std::for_each(
 		this->m_logEvents.begin(), 
 		this->m_logEvents.end(), 
 		FireLoggedEventsFunctor(testCase));
-
-	//// TODO - change to vector of events
-	//if (this->m_loggedEvent != 0) {
-	//	(*this->m_loggedEvent)(testCase);
-	//}
 }
 
 
@@ -307,4 +324,11 @@ void Engine::RegisterLoggedEvent(CppTest::DataLoggedEvent loggedCallbackEvent) {
 }
 
 
+void Engine::RegisterSummaryEvent(CppTest::TestRunSummaryData summrayCallbackEvent) {
+	mr_utils::mr_pointerException::ptrAssert(summrayCallbackEvent, _FL_);
+	this->m_summaryEvents.push_back(summrayCallbackEvent);
 }
+
+
+}
+

@@ -96,6 +96,7 @@
   <ItemGroup>
     <ClCompile Include="Core\source\CppTestAssert.cpp" />
     <ClCompile Include="Core\source\CppTestCase.cpp" />
+    <ClCompile Include="Core\source\CppTestCaseCounter.cpp" />
     <ClCompile Include="Core\source\CppTestCaseHolder.cpp" />
     <ClCompile Include="Core\source\CppTestCompareFunctions.cpp" />
     <ClCompile Include="Core\source\CppTestEngine.cpp" />
@@ -104,6 +105,7 @@
     <ClCompile Include="Core\source\CppTestFixtureTestCaseNames.cpp" />
     <ClCompile Include="Core\source\CppTestInfoObject.cpp" />
     <ClCompile Include="Core\source\CppTestListBuilder.cpp" />
+    <ClCompile Include="Core\source\CppTestRunSummary.cpp" />
     <ClCompile Include="Core\source\dllmain.cpp" />
     <ClCompile Include="Exceptions\source\CppTestScriptException.cpp" />
     <ClCompile Include="Factories\source\CppTestLogFactory.cpp" />
@@ -129,7 +131,9 @@
     <ClCompile Include="Win\AssemblyInfo.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Core\include\CppTestCaseCounter.h" />
     <ClInclude Include="Core\include\CppTestFixtureInfoObject.h" />
+    <ClInclude Include="Core\include\CppTestRunSummary.h" />
     <ClInclude Include="Factories\include\CppTestLogFactory.h" />
     <ClInclude Include="Factories\include\CppTestLogInitialiserFactory.h" />
     <ClInclude Include="Factories\include\CppTestLogOutputFactory.h" />
@@ -154,6 +158,7 @@
     <ClInclude Include="include\ICppTestListBuilder.h" />
     <ClInclude Include="include\ICppTestLog.h" />
     <ClInclude Include="include\ICppTestLogOutput.h" />
+    <ClInclude Include="include\ICppTestRunSummary.h" />
     <ClInclude Include="Logging\include\CppTestBuildColumnInfoString.h" />
     <ClInclude Include="Logging\include\CppTestBuildColumnValueString.h" />
     <ClInclude Include="Logging\include\CppTestBuildConsoleSummaryString.h" />
