@@ -17,9 +17,9 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
 		printf("-----------------------------DLL_PROCESS_ATTACH - Utils Test Cases\n");
 		{
 			/*
-			_REGISTER_FIXTURE_MAIN(TokenizerTests1);
-			_REGISTER_FIXTURE_MAIN(TokenizerTests2);
-			_REGISTER_FIXTURE_MAIN(UtilStrTrimTests);
+			REGISTER_FIXTURE_MAIN(TokenizerTests1);
+			REGISTER_FIXTURE_MAIN(TokenizerTests2);
+			REGISTER_FIXTURE_MAIN(UtilStrTrimTests);
 			*/
 		}
 		break;

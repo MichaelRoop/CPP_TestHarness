@@ -17,43 +17,43 @@ public:
 	UtilStrTrimTests(const mr_utils::mr_string& name) 
 		: CppTest::Fixture(name) {
 
-		_ADD_TEST_FIXTURE_(this);
-		_REGISTER_TEST_(this, &UtilStrTrimTests::UTL_STR_RTRIM_1, "Right trim removes all white space characters");
-		_REGISTER_TEST_(this, &UtilStrTrimTests::UTL_STR_RTRIM_2, "Right trim on empty string");
-		_REGISTER_TEST_(this, &UtilStrTrimTests::UTL_STR_LTRIM_1, "Left trim removes all white space characters");
-		_REGISTER_TEST_(this, &UtilStrTrimTests::UTL_STR_LTRIM_2, "Left trim on empty string");
-		_REGISTER_TEST_(this, &UtilStrTrimTests::UTL_STR_TRIM_1, "Two sided trim removes all white space characters");
-		_REGISTER_TEST_(this, &UtilStrTrimTests::UTL_STR_TRIM_2, "Two sided trim on empty string");
+		ADD_TEST_FIXTURE(this);
+		REGISTER_TEST(this, &UtilStrTrimTests::UTL_STR_RTRIM_1, "Right trim removes all white space characters");
+		REGISTER_TEST(this, &UtilStrTrimTests::UTL_STR_RTRIM_2, "Right trim on empty string");
+		REGISTER_TEST(this, &UtilStrTrimTests::UTL_STR_LTRIM_1, "Left trim removes all white space characters");
+		REGISTER_TEST(this, &UtilStrTrimTests::UTL_STR_LTRIM_2, "Left trim on empty string");
+		REGISTER_TEST(this, &UtilStrTrimTests::UTL_STR_TRIM_1, "Two sided trim removes all white space characters");
+		REGISTER_TEST(this, &UtilStrTrimTests::UTL_STR_TRIM_2, "Two sided trim on empty string");
 	}
 
 	void UTL_STR_RTRIM_1() {  
-		_ARE_EQUAL(this, mr_utils::mr_string(L("This is a str")), mr_utils::TrimRight(L("This is a str  \t\n\r\0")));
+		TEST_EQUAL(this, mr_utils::mr_string(L("This is a str")), mr_utils::TrimRight(L("This is a str  \t\n\r\0")));
 	}
 
 	void UTL_STR_RTRIM_2() {  
-		_ARE_EQUAL(this, mr_utils::mr_string(L("")), mr_utils::TrimLeft(L("")));
+		TEST_EQUAL(this, mr_utils::mr_string(L("")), mr_utils::TrimLeft(L("")));
 	}
 
 
 	void UTL_STR_LTRIM_1() {  
-		_ARE_EQUAL(this, mr_utils::mr_string(L("This is a str")), mr_utils::TrimLeft(L("  \t\n\rThis is a str")));
+		TEST_EQUAL(this, mr_utils::mr_string(L("This is a str")), mr_utils::TrimLeft(L("  \t\n\rThis is a str")));
 	}
 
 
 	void UTL_STR_LTRIM_2() {  
-		_ARE_EQUAL(this, mr_utils::mr_string(L("")), mr_utils::TrimLeft(L("")));
+		TEST_EQUAL(this, mr_utils::mr_string(L("")), mr_utils::TrimLeft(L("")));
 	}
 
 
 	void UTL_STR_TRIM_1() {  
-		_ARE_EQUAL(this, mr_utils::mr_string(L("This is a str")), mr_utils::Trim(L("  \t\n\r  This is a str  \t\n\r  ")));
+		TEST_EQUAL(this, mr_utils::mr_string(L("This is a str")), mr_utils::Trim(L("  \t\n\r  This is a str  \t\n\r  ")));
 	}
 
 
 	void UTL_STR_TRIM_2() {  
-		_ARE_EQUAL(this, mr_utils::mr_string(L("")), mr_utils::Trim(L("")));
+		TEST_EQUAL(this, mr_utils::mr_string(L("")), mr_utils::Trim(L("")));
 	}
 
 };
-_REGISTER_FIXTURE_(UtilStrTrimTests)
+REGISTER_FIXTURE(UtilStrTrimTests)
 

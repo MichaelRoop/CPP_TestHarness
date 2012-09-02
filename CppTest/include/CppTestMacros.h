@@ -20,14 +20,14 @@
 
 
 // Adding the test fixture to the engine
-#define _ADD_TEST_FIXTURE_( _fixtureClass_ )				\
+#define ADD_TEST_FIXTURE( _fixtureClass_ )					\
 CppTest::Engine::Instance().RegisterCase( _fixtureClass_ );	\
 
 
 // Create the fixture instance with a unique variable name. This will trigger the constructor which registers it 
 // with the engine. You can only register a fixture class once. Place this in the dllMain for those OS which do
 // not have DLL header parsing implemented
-#define _REGISTER_FIXTURE_MAIN( _fixture_ )						\
+#define REGISTER_FIXTURE_MAIN( _fixture_ )						\
 	_fixture_*  ##_fixture_##Instance  = new _fixture_(_L_((#_fixture_)));		\
 
 // Dynamic loading of the fixture via a called export function. In windows the functions are discovered by parsing
@@ -37,40 +37,40 @@ CppTest::Engine::Instance().RegisterCase( _fixtureClass_ );	\
 //
 // Note that we assume __cplusplus is defined. We cannot use pre processor directives in a macro. 
 #if defined(WIN32)
-#	define _REGISTER_FIXTURE_( _fixture_ )													\
+#	define REGISTER_FIXTURE( _fixture_ )													\
 	extern "C" {																			\
 		__declspec(dllexport) void __cdecl ##_fixture_##_this_is_a_CppTest_loader_() {		\
 			_fixture_*  ##_fixture_##instance = new _fixture_(_L_((#_fixture_)));			\
 		}																					\
 	}																						
 #else
-#	define _REGISTER_FIXTURE_( _fixture_ )
+#	define REGISTER_FIXTURE( _fixture_ )
 #endif
 
 
 
 // Register the class void method as the fixture setup method
-#define _FIXTURE_SETUP_( _fixture_,  _setup_ )		\
+#define FIXTURE_SETUP( _fixture_,  _setup_ )		\
 	_fixture_->RegisterFixtureSetup(static_cast<CppTest::IFixture::Ifixture_method_ptr>( _setup_  ));			\
 
 
 // Register the class void method as the fixture teardown method
-#define _FIXTURE_TEARDOWN_( _fixture_,  _teardown_ )		\
+#define FIXTURE_TEARDOWN( _fixture_,  _teardown_ )		\
 _fixture_->RegisterFixtureTeardown(static_cast<CppTest::IFixture::Ifixture_method_ptr>( _teardown_  ));			\
 
 
 // Register the class void method as the test setup method
-#define _TEST_SETUP_( _fixture_,  _setup_ )		\
+#define TEST_SETUP( _fixture_,  _setup_ )		\
 _fixture_->RegisterTestSetup(static_cast<CppTest::IFixture::Ifixture_method_ptr>( _setup_  ));			\
 
 
 // Register the class void method as the test teardown method
-#define _TEST_TEARDOWN_( _fixture_,  _teardown_ )		\
+#define TEST_TEARDOWN( _fixture_,  _teardown_ )		\
 _fixture_->RegisterTestTeardown(static_cast<CppTest::IFixture::Ifixture_method_ptr>( _teardown_  ));			\
 
 
 // Register the class void method as the test method
-#define _REGISTER_TEST_( _fixture_, _test_, _desc_ )												\
+#define REGISTER_TEST( _fixture_, _test_, _desc_ )												\
 _fixture_->RegisterTest(static_cast<CppTest::IFixture::Ifixture_method_ptr>( _test_ ), _L_((#_test_)), _L_((_desc_)) );			\
 
 
@@ -79,17 +79,17 @@ _fixture_->RegisterTest(static_cast<CppTest::IFixture::Ifixture_method_ptr>( _te
 //----------------------------------------------------------------------------------
 
 
-#define _ARE_EQUAL(_fixture_,_expected_, _actual_) \
+#define TEST_EQUAL(_fixture_,_expected_, _actual_) \
 CppTest::AreEqual(_FL_, (_expected_), (_actual_), (_fixture_)->CurrentTestCase().MsgBuffer);
 
 
-#define _ARE_NOT_EQUAL(_fixture_,_notexpected_, _actual_) \
+#define TEST_NOT_EQUAL(_fixture_,_notexpected_, _actual_) \
 CppTest::AreNotEqual(_FL_, (_notexpected_), (_actual_), (_fixture_)->CurrentTestCase().MsgBuffer);
 
-#define _IS_TRUE_(_fixture_,_condition_,_msg_)	\
+#define TEST_TRUE(_fixture_,_condition_,_msg_)	\
 CppTest::IsTrue(_FL_, (_condition_), (_fixture_)->CurrentTestCase().MsgBuffer, (_msg_));
 
-#define _IS_FALSE_(_fixture_,_condition_,_msg_)	\
+#define TEST_FALSE(_fixture_,_condition_,_msg_)	\
 CppTest::IsFalse(_FL_, (_condition_), (_fixture_)->CurrentTestCase().MsgBuffer, (_msg_));
 
 
@@ -99,10 +99,10 @@ CppTest::IsFalse(_FL_, (_condition_), (_fixture_)->CurrentTestCase().MsgBuffer, 
 
 
 /*
-#define _DOES_THROW(_fixture_, _exception_, _logic_) \
+#define TEST_THROWS(_fixture_, _exception_, _logic_) \
 	try {									\
 		(_logic_);							\
-		_ARE_EQUAL(_fixture_, 1, 2);		\
+		TEST_EQUAL(_fixture_, 1, 2);		\
 	}										\
 	catch (const (_exception_)& e) {			\
 		prinf("caught exception");			\

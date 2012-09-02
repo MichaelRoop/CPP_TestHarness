@@ -26,23 +26,23 @@ public:
 		// fires the contructor. However, this only works if the test case is compiled in
 		// to a test app.  TODO - secondary step - register contructor with a method
 		// that could be called from a DLL when the engine loads that DLL with the tests
-		_ADD_TEST_FIXTURE_(this);
+		ADD_TEST_FIXTURE(this);
 
 		// Optional Fixture setup and teardown. Executed once for series of test cases
-		_FIXTURE_SETUP_(this, &TokenizerTests1::FixtureSetup);
-		_FIXTURE_TEARDOWN_(this, &TokenizerTests1::FixtureTeardown); 
+		FIXTURE_SETUP(this, &TokenizerTests1::FixtureSetup);
+		FIXTURE_TEARDOWN(this, &TokenizerTests1::FixtureTeardown); 
 
 		// Optional Test case setup and teardown. executed for each test case
-		_TEST_SETUP_(this, &TokenizerTests1::TestSetup);
-		_TEST_TEARDOWN_(this, &TokenizerTests1::TestTeardown);
+		TEST_SETUP(this, &TokenizerTests1::TestSetup);
+		TEST_TEARDOWN(this, &TokenizerTests1::TestTeardown);
 
 		// Register test case methods
-		_REGISTER_TEST_(this, &TokenizerTests1::UTL_TOK_1_1, "Normal tokenize string");
-		_REGISTER_TEST_(this, &TokenizerTests1::UTL_TOK_1_2, "Tokenize with multiple mid delimiters");
-		_REGISTER_TEST_(this, &TokenizerTests1::UTL_TOK_1_3, "Tokenize test leading delimiters");
-		_REGISTER_TEST_(this, &TokenizerTests1::UTL_TOK_1_4, "Tokenize test following delimiters");
-		_REGISTER_TEST_(this, &TokenizerTests1::UTL_TOK_1_5, "Tokenize test leading and following delimiters");
-		_REGISTER_TEST_(this, &TokenizerTests1::UTL_TOK_1_6, "Tokenize test multiple leading mid and following delimiters");
+		REGISTER_TEST(this, &TokenizerTests1::UTL_TOK_1_1, "Normal tokenize string");
+		REGISTER_TEST(this, &TokenizerTests1::UTL_TOK_1_2, "Tokenize with multiple mid delimiters");
+		REGISTER_TEST(this, &TokenizerTests1::UTL_TOK_1_3, "Tokenize test leading delimiters");
+		REGISTER_TEST(this, &TokenizerTests1::UTL_TOK_1_4, "Tokenize test following delimiters");
+		REGISTER_TEST(this, &TokenizerTests1::UTL_TOK_1_5, "Tokenize test leading and following delimiters");
+		REGISTER_TEST(this, &TokenizerTests1::UTL_TOK_1_6, "Tokenize test multiple leading mid and following delimiters");
 	}
 	
 	void FixtureSetup()	{ 
@@ -65,16 +65,16 @@ public:
 
 	void TestSetup()	{ 
 		mr_cout << _L_("**** ") << this->Name() << _L_(" Registered Test Setup Executed ****") << std::endl;
-		//_ARE_EQUAL(this, 1, 99);
-		//_ARE_NOT_EQUAL(this, 1, 1);
-		//_DOES_THROW(this, Exception, { this->ThrowTest());
-		//_IS_TRUE_(this, false, "Totaly false msg");
-		//_IS_FALSE_(this, true, "Totaly false msg");
+		//TEST_EQUAL(this, 1, 99);
+		//TEST_NOT_EQUAL(this, 1, 1);
+		//TEST_THROWS(this, Exception, { this->ThrowTest());
+		//TEST_TRUE_(this, false, "Totaly false msg");
+		//TEST_FALSE_(this, true, "Totaly false msg");
 	}
 
 	void TestTeardown()	{ 
 		mr_cout << _L_("**** ") << this->Name() << _L_(" Registered Test Teardown Executed ****") << std::endl;
-		//_ARE_EQUAL(this, 1, 99);
+		//TEST_EQUAL(this, 1, 99);
 	}
 	
 
@@ -117,9 +117,9 @@ protected:
 		if (index >= m_tokens.size()) {
 			mr_utils::mr_stringstream ss;
 			ss << L( "index of:" ) << index << L( " exceeds token count of :" ) << m_tokens.size();
-			_IS_TRUE_(this, false, ss.str().c_str());
+			TEST_TRUE(this, false, ss.str().c_str());
 		}
-		_ARE_EQUAL(this, m_tokens[index], token);
+		TEST_EQUAL(this, m_tokens[index], token);
 	}
 
 	void TokenizeString(const mr_utils::mr_string& str) {
@@ -132,11 +132,11 @@ protected:
 		}
 
 		// The index is incremented before the tokenize so it will be one high.
-		_ARE_EQUAL(this, this->m_tokens.size(), index);
+		TEST_EQUAL(this, this->m_tokens.size(), index);
 	}
 
 };
-_REGISTER_FIXTURE_(TokenizerTests1)
+REGISTER_FIXTURE(TokenizerTests1)
 
 
 // Test tokenize of string with only token delimiters.
@@ -145,14 +145,14 @@ class TokenizerTests2 : public CppTest::Fixture {
 public:
 	TokenizerTests2(const mr_utils::mr_string& name)
 		: CppTest::Fixture(name)	{
-		_ADD_TEST_FIXTURE_( this );
+		ADD_TEST_FIXTURE( this );
 
-		_FIXTURE_SETUP_(this, &TokenizerTests2::FixtureSetup );
-		_FIXTURE_TEARDOWN_(this, &TokenizerTests2::FixtureTeardown );
-		_TEST_SETUP_(this, &TokenizerTests2::TestSetup);
-		_TEST_TEARDOWN_(this, &TokenizerTests2::TestTeardown);
+		FIXTURE_SETUP(this, &TokenizerTests2::FixtureSetup );
+		FIXTURE_TEARDOWN(this, &TokenizerTests2::FixtureTeardown );
+		TEST_SETUP(this, &TokenizerTests2::TestSetup);
+		TEST_TEARDOWN(this, &TokenizerTests2::TestTeardown);
 
-		_REGISTER_TEST_(this, &TokenizerTests2::UTL_TOK_1_7, "Tokenize delimiters only");
+		REGISTER_TEST(this, &TokenizerTests2::UTL_TOK_1_7, "Tokenize delimiters only");
 	}																				
 
 	void TestSetup()	{ 
@@ -185,12 +185,12 @@ public:
 		int count;
 		for (count = 0; mr_utils::MrTokenize( pos,  _L_("||||||||"), token, _L_('|') ); count++) {
 		}
-		_ARE_EQUAL(this, 0, count);
+		TEST_EQUAL(this, 0, count);
 	}
 
 private:
 	std::vector<mr_utils::mr_string> m_tokens;
 };
-_REGISTER_FIXTURE_(TokenizerTests2);
+REGISTER_FIXTURE(TokenizerTests2);
 
 
