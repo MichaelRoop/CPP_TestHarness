@@ -96,6 +96,7 @@ public:
 	mr_utils::mr_string			Description;	///< Test description.
 	//mr_test::TestArguments	m_args;			///< Test arguments.
 	mr_utils::mr_stringstream	MsgBuffer;		///< Short message buffer.
+	mr_utils::mr_stringstream	EmbeddedMsgBuffer;	///< Used internally to create embedded messages
 	mr_utils::mr_stringstream	VerboseBuffer;	///< Verbose message buffer.
 	long long					SetupTime;		///< Setup time in ms.
 	long long					ExecTime;		///< Test time in ms.

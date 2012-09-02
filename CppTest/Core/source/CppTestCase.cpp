@@ -29,6 +29,7 @@ void Case::Reset() {
 	this->Status = Case::ST_NONE;
 	//this->m_args.clear();
 	mr_utils::ResetStringStream(this->MsgBuffer);
+	mr_utils::ResetStringStream(this->EmbeddedMsgBuffer);
 	mr_utils::ResetStringStream(this->VerboseBuffer);
 	this->SetupTime = 0;
 	this->ExecTime = 0;

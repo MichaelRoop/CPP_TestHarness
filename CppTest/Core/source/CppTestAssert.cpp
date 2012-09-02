@@ -16,35 +16,35 @@
 namespace CppTest {
 
 
-void CreateMsg(mr_utils::mr_stringstream& ss, const char* file, int line, const mr_utils::mr_string& msg) {
-	mr_utils::ToStream( ss, mr_utils::ExtractFileName( file ));
-	ss << _L_(" line:") << line;
+void CreateMsg(mr_utils::mr_stringstream& msgBuffer, const char* file, int line, const mr_utils::mr_stringstream& userMsg) {
+	mr_utils::ToStream( msgBuffer, mr_utils::ExtractFileName(file));
+	msgBuffer << _L_(":") << line;
 
-	if (msg.length() > 0) { 
-		ss << _L_(" : ") << msg;
+	if (userMsg.str().length() > 0) { 
+		msgBuffer << _L_(" : ") << userMsg.str();
 	}
 }
 
 
 void IsTrue(
-	const char* file, int line, bool condition, mr_utils::mr_stringstream& buffer, const mr_utils::mr_string& msg) {
+	const char* file, int line, bool condition, mr_utils::mr_stringstream& buffer, const mr_utils::mr_stringstream& userMsg) {
 
 	mr_utils::mr_stringstream ss;
-	//ss << msg;
 	ss << _L_("Did not Expected false condition ");	
-	CreateMsg(ss, file, line, msg);
+	CreateMsg(ss, file, line, userMsg);
 
 	if (!CppTest::CompareEqual(true, condition, buffer, ss.str())) {
 		throw mr_utils::mr_exception(file, line, ss.str());				
-	}																	
+	}		
 }
 
+
 void IsFalse(
-	const char* file, int line, bool condition, mr_utils::mr_stringstream& buffer, const mr_utils::mr_string& msg) {
+	const char* file, int line, bool condition, mr_utils::mr_stringstream& buffer, const mr_utils::mr_stringstream& userMsg) {
 
 	mr_utils::mr_stringstream ss;
 	ss << _L_("Did not Expected true condition ");	
-	CreateMsg(ss, file, line, msg);
+	CreateMsg(ss, file, line, userMsg);
 
 	if (!CppTest::CompareEqual(false, condition, buffer, ss.str())) {
 		throw mr_utils::mr_exception(file, line, ss.str());				

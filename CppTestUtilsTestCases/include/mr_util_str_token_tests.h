@@ -115,9 +115,7 @@ protected:
 	void CompareToken( std::vector<mr_utils::mr_string>::size_type index, const mr_utils::mr_string& token ) {
 		// compare index range.
 		if (index >= m_tokens.size()) {
-			mr_utils::mr_stringstream ss;
-			ss << L( "index of:" ) << index << L( " exceeds token count of :" ) << m_tokens.size();
-			TEST_TRUE(this, false, ss.str().c_str());
+			TEST_TRUE(this, false, L( "index of:" ) << index << L( " exceeds token count of :" ) << m_tokens.size());
 		}
 		TEST_EQUAL(this, m_tokens[index], token);
 	}

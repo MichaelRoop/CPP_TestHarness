@@ -79,18 +79,26 @@ _fixture_->RegisterTest(static_cast<CppTest::IFixture::Ifixture_method_ptr>( _te
 //----------------------------------------------------------------------------------
 
 
+//#define TEST_EQUAL(_fixture_,_expected_, _actual_) \
+//CppTest::AreEqual(_FL_, (_expected_), (_actual_), (_fixture_)->CurrentTestCase().MsgBuffer);
 #define TEST_EQUAL(_fixture_,_expected_, _actual_) \
-CppTest::AreEqual(_FL_, (_expected_), (_actual_), (_fixture_)->CurrentTestCase().MsgBuffer);
+CppTest::AreEqual(_FL_, (_expected_), (_actual_), (_fixture_)->CurrentTestCase().MsgBuffer, (_fixture_)->CurrentTestCase().EmbeddedMsgBuffer);
+
+
 
 
 #define TEST_NOT_EQUAL(_fixture_,_notexpected_, _actual_) \
-CppTest::AreNotEqual(_FL_, (_notexpected_), (_actual_), (_fixture_)->CurrentTestCase().MsgBuffer);
+CppTest::AreNotEqual(_FL_, (_notexpected_), (_actual_), (_fixture_)->CurrentTestCase().MsgBuffer, (_fixture_)->CurrentTestCase().EmbeddedMsgBuffer);
 
-#define TEST_TRUE(_fixture_,_condition_,_msg_)	\
-CppTest::IsTrue(_FL_, (_condition_), (_fixture_)->CurrentTestCase().MsgBuffer, (_msg_));
+#define TEST_TRUE(_fixture_,_condition_,_msg_)												\
+(_fixture_)->CurrentTestCase().EmbeddedMsgBuffer << _msg_;									\
+CppTest::IsTrue(_FL_, (_condition_), (_fixture_)->CurrentTestCase().MsgBuffer, (_fixture_)->CurrentTestCase().EmbeddedMsgBuffer);
 
 #define TEST_FALSE(_fixture_,_condition_,_msg_)	\
-CppTest::IsFalse(_FL_, (_condition_), (_fixture_)->CurrentTestCase().MsgBuffer, (_msg_));
+(_fixture_)->CurrentTestCase().EmbeddedMsgBuffer << _msg_;									\
+CppTest::IsFalse(_FL_, (_condition_), (_fixture_)->CurrentTestCase().MsgBuffer, (_fixture_)->CurrentTestCase().EmbeddedMsgBuffer);
+
+
 
 
 //void IsTrue(
