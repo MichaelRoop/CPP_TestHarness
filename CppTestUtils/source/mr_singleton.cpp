@@ -13,15 +13,10 @@
 namespace mr_utils {
 
 	singleton::singleton() {
-		this->Initialise();
 	}
 
 
 	singleton::singleton( const singleton& ) {
-	}
-
-
-	void singleton::Initialise() {
 	}
 	
 } // end of namespace.

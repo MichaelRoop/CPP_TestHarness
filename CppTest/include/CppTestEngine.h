@@ -19,6 +19,7 @@
 #include "ICppTestFixture.h"
 #include "ICppTestFixtureTestCaseNames.h"
 #include "ICppTestRunSummary.h"
+#include "ICppTestDllManager.h"
 #include "CppTestFixtureInfoObject.h"
 #include "CppTestCaseCounter.h"
 #include "mr_singleton.h"
@@ -57,11 +58,16 @@ public:
 	/// The engine will be created on first call.
 	/// @return	The unique instance of the test engine.
 	static Engine& Instance();
-
-
-	/// @brief Override on the intialiser called by singleton default construction
-	virtual void Initialise();
 	
+
+	/// @brief	Load a DLL of test cases
+	/// @param	dllName	Name of the DLL containing the test cases
+	void LoadTests(const mr_utils::mr_string& dllName);
+
+
+	/// @brief 	Unload current DLL of test cases
+	void UnloadTests();
+
 
 	/// @brief	Register a test case to the system for later recall.
 	/// It is easier to use the macros to create and register the test case. The engine
@@ -106,6 +112,11 @@ public:
 	/// @brief Get all the test case names that have been registered
 	std::vector<mr_utils::SharedPtr<CppTest::IFixutureTestCaseNames> > GetTestNames();
 
+protected:
+	///@brief	Default constructor
+	Engine();
+
+
 private:
 	std::vector<CppTest::IFixture*> m_fixtures;	///< The vector of registered test case fixtures.
 	static Engine*					m_instance;	///< The unique instance of the testEngine.
@@ -113,8 +124,8 @@ private:
 	CppTest::LogEngine				m_logEngine;///< The logging engine.
 	std::vector<CppTest::DataLoggedEvent>	m_logEvents;///< Vector of registered log events
 	std::vector<CppTest::TestRunSummaryData> m_summaryEvents;///< Vector of registered log events
-
 	CppTest::CaseCounter			m_caseCounter; ///< track test case summary data
+	mr_utils::SharedPtr<CppTest::IDllManager>	m_testDllManger; // Manages the test case DLLs
 
 
 	/// @brief	Process one test case fixture based on information contained in the testInfoObject.

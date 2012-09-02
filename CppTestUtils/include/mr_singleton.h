@@ -13,12 +13,10 @@
 
 #include "CppTestUtilsDefine.h"
 
-namespace mr_utils
-{
+namespace mr_utils {
 
 	/// @brief	Singleton base class.
-	class CPPTESTUTILS_API singleton
-	{
+	class CPPTESTUTILS_API singleton {
 
 	protected:
 
@@ -27,20 +25,11 @@ namespace mr_utils
 
 
 		/// @brief	Copy constructor in protected scope to prevent direct intantiation.
-		///
 		/// @param	obj	The Singleton object used to contruct an instance.
-		singleton( const singleton& obj );
-
-
-		/// @brief	An optional intialiser is called on the default constructor and can be
-		///			overriden to guarantee initialisation on construction
-		virtual void Initialise();
-
+		singleton(const singleton& obj);
 
 	};
 
-
-}
-
+} // end namespace
 
 #endif

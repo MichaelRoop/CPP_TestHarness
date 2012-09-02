@@ -125,18 +125,6 @@ int main(int argc, char* argv[]) {
 //
 ////return 0;
 
-
-	std::cout << "Before load library" << std::endl;
-	HINSTANCE handle = LoadLibrary(L"..\\Debug\\CppTestUtilsTestCases.dll") ;
-//	//HANDLE handle = LoadLibrary(L"..\\Debug\\CppTestUtils.dll") ;
-//
-//
-//	std::cout << "After load library" << std::endl;
-//	if (handle == NULL) {
-//		std::cout << "library load failed" << std::endl;
-//		return 1;
-//	}
-//	
 //
 //	std:: wcout << "Func Name:" << MAKEINTRESOURCEA(1) << std::endl;
 //
@@ -176,14 +164,14 @@ int main(int argc, char* argv[]) {
 
 	if (checkParams( 1, argc, argv )) {
 		try {
-			mr_cout << _L_("Loading Configuration from ./CppTestConfig.ini") << std::endl;
 			CppTest::Engine& eng = CppTest::Engine::Instance();
+			eng.LoadTests(L"..\\Debug\\CppTestUtilsTestCases.dll");
 
-			// Print out list of loaded tests
+			// Print out list of loaded tests - temp test
 			std::vector<mr_utils::SharedPtr<CppTest::IFixutureTestCaseNames> > testNames = eng.GetTestNames();
 			std::for_each(testNames.begin(), testNames.end(), PrintFixtureCaseNames());
-
-
+			
+			mr_cout << _L_("Loading Configuration from ./CppTestConfig.ini") << std::endl;
 			eng.GetLogEngine().LoadLoggers("CppTestConfig.ini", _L_("INI"));
 
 			// Test register event call backs
@@ -202,6 +190,8 @@ int main(int argc, char* argv[]) {
 			//CppTest::ListBuilder listBuilder;
 			eng.ProcessTestList(listBuilder.Build(reader));
 			//eng.ProcessScript( reader );
+
+			eng.UnloadTests();
 		} 
 		catch( const CppTest::ScriptException e ) {
 			mr_cout << e.longMsg() << std::endl;
@@ -222,12 +212,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	// Temp DLL load test
-	FreeLibrary(handle);
-
-
-
-	return 0;
-	
+//	FreeLibrary(handle);
 
 
 	return 0;

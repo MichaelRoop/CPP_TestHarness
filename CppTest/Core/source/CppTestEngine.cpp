@@ -13,10 +13,11 @@
 #include "CppTestCase.h"
 #include "CppTestInfoObject.h"
 #include "CppTestRunSummary.h"
+#include "CppTestDllManager.h"
 #include "mr_pointerException.h"
 #include "mr_defines.h"
 
-//#include "mr_iostream.h"
+#include "mr_iostream.h"
 
 #include <time.h>
 #include <algorithm>
@@ -141,10 +142,10 @@ Engine& Engine::Instance() {
 }
 
 
-// TODO - look at singleton and figure out an intialiaser to call 
-void Engine::Initialise() {
+Engine::Engine() {
+	mr_cout << _L_("*** Default constructor called") << std::endl;
+	this->m_testDllManger = new CppTest::DllManager();
 }
-
 
 
 void Engine::RegisterCase(CppTest::IFixture* fixture) {
@@ -213,6 +214,16 @@ void Engine::ProcessScript(CppTest::IScriptReader& theReader ) {
 	this->m_logEngine.WriteSummaries();
 }
 #endif
+
+
+void Engine::LoadTests(const mr_utils::mr_string& dllName) {
+	this->m_testDllManger->Load(dllName);
+}
+
+
+void Engine::UnloadTests() {
+	this->m_testDllManger->Unload();
+}
 
 
 void Engine::ProcessTestList(std::vector< mr_utils::SharedPtr<CppTest::ITestFixtureInfoObject> >& list) {

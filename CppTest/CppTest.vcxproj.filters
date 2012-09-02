@@ -61,6 +61,15 @@
     <Filter Include="Core\include">
       <UniqueIdentifier>{eba5a6fe-4d4f-451d-bc7d-0321e6111038}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Dlls">
+      <UniqueIdentifier>{4e38da0f-34ca-4089-ae8e-69a3d1e0c7bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dlls\include">
+      <UniqueIdentifier>{9903d07e-c466-4c90-bcf4-5f29b9216606}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dlls\source">
+      <UniqueIdentifier>{f2f53e95-0e47-468d-b95b-5302a468dc0c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Win\app.ico">
@@ -177,6 +186,9 @@
     </ClCompile>
     <ClCompile Include="Core\source\CppTestRunSummary.cpp">
       <Filter>Core\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Dlls\source\CppTestDllManager.cpp">
+      <Filter>Dlls\source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -323,6 +335,12 @@
     </ClInclude>
     <ClInclude Include="Core\include\CppTestRunSummary.h">
       <Filter>Core\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ICppTestDllManager.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="Dlls\include\CppTestDllManager.h">
+      <Filter>Dlls\include</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
