@@ -136,7 +136,7 @@ protected:
 	}
 
 };
-//_REGISTER_FIXTURE_(TokenizerTests1)
+_REGISTER_FIXTURE_(TokenizerTests1)
 
 
 // Test tokenize of string with only token delimiters.
@@ -191,6 +191,6 @@ public:
 private:
 	std::vector<mr_utils::mr_string> m_tokens;
 };
-//_REGISTER_FIXTURE_(TokenizerTests2);
+_REGISTER_FIXTURE_(TokenizerTests2);
 
 

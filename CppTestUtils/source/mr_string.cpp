@@ -174,5 +174,15 @@ mr_utils::mr_string::size_type StrNPos() {
 }
 
 
+std::string::size_type Find(const std::string& s, const std::string pattern, std::string::size_type pos) {
+	return s.find(pattern, pos);
+}
+
+
+bool Contains(const std::string& s, const std::string pattern) {
+	return Find(s, pattern, 0) != std::string::npos;
+}
+
+
 
 } // end namespace

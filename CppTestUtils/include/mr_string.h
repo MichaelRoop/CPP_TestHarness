@@ -116,6 +116,13 @@ CPPTESTUTILS_API mr_utils::mr_string SubString(const mr_utils::mr_string& s, mr_
 CPPTESTUTILS_API mr_utils::mr_string::size_type StrNPos();
 
 
+/// @brief	Function to replace find. Needed because reference to the npos causing a link failure
+/// @param	pos	The start position 0 indexed.
+CPPTESTUTILS_API std::string::size_type Find(const std::string& s, const std::string pattern, std::string::size_type pos);
+
+
+/// @brief	Contain function
+CPPTESTUTILS_API bool Contains(const std::string& s, const std::string pattern);
 
 
 } // end namespace.

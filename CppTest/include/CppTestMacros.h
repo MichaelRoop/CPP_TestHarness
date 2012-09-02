@@ -15,6 +15,7 @@
 #include "CppTestAsserts.h"
 #include "CppTestEngine.h"
 #include "mr_char.h"
+#include "mr_sstream.h"
 #include "mr_defines.h"
 
 
@@ -23,10 +24,29 @@
 CppTest::Engine::Instance().RegisterCase( _fixtureClass_ );	\
 
 
-// Create the fixture instance with a unique variable name. This will trigger the constructor which registers it with the engine
-// You can only register a fixture class once
-#define _REGISTER_FIXTURE_( _fixture_ )						\
+// Create the fixture instance with a unique variable name. This will trigger the constructor which registers it 
+// with the engine. You can only register a fixture class once. Place this in the dllMain for those OS which do
+// not have DLL header parsing implemented
+#define _REGISTER_FIXTURE_MAIN( _fixture_ )						\
 	_fixture_*  ##_fixture_##Instance  = new _fixture_(_L_((#_fixture_)));		\
+
+// Dynamic loading of the fixture via a called export function. In windows the functions are discovered by parsing
+// the DLL header to extract export function names which are then called. This allows the macro to be placed in 
+// closer proximity to the test fixture instead of in the dllMain.  This should also be doable for linux and other
+// NIX which use the ELF shared object headers.
+//
+// Note that we assume __cplusplus is defined. We cannot use pre processor directives in a macro. 
+#if defined(WIN32)
+#	define _REGISTER_FIXTURE_( _fixture_ )													\
+	extern "C" {																			\
+		__declspec(dllexport) void __cdecl ##_fixture_##_this_is_a_CppTest_loader_() {		\
+			_fixture_*  ##_fixture_##instance = new _fixture_(_L_((#_fixture_)));			\
+		}																					\
+	}																						
+#else
+#	define _REGISTER_FIXTURE_( _fixture_ )
+#endif
+
 
 
 // Register the class void method as the fixture setup method

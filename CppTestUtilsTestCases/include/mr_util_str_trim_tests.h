@@ -55,4 +55,5 @@ public:
 	}
 
 };
+_REGISTER_FIXTURE_(UtilStrTrimTests)
 
