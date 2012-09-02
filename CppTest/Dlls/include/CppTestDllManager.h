@@ -50,6 +50,15 @@ public:
 
 private:
 	DLL_HANDLE m_dllHandle;
+
+
+	/// @brief	Parse DLL header to load test cases from list of export functions
+	void ParseHeaderAndLoad(const mr_utils::mr_string& dllName);
+
+	/// @breif	Parse the DLL header to discover exported fixture load functions
+	std::vector<std::string> GetMethodNames(const mr_utils::mr_string& dllName);
+
+
 };
 
 } // end namespace cppTest::Case
