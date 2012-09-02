@@ -58,7 +58,7 @@ void AreNotEqual(
 	ss << _L_("Did not Expected '") << nonexpected << _L_("' but actual is '") << actual << _L_("'  ");
 	CreateMsg(ss, file, line, userMsg);
 
-	if (!mr_test::CompareNotEqual(nonexpected, actual, buffer, ss.str())) {
+	if (!CppTest::CompareNotEqual(nonexpected, actual, buffer, ss.str())) {
 		throw mr_utils::mr_exception(file, line, ss.str());				
 	}																	
 }
