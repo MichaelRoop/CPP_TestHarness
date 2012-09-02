@@ -62,13 +62,14 @@ static void MySecondLoggedEventHandler(const CppTest::ICase& testCase) {
 
 static void MySummaryEventHandler(const CppTest::IRunSummary& summary) {
 	mr_cout << _L_("& & & & & Summary Event") << std::endl
-		<< _L_("Success") << summary.Total(CppTest::ICase::ST_SUCCESS) << std::endl
-		<< _L_("Fixture Setup Failure") << summary.Total(CppTest::ICase::ST_FAIL_FIXTURE_SETUP) << std::endl
-		<< _L_("Setup Failure") << summary.Total(CppTest::ICase::ST_FAIL_SETUP) << std::endl
-		<< _L_("Test Failure") << summary.Total(CppTest::ICase::ST_FAIL_TEST) << std::endl
-		<< _L_("Teardown Failure") << summary.Total(CppTest::ICase::ST_FAIL_CLEANUP) << std::endl
-		<< _L_("Disabled") << summary.Total(CppTest::ICase::ST_DISABLED) << std::endl
-		<< _L_("Not Found") << summary.Total(CppTest::ICase::ST_NOT_EXISTS) << std::endl;
+		<< _L_("Success = ") << summary.Total(CppTest::ICase::ST_SUCCESS) << std::endl
+		<< _L_("Fixture Setup Failure = ") << summary.Total(CppTest::ICase::ST_FAIL_FIXTURE_SETUP) << std::endl
+		<< _L_("Setup Failure = ") << summary.Total(CppTest::ICase::ST_FAIL_SETUP) << std::endl
+		<< _L_("Test Failure = ") << summary.Total(CppTest::ICase::ST_FAIL_TEST) << std::endl
+		<< _L_("Teardown Failure = ") << summary.Total(CppTest::ICase::ST_FAIL_CLEANUP) << std::endl
+		<< _L_("Disabled = ") << summary.Total(CppTest::ICase::ST_DISABLED) << std::endl
+		<< _L_("Not Found = ") << summary.Total(CppTest::ICase::ST_NOT_EXISTS) << std::endl
+		<< _L_("Total = ") << summary.Total() << std::endl;
 }
 
 
