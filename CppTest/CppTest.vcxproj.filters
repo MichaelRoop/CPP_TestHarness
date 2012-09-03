@@ -190,6 +190,9 @@
     <ClCompile Include="Dlls\source\CppTestDllManager.cpp">
       <Filter>Dlls\source</Filter>
     </ClCompile>
+    <ClCompile Include="Core\source\MrTestEngineImplementation.cpp">
+      <Filter>Core\source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Win\resource.h">
@@ -344,6 +347,12 @@
     </ClInclude>
     <ClInclude Include="include\MrTestTypes.h">
       <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IMrTestEngineImplementation.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\MrTestEngineImplementation.h">
+      <Filter>Core\include</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

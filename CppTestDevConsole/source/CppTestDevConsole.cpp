@@ -26,30 +26,24 @@
 bool checkParams( int required, int argc, char* argv[] );
 void holdScreen();
 
-class PrintCaseNames {
+class PrintCaseNamesFunctor {
 public:
-//	PrintCaseNames() {}
 	void operator () (const mr_utils::mr_string& name) {
 		mr_cout << _L_("\t") << name << std::endl;
 	}
 };
 
 //std::vector<mr_utils::SharedPtr<MrTest::IFixutureTestCaseNames> >
-class PrintFixtureCaseNames {
+class PrintFixtureCaseNamesFunctor {
 public:
 	void operator () (mr_utils::SharedPtr<MrTest::IFixutureTestCaseNames> fixture) {
 		mr_utils::mr_pointerException::ptrAssert(fixture.getPtr(), _FL_ );
 		mr_cout << fixture->FixtureName() << std::endl;
 		std::for_each(
 			fixture->TestCaseNames().begin(), 
-			fixture->TestCaseNames().end(), PrintCaseNames());
+			fixture->TestCaseNames().end(), PrintCaseNamesFunctor());
 	}
 };
-
-
-//typedef void (__cdecl *ptrFunc)();
-//typedef void (__stdcall *ptrFunc)();
-//#define PROC_OFFSET 0x000112C1
 
 
 static void MyLoggedEventHandler(const MrTest::ICase& testCase) {
@@ -80,9 +74,10 @@ int main(int argc, char* argv[]) {
 			MrTest::Engine& eng = MrTest::Engine::Instance();
 			eng.LoadTests(L"..\\Debug\\CppTestUtilsTestCases.dll");
 
-			//// Print out list of loaded tests - temp test
-			//std::vector<mr_utils::SharedPtr<MrTest::IFixutureTestCaseNames> > testNames = eng.GetTestNames();
-			//std::for_each(testNames.begin(), testNames.end(), PrintFixtureCaseNames());
+			// Print out list of loaded tests - temp test
+			mr_cout << L("List of Test Cases from DLL") << std::endl;
+			std::vector<mr_utils::SharedPtr<MrTest::IFixutureTestCaseNames> > testNames = eng.GetTestNames();
+			std::for_each(testNames.begin(), testNames.end(), PrintFixtureCaseNamesFunctor());
 			
 			mr_cout << _L_("Loading Configuration from ./CppTestConfig.ini") << std::endl;
 			eng.LoadLoggersByFileDefinition("CppTestConfig.ini", _L_("INI"));
