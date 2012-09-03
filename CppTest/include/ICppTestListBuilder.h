@@ -17,7 +17,7 @@
 #include "mr_SharedPtr.h"
 #include <vector>
 
-namespace CppTest {
+namespace MrTest {
 
 ///--------------------------------------------------------------------------------------
 /// 
@@ -29,16 +29,16 @@ public:
 
 	/// @brief	Process the test cases using the vector of info objects that were assembled
 	/// @param	list	The test fixture info objects and their tests
-	virtual std::vector< mr_utils::SharedPtr<CppTest::ITestFixtureInfoObject> > 
-		Build(CppTest::IScriptReader& theReader) const = 0;
+	virtual std::vector< mr_utils::SharedPtr<MrTest::ITestFixtureInfoObject> > 
+		Build(MrTest::IScriptReader& theReader) const = 0;
 
 };
 
 } // end namesapce
 
 // Force export of class with std objects
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator< mr_utils::SharedPtr<CppTest::IListBuilder> >;
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector< mr_utils::SharedPtr<CppTest::IListBuilder> >;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator< mr_utils::SharedPtr<MrTest::IListBuilder> >;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector< mr_utils::SharedPtr<MrTest::IListBuilder> >;
 
 
 #endif

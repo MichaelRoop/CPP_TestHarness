@@ -13,7 +13,7 @@
 #include "mr_defines.h"
 
 
-namespace CppTest {
+namespace MrTest {
 
 BuildColumnValueString::BuildColumnValueString( 
 	mr_utils::mr_stringstream&	os,

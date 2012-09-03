@@ -16,7 +16,7 @@
 #include "CppTestFieldPair.h"
 #include "ICppTestLogInitialiser.h"
 
-namespace CppTest {
+namespace MrTest {
 	class ICase;
 
 /// @brief	Structure to hold the loaded field.
@@ -38,7 +38,7 @@ struct StreamFormatData {
 /// The footer gives a summary of the total of successful and failed tests as well as a 
 /// breakdown of the total failures per state.
 /// 
-class SimpleLog : public CppTest::Log {
+class SimpleLog : public MrTest::Log {
 public:
 
 	/// @brief	Constructor.
@@ -50,9 +50,9 @@ public:
 	/// @param	summaryOutput	A SharedObject reference to a log object for summary output.
 	/// @param	initialiser		A SharedObject reference to an iLogInitialiser.
 	SimpleLog( 
-		mr_utils::SharedPtr<CppTest::ILogOutput>&		output, 
-		mr_utils::SharedPtr<CppTest::ILog>&				summaryLog, 
-		mr_utils::SharedPtr<CppTest::ILogInitialiser>&	initialiser 
+		mr_utils::SharedPtr<MrTest::ILogOutput>&		output, 
+		mr_utils::SharedPtr<MrTest::ILog>&				summaryLog, 
+		mr_utils::SharedPtr<MrTest::ILogInitialiser>&	initialiser 
 	);
 
 
@@ -77,13 +77,13 @@ public:
 	/// @exception	throws a mr_utils::mr_exception if the output object is invalid.
 	/// @param	fixture	Pointer to the test case fixture object that contains information to log.
 	/// @return	true if successful, otherwise false.
-	bool WriteEntry(CppTest::ICase& testCase);
+	bool WriteEntry(MrTest::ICase& testCase);
 
 
 	/// @brief	Write the summary of the logging.
 	/// @param	log	The log that contains the summary information.
 	/// @return	true if successful, otherwise false.
-	virtual bool WriteSummaryEntry(CppTest::ILog* log );
+	virtual bool WriteSummaryEntry(MrTest::ILog* log );
 
 private:
 

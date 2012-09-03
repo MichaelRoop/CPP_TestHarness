@@ -15,7 +15,7 @@
 #include "ICppTestLogOutput.h"
 
 
-namespace CppTest {
+namespace MrTest {
 
 //----------------------------------------------------------------------------------------
 /// @brief	Class for outputing logging information to the console.

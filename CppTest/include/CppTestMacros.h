@@ -21,7 +21,7 @@
 
 // Adding the test fixture to the engine
 #define ADD_TEST_FIXTURE( _fixtureClass_ )					\
-CppTest::Engine::Instance().RegisterCase( _fixtureClass_ );	\
+MrTest::Engine::Instance().RegisterCase( _fixtureClass_ );	\
 
 
 // Create the fixture instance with a unique variable name. This will trigger the constructor which registers it 
@@ -51,27 +51,27 @@ CppTest::Engine::Instance().RegisterCase( _fixtureClass_ );	\
 
 // Register the class void method as the fixture setup method
 #define FIXTURE_SETUP( _fixture_,  _setup_ )		\
-	_fixture_->RegisterFixtureSetup(static_cast<CppTest::IFixture::Ifixture_method_ptr>( _setup_  ));			\
+	_fixture_->RegisterFixtureSetup(static_cast<MrTest::IFixture::Ifixture_method_ptr>( _setup_  ));			\
 
 
 // Register the class void method as the fixture teardown method
 #define FIXTURE_TEARDOWN( _fixture_,  _teardown_ )		\
-_fixture_->RegisterFixtureTeardown(static_cast<CppTest::IFixture::Ifixture_method_ptr>( _teardown_  ));			\
+_fixture_->RegisterFixtureTeardown(static_cast<MrTest::IFixture::Ifixture_method_ptr>( _teardown_  ));			\
 
 
 // Register the class void method as the test setup method
 #define TEST_SETUP( _fixture_,  _setup_ )		\
-_fixture_->RegisterTestSetup(static_cast<CppTest::IFixture::Ifixture_method_ptr>( _setup_  ));			\
+_fixture_->RegisterTestSetup(static_cast<MrTest::IFixture::Ifixture_method_ptr>( _setup_  ));			\
 
 
 // Register the class void method as the test teardown method
 #define TEST_TEARDOWN( _fixture_,  _teardown_ )		\
-_fixture_->RegisterTestTeardown(static_cast<CppTest::IFixture::Ifixture_method_ptr>( _teardown_  ));			\
+_fixture_->RegisterTestTeardown(static_cast<MrTest::IFixture::Ifixture_method_ptr>( _teardown_  ));			\
 
 
 // Register the class void method as the test method
 #define REGISTER_TEST( _fixture_, _test_, _desc_ )												\
-_fixture_->RegisterTest(static_cast<CppTest::IFixture::Ifixture_method_ptr>( _test_ ), _L_((#_test_)), _L_((_desc_)) );			\
+_fixture_->RegisterTest(static_cast<MrTest::IFixture::Ifixture_method_ptr>( _test_ ), _L_((#_test_)), _L_((_desc_)) );			\
 
 
 //----------------------------------------------------------------------------------
@@ -80,11 +80,11 @@ _fixture_->RegisterTest(static_cast<CppTest::IFixture::Ifixture_method_ptr>( _te
 
 
 #define TEST_EQUAL(_fixture_,_expected_, _actual_) \
-CppTest::AreEqual(_FL_, (_expected_), (_actual_), (_fixture_)->CurrentTestCase().MsgBuffer, (_fixture_)->CurrentTestCase().EmbeddedMsgBuffer);
+MrTest::AreEqual(_FL_, (_expected_), (_actual_), (_fixture_)->CurrentTestCase().MsgBuffer, (_fixture_)->CurrentTestCase().EmbeddedMsgBuffer);
 
 
 #define TEST_NOT_EQUAL(_fixture_,_notexpected_, _actual_) \
-CppTest::AreNotEqual(_FL_, (_notexpected_), (_actual_), (_fixture_)->CurrentTestCase().MsgBuffer, (_fixture_)->CurrentTestCase().EmbeddedMsgBuffer);
+MrTest::AreNotEqual(_FL_, (_notexpected_), (_actual_), (_fixture_)->CurrentTestCase().MsgBuffer, (_fixture_)->CurrentTestCase().EmbeddedMsgBuffer);
 
 
 #define TEST_EQUAL_EX(_fixture_,_expected_, _actual_,_userMsg_)								\
@@ -99,12 +99,12 @@ TEST_NOT_EQUAL(_fixture_,_notexpected_, _actual_)
 
 #define TEST_TRUE(_fixture_,_condition_,_msg_)												\
 (_fixture_)->CurrentTestCase().EmbeddedMsgBuffer << _msg_;									\
-CppTest::IsTrue(_FL_, (_condition_), (_fixture_)->CurrentTestCase().MsgBuffer, (_fixture_)->CurrentTestCase().EmbeddedMsgBuffer);
+MrTest::IsTrue(_FL_, (_condition_), (_fixture_)->CurrentTestCase().MsgBuffer, (_fixture_)->CurrentTestCase().EmbeddedMsgBuffer);
 
 
 #define TEST_FALSE(_fixture_,_condition_,_msg_)	\
 (_fixture_)->CurrentTestCase().EmbeddedMsgBuffer << _msg_;									\
-CppTest::IsFalse(_FL_, (_condition_), (_fixture_)->CurrentTestCase().MsgBuffer, (_fixture_)->CurrentTestCase().EmbeddedMsgBuffer);
+MrTest::IsFalse(_FL_, (_condition_), (_fixture_)->CurrentTestCase().MsgBuffer, (_fixture_)->CurrentTestCase().EmbeddedMsgBuffer);
 
 
 

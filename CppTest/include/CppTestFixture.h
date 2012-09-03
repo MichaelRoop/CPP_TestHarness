@@ -16,7 +16,7 @@
 #include "ICppTestCaseHolder.h"
 #include "mr_string.h"
 
-namespace CppTest {
+namespace MrTest {
 
 ///--------------------------------------------------------------------------------------
 ///
@@ -57,7 +57,7 @@ public:
 	/// @brief	Run the named test case contained in the fixture
 	/// @param	name	The test case name
 	/// @param	args	Arguments for the named test case
-	 virtual void RunTest(const mr_utils::mr_string& name, const CppTest::TestCaseArguments& args);
+	 virtual void RunTest(const mr_utils::mr_string& name, const MrTest::TestCaseArguments& args);
 
 
 	/// @brief	Called after the last fixture test case has executed
@@ -70,7 +70,7 @@ public:
 
 
 	/// @brief	Retrieve the Fixture and test case names
-	virtual mr_utils::SharedPtr<CppTest::IFixutureTestCaseNames> GetTestNames() const;
+	virtual mr_utils::SharedPtr<MrTest::IFixutureTestCaseNames> GetTestNames() const;
 
 
 	/// @brief	Retrieve a copy of the currently executed test case
@@ -118,12 +118,12 @@ protected:
 
 	/// @brief	Retrieve test arguments for current test case.
 	/// @return	The arguments for the test case.
-	virtual const CppTest::TestCaseArguments& CurrentArgs() const;
+	virtual const MrTest::TestCaseArguments& CurrentArgs() const;
 
 private:
 
 	mr_utils::mr_string				m_name;				///< Fixture name 
-	CppTest::TestCaseArguments		m_args;				///< Arguments for current Test Case.
+	MrTest::TestCaseArguments		m_args;				///< Arguments for current Test Case.
 	IFixture::Ifixture_method_ptr	m_fixtureSetup;		///< setup method for the entire fixture
 	IFixture::Ifixture_method_ptr	m_fixtureTeardown;	///< teardown method for the entire fixture
 	IFixture::Ifixture_method_ptr	m_testSetup;		///< setup method for each test
@@ -131,7 +131,7 @@ private:
 	bool							m_isFixtureCalled;	///< Determines if a test has been called on the fixture yet
 	std::vector<ITestCaseHolder*>	m_tests;			///< The list of test cases
 	ITestCaseHolder*				m_currentTestCase;	///< The currently executing test case holder
-	mr_utils::SharedPtr<CppTest::IFixutureTestCaseNames> m_testCaseNames; ///< Object that holds test case name information
+	mr_utils::SharedPtr<MrTest::IFixutureTestCaseNames> m_testCaseNames; ///< Object that holds test case name information
 
 private:
 
@@ -158,10 +158,10 @@ private:  // temp to check for linking
 };
 
 
-} // end namespace cppTest
+} // end namespace MrTest
 
 ////#include <vector>
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::Fixture*>;
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::Fixture*>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<MrTest::Fixture*>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<MrTest::Fixture*>;
 
 #endif

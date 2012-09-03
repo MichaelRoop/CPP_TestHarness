@@ -18,7 +18,7 @@
 #include "mr_defines.h"
 
 
-namespace CppTest {
+namespace MrTest {
 
 LogSharedPtr LogFactory::Create( 
 	const std::string&			configFileName, 
@@ -42,17 +42,17 @@ LogSharedPtr LogFactory::Create(
 
 
 LogSharedPtr LogFactory::Create(
-	mr_utils::SharedPtr<CppTest::ILogOutput>&		output, 
-	mr_utils::SharedPtr<CppTest::ILog>&				summaryLog, 
-	mr_utils::SharedPtr<CppTest::ILogInitialiser>&	initialiser 
+	mr_utils::SharedPtr<MrTest::ILogOutput>&		output, 
+	mr_utils::SharedPtr<MrTest::ILog>&				summaryLog, 
+	mr_utils::SharedPtr<MrTest::ILogInitialiser>&	initialiser 
 ) {
 	LogSharedPtr log;
 
 	if (initialiser->GetLogType().compare(_L_("SQL"))  == 0) {
-		log = new CppTest::SqlLog(output, summaryLog, initialiser);
+		log = new MrTest::SqlLog(output, summaryLog, initialiser);
 	}
 	else if (initialiser->GetLogType().compare(_L_("CSV")) == 0) {
-		log = new CppTest::SimpleLog(output, summaryLog, initialiser);
+		log = new MrTest::SimpleLog(output, summaryLog, initialiser);
 	}
 	else {
 		mr_utils::mr_stringstream os;

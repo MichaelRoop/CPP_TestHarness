@@ -17,7 +17,7 @@
 #include <vector>
 
 
-namespace CppTest {
+namespace MrTest {
 
 //----------------------------------------------------------------------------------------
 /// @brief	Interface for retrieving configuration information for the logger.

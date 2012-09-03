@@ -14,14 +14,14 @@
 
 #include "ICppTestCaseHolder.h"
 
-namespace CppTest {
+namespace MrTest {
 
 ///--------------------------------------------------------------------------------------
 ///
 ///	@brief	Associates the test pointer with the Case object that stores test results
 ///
 ///--------------------------------------------------------------------------------------
-class TestCaseHolder : public CppTest::ITestCaseHolder {
+class TestCaseHolder : public MrTest::ITestCaseHolder {
 
 public:
 
@@ -58,7 +58,7 @@ private:
 
 };
 
-} // end namespace cppTest
+} // end namespace MrTest
 
 #endif
 

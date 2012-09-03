@@ -15,7 +15,7 @@
 #include "mr_defines.h"
 
 
-namespace CppTest {
+namespace MrTest {
 
 LogInitialiserSharedPtr LogInitialiserFactory::Create( 
 	const std::string&			configFileName, 
@@ -25,7 +25,7 @@ LogInitialiserSharedPtr LogInitialiserFactory::Create(
 	LogInitialiserSharedPtr	initialiser;
 
 	if (configFileType.compare(_L_("INI")) == 0) {
-		initialiser = new CppTest::IniLogInitialiser(configFileName, section);
+		initialiser = new MrTest::IniLogInitialiser(configFileName, section);
 	}
 	//else if (configFileType.compare( L("XML") ) == 0)
 	//{

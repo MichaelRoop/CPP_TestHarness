@@ -15,7 +15,7 @@
 #include "CppTestDefines.h"
 #include "ICppTestFixture.h"
 
-namespace CppTest {
+namespace MrTest {
 
 ///--------------------------------------------------------------------------------------
 ///
@@ -50,10 +50,10 @@ private:
 
 };
 
-} // end namespace cppTest
+} // end namespace MrTest
 
 // Force export of contained std items
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::ITestCaseHolder*>;
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::ITestCaseHolder*>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<MrTest::ITestCaseHolder*>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<MrTest::ITestCaseHolder*>;
 
 #endif

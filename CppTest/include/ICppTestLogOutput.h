@@ -14,7 +14,7 @@
 #include "mr_string.h"
 
 
-namespace CppTest {
+namespace MrTest {
 
 //----------------------------------------------------------------------------------------
 /// @briefs	Pure virtual base class for outputing logging information.

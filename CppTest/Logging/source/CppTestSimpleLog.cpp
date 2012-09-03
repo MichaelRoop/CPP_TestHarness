@@ -16,17 +16,17 @@
 #include "mr_sstream.h"
 
 
-namespace CppTest {
+namespace MrTest {
 
-SimpleLog::SimpleLog() : CppTest::Log() {
+SimpleLog::SimpleLog() : MrTest::Log() {
 }
 
 
 SimpleLog::SimpleLog( 
-	mr_utils::SharedPtr<CppTest::ILogOutput>&		output, 
-	mr_utils::SharedPtr<CppTest::ILog>&				summaryLog, 
-	mr_utils::SharedPtr<CppTest::ILogInitialiser>&	initialiser 
-) :	CppTest::Log(output, summaryLog) {
+	mr_utils::SharedPtr<MrTest::ILogOutput>&		output, 
+	mr_utils::SharedPtr<MrTest::ILog>&				summaryLog, 
+	mr_utils::SharedPtr<MrTest::ILogInitialiser>&	initialiser 
+) :	MrTest::Log(output, summaryLog) {
 	mr_utils::mr_exception::assertCondition( 
 		initialiser.isValid(), _FL_, _L_("Invalid intialiser"));
 	mr_utils::mr_exception::assertCondition( 
@@ -48,17 +48,17 @@ bool SimpleLog::WriteHeader() {
 	mr_utils::mr_exception::assertCondition(this->m_output->InitOutput(), _FL_, _L_("output failed init"));
 
 	mr_utils::mr_stringstream os;
-	os << CppTest::ColumnBuilder::CreateColumnHeaders(this->m_formatData.m_fields, this->m_formatData.m_delimiter);
+	os << MrTest::ColumnBuilder::CreateColumnHeaders(this->m_formatData.m_fields, this->m_formatData.m_delimiter);
 	os << std::endl;
 	return this->m_output->Write(os.str());
 }
 
 
-bool SimpleLog::WriteEntry(CppTest::ICase& testCase) {
+bool SimpleLog::WriteEntry(MrTest::ICase& testCase) {
 	mr_utils::mr_exception::assertCondition(this->m_output.isValid(), _FL_, _L_("invalid output"));
 
 	mr_utils::mr_stringstream os;
-	os << CppTest::ColumnBuilder::CreateColumnData( 
+	os << MrTest::ColumnBuilder::CreateColumnData( 
 				this->m_formatData.m_fields, 
 				this->m_formatData.m_delimiter, 
 				this->m_formatData.m_strQuote, 
@@ -68,14 +68,14 @@ bool SimpleLog::WriteEntry(CppTest::ICase& testCase) {
 }
 
 
-bool SimpleLog::WriteSummaryEntry(CppTest::ILog* log) {
+bool SimpleLog::WriteSummaryEntry(MrTest::ILog* log) {
 	mr_utils::mr_pointerException::ptrAssert(log, _FL_);
 	mr_utils::mr_exception::assertCondition(this->m_output.isValid(), _FL_, _L_("invalid output"));
 
 	this->WriteHeader();
 
 	mr_utils::mr_stringstream os;
-	os << CppTest::ColumnBuilder::CreateColumnData( 
+	os << MrTest::ColumnBuilder::CreateColumnData( 
 				this->m_formatData.m_fields, 
 				this->m_formatData.m_delimiter, 
 				this->m_formatData.m_strQuote, 

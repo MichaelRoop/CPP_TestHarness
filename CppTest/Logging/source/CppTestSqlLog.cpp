@@ -15,26 +15,26 @@
 #include "mr_pointerException.h"
 #include "mr_defines.h"
 
-namespace CppTest {
+namespace MrTest {
 
-SqlLog::SqlLog() : CppTest::Log()
+SqlLog::SqlLog() : MrTest::Log()
 {
 }
 
 
 SqlLog::SqlLog( 
-	mr_utils::SharedPtr<CppTest::ILogOutput>&		output, 
-	mr_utils::SharedPtr<CppTest::ILog>&				summaryLog, 
-	mr_utils::SharedPtr<CppTest::ILogInitialiser>&	initialiser 
-) :	CppTest::Log(output, summaryLog) {
+	mr_utils::SharedPtr<MrTest::ILogOutput>&		output, 
+	mr_utils::SharedPtr<MrTest::ILog>&				summaryLog, 
+	mr_utils::SharedPtr<MrTest::ILogInitialiser>&	initialiser 
+) :	MrTest::Log(output, summaryLog) {
 	this->Init(initialiser);
 }
 
 
 SqlLog::SqlLog( 
-	mr_utils::SharedPtr<CppTest::ILogOutput>&		output, 
-	mr_utils::SharedPtr<CppTest::ILogInitialiser>&	initialiser 
-):	CppTest::Log(output, mr_utils::SharedPtr<CppTest::ILog>()) {
+	mr_utils::SharedPtr<MrTest::ILogOutput>&		output, 
+	mr_utils::SharedPtr<MrTest::ILogInitialiser>&	initialiser 
+):	MrTest::Log(output, mr_utils::SharedPtr<MrTest::ILog>()) {
 	this->Init(initialiser);
 }
 
@@ -55,13 +55,13 @@ bool SqlLog::WriteHeader() {
 }
 
 
-bool SqlLog::WriteEntry(CppTest::ICase& testCase) { 
+bool SqlLog::WriteEntry(MrTest::ICase& testCase) { 
 	mr_utils::mr_exception::assertCondition(this->m_output.isValid(), FL, L("invalid output"));
 	return this->m_output->Write(this->GetInsertStmt(testCase));
 }
 
 
-bool SqlLog::WriteSummaryEntry(CppTest::ILog* log) {
+bool SqlLog::WriteSummaryEntry(MrTest::ILog* log) {
 	mr_utils::mr_pointerException::ptrAssert(log, FL);
 	mr_utils::mr_exception::assertCondition(this->m_output.isValid(), FL, L("invalid output"));
 	
@@ -82,7 +82,7 @@ bool SqlLog::WriteFooter() {
 }
 
 
-void SqlLog::Init(mr_utils::SharedPtr<CppTest::ILogInitialiser>& initialiser) {
+void SqlLog::Init(mr_utils::SharedPtr<MrTest::ILogInitialiser>& initialiser) {
 	mr_utils::mr_exception::assertCondition( 
 		initialiser.isValid(), _FL_, _L_("Invalid intialiser"));
 	mr_utils::mr_exception::assertCondition( 
@@ -90,7 +90,7 @@ void SqlLog::Init(mr_utils::SharedPtr<CppTest::ILogInitialiser>& initialiser) {
 
 	this->m_sqlData.m_tableName = initialiser->GetLogName();
 	if (initialiser->GetUseAutoGenUniqueTableName()) {
-		this->m_sqlData.m_tableName = this->m_sqlData.m_tableName + CppTest::Engine::Instance().GetRunId();
+		this->m_sqlData.m_tableName = this->m_sqlData.m_tableName + MrTest::Engine::Instance().GetRunId();
 	}
 
 	this->m_sqlData.m_strQuote = initialiser->GetStringDelimiter(true);
@@ -114,12 +114,12 @@ const mr_utils::mr_string& SqlLog::GetCreateStmt() const {
 }
 
 
-mr_utils::mr_string SqlLog::GetInsertStmt(CppTest::ICase& testCase) const {
+mr_utils::mr_string SqlLog::GetInsertStmt(MrTest::ICase& testCase) const {
 	return SqlBuilder::BuildInsertStmtWithValues(this->m_sqlData, testCase);
 }
 
 
-mr_utils::mr_string SqlLog::GetInsertStmt(CppTest::ILog* log) const {
+mr_utils::mr_string SqlLog::GetInsertStmt(MrTest::ILog* log) const {
 	return SqlBuilder::BuildInsertStmtWithValues(this->m_sqlData, log);
 }
 

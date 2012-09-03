@@ -19,7 +19,7 @@
 #include "mr_iostream.h"
 
 
-namespace CppTest {
+namespace MrTest {
 
 FileScriptReader::FileScriptReader( 
 	const std::string&	filename,
@@ -50,10 +50,10 @@ void FileScriptReader::Open() {
 }
 
 
-CppTest::TestInfoObject FileScriptReader::getNextTest(mr_utils::mr_string& fixtureName) {
+MrTest::TestInfoObject FileScriptReader::getNextTest(mr_utils::mr_string& fixtureName) {
 	const int			size = 2048;
 	mr_utils::mr_char	buff[size];
-	CppTest::TestInfoObject		testInfo;
+	MrTest::TestInfoObject		testInfo;
 	this->FileAssert(m_scriptStream.is_open(), _FL_, _L_( "File not open"));
 
 	while (m_scriptStream.getline(buff, size)) {
@@ -68,7 +68,7 @@ CppTest::TestInfoObject FileScriptReader::getNextTest(mr_utils::mr_string& fixtu
 }
 
 
-void FileScriptReader::ProcessLine(mr_utils::mr_string& fixtureName, CppTest::TestInfoObject& testInfo, mr_utils::mr_string line) {
+void FileScriptReader::ProcessLine(mr_utils::mr_string& fixtureName, MrTest::TestInfoObject& testInfo, mr_utils::mr_string line) {
 
 	// Check for Disabled indicator
 	testInfo.SetActive(line[0] != _L_('@'));
@@ -104,7 +104,7 @@ void FileScriptReader::ProcessLine(mr_utils::mr_string& fixtureName, CppTest::Te
 }
 
 
-void FileScriptReader::ProcessArgs(CppTest::TestInfoObject& testInfo, const mr_utils::mr_string& args) {
+void FileScriptReader::ProcessArgs(MrTest::TestInfoObject& testInfo, const mr_utils::mr_string& args) {
 	mr_utils::mr_string oneArg;
 	mr_utils::mr_string::size_type pos = 0;
 
@@ -114,7 +114,7 @@ void FileScriptReader::ProcessArgs(CppTest::TestInfoObject& testInfo, const mr_u
 }
 
 
-void FileScriptReader::ProcessArg(CppTest::TestInfoObject& testInfo, const mr_utils::mr_string& arg) {
+void FileScriptReader::ProcessArg(MrTest::TestInfoObject& testInfo, const mr_utils::mr_string& arg) {
 	mr_utils::mr_string name;
 	mr_utils::mr_string value;
 	mr_utils::mr_string::size_type pos = 0;

@@ -33,7 +33,7 @@
 #include "ICppTestLogInitialiser.h"
 
 
-namespace CppTest {
+namespace MrTest {
 
 //----------------------------------------------------------------------------------------
 /// @brief	Class for outputing logging information to an ODBC connection.
@@ -58,7 +58,7 @@ public:
 
 	/// @brief	Constructor.
 	/// @param	initialiser	A SharedObject reference to an iLogInitialiser.
-	OdbcOutput(mr_utils::SharedPtr<CppTest::ILogInitialiser>& initialiser);
+	OdbcOutput(mr_utils::SharedPtr<MrTest::ILogInitialiser>& initialiser);
 
 
 	/// @brief	Initialise the object.

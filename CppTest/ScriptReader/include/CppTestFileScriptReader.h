@@ -17,7 +17,7 @@
 #include "mr_char.h" 
 
 
-namespace CppTest {
+namespace MrTest {
 
 ///--------------------------------------------------------------------------------------
 ///
@@ -46,7 +46,7 @@ namespace CppTest {
 /// If the first non whitespace on a line is '#' it will be considered as a comment or 
 /// inactive test case and be discarded.
 ///--------------------------------------------------------------------------------------
-class CPPTESCASE_API FileScriptReader : public CppTest::IScriptReader {
+class CPPTESCASE_API FileScriptReader : public MrTest::IScriptReader {
 public:
 
 	/// @brief	Constructor.
@@ -87,7 +87,7 @@ public:
 	};
 
 
-	FileScriptReader FileScriptReader::operator=(class CppTest::FileScriptReader const &) {
+	FileScriptReader FileScriptReader::operator=(class MrTest::FileScriptReader const &) {
 		// TODO - check effect  put public to force export of class
 		return *this;
 	}
@@ -103,7 +103,7 @@ public:
 	///	@throw	Throws a scriptException on syntax failure.
 	/// @return	The populated testInfoObject for the test.  If the object has no more
 	///			script lines the testInfoObject.isValid() will return false.
-	CppTest::TestInfoObject getNextTest(mr_utils::mr_string& fixtureName);
+	MrTest::TestInfoObject getNextTest(mr_utils::mr_string& fixtureName);
 
 private:
 	std::string				m_filename;		///< The file name of the script.
@@ -117,14 +117,14 @@ private:
 	///	@throw	Throws a scriptException on failure
 	/// @param	testInfo	The testInfoObject to populate from the script file.
 	/// @param	str			The line as read from the file.
-	void ProcessLine(mr_utils::mr_string& fixtureName, CppTest::TestInfoObject& testInfo, mr_utils::mr_string str);
+	void ProcessLine(mr_utils::mr_string& fixtureName, MrTest::TestInfoObject& testInfo, mr_utils::mr_string str);
 
 
 	/// @brief	Helper method to process the arguments portion of the script line.
 	///	@throw	Throws a scriptException on failure
 	/// @param	testInfo	The testInfoObject to populate from the script file.
 	/// @param	args		The args portion of the script line.
-	void ProcessArgs(CppTest::TestInfoObject& testInfo, const mr_utils::mr_string& args);
+	void ProcessArgs(MrTest::TestInfoObject& testInfo, const mr_utils::mr_string& args);
 
 
 	/// @brief	Helper method to process one argument string token.
@@ -132,7 +132,7 @@ private:
 	///	@throw	Throws a scriptException on failure
 	/// @param	testInfo	The testInfoObject to populate from the script file.
 	/// @param	args		The arg token from the script line.
-	void ProcessArg(CppTest::TestInfoObject& testInfo, const mr_utils::mr_string& arg);
+	void ProcessArg(MrTest::TestInfoObject& testInfo, const mr_utils::mr_string& arg);
 
 
 	/// @brief	Extracts name on first call and value on second.
@@ -181,8 +181,8 @@ private:
 } // end namespace
 
 
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::FileScriptReader>;
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::FileScriptReader>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<MrTest::FileScriptReader>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<MrTest::FileScriptReader>;
 
 
 #endif

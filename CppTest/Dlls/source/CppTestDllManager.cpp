@@ -30,7 +30,7 @@
 
 
 
-namespace CppTest {
+namespace MrTest {
 
 // typedef of an export function pointer
 typedef void (__cdecl *ptrFunc)();
@@ -162,4 +162,4 @@ std::vector<std::string> DllManager::GetMethodNames(const mr_utils::mr_string& d
 
 
 
-} // end namespace cppTest::Case
+} // end namespace MrTest::Case

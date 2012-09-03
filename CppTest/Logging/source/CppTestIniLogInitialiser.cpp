@@ -16,7 +16,7 @@
 #include <algorithm>
 
 
-namespace CppTest {
+namespace MrTest {
 
 /// @brief	Functor to populate field vector from ini.
 struct PopulateFieldListFromIni {
@@ -25,7 +25,7 @@ struct PopulateFieldListFromIni {
 
 	void operator () (const mr_inireader::node& theNode) {
 		if (theNode.isDataNode()) {
-			this->m_fields.push_back(CppTest::FieldPair(theNode.name(), theNode.value()));
+			this->m_fields.push_back(MrTest::FieldPair(theNode.name(), theNode.value()));
 		}
 	}
 private:

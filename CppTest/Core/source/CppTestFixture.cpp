@@ -23,7 +23,7 @@
 //#include <Windows.h>
 //#endif
 
-namespace CppTest {
+namespace MrTest {
 
 
 //---------------------------------------------------------------------------------------
@@ -49,7 +49,7 @@ Fixture::Fixture(const mr_utils::mr_string& name)
 	m_testSetup(0),
 	m_testTeardown(0),
 	m_isFixtureCalled(false),
-	m_testCaseNames(new CppTest::FixutureTestCaseNames(name)) {
+	m_testCaseNames(new MrTest::FixutureTestCaseNames(name)) {
 }
 
 
@@ -59,7 +59,7 @@ Fixture::~Fixture() {
 }
 
 
-const CppTest::TestCaseArguments& Fixture::CurrentArgs() const {
+const MrTest::TestCaseArguments& Fixture::CurrentArgs() const {
 	return this->m_args;
 }
 
@@ -117,7 +117,7 @@ bool Fixture::HasTest(const mr_utils::mr_string& name) const {
 }
 
 
-mr_utils::SharedPtr<CppTest::IFixutureTestCaseNames> Fixture::GetTestNames() const {
+mr_utils::SharedPtr<MrTest::IFixutureTestCaseNames> Fixture::GetTestNames() const {
 	return this->m_testCaseNames;
 }
 
@@ -133,7 +133,7 @@ const mr_utils::mr_string& Fixture::Name() const {
 }
 
 
-void Fixture::RunTest(const mr_utils::mr_string& name, const CppTest::TestCaseArguments& args ) {
+void Fixture::RunTest(const mr_utils::mr_string& name, const MrTest::TestCaseArguments& args ) {
 	// Clear out any information from a previous test case
 	this->ResetTest();
 

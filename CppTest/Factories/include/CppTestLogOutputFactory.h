@@ -17,9 +17,9 @@
 #include "mr_sharedPtr.h"
 
 
-namespace CppTest {
+namespace MrTest {
 
-typedef mr_utils::SharedPtr<CppTest::ILogOutput> LogOutputSharedPtr;
+typedef mr_utils::SharedPtr<MrTest::ILogOutput> LogOutputSharedPtr;
 
 //----------------------------------------------------------------------------------------
 /// @brief	Class for creating iLogInitiser objects.
@@ -31,7 +31,7 @@ public:
 	///	@brief	Creates the appropriate iLogInitialiser.
 	///
 	/// @param	initialiser	Initialiser object. 
-	static LogOutputSharedPtr Create( mr_utils::SharedPtr<CppTest::ILogInitialiser>& initialiser );
+	static LogOutputSharedPtr Create( mr_utils::SharedPtr<MrTest::ILogInitialiser>& initialiser );
 };
 
 

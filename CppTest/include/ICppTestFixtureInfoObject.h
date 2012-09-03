@@ -18,7 +18,7 @@
 #include <vector>
 
 
-namespace CppTest {
+namespace MrTest {
 
 
 ///--------------------------------------------------------------------------------------
@@ -47,14 +47,14 @@ public:
 	/// @brief	Retrieve the argument set.
 	///
 	/// @return	The argument set.
-	virtual const std::vector<CppTest::TestInfoObject>& GetTestInfoVector() = 0;
+	virtual const std::vector<MrTest::TestInfoObject>& GetTestInfoVector() = 0;
 
 
 	/// @brief	Add an argument to the argument set.
 	///
 	/// @param	name	The name of the argument.
 	/// @param	value	The value of the argument.
-	virtual void AddTestInfo(const CppTest::TestInfoObject& info) = 0;
+	virtual void AddTestInfo(const MrTest::TestInfoObject& info) = 0;
 
 private:
 
@@ -68,7 +68,7 @@ private:
 } // end namespace
 
 // Force export of class with std objects
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::ITestFixtureInfoObject*>;
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::ITestFixtureInfoObject*>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<MrTest::ITestFixtureInfoObject*>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<MrTest::ITestFixtureInfoObject*>;
 
 #endif

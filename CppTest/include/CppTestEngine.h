@@ -28,22 +28,22 @@
 #include <vector>
 
 
-namespace CppTest {
+namespace MrTest {
 
 /// @brief	Typdef of a call back event that will be called to 
-typedef void (* DataLoggedEvent) (const CppTest::ICase&);
+typedef void (* DataLoggedEvent) (const MrTest::ICase&);
 
 // Force export so it can be used in of std contained object 
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::DataLoggedEvent>;
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::DataLoggedEvent>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<MrTest::DataLoggedEvent>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<MrTest::DataLoggedEvent>;
 
 
 /// @brief	Typdef of a call back event that will be called to 
-typedef void (* TestRunSummaryData) (const CppTest::IRunSummary&);
+typedef void (* TestRunSummaryData) (const MrTest::IRunSummary&);
 
 // Force export so it can be used in of std contained object 
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::TestRunSummaryData>;
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::TestRunSummaryData>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<MrTest::TestRunSummaryData>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<MrTest::TestRunSummaryData>;
 
 			
 ///--------------------------------------------------------------------------------------
@@ -74,15 +74,15 @@ public:
 	/// takes ownership of the created test case.
 	///
 	/// @exception	Throws a mr_utils::mr_pointerException if the test case fixture pointer is invalid.
-	void RegisterCase(CppTest::IFixture* fixture);
+	void RegisterCase(MrTest::IFixture* fixture);
 
 
 	/// @brief Method to register a callback handler on the logged event
-	void RegisterLoggedEvent(CppTest::DataLoggedEvent loggedCallbackEvent);
+	void RegisterLoggedEvent(MrTest::DataLoggedEvent loggedCallbackEvent);
 
 
 	/// @brief Method to register a callback handler on the summary event
-	void RegisterSummaryEvent(CppTest::TestRunSummaryData summrayCallbackEvent);
+	void RegisterSummaryEvent(MrTest::TestRunSummaryData summrayCallbackEvent);
 
 
 	// TODO - unregister functionality on events
@@ -92,25 +92,25 @@ public:
 	/// @brief	Process the test cases using the scriptReader object.
 	/// @param	theReader	The object that parses the script that drives test selection and their
 	///						arguments.
-	void ProcessScript(CppTest::IScriptReader& theReader );
+	void ProcessScript(MrTest::IScriptReader& theReader );
 #endif
 
 	/// @brief	Process the test cases using the vector of info objects that were assembled
 	/// @param	list	The test fixture info objects and their tests
-	void ProcessTestList(std::vector< mr_utils::SharedPtr<CppTest::ITestFixtureInfoObject> >& list);
+	void ProcessTestList(std::vector< mr_utils::SharedPtr<MrTest::ITestFixtureInfoObject> >& list);
 
 
 	/// @brief	Retrieve the results logging engine.
 	///
 	/// @return	The results logging engine.
-	CppTest::LogEngine& GetLogEngine();
+	MrTest::LogEngine& GetLogEngine();
 
 
 	/// @brief	Returns the unique id for the test run.
 	mr_utils::mr_string GetRunId();
 
 	/// @brief Get all the test case names that have been registered
-	std::vector<mr_utils::SharedPtr<CppTest::IFixutureTestCaseNames> > GetTestNames();
+	std::vector<mr_utils::SharedPtr<MrTest::IFixutureTestCaseNames> > GetTestNames();
 
 protected:
 	///@brief	Default constructor
@@ -118,14 +118,14 @@ protected:
 
 
 private:
-	std::vector<CppTest::IFixture*> m_fixtures;	///< The vector of registered test case fixtures.
+	std::vector<MrTest::IFixture*> m_fixtures;	///< The vector of registered test case fixtures.
 	static Engine*					m_instance;	///< The unique instance of the testEngine.
 	mr_utils::mr_string				m_runId;	///< Unique ID for the run used in log files.
-	CppTest::LogEngine				m_logEngine;///< The logging engine.
-	std::vector<CppTest::DataLoggedEvent>	m_logEvents;///< Vector of registered log events
-	std::vector<CppTest::TestRunSummaryData> m_summaryEvents;///< Vector of registered log events
-	CppTest::CaseCounter			m_caseCounter; ///< track test case summary data
-	mr_utils::SharedPtr<CppTest::IDllManager>	m_testDllManger; // Manages the test case DLLs
+	MrTest::LogEngine				m_logEngine;///< The logging engine.
+	std::vector<MrTest::DataLoggedEvent>	m_logEvents;///< Vector of registered log events
+	std::vector<MrTest::TestRunSummaryData> m_summaryEvents;///< Vector of registered log events
+	MrTest::CaseCounter			m_caseCounter; ///< track test case summary data
+	mr_utils::SharedPtr<MrTest::IDllManager>	m_testDllManger; // Manages the test case DLLs
 
 
 	/// @brief	Process one test case fixture based on information contained in the testInfoObject.
@@ -134,20 +134,20 @@ private:
 	/// feed to the test case.
 	///
 	/// @param	testInfo	The data necessary to look up and run the test case.
-	void ProcessCase(const CppTest::TestInfoObject& testInfo);
+	void ProcessCase(const MrTest::TestInfoObject& testInfo);
 
 
 	/// @brief	Log the results of one test case across log outputs.
 	/// @exception	Throws a mr_utils::mr_pointerException if the testCase pointer is invalid.
 	/// @param	fixture	The test case fixture whose results are to be logged.
-	void LogResults(CppTest::ICase& caseData);
+	void LogResults(MrTest::ICase& caseData);
 
 };
 
 } // end namespace
 
 // Force export so it can be used in of std contained object 
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::Engine*>;
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::Engine*>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<MrTest::Engine*>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<MrTest::Engine*>;
 
 #endif

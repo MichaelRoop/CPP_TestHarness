@@ -13,7 +13,7 @@
 #include "mr_toStream.h"
 #include "mr_exception.h"
 
-namespace CppTest {
+namespace MrTest {
 
 
 void CreateMsg(mr_utils::mr_stringstream& msgBuffer, const char* file, int line, const mr_utils::mr_stringstream& userMsg) {
@@ -33,7 +33,7 @@ void IsTrue(
 	ss << _L_("Did not Expected false condition ");	
 	CreateMsg(ss, file, line, userMsg);
 
-	if (!CppTest::CompareEqual(true, condition, buffer, ss.str())) {
+	if (!MrTest::CompareEqual(true, condition, buffer, ss.str())) {
 		throw mr_utils::mr_exception(file, line, ss.str());				
 	}		
 }
@@ -46,7 +46,7 @@ void IsFalse(
 	ss << _L_("Did not Expected true condition ");	
 	CreateMsg(ss, file, line, userMsg);
 
-	if (!CppTest::CompareEqual(false, condition, buffer, ss.str())) {
+	if (!MrTest::CompareEqual(false, condition, buffer, ss.str())) {
 		throw mr_utils::mr_exception(file, line, ss.str());				
 	}																	
 }

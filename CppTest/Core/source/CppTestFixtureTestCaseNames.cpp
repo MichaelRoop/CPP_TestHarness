@@ -2,7 +2,7 @@
 
 #include "CppTestFixtureTestCaseNames.h"
 
-namespace CppTest {
+namespace MrTest {
 
 
 FixutureTestCaseNames::FixutureTestCaseNames(const mr_utils::mr_string& name) 

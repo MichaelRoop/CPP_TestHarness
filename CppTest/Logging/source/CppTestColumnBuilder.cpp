@@ -17,7 +17,7 @@
 #include "ICppTestLog.h"
 #include <algorithm>
 
-namespace CppTest {
+namespace MrTest {
 
 mr_utils::mr_string ColumnBuilder::CreateColumnHeaders( 
 	const FieldVector&			fieldInfo, 
@@ -51,7 +51,7 @@ mr_utils::mr_string ColumnBuilder::CreateColumnData(
 	const FieldVector&			fieldInfo,
 	const mr_utils::mr_string&	delimiter,
 	const mr_utils::mr_string&	strQuotes,
-	CppTest::ICase&				testCase 
+	MrTest::ICase&				testCase 
 ) {
 	// I cannot use a factory to create the build objects since the for_each will fail with a
 	// C2893.  It cannot access a derived class through a virtual base class.
@@ -69,7 +69,7 @@ mr_utils::mr_string ColumnBuilder::CreateColumnData(
 	const FieldVector&			fieldInfo,
 	const mr_utils::mr_string&	delimiter,
 	const mr_utils::mr_string&	strQuotes,
-	CppTest::ILog*				theLog 
+	MrTest::ILog*				theLog 
 ) {
 	mr_utils::mr_stringstream os;
 	std::for_each( 

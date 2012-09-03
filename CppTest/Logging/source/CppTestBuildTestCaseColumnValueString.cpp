@@ -15,19 +15,19 @@
 #include "mr_pointerException.h"
 #include "mr_defines.h"
 
-namespace CppTest {
+namespace MrTest {
 
 BuildTestCaseColumnValueString::BuildTestCaseColumnValueString( 
 	mr_utils::mr_stringstream&	os,
 	const mr_utils::mr_string&	delimiter,
 	const mr_utils::mr_string&	strQuotes,
-	CppTest::ICase&				testCase) 
+	MrTest::ICase&				testCase) 
 :	BuildColumnValueString(os, delimiter, strQuotes),
 	m_testCase(testCase) {
 }
 
 
-void BuildTestCaseColumnValueString::Build(const CppTest::FieldPair& field) {
+void BuildTestCaseColumnValueString::Build(const MrTest::FieldPair& field) {
 	// add upper case conversion later.
 	if (field.first.compare(_L_("ID")) == 0) {
 		this->ConcatenateStr(this->m_testCase.Name);
@@ -36,7 +36,7 @@ void BuildTestCaseColumnValueString::Build(const CppTest::FieldPair& field) {
 		this->ConcatenateStr(this->m_testCase.Description);
 	}
 	else if (field.first.compare(_L_("Status")) == 0) {
-		this->ConcatenateStr(CppTest::Case::ToString(this->m_testCase.Status));
+		this->ConcatenateStr(MrTest::Case::ToString(this->m_testCase.Status));
 	}
 	else if (field.first.compare(_L_("Message")) == 0) {
 		this->ConcatenateStr(this->m_testCase.MsgBuffer.str() );
@@ -51,7 +51,7 @@ void BuildTestCaseColumnValueString::Build(const CppTest::FieldPair& field) {
 		this->m_os << this->m_testCase.CleanupTime;
 	}
 	else if (field.first.compare(_L_("RunId")) == 0) {
-		this->m_os << CppTest::Engine::Instance().GetRunId();
+		this->m_os << MrTest::Engine::Instance().GetRunId();
 	}
 	else if (field.first.compare(_L_("VerboseMessage")) == 0) {
 		this->ConcatenateVerboseBufferStr(this->m_testCase.VerboseBuffer.str());

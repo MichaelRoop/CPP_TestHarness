@@ -15,7 +15,7 @@
 #include "CppTestBuildSummaryColumnValueString.h"
 
 
-namespace CppTest {
+namespace MrTest {
 
 ///--------------------------------------------------------------------------------------
 /// @brief	Functor to Add a value to the value string on each iteration.
@@ -28,7 +28,7 @@ public:
 	/// @brief	Function operator called on each iteration.
 	///
 	/// @param	field	The current field at iteration.
-	void operator () (const CppTest::FieldPair& field);
+	void operator () (const MrTest::FieldPair& field);
 
 
 	/// @brief	Constructor.
@@ -41,7 +41,7 @@ public:
 		mr_utils::mr_stringstream&	os,
 		const mr_utils::mr_string&	delimiter,
 		const mr_utils::mr_string&	strQuotes,
-		CppTest::ILog*				theLog 
+		MrTest::ILog*				theLog 
 	);
 };
 

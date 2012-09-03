@@ -13,7 +13,7 @@
 
 #include "ICppTestCase.h"
 
-namespace CppTest {
+namespace MrTest {
 
 ///--------------------------------------------------------------------------------------
 ///	@brief	Holder for test case execution results data
@@ -26,7 +26,7 @@ namespace CppTest {
 /// The test case object can be querried by the logger derived objects to assemble the 
 /// information required.
 ///--------------------------------------------------------------------------------------
-class Case : public CppTest::ICase {
+class Case : public MrTest::ICase {
 
 public:
 
@@ -48,6 +48,6 @@ public:
 
 };
 
-} // end namespace cppTest::Case
+} // end namespace MrTest::Case
 
 #endif

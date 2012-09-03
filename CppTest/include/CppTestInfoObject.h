@@ -17,7 +17,7 @@
 #include <vector>
 
 
-namespace CppTest {
+namespace MrTest {
 
 
 ///--------------------------------------------------------------------------------------
@@ -98,15 +98,15 @@ private:
 	bool							m_isActive;		///< The active status.
 	bool							m_isNull;		///< The NULL status.
 	mr_utils::mr_string				m_name;			///< Test Name.
-	std::vector<CppTest::ICaseArgument>	m_arguments;	///< Test arguments.
+	std::vector<MrTest::ICaseArgument>	m_arguments;	///< Test arguments.
 
 };
 
 
 } // end namespace
 
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::TestInfoObject>;
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::TestInfoObject>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<MrTest::TestInfoObject>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<MrTest::TestInfoObject>;
 
 
 #endif

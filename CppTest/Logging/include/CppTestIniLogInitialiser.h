@@ -17,7 +17,7 @@
 #include "mr_ini_file.h"
 
 
-namespace CppTest {
+namespace MrTest {
 
 //----------------------------------------------------------------------------------------
 /// @brief	Interface for retrieving configuration information for the logger from ini file.

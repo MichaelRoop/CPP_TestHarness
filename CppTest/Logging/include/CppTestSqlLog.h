@@ -16,7 +16,7 @@
 #include "CppTestSqlBuilder.h"
 #include "ICppTestLogInitialiser.h"
 
-namespace CppTest {
+namespace MrTest {
 
 class ICase;
 
@@ -30,7 +30,7 @@ class ICase;
 /// The footer gives a summary of the total of successful and failed tests as well as a 
 /// breakdown of the total failures per state.
 /// 
-class SqlLog : public CppTest::Log {
+class SqlLog : public MrTest::Log {
 public:
 
 	/// @brief	Constructor.
@@ -42,17 +42,17 @@ public:
 	/// @param	summaryOutput	A SharedObject reference to a log object for summary output.
 	/// @param	initialiser		A SharedObject reference to an iLogInitialiser.
 	SqlLog( 
-		mr_utils::SharedPtr<CppTest::ILogOutput>&		output, 
-		mr_utils::SharedPtr<CppTest::ILog>&				summaryLog, 
-		mr_utils::SharedPtr<CppTest::ILogInitialiser>&	initialiser);
+		mr_utils::SharedPtr<MrTest::ILogOutput>&		output, 
+		mr_utils::SharedPtr<MrTest::ILog>&				summaryLog, 
+		mr_utils::SharedPtr<MrTest::ILogInitialiser>&	initialiser);
 
 
 	/// @brief	Constructor.
 	/// @param	output			A pointer to a logOutput object. It now assumes its ownership. 
 	/// @param	initialiser		A SharedObject reference to an iLogInitialiser.
 	SqlLog( 
-		mr_utils::SharedPtr<CppTest::ILogOutput>&		output, 
-		mr_utils::SharedPtr<CppTest::ILogInitialiser>&	initialiser);
+		mr_utils::SharedPtr<MrTest::ILogOutput>&		output, 
+		mr_utils::SharedPtr<MrTest::ILogInitialiser>&	initialiser);
 
 
 
@@ -77,22 +77,22 @@ public:
 	/// @exception	throws a mr_utils::mr_exception if the output object is invalid.
 	/// @param	fixture	Pointer to the test case fixture object that contains information to log.
 	/// @return	true if successful, otherwise false.
-	bool WriteEntry(CppTest::ICase& testCase);
+	bool WriteEntry(MrTest::ICase& testCase);
 
 
 	/// @brief	Write the summary of the logging.
 	/// @param	log	The log that contains the summary information.
 	/// @return	true if successful, otherwise false.
-	virtual bool WriteSummaryEntry(CppTest::ILog* log );
+	virtual bool WriteSummaryEntry(MrTest::ILog* log );
 
 private:
 
-	CppTest::SQLData	m_sqlData;		///< SQL data loaded from config.
+	MrTest::SQLData	m_sqlData;		///< SQL data loaded from config.
 
 
 	/// @brief	Initialisation method.
 	/// @param	initialiser		A SharedObject reference to an iLogInitialiser.
-	void Init( mr_utils::SharedPtr<CppTest::ILogInitialiser>& initialiser );
+	void Init( mr_utils::SharedPtr<MrTest::ILogInitialiser>& initialiser );
 
 
 	/// @brief	Returns the SQL DROP TABLE statement.
@@ -107,12 +107,12 @@ private:
 
 	/// @brief	Returns the SQL INSERT statement.
 	/// @return	The insert statement.
-	mr_utils::mr_string GetInsertStmt(CppTest::ICase& testCase) const;
+	mr_utils::mr_string GetInsertStmt(MrTest::ICase& testCase) const;
 
 
 	/// @brief	Returns the SQL INSERT statement.
 	/// @return	The insert statement.
-	mr_utils::mr_string GetInsertStmt(CppTest::ILog* log) const;
+	mr_utils::mr_string GetInsertStmt(MrTest::ILog* log) const;
 
 };
 

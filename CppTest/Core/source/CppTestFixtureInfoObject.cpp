@@ -12,7 +12,7 @@
 #include "CppTestFixtureInfoObject.h"
 
 
-namespace CppTest {
+namespace MrTest {
 
 
 TestFixtureInfoObject::TestFixtureInfoObject(const mr_utils::mr_string& name) 
@@ -36,12 +36,12 @@ const void TestFixtureInfoObject::SetName(mr_utils::mr_string& name) {
 }
 
 
-const std::vector<CppTest::TestInfoObject>& TestFixtureInfoObject::GetTestInfoVector() {
+const std::vector<MrTest::TestInfoObject>& TestFixtureInfoObject::GetTestInfoVector() {
 	return this->m_tests;
 }
 
 
-void TestFixtureInfoObject::AddTestInfo(const CppTest::TestInfoObject& info) {
+void TestFixtureInfoObject::AddTestInfo(const MrTest::TestInfoObject& info) {
 	this->m_tests.push_back(info);
 }
 

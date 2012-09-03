@@ -14,20 +14,20 @@
 #include "mr_pointerException.h"
 #include "mr_defines.h"
 
-namespace CppTest {
+namespace MrTest {
 
 BuildSummaryColumnValueString::BuildSummaryColumnValueString( 
 	mr_utils::mr_stringstream&	os,
 	const mr_utils::mr_string&	delimiter,
 	const mr_utils::mr_string&	strQuotes,
-	CppTest::ILog*				theLog 
+	MrTest::ILog*				theLog 
 ) :	BuildColumnValueString(os, delimiter, strQuotes),
 	m_log(theLog) {
 		mr_utils::mr_pointerException::ptrAssert(theLog, _FL_);
 }
 
 
-void BuildSummaryColumnValueString::Build(const CppTest::FieldPair& field) {
+void BuildSummaryColumnValueString::Build(const MrTest::FieldPair& field) {
 	// add upper case conversion later.
 	if (field.first.compare(_L_("SuccessCount")) == 0) {
 		this->m_os << this->m_log->GetSuccessCount();
@@ -51,7 +51,7 @@ void BuildSummaryColumnValueString::Build(const CppTest::FieldPair& field) {
 		this->m_os << this->m_log->GetTotalCount();
 	}
 	else if (field.first.compare(_L_("RunId")) == 0) {
-		this->m_os << CppTest::Engine::Instance().GetRunId();
+		this->m_os << MrTest::Engine::Instance().GetRunId();
 	}
 	else {
 		//very bad

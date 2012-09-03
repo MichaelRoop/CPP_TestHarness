@@ -20,7 +20,7 @@
 
 #include <vector>
 
-namespace CppTest {
+namespace MrTest {
 
 class testCase;
 

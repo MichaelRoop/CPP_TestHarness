@@ -14,7 +14,7 @@
 #include "mr_defines.h"
 
 
-namespace CppTest {
+namespace MrTest {
 
 Log::Log() 
 :	m_stSuccessCount(0),
@@ -28,8 +28,8 @@ Log::Log()
 
 
 Log::Log( 
-	mr_utils::SharedPtr<CppTest::ILogOutput>&	output,
-	mr_utils::SharedPtr<CppTest::ILog>&				summaryLog
+	mr_utils::SharedPtr<MrTest::ILogOutput>&	output,
+	mr_utils::SharedPtr<MrTest::ILog>&				summaryLog
 )
 :	m_output(output),
 	m_summaryLog( summaryLog ),
@@ -50,34 +50,34 @@ Log::~Log() {
 }
 
 
-bool Log::LogTest(CppTest::ICase& testCase) {
+bool Log::LogTest(MrTest::ICase& testCase) {
 	switch(testCase.Status) {
-		case CppTest::ICase::ST_SUCCESS:
+		case MrTest::ICase::ST_SUCCESS:
 			++this->m_stSuccessCount;
 			break;
-		case CppTest::ICase::ST_FAIL_SETUP:		
+		case MrTest::ICase::ST_FAIL_SETUP:		
 			++this->m_stFailSetupCount;
 			break;
-		case CppTest::ICase::ST_FAIL_TEST:		
+		case MrTest::ICase::ST_FAIL_TEST:		
 			++this->m_stFailTestCount;
 			break;
-		case CppTest::ICase::ST_FAIL_CLEANUP:	
+		case MrTest::ICase::ST_FAIL_CLEANUP:	
 			++this->m_stFailCleanupCount;
 			break;
-		case CppTest::ICase::ST_NOT_EXISTS:		
+		case MrTest::ICase::ST_NOT_EXISTS:		
 			++this->m_stNotExistCount;
 			break;
 
-		case CppTest::ICase::ST_DISABLED:		
+		case MrTest::ICase::ST_DISABLED:		
 			//++this->m_stNotExistCount;
 			// TODO - add disabled count
 			break;
 
 		// TODO - Need to modify this with fixture specific counters?
-		case CppTest::ICase::ST_FAIL_FIXTURE_SETUP:
+		case MrTest::ICase::ST_FAIL_FIXTURE_SETUP:
 			++this->m_stFailSetupCount;
 			break;
-		case CppTest::ICase::ST_FAIL_FIXTURE_TEARDOWN:
+		case MrTest::ICase::ST_FAIL_FIXTURE_TEARDOWN:
 			++this->m_stFailCleanupCount;
 			break;
 

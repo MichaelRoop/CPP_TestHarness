@@ -15,7 +15,7 @@
 #include "ICppTestLogOutput.h"
 #include "mr_sharedPtr.h"
 
-namespace CppTest {
+namespace MrTest {
 
 	class ICase;
 
@@ -46,7 +46,7 @@ public:
 	/// @exception	throws a mr_utils::mr_exception if test has a state that is not handled.
 	/// @param	fixture	Pointer to the test case fixture object that contains information to log.
 	/// @return	true if successful, otherwise false.
-	virtual bool LogTest(CppTest::ICase& testCase) = 0;
+	virtual bool LogTest(MrTest::ICase& testCase) = 0;
 
 
 	/// @brief	Write the summary of the logging to the summary log output.
@@ -88,8 +88,8 @@ public:
 
 };
 
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator< mr_utils::SharedPtr<CppTest::ILog> >;
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector< mr_utils::SharedPtr<CppTest::ILog> >;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator< mr_utils::SharedPtr<MrTest::ILog> >;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector< mr_utils::SharedPtr<MrTest::ILog> >;
 
 } // end namespace
 

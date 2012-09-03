@@ -13,7 +13,7 @@
 #include "mr_toStream.h"
 
 
-namespace CppTest {
+namespace MrTest {
 
 ScriptException::ScriptException( 
 	const char*					file, 

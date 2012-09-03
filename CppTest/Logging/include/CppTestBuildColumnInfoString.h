@@ -17,7 +17,7 @@
 #include "mr_sstream.h"
 
 
-namespace CppTest {
+namespace MrTest {
 
 ///--------------------------------------------------------------------------------------
 /// @brief	Functor to Add a value to the value string on each iteration.

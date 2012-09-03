@@ -15,7 +15,7 @@
 #include "mr_exception.h"
 
 
-namespace CppTest {
+namespace MrTest {
 
 ///--------------------------------------------------------------------------------------
 ///

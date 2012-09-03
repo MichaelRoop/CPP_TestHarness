@@ -13,10 +13,10 @@
 #include "mr_exception.h"
 #include "mr_defines.h"
 
-namespace CppTest {
+namespace MrTest {
 
 
-RunSummary::RunSummary(const CppTest::CaseCounter& counter) :
+RunSummary::RunSummary(const MrTest::CaseCounter& counter) :
 	m_Success(counter.SuccessCount()),
 	m_FailFixtureSetup(counter.FailFixtureSetupCount()),
 	m_FailSetup(counter.FailSetupCount()),
@@ -27,7 +27,7 @@ RunSummary::RunSummary(const CppTest::CaseCounter& counter) :
 }
 
 
-int RunSummary::Total(CppTest::ICase::TestCaseStatus status) const {
+int RunSummary::Total(MrTest::ICase::TestCaseStatus status) const {
 	switch (status) {
 		case ICase::ST_SUCCESS:				return this->m_Success;
 		case ICase::ST_FAIL_SETUP:			return this->m_FailSetup;

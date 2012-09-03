@@ -15,21 +15,21 @@
 #include "CppTestCaseCounter.h"
 
 
-namespace CppTest {
+namespace MrTest {
 
 ///--------------------------------------------------------------------------------------
 ///	@brief	Holder for test case summrary data
 ///--------------------------------------------------------------------------------------
-class RunSummary : public CppTest::IRunSummary {
+class RunSummary : public MrTest::IRunSummary {
 public:
 
 	/// @brief
-	RunSummary(const CppTest::CaseCounter& counter); 
+	RunSummary(const MrTest::CaseCounter& counter); 
 
 
 	/// @brief	Get the total number of test of a given status
 	/// @param	status	The total number of tests of this status will be returned
-	virtual int Total(CppTest::ICase::TestCaseStatus status) const;
+	virtual int Total(MrTest::ICase::TestCaseStatus status) const;
 
 
 	/// @brief	Get the total number of all tests run
@@ -46,6 +46,6 @@ private:
 
 };
 
-} // end namespace cppTest::Case
+} // end namespace MrTest::Case
 
 #endif

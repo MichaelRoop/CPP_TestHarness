@@ -15,7 +15,7 @@
 #include "mr_defines.h"
 #include "mr_string.h"
 
-namespace CppTest {
+namespace MrTest {
 
 class CPPTESCASE_API ICaseArgument {
 public:
@@ -48,8 +48,8 @@ public:
 
 };
 
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::ICaseArgument>;
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::ICaseArgument>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<MrTest::ICaseArgument>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<MrTest::ICaseArgument>;
 
 /// @typedef Typedef for a vector of argument pairs.
 typedef std::vector<ICaseArgument> TestCaseArguments; 

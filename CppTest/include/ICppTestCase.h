@@ -16,7 +16,7 @@
 #include "mr_sstream.h"
 #include <assert.h>
 
-namespace CppTest {
+namespace MrTest {
 
 ///--------------------------------------------------------------------------------------
 ///	@brief	Holder for test case execution results data
@@ -116,11 +116,11 @@ private:
 
 };
 
-} // end namespace cppTest::Case
+} // end namespace MrTest::Case
 
 // Force export of std items
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::ICase*>;
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::ICase*>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<MrTest::ICase*>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<MrTest::ICase*>;
 
 
 #endif

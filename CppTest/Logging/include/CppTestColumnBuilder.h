@@ -13,7 +13,7 @@
 
 #include "CppTestFieldPair.h"
 
-namespace CppTest {
+namespace MrTest {
 
 class ICase;	///< Forward declaration of Case class
 class ILog;	///< Forward declaration of iTestLog.
@@ -64,7 +64,7 @@ public:
 		const FieldVector&			fieldInfo,
 		const mr_utils::mr_string&	delimiter,
 		const mr_utils::mr_string&	strQuotes,
-		CppTest::ICase&			fixture 
+		MrTest::ICase&			fixture 
 	);
 
 
@@ -80,7 +80,7 @@ public:
 		const FieldVector&			fieldInfo,
 		const mr_utils::mr_string&	delimiter,
 		const mr_utils::mr_string&	strQuotes,
-		CppTest::ILog*				theLog 
+		MrTest::ILog*				theLog 
 	);
 
 };

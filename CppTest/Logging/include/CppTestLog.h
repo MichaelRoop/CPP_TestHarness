@@ -15,7 +15,7 @@
 #include "ICppTestLog.h"
 
 
-namespace CppTest {
+namespace MrTest {
 
 class ICase;
 
@@ -38,8 +38,8 @@ public:
 	/// @param	output		A SharedObject reference to a logOutput object for output.
 	/// @param	summaryLog	A SharedObject reference to a log object for summary output.
 	Log( 
-		mr_utils::SharedPtr<CppTest::ILogOutput>&	output,
-		mr_utils::SharedPtr<CppTest::ILog>&			summaryLog
+		mr_utils::SharedPtr<MrTest::ILogOutput>&	output,
+		mr_utils::SharedPtr<MrTest::ILog>&			summaryLog
 	);
 
 
@@ -53,7 +53,7 @@ public:
 	/// @exception	throws a mr_utils::mr_exception if the output object is invalid.
 	/// @param	fixture	Pointer to the test case fixture object that contains information to log.
 	/// @return	true if successful, otherwise false.
-	bool LogTest(CppTest::ICase& testCase);
+	bool LogTest(MrTest::ICase& testCase);
 
 
 	/// @brief	Write the summary of the logging.
@@ -93,8 +93,8 @@ public:
 
 
 protected:
-	mr_utils::SharedPtr<CppTest::ILogOutput>	m_output;	///< logOutput pointer.
-	mr_utils::SharedPtr<CppTest::ILog>	m_summaryLog;		///< summary logger pointer.
+	mr_utils::SharedPtr<MrTest::ILogOutput>	m_output;	///< logOutput pointer.
+	mr_utils::SharedPtr<MrTest::ILog>	m_summaryLog;		///< summary logger pointer.
 	int			m_stSuccessCount;		///< Counter for successful tests.
 	int			m_stFailInitCount;		///< Counter tests that failed on Init.
 	int			m_stFailSetupCount;		///< Counter tests that failed on setup.
@@ -111,7 +111,7 @@ protected:
 	/// @param	fixture	Pointer to the test case fixture object that contains information to log.
 	///
 	/// @return	true if successful, otherwise false.
-	virtual bool WriteEntry(CppTest::ICase& testCase) = 0;
+	virtual bool WriteEntry(MrTest::ICase& testCase) = 0;
 
 
 	/// @brief	Determine if the existing log is to be overwritten or appended. 

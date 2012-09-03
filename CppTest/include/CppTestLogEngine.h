@@ -19,7 +19,7 @@
 #include <vector>
 
 
-namespace CppTest {
+namespace MrTest {
 
 //--------------------------------------------------------------------------------------
 /// 
@@ -56,7 +56,7 @@ public:
 	/// @exception	throws a mr_utils::mr_pointerException on invalid loggers.
 	///
 	/// @return	true if successful, otherwise false.
-	bool Log(CppTest::ICase& testCase);
+	bool Log(MrTest::ICase& testCase);
 
 
 	/// @brief	Add a logger object to the logger group.
@@ -64,7 +64,7 @@ public:
 	/// @exception	throws a mr_utils::mr_pointerException if the testCase object is invalid.
 	///
 	/// @param	theLogger	Pointer to the logger to add.
-	void AddLogger(const mr_utils::SharedPtr<CppTest::ILog>& theLogger);
+	void AddLogger(const mr_utils::SharedPtr<MrTest::ILog>& theLogger);
 
 
 	/// @brief	Load loggers from an init file.
@@ -77,12 +77,12 @@ public:
 
 protected:
 
-	std::vector< mr_utils::SharedPtr<CppTest::ILog> >	m_logs; ///< Vector of derived logger objects.
+	std::vector< mr_utils::SharedPtr<MrTest::ILog> >	m_logs; ///< Vector of derived logger objects.
 };
 
 // Force export
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator< mr_utils::SharedPtr<CppTest::LogEngine> >;
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector< mr_utils::SharedPtr<CppTest::LogEngine> >;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator< mr_utils::SharedPtr<MrTest::LogEngine> >;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector< mr_utils::SharedPtr<MrTest::LogEngine> >;
 
 }
 

@@ -19,11 +19,11 @@
 
 #if defined(MR_USE_THE_ODBC_OUTPUT)
 
-namespace CppTest {
+namespace MrTest {
 
 
 //odbcOutput::odbcOutput( const mr_utils::mr_string&, const mr_utils::mr_string& )
-OdbcOutput::OdbcOutput(mr_utils::SharedPtr<CppTest::ILogInitialiser>& initialiser)
+OdbcOutput::OdbcOutput(mr_utils::SharedPtr<MrTest::ILogInitialiser>& initialiser)
 :	m_odbcEnv(SQL_NULL_HENV),
 	m_odbcHdbc(SQL_NULL_HDBC),
 	m_odbcVersion(0),

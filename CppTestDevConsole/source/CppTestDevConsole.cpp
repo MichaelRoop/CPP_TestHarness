@@ -34,10 +34,10 @@ public:
 	}
 };
 
-//std::vector<mr_utils::SharedPtr<CppTest::IFixutureTestCaseNames> >
+//std::vector<mr_utils::SharedPtr<MrTest::IFixutureTestCaseNames> >
 class PrintFixtureCaseNames {
 public:
-	void operator () (mr_utils::SharedPtr<CppTest::IFixutureTestCaseNames> fixture) {
+	void operator () (mr_utils::SharedPtr<MrTest::IFixutureTestCaseNames> fixture) {
 		mr_utils::mr_pointerException::ptrAssert(fixture.getPtr(), _FL_ );
 		mr_cout << fixture->FixtureName() << std::endl;
 		std::for_each(
@@ -52,23 +52,23 @@ typedef void (__cdecl *ptrFunc)();
 //#define PROC_OFFSET 0x000112C1
 
 
-static void MyLoggedEventHandler(const CppTest::ICase& testCase) {
-	mr_cout << _L_(" # # # # Received a log event for test:") << testCase.FixtureName << _L_(".") << testCase.Name << _L_(" with results:") << CppTest::ICase::ToString(testCase.Status) << std::endl;
+static void MyLoggedEventHandler(const MrTest::ICase& testCase) {
+	mr_cout << _L_(" # # # # Received a log event for test:") << testCase.FixtureName << _L_(".") << testCase.Name << _L_(" with results:") << MrTest::ICase::ToString(testCase.Status) << std::endl;
 }
 
-static void MySecondLoggedEventHandler(const CppTest::ICase& testCase) {
-	mr_cout << _L_(" @ @ @ @ Received a log event for test:") << testCase.FixtureName << _L_(".") << testCase.Name << _L_(" with results:") << CppTest::ICase::ToString(testCase.Status) << std::endl;
+static void MySecondLoggedEventHandler(const MrTest::ICase& testCase) {
+	mr_cout << _L_(" @ @ @ @ Received a log event for test:") << testCase.FixtureName << _L_(".") << testCase.Name << _L_(" with results:") << MrTest::ICase::ToString(testCase.Status) << std::endl;
 }
 
-static void MySummaryEventHandler(const CppTest::IRunSummary& summary) {
+static void MySummaryEventHandler(const MrTest::IRunSummary& summary) {
 	mr_cout << _L_("& & & & & Summary Event") << std::endl
-		<< _L_("Success = ") << summary.Total(CppTest::ICase::ST_SUCCESS) << std::endl
-		<< _L_("Fixture Setup Failure = ") << summary.Total(CppTest::ICase::ST_FAIL_FIXTURE_SETUP) << std::endl
-		<< _L_("Setup Failure = ") << summary.Total(CppTest::ICase::ST_FAIL_SETUP) << std::endl
-		<< _L_("Test Failure = ") << summary.Total(CppTest::ICase::ST_FAIL_TEST) << std::endl
-		<< _L_("Teardown Failure = ") << summary.Total(CppTest::ICase::ST_FAIL_CLEANUP) << std::endl
-		<< _L_("Disabled = ") << summary.Total(CppTest::ICase::ST_DISABLED) << std::endl
-		<< _L_("Not Found = ") << summary.Total(CppTest::ICase::ST_NOT_EXISTS) << std::endl
+		<< _L_("Success = ") << summary.Total(MrTest::ICase::ST_SUCCESS) << std::endl
+		<< _L_("Fixture Setup Failure = ") << summary.Total(MrTest::ICase::ST_FAIL_FIXTURE_SETUP) << std::endl
+		<< _L_("Setup Failure = ") << summary.Total(MrTest::ICase::ST_FAIL_SETUP) << std::endl
+		<< _L_("Test Failure = ") << summary.Total(MrTest::ICase::ST_FAIL_TEST) << std::endl
+		<< _L_("Teardown Failure = ") << summary.Total(MrTest::ICase::ST_FAIL_CLEANUP) << std::endl
+		<< _L_("Disabled = ") << summary.Total(MrTest::ICase::ST_DISABLED) << std::endl
+		<< _L_("Not Found = ") << summary.Total(MrTest::ICase::ST_NOT_EXISTS) << std::endl
 		<< _L_("Total = ") << summary.Total() << std::endl;
 }
 
@@ -78,13 +78,13 @@ int main(int argc, char* argv[]) {
 	//std::vector<std::string> namesVector;
 
 
-	//std::vector< mr_utils::SharedPtr<CppTest::IFixture> > fixtures;
-	//fixtures.push_back(mr_utils::SharedPtr<CppTest::IFixture>(new CppTest::Fixture(_L_("MyFixture"))));
+	//std::vector< mr_utils::SharedPtr<MrTest::IFixture> > fixtures;
+	//fixtures.push_back(mr_utils::SharedPtr<MrTest::IFixture>(new MrTest::Fixture(_L_("MyFixture"))));
 	//mr_cout << _L_("Fixture Name:") << fixtures[0]->Name();
 
 
-	//mr_utils::SharedPtr<CppTest::IFixture> fixture(new CppTest::Fixture(_L_("MyFixture")));
-	//fixture = new CppTest::Fixture(_L_("MyFixture"));
+	//mr_utils::SharedPtr<MrTest::IFixture> fixture(new MrTest::Fixture(_L_("MyFixture")));
+	//fixture = new MrTest::Fixture(_L_("MyFixture"));
 
 	////mr_cout << _L_("Fixture Name:") << fixture->Name();
 
@@ -164,11 +164,11 @@ int main(int argc, char* argv[]) {
 
 	if (checkParams( 1, argc, argv )) {
 		try {
-			CppTest::Engine& eng = CppTest::Engine::Instance();
+			MrTest::Engine& eng = MrTest::Engine::Instance();
 			eng.LoadTests(L"..\\Debug\\CppTestUtilsTestCases.dll");
 
 			// Print out list of loaded tests - temp test
-			std::vector<mr_utils::SharedPtr<CppTest::IFixutureTestCaseNames> > testNames = eng.GetTestNames();
+			std::vector<mr_utils::SharedPtr<MrTest::IFixutureTestCaseNames> > testNames = eng.GetTestNames();
 			std::for_each(testNames.begin(), testNames.end(), PrintFixtureCaseNames());
 			
 			mr_cout << _L_("Loading Configuration from ./CppTestConfig.ini") << std::endl;
@@ -181,19 +181,19 @@ int main(int argc, char* argv[]) {
 
 
 			// The include path is provided for now until we can replace with test runner concept
-			CppTest::FileScriptReader reader( argv[1] );
+			MrTest::FileScriptReader reader( argv[1] );
 			reader.Open();
 
-			CppTest::ListBuilder listBuilder;
+			MrTest::ListBuilder listBuilder;
 			//listBuilder.Build(reader);
 
-			//CppTest::ListBuilder listBuilder;
+			//MrTest::ListBuilder listBuilder;
 			eng.ProcessTestList(listBuilder.Build(reader));
 			//eng.ProcessScript( reader );
 
 			eng.UnloadTests();
 		} 
-		catch( const CppTest::ScriptException e ) {
+		catch( const MrTest::ScriptException e ) {
 			mr_cout << e.longMsg() << std::endl;
 		}
 		catch( const mr_utils::fileException e ) {

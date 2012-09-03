@@ -10,7 +10,7 @@
 ///--------------------------------------------------------------------------------------
 #include "CppTestCase.h"
 
-namespace CppTest {
+namespace MrTest {
 
 
 Case::Case(

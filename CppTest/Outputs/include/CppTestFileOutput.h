@@ -16,7 +16,7 @@
 #include "mr_fstream.h"
 
 
-namespace CppTest {
+namespace MrTest {
 
 //----------------------------------------------------------------------------------------
 /// @brief	Class for outputing logging information to a file.

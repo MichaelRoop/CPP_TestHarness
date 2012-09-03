@@ -16,7 +16,7 @@
 #include "mr_string.h"
 #include "mr_exception.h"
 
-namespace CppTest {
+namespace MrTest {
 
 /// @brief	Compares two values and asserts if different after a message is written
 ///
@@ -35,7 +35,7 @@ void AreEqual(
 	ss << _L_("Expected '") << expected << _L_("' but actual is '") << actual << _L_("'  ");
 	CreateMsg(ss, file, line, userMsg);
 
-	if (!CppTest::CompareEqual(expected, actual, buffer, ss.str())) {
+	if (!MrTest::CompareEqual(expected, actual, buffer, ss.str())) {
 		throw mr_utils::mr_exception(file, line, ss.str());				
 	}																	
 }
@@ -58,7 +58,7 @@ void AreNotEqual(
 	ss << _L_("Did not Expected '") << nonexpected << _L_("' but actual is '") << actual << _L_("'  ");
 	CreateMsg(ss, file, line, userMsg);
 
-	if (!CppTest::CompareNotEqual(nonexpected, actual, buffer, ss.str())) {
+	if (!MrTest::CompareNotEqual(nonexpected, actual, buffer, ss.str())) {
 		throw mr_utils::mr_exception(file, line, ss.str());				
 	}																	
 }

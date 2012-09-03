@@ -13,7 +13,7 @@
 
 #include "ICppTestFixtureInfoObject.h"
 
-namespace CppTest {
+namespace MrTest {
 
 ///--------------------------------------------------------------------------------------
 ///
@@ -44,18 +44,18 @@ public:
 	/// @brief	Retrieve the argument set.
 	///
 	/// @return	The argument set.
-	virtual const std::vector<CppTest::TestInfoObject>& GetTestInfoVector();
+	virtual const std::vector<MrTest::TestInfoObject>& GetTestInfoVector();
 
 
 	/// @brief	Add an argument to the argument set.
 	///
 	/// @param	name	The name of the argument.
 	/// @param	value	The value of the argument.
-	virtual void AddTestInfo(const CppTest::TestInfoObject& info);
+	virtual void AddTestInfo(const MrTest::TestInfoObject& info);
 
 private:
 	mr_utils::mr_string						m_name;		///< Fixture name
-	std::vector<CppTest::TestInfoObject>	m_tests;	///< Info objects for tests 	
+	std::vector<MrTest::TestInfoObject>	m_tests;	///< Info objects for tests 	
 
 
 	/// @brief Default constructor
@@ -70,8 +70,8 @@ private:
 };
 
 // Force export of class with std objects
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::TestFixtureInfoObject*>;
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::TestFixtureInfoObject*>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<MrTest::TestFixtureInfoObject*>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<MrTest::TestFixtureInfoObject*>;
 
 } // end namespace
 

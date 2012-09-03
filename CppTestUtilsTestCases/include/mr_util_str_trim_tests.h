@@ -11,11 +11,11 @@
 #include "CppTestAsserts.h"
 
 
-class UtilStrTrimTests : public CppTest::Fixture {
+class UtilStrTrimTests : public MrTest::Fixture {
 public:
 
 	UtilStrTrimTests(const mr_utils::mr_string& name) 
-		: CppTest::Fixture(name) {
+		: MrTest::Fixture(name) {
 
 		ADD_TEST_FIXTURE(this);
 		REGISTER_TEST(this, &UtilStrTrimTests::UTL_STR_RTRIM_1, "Right trim removes all white space characters");

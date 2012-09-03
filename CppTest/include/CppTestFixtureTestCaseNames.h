@@ -13,7 +13,7 @@
 
 #include "ICppTestFixtureTestCaseNames.h"
 
-namespace CppTest {
+namespace MrTest {
 
 //----------------------------------------------------------------------------------------
 /// @brief	Storage for test fixture name and its test case names.

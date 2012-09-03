@@ -16,7 +16,7 @@
 #include "mr_SharedPtr.h"
 #include "mr_string.h"
 
-namespace CppTest {
+namespace MrTest {
 
 class ICase;
 
@@ -31,7 +31,7 @@ public:
 
 
 	/// @brief	Increment counts with test case information
-	void Count(const CppTest::ICase& testCase);
+	void Count(const MrTest::ICase& testCase);
 
 
 	/// @brief	Called to reset internal state
@@ -39,7 +39,7 @@ public:
 
 
 	/// @brief	Get a snapshot of the latest test summary data
-	mr_utils::SharedPtr<CppTest::IRunSummary> Summary(const mr_utils::mr_string& runId) const;
+	mr_utils::SharedPtr<MrTest::IRunSummary> Summary(const mr_utils::mr_string& runId) const;
 
 
 	/// @brief	Number of test with status success
@@ -83,7 +83,7 @@ public:
 } // end namespace 
 
 // Force export of std items
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::CaseCounter*>;
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::CaseCounter*>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<MrTest::CaseCounter*>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<MrTest::CaseCounter*>;
 
 #endif

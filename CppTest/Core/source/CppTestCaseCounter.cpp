@@ -15,7 +15,7 @@
 #include "mr_exception.h"
 #include "mr_defines.h"
 
-namespace CppTest {
+namespace MrTest {
 
 
 CaseCounter::CaseCounter() {
@@ -23,31 +23,31 @@ CaseCounter::CaseCounter() {
 }
 
 
-void CaseCounter::Count(const CppTest::ICase& testCase) {
+void CaseCounter::Count(const MrTest::ICase& testCase) {
 	switch(testCase.Status) {
-		case CppTest::ICase::ST_SUCCESS:
+		case MrTest::ICase::ST_SUCCESS:
 			++this->m_success;
 			break;
-		case CppTest::ICase::ST_FAIL_TEST:		
+		case MrTest::ICase::ST_FAIL_TEST:		
 			++this->m_failTest;
 			break;
-		case CppTest::ICase::ST_FAIL_SETUP:		
+		case MrTest::ICase::ST_FAIL_SETUP:		
 			++this->m_failSetup;
 			break;
-		case CppTest::ICase::ST_FAIL_CLEANUP:	
+		case MrTest::ICase::ST_FAIL_CLEANUP:	
 			++this->m_failTeardown;
 			break;
-		case CppTest::ICase::ST_FAIL_FIXTURE_SETUP:
+		case MrTest::ICase::ST_FAIL_FIXTURE_SETUP:
 			++this->m_failFixtureSetup;
 			break;
-		case CppTest::ICase::ST_DISABLED:
+		case MrTest::ICase::ST_DISABLED:
 			++this->m_disabled;
 			break;
-		case CppTest::ICase::ST_NOT_EXISTS:		
+		case MrTest::ICase::ST_NOT_EXISTS:		
 			++this->m_notFound;
 			break;
 		// TODO - REMOVE - fixture teardown never counted - no test case to save it to
-		case CppTest::ICase::ST_FAIL_FIXTURE_TEARDOWN:
+		case MrTest::ICase::ST_FAIL_FIXTURE_TEARDOWN:
 		//	++this->m_stFailCleanupCount;
 			break;
 		default:	
@@ -70,8 +70,8 @@ void CaseCounter::Reset() {
 }
 
 
-mr_utils::SharedPtr<CppTest::IRunSummary> CaseCounter::Summary(const mr_utils::mr_string& runId) const {
-	return mr_utils::SharedPtr<CppTest::IRunSummary>(new CppTest::RunSummary(*this));
+mr_utils::SharedPtr<MrTest::IRunSummary> CaseCounter::Summary(const mr_utils::mr_string& runId) const {
+	return mr_utils::SharedPtr<MrTest::IRunSummary>(new MrTest::RunSummary(*this));
 }
 
 

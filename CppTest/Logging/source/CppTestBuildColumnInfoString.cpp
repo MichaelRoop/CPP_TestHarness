@@ -13,7 +13,7 @@
 #include "mr_defines.h"
 
 
-namespace CppTest {
+namespace MrTest {
 
 BuildColumnInfoString::BuildColumnInfoString( 
 	mr_utils::mr_stringstream&	os,
@@ -28,7 +28,7 @@ BuildColumnInfoString::BuildColumnInfoString(
 }
 
 
-void BuildColumnInfoString::operator () (const CppTest::FieldPair& field) {
+void BuildColumnInfoString::operator () (const MrTest::FieldPair& field) {
 	if ((++this->m_count) > 1) {
 		m_os << this->m_unitDelimiter;
 	}

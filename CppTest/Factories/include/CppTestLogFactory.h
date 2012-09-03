@@ -16,9 +16,9 @@
 #include "mr_sharedPtr.h"
 
 
-namespace CppTest {
+namespace MrTest {
 
-typedef mr_utils::SharedPtr<CppTest::ILog> LogSharedPtr;
+typedef mr_utils::SharedPtr<MrTest::ILog> LogSharedPtr;
 
 //----------------------------------------------------------------------------------------
 /// @brief	Class for creating iLogInitiser objects.
@@ -46,9 +46,9 @@ private:
 	/// @param	summaryLog		A SharedObject summary logger.
 	/// @param	initialiser		A SharedObject reference to an iLogInitialiser.
 	static LogSharedPtr Create(
-			mr_utils::SharedPtr<CppTest::ILogOutput>&		output, 
-			mr_utils::SharedPtr<CppTest::ILog>&			summaryLog, 
-			mr_utils::SharedPtr<CppTest::ILogInitialiser>&	initialiser 
+			mr_utils::SharedPtr<MrTest::ILogOutput>&		output, 
+			mr_utils::SharedPtr<MrTest::ILog>&			summaryLog, 
+			mr_utils::SharedPtr<MrTest::ILogInitialiser>&	initialiser 
 		);
 };
 

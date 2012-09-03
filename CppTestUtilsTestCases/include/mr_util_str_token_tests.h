@@ -15,11 +15,11 @@
 #include <exception>
 
 
-class TokenizerTests1 : public CppTest::Fixture {
+class TokenizerTests1 : public MrTest::Fixture {
 public:
 
 	TokenizerTests1(const mr_utils::mr_string& name) 
-		: CppTest::Fixture(name) {
+		: MrTest::Fixture(name) {
 
 		// This will add the test fixture to the test engine list when it is constructed
 		// The Register Fixture macro at the end of the class creates an instance which
@@ -138,11 +138,11 @@ REGISTER_FIXTURE(TokenizerTests1)
 
 
 // Test tokenize of string with only token delimiters.
-class TokenizerTests2 : public CppTest::Fixture {
+class TokenizerTests2 : public MrTest::Fixture {
 
 public:
 	TokenizerTests2(const mr_utils::mr_string& name)
-		: CppTest::Fixture(name)	{
+		: MrTest::Fixture(name)	{
 		ADD_TEST_FIXTURE( this );
 
 		FIXTURE_SETUP(this, &TokenizerTests2::FixtureSetup );

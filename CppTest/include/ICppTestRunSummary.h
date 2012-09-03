@@ -15,7 +15,7 @@
 #include "ICppTestCase.h"
 #include "mr_string.h"
 
-namespace CppTest {
+namespace MrTest {
 
 ///--------------------------------------------------------------------------------------
 ///	@brief	Holder for test case summary data
@@ -25,7 +25,7 @@ public:
 
 	/// @brief	Get the total number of test of a given status
 	/// @param	status	The total number of tests of this status will be returned
-	virtual int Total(CppTest::ICase::TestCaseStatus status) const = 0;
+	virtual int Total(MrTest::ICase::TestCaseStatus status) const = 0;
 
 
 	/// @brief	Get the total number of test run
@@ -33,6 +33,6 @@ public:
 
 };
 
-} // end namespace cppTest::Case
+} // end namespace MrTest::Case
 
 #endif

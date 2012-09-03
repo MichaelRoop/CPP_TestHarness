@@ -15,7 +15,7 @@
 #include "ICppTestCase.h"
 #include "CppTestFieldPair.h"
 
-namespace CppTest {
+namespace MrTest {
 
 class Case;
 struct SQLData; ///< Forward declaration of SQLData structure.
@@ -34,7 +34,7 @@ public:
 	/// @param	sqlData			Structure that will hold the finished statement. It also 
 	///							holds the field information and order.
 	/// @param	createTemplate	The create statement template.
-	static void BuildCreateStmt(CppTest::SQLData& sqlData, mr_utils::mr_string createTemplate);
+	static void BuildCreateStmt(MrTest::SQLData& sqlData, mr_utils::mr_string createTemplate);
 
 
 	/// @brief	Build the DROP statement from the table name and template.
@@ -43,7 +43,7 @@ public:
 	///
 	/// @param	sqlData			Structure that will hold the finished statement.
 	/// @param	dropTemplate	The drop statement template.
-	static void BuildDropStmt(CppTest::SQLData& sqlData, const mr_utils::mr_string& dropTemplate);
+	static void BuildDropStmt(MrTest::SQLData& sqlData, const mr_utils::mr_string& dropTemplate);
 
 
 	/// @brief	Build the INSERT statement from the table name and template.
@@ -51,7 +51,7 @@ public:
 	/// @param	sqlData			Structure that will hold the finished statement. It also 
 	///							holds the field information and order.
 	/// @param	insertTemplate	The drop statement template.
-	static void BuildInsertStmt(CppTest::SQLData& sqlData, const mr_utils::mr_string& insertTemplate);
+	static void BuildInsertStmt(MrTest::SQLData& sqlData, const mr_utils::mr_string& insertTemplate);
 
 
 	/// @brief	Build the INSERT statement from the built template and values.
@@ -60,7 +60,7 @@ public:
 	///							field information and order.
 	/// @param	fixture			The test case fixture that holds the values.
 	/// @return	The INSERT statement with the data values.
-	static mr_utils::mr_string BuildInsertStmtWithValues(const CppTest::SQLData& sqlData, CppTest::ICase& fixture);
+	static mr_utils::mr_string BuildInsertStmtWithValues(const MrTest::SQLData& sqlData, MrTest::ICase& fixture);
 
 
 	/// @brief	Build the INSERT statement from the built template and values.
@@ -69,7 +69,7 @@ public:
 	///							field information and order.
 	/// @param	theLog			The iTestLog that holds the values.
 	/// @return	The INSERT statement with the data values.
-	static mr_utils::mr_string BuildInsertStmtWithValues(const CppTest::SQLData& sqlData, CppTest::ILog* theLog);
+	static mr_utils::mr_string BuildInsertStmtWithValues(const MrTest::SQLData& sqlData, MrTest::ILog* theLog);
 
 private:
 
@@ -126,7 +126,7 @@ private:
 	/// @param	file			File from which this was called.
 	/// @param	line			The file line from which this was called.
 	static void BuildNameAndFields( 
-		CppTest::SQLData&			sqlData,  
+		MrTest::SQLData&			sqlData,  
 		const mr_utils::mr_string&	stmtTemplate,  
 		mr_utils::mr_string&		target,
 		bool						addTypes,

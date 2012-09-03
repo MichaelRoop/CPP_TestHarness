@@ -12,7 +12,7 @@
 #include "mr_toStream.h"
 
 
-namespace CppTest
+namespace MrTest
 {
 
 bool WriteToMsgBuff(mr_utils::mr_stringstream& buffer, const mr_utils::mr_string& msg, bool success) {

@@ -18,22 +18,22 @@
 #include "mr_defines.h"
 
 
-namespace CppTest {
+namespace MrTest {
 
 LogOutputSharedPtr LogOutputFactory::Create( 
-	mr_utils::SharedPtr<CppTest::ILogInitialiser>& initialiser 
+	mr_utils::SharedPtr<MrTest::ILogInitialiser>& initialiser 
 ) {
 	LogOutputSharedPtr output;
 
 	if (initialiser->GetOutputType().compare(_L_("ODBC") ) == 0) {
-		output = new CppTest::OdbcOutput(initialiser);
+		output = new MrTest::OdbcOutput(initialiser);
 	}
 	else if (initialiser->GetOutputType().compare(_L_("FILE")) == 0) {
 		mr_utils::mr_exception::assertCondition( false, _FL_, _L_("FILE output not ready"));
-		output = new CppTest::FileOutput("Simple log file.txt");
+		output = new MrTest::FileOutput("Simple log file.txt");
 	}
 	else if (initialiser->GetOutputType().compare(_L_("CONSOLE")) == 0) {
-		output = new CppTest::ConsoleOutput();
+		output = new MrTest::ConsoleOutput();
 	}
 	else {
 		mr_utils::mr_stringstream os;

@@ -18,7 +18,7 @@
 #include "mr_string.h"
 
 
-namespace CppTest {
+namespace MrTest {
 
 ///--------------------------------------------------------------------------------------
 ///
@@ -60,7 +60,7 @@ public:
 	/// @brief	Run the named test case contained in the fixture
 	/// @param	name	The test case name
 	/// @param	args	Arguments for the named test case
-	virtual void RunTest(const mr_utils::mr_string& name, const CppTest::TestCaseArguments& args) = 0;
+	virtual void RunTest(const mr_utils::mr_string& name, const MrTest::TestCaseArguments& args) = 0;
 	
 
 	/// @brief	Called after the last fixture test case has executed
@@ -73,7 +73,7 @@ public:
 
 
 	/// @brief	Retrieve the Fixture and test case names
-	virtual mr_utils::SharedPtr<CppTest::IFixutureTestCaseNames> GetTestNames() const = 0;
+	virtual mr_utils::SharedPtr<MrTest::IFixutureTestCaseNames> GetTestNames() const = 0;
 
 
 	/// @brief	Retrieve a copy of the currently executed test case
@@ -121,7 +121,7 @@ protected: // the register test methods could be public
 
 	/// @brief	Retrieve test arguments for current test case.
 	/// @return	The arguments for the test case.
-	virtual const CppTest::TestCaseArguments& CurrentArgs() const = 0;
+	virtual const MrTest::TestCaseArguments& CurrentArgs() const = 0;
 
 private:
 
@@ -132,10 +132,10 @@ private:
 
 };
 
-} // end namespace cppTest
+} // end namespace MrTest
 
 // Force exposure of class using std objects
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<CppTest::IFixture*>;
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<CppTest::IFixture*>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<MrTest::IFixture*>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<MrTest::IFixture*>;
 
 #endif

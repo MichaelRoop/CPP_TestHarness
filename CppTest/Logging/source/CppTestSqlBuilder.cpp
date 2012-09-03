@@ -17,24 +17,24 @@
 #include "mr_sstream.h"
 
 
-namespace CppTest {
+namespace MrTest {
 
-void SqlBuilder::BuildCreateStmt(CppTest::SQLData& sqlData, mr_utils::mr_string createTemplate ) {
+void SqlBuilder::BuildCreateStmt(MrTest::SQLData& sqlData, mr_utils::mr_string createTemplate ) {
 	BuildNameAndFields(sqlData, createTemplate, sqlData.m_createStmt, true, _FL_);
 }
 
 
-void SqlBuilder::BuildDropStmt(CppTest::SQLData& sqlData, const mr_utils::mr_string& dropTemplate) {
+void SqlBuilder::BuildDropStmt(MrTest::SQLData& sqlData, const mr_utils::mr_string& dropTemplate) {
 	AddTableName(sqlData.m_tableName, dropTemplate, sqlData.m_dropStmt, _FL_);
 }
 
 
-void SqlBuilder::BuildInsertStmt(CppTest::SQLData& sqlData, const mr_utils::mr_string& insertTemplate) {
+void SqlBuilder::BuildInsertStmt(MrTest::SQLData& sqlData, const mr_utils::mr_string& insertTemplate) {
 	BuildNameAndFields(sqlData, insertTemplate, sqlData.m_insertStmt, false, _FL_);
 }
 
 
-mr_utils::mr_string SqlBuilder::BuildInsertStmtWithValues(const CppTest::SQLData& sqlData, CppTest::ICase& fixture) {
+mr_utils::mr_string SqlBuilder::BuildInsertStmtWithValues(const MrTest::SQLData& sqlData, MrTest::ICase& fixture) {
 	mr_utils::mr_char delimiter = _L_('&');
 	VerifyPlaceHolder( sqlData.m_insertStmt, delimiter, _FL_);
 
@@ -56,7 +56,7 @@ mr_utils::mr_string SqlBuilder::BuildInsertStmtWithValues(const CppTest::SQLData
 }
 
 
-mr_utils::mr_string SqlBuilder::BuildInsertStmtWithValues(const CppTest::SQLData& sqlData, CppTest::ILog* theLog) {
+mr_utils::mr_string SqlBuilder::BuildInsertStmtWithValues(const MrTest::SQLData& sqlData, MrTest::ILog* theLog) {
 	mr_utils::mr_char delimiter = _L_('&');
 	VerifyPlaceHolder( sqlData.m_insertStmt, delimiter, _FL_ );
 
@@ -135,7 +135,7 @@ void SqlBuilder::AddTableName(
 
 
 void SqlBuilder::BuildNameAndFields( 
-	CppTest::SQLData&			sqlData,  
+	MrTest::SQLData&			sqlData,  
 	const mr_utils::mr_string&	stmtTemplate,  
 	mr_utils::mr_string&		target,
 	bool						addTypes,

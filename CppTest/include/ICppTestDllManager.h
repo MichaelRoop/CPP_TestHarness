@@ -15,7 +15,7 @@
 #include "mr_string.h"
 #include "mr_SharedPtr.h"
 
-namespace CppTest {
+namespace MrTest {
 
 ///--------------------------------------------------------------------------------------
 ///	@brief	Manages the loading and unloading of test case DLLs
@@ -33,9 +33,9 @@ public:
 
 };
 
-} // end namespace cppTest::Case
+} // end namespace MrTest::Case
 
 // Force export of std items
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API mr_utils::SharedPtr<CppTest::IDllManager>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API mr_utils::SharedPtr<MrTest::IDllManager>;
 
 #endif

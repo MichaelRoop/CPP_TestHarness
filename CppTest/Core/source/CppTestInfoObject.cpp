@@ -11,7 +11,7 @@
 #include "CppTestInfoObject.h"
 
 
-namespace CppTest {
+namespace MrTest {
 
 TestInfoObject::TestInfoObject() 
 :	m_isActive( false ),
@@ -49,14 +49,14 @@ void TestInfoObject::SetName(const mr_utils::mr_string& name) {
 }
 
 
-const std::vector<CppTest::ICaseArgument>& TestInfoObject::GetArguments() const {
+const std::vector<MrTest::ICaseArgument>& TestInfoObject::GetArguments() const {
 	return this->m_arguments;
 }
 
 
 void TestInfoObject::AddArgument(const mr_utils::mr_string& name, const mr_utils::mr_string& value) {
-	this->m_arguments.push_back(CppTest::ICaseArgument(name, value));
+	this->m_arguments.push_back(MrTest::ICaseArgument(name, value));
 }
 
 
-} // end namespace CppTest
+} // end namespace MrTest

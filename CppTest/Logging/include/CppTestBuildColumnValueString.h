@@ -17,7 +17,7 @@
 #include "mr_sstream.h"
 
 
-namespace CppTest {
+namespace MrTest {
 
 ///--------------------------------------------------------------------------------------
 /// @brief	Functor to Add a value to the value string on each iteration.
@@ -41,7 +41,7 @@ public:
 	/// @brief	Function operator called on each iteration.
 	///
 	/// @param	field	The current field at iteration.
-	virtual void operator () (const CppTest::FieldPair& field);
+	virtual void operator () (const MrTest::FieldPair& field);
 
 protected:
 	mr_utils::mr_stringstream&	m_os;

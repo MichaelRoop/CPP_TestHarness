@@ -11,7 +11,7 @@
 #include "CppTestConsoleOutput.h"
 #include "mr_iostream.h"
 
-namespace CppTest {
+namespace MrTest {
 
 bool ConsoleOutput::InitOutput() { 
 	return true; 

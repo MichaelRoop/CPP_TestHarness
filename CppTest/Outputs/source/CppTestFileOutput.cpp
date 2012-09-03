@@ -15,7 +15,7 @@
 #include "mr_defines.h"
 
 
-namespace CppTest {
+namespace MrTest {
 
 
 FileOutput::FileOutput(const std::string& filename) : ILogOutput(), m_filename(filename) {

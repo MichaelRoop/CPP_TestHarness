@@ -15,7 +15,7 @@
 #include "CppTestBuildColumnValueString.h"
 
 
-namespace CppTest {
+namespace MrTest {
 
 class ILog;	///< Forward declaration of iTestLog interface.
 
@@ -39,18 +39,18 @@ public:
 		mr_utils::mr_stringstream&	os,
 		const mr_utils::mr_string&	delimiter,
 		const mr_utils::mr_string&	strQuotes,
-		CppTest::ILog*				theLog 
+		MrTest::ILog*				theLog 
 	);
 
 protected:
 
-	CppTest::ILog* m_log; ///< Pointer to the testLog;
+	MrTest::ILog* m_log; ///< Pointer to the testLog;
 
 
 	/// @brief	Handles the building of column data.
 	//
 	/// @param	field	The current field at iteration.
-	virtual void Build(const CppTest::FieldPair& field);
+	virtual void Build(const MrTest::FieldPair& field);
 };
 
 } // end namespace

@@ -15,7 +15,7 @@
 #include <vector>
 
 
-namespace CppTest {
+namespace MrTest {
 
 /// @brief Typedef of the basic pair that defines the name and type strings of a SQL field.
 typedef std::pair<mr_utils::mr_string,mr_utils::mr_string> FieldPair;

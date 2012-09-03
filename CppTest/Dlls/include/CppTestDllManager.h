@@ -24,7 +24,7 @@
 #endif
 
 
-namespace CppTest {
+namespace MrTest {
 
 ///--------------------------------------------------------------------------------------
 ///	@brief	Manages the loading and unloading of test case DLLs
@@ -61,6 +61,6 @@ private:
 
 };
 
-} // end namespace cppTest::Case
+} // end namespace MrTest::Case
 
 #endif
