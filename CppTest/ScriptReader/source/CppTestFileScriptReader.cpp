@@ -77,25 +77,18 @@ void FileScriptReader::ProcessLine(mr_utils::mr_string& fixtureName, MrTest::Tes
 		line = mr_utils::SubString(line, 1);
 	}
 
-//	if (testInfo.IsActive()) {
-		mr_utils::mr_string name;
-		mr_utils::mr_string args;
-		mr_utils::mr_string::size_type pos = 0;
+	mr_utils::mr_string name;
+	mr_utils::mr_string args;
+	mr_utils::mr_string::size_type pos = 0;
 
-		// If no '.' then assume it is the fixture name only. This means execute all tests on that fixture
-		if (line.find(_L_('.')) == mr_utils::StrNPos()) {
-			if (mr_utils::MrTokenize(pos, line, fixtureName, m_nameDelimiter)) {
-				return;
-			}
-			this->ScriptAssert(false, _FL_, L("Invalid script line format"), line); 
+	// If no '.' then assume it is the fixture name only. This means execute all tests on that fixture
+	if (line.find(_L_('.')) == mr_utils::StrNPos()) {
+		if (mr_utils::MrTokenize(pos, line, fixtureName, m_nameDelimiter)) {
+			return;
 		}
-
-		this->ScriptAssert( 
-			line.find(_L_('.')) != mr_utils::StrNPos(),
-			_FL_, 
-			L("Must have FixtureName.TestCaseName format for a test name"), 
-			line
-		); 
+		this->ScriptAssert(false, _FL_, L("Invalid script line format"), line); 
+	}
+	else {
 		mr_utils::MrTokenize(pos, line, fixtureName, _L_('.'));
 
 		if (mr_utils::MrTokenize(pos, line, name, m_nameDelimiter)) {
@@ -106,9 +99,7 @@ void FileScriptReader::ProcessLine(mr_utils::mr_string& fixtureName, MrTest::Tes
 				this->ProcessArgs(testInfo, args);
 			}
 		}
-
-		//mr_cout << _L_("Fixture:") << fixtureName << _L_("  TestCase:") << name << std::endl;
-//	}
+	}
 }
 
 
