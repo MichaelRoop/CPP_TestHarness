@@ -299,9 +299,9 @@ void Engine::LogResults(MrTest::ICase& testCase) {
 }
 
 
-MrTest::LogEngine& Engine::GetLogEngine() {
-	return this->m_logEngine;
-}
+//MrTest::LogEngine& Engine::GetLogEngine() {
+//	return this->m_logEngine;
+//}
 
 
 mr_utils::mr_string Engine::GetRunId() {
@@ -338,6 +338,11 @@ void Engine::RegisterLoggedEvent(MrTest::DataLoggedEvent loggedCallbackEvent) {
 void Engine::RegisterSummaryEvent(MrTest::TestRunSummaryData summrayCallbackEvent) {
 	mr_utils::mr_pointerException::ptrAssert(summrayCallbackEvent, _FL_);
 	this->m_summaryEvents.push_back(summrayCallbackEvent);
+}
+
+
+void Engine::LoadLoggersByFileDefinition(const std::string& fileName, const mr_utils::mr_string& fileType) {
+	this->m_logEngine.LoadLoggers(fileName, fileType);
 }
 
 

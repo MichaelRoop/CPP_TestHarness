@@ -73,6 +73,14 @@ public:
 	// TODO - unregister functionality on events
 
 
+	/// TODO - load loggers from text xml passed in
+	/// @brief	Load loggers from an init file.
+	/// @exception	throws a mr_utils::mr_exception if the load fails.
+	/// @param	fileName	Name of the int file.
+	/// @param	fileType	Type of file loading.  Presently INI or XML
+	void LoadLoggersByFileDefinition(const std::string& fileName, const mr_utils::mr_string& fileType);
+
+
 #if defined(THIS_IS_REDUNDANT_NEED_TO_DELETE)
 	/// @brief	Process the test cases using the scriptReader object.
 	/// @param	theReader	The object that parses the script that drives test selection and their
@@ -83,12 +91,6 @@ public:
 	/// @brief	Process the test cases using the vector of info objects that were assembled
 	/// @param	list	The test fixture info objects and their tests
 	void ProcessTestList(std::vector< mr_utils::SharedPtr<MrTest::ITestFixtureInfoObject> >& list);
-
-
-	/// @brief	Retrieve the results logging engine.
-	///
-	/// @return	The results logging engine.
-	MrTest::LogEngine& GetLogEngine();
 
 
 	/// @brief	Returns the unique id for the test run.
