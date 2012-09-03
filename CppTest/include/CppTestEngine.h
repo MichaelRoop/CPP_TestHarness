@@ -12,7 +12,8 @@
 #define CPP_TEST_ENGINE_H
 
 #include "CppTestDefines.h"
-#include "CppTestDefines.h"
+#include "MrTestTypes.h"
+
 #include "CppTestLogEngine.h"
 #include "ICppTestScriptReader.h"
 #include "ICppTestCase.h"
@@ -29,22 +30,6 @@
 
 
 namespace MrTest {
-
-/// @brief	Typdef of a call back event that will be called to 
-typedef void (* DataLoggedEvent) (const MrTest::ICase&);
-
-// Force export so it can be used in of std contained object 
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<MrTest::DataLoggedEvent>;
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<MrTest::DataLoggedEvent>;
-
-
-/// @brief	Typdef of a call back event that will be called to 
-typedef void (* TestRunSummaryData) (const MrTest::IRunSummary&);
-
-// Force export so it can be used in of std contained object 
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<MrTest::TestRunSummaryData>;
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<MrTest::TestRunSummaryData>;
-
 			
 ///--------------------------------------------------------------------------------------
 /// 

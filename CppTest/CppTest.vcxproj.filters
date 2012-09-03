@@ -342,5 +342,8 @@
     <ClInclude Include="Dlls\include\CppTestDllManager.h">
       <Filter>Dlls\include</Filter>
     </ClInclude>
+    <ClInclude Include="include\MrTestTypes.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -162,6 +162,7 @@
     <ClInclude Include="include\ICppTestLog.h" />
     <ClInclude Include="include\ICppTestLogOutput.h" />
     <ClInclude Include="include\ICppTestRunSummary.h" />
+    <ClInclude Include="include\MrTestTypes.h" />
     <ClInclude Include="Logging\include\CppTestBuildColumnInfoString.h" />
     <ClInclude Include="Logging\include\CppTestBuildColumnValueString.h" />
     <ClInclude Include="Logging\include\CppTestBuildConsoleSummaryString.h" />
