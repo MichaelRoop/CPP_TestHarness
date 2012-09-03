@@ -20,7 +20,6 @@
 #include <time.h>
 #include <algorithm>
 
-
 namespace MrTest {
 
 //---------------------------------------------------------------------------------------
@@ -138,6 +137,7 @@ void EngineImplementation::RegisterCase(MrTest::IFixture* fixture) {
 	this->m_fixtures.push_back(fixture);
 }
 
+
 #ifdef THIS_IS_REDUNDANT_NEED_TO_DELETE
 void Engine::ProcessScript(MrTest::IScriptReader& theReader ) {
 	this->m_logEngine.WriteHeaders();
@@ -221,55 +221,19 @@ void EngineImplementation::ProcessTestList(std::vector< mr_utils::SharedPtr<MrTe
 
 		// Only look up the actual fixture if the Fixture Info has test case infos
 		const std::vector<MrTest::TestInfoObject>& testInfos = (*itFixtureInfo)->GetTestInfoVector();
-		if (testInfos.size() > 0) {
 
-			// Retrieve the actual fixture pointer
-			std::vector<MrTest::IFixture*>::iterator itFixture = 
-				std::find_if(
-					this->m_fixtures.begin(), 
-					this->m_fixtures.end(), 
-					HasNamedFixtureFunctor((*itFixtureInfo)->GetName()));
-
-			// check if the fixture is registered with the engine
-			if (itFixture == this->m_fixtures.end()) {
-				// TODO - Log failure to find the Fixture
-			}
-			else {
-				// iterate through each test info in the fixture info to find the tests
-				std::vector<MrTest::TestInfoObject>::const_iterator itTestInfo = testInfos.begin();
-				for (; itTestInfo != testInfos.end(); ++itTestInfo) {
-
-					mr_utils::mr_string name = itTestInfo->GetName(); 
-					if ((*itFixture)->HasTest(name)) {
-						if (itTestInfo->IsActive()) {
-							(*itFixture)->RunTest(name, itTestInfo->GetArguments());
-							this->LogResults((*itFixture)->CurrentTestCase());
-						}
-						else {
-							// Test found but marked disabled
-							this->LogResults(DisabledTestData((*itFixture)->Name(), name));
-						}
-					}
-					else {
-						// test not found by name
-						this->LogResults(NonExistantTestData((*itFixture)->Name(), name));
-					}
-				}
-				// Last test in fixture. Need to close off the fixture
-				(*itFixture)->ResetFixture();
-			}
+		// First case has only has one test info in the fixture test info and that test name is zero length. Run all the fixture tests 
+		if (testInfos.size() == 1 && testInfos[0].GetName().length() == 0) {
+			this->RunAllFixtureTests((*itFixtureInfo)->GetName());
+		}
+		else if (testInfos.size() > 0) {
+			this->RunSelectFixtureTests((*itFixtureInfo)->GetName(), testInfos);
 		}
 		else {
 			// No test case infos in fixture info - log this
 		}
 	}
-
-	std::for_each(
-		this->m_summaryEvents.begin(), 
-		this->m_summaryEvents.end(), 
-		FireSummaryEventsFunctor(this->m_caseCounter));
-
-	this->m_logEngine.WriteSummaries();
+	this->LogSummaries();
 }
 
 
@@ -281,6 +245,16 @@ void EngineImplementation::LogResults(MrTest::ICase& testCase) {
 		this->m_logEvents.begin(), 
 		this->m_logEvents.end(), 
 		FireLoggedEventsFunctor(testCase));
+}
+
+
+void EngineImplementation::LogSummaries() {
+	std::for_each(
+		this->m_summaryEvents.begin(), 
+		this->m_summaryEvents.end(), 
+		FireSummaryEventsFunctor(this->m_caseCounter));
+
+	this->m_logEngine.WriteSummaries();
 }
 
 
@@ -324,6 +298,74 @@ void EngineImplementation::RegisterSummaryEvent(MrTest::TestRunSummaryData summr
 void EngineImplementation::LoadLoggersByFileDefinition(const std::string& fileName, const mr_utils::mr_string& fileType) {
 	this->m_logEngine.LoadLoggers(fileName, fileType);
 }
+
+
+void EngineImplementation::RunSelectFixtureTests(const mr_utils::mr_string& fixtureName, const std::vector<MrTest::TestInfoObject>& testInfos) {
+
+	// Retrieve the actual fixture pointer and check if registered
+	std::vector<MrTest::IFixture*>::iterator itFixture = this->GetFixtureIterator(fixtureName);
+	if (itFixture == this->m_fixtures.end()) {
+		// TODO - Log failure to find the Fixture
+	}
+	else {
+		// iterate through each test info in the fixture info to find the tests
+		std::vector<MrTest::TestInfoObject>::const_iterator itTestInfo = testInfos.begin();
+		for (; itTestInfo != testInfos.end(); ++itTestInfo) {
+
+			mr_utils::mr_string name = itTestInfo->GetName(); 
+			if ((*itFixture)->HasTest(name)) {
+				if (itTestInfo->IsActive()) {
+					(*itFixture)->RunTest(name, itTestInfo->GetArguments());
+					this->LogResults((*itFixture)->CurrentTestCase());
+				}
+				else {
+					// Test found but marked disabled
+					this->LogResults(DisabledTestData((*itFixture)->Name(), name));
+				}
+			}
+			else {
+				// test not found by name
+				this->LogResults(NonExistantTestData((*itFixture)->Name(), name));
+			}
+		}
+		// Last test in fixture. Need to close off the fixture
+		(*itFixture)->ResetFixture();
+	}
+}
+
+
+void EngineImplementation::RunAllFixtureTests(const mr_utils::mr_string& fixtureName) {
+
+	std::vector<MrTest::IFixture*>::iterator itFixture = this->GetFixtureIterator(fixtureName);
+	if (itFixture == this->m_fixtures.end()) {
+		// TODO - Log failure to find the Fixture
+	}
+	else {
+		std::vector<mr_utils::mr_string>::const_iterator itTestNames = (*itFixture)->GetTestNames()->TestCaseNames().begin();
+		std::vector<mr_utils::mr_string>::const_iterator endTestNames = (*itFixture)->GetTestNames()->TestCaseNames().end();
+		for (; itTestNames != endTestNames; ++itTestNames) {
+			if ((*itFixture)->HasTest(*itTestNames)) {
+				(*itFixture)->RunTest((*itTestNames), MrTest::TestCaseArguments());
+				this->LogResults((*itFixture)->CurrentTestCase());
+			}
+			else {
+				this->LogResults(NonExistantTestData((*itFixture)->Name(), *itTestNames));
+			}
+		}
+		// Last test in fixture. Need to close off the fixture
+		(*itFixture)->ResetFixture();
+	} 
+}
+
+
+std::vector<MrTest::IFixture*>::iterator EngineImplementation::GetFixtureIterator(const mr_utils::mr_string& fixtureName) { 
+	return std::find_if(
+				this->m_fixtures.begin(), 
+				this->m_fixtures.end(), 
+				HasNamedFixtureFunctor(fixtureName));
+}
+
+
 
 
 } // end namespace

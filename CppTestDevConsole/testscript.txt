@@ -1,13 +1,15 @@
 #TC1
 #TC2
 #TC3
-UtilStrTrimTests.UTL_STR_RTRIM_1
-UtilStrTrimTests.UTL_STR_RTRIM_2
-UtilStrTrimTests.UTL_STR_LTRIM_1
-UtilStrTrimTests.UTL_STR_LTRIM_2
-UtilStrTrimTests.UTL_STR_TRIM_1
-UtilStrTrimTests.UTL_STR_TRIM_2
+UtilStrTrimTests
+#UtilStrTrimTests.UTL_STR_RTRIM_1
+#UtilStrTrimTests.UTL_STR_RTRIM_2
+#UtilStrTrimTests.UTL_STR_LTRIM_1
+#UtilStrTrimTests.UTL_STR_LTRIM_2
+#UtilStrTrimTests.UTL_STR_TRIM_1
+#UtilStrTrimTests.UTL_STR_TRIM_2
 
+TokenizerTests1
 TokenizerTests1.UTL_TOK_1_1
 TokenizerTests1.UTL_TOK_1_2$
 TokenizerTests1.UTL_TOK_1_3$arg1=3434||arg2=jjf

@@ -82,6 +82,14 @@ void FileScriptReader::ProcessLine(mr_utils::mr_string& fixtureName, MrTest::Tes
 		mr_utils::mr_string args;
 		mr_utils::mr_string::size_type pos = 0;
 
+		// If no '.' then assume it is the fixture name only. This means execute all tests on that fixture
+		if (line.find(_L_('.')) == mr_utils::StrNPos()) {
+			if (mr_utils::MrTokenize(pos, line, fixtureName, m_nameDelimiter)) {
+				return;
+			}
+			this->ScriptAssert(false, _FL_, L("Invalid script line format"), line); 
+		}
+
 		this->ScriptAssert( 
 			line.find(_L_('.')) != mr_utils::StrNPos(),
 			_FL_, 

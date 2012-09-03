@@ -105,6 +105,25 @@ private:
 	/// @param	fixture	The test case fixture whose results are to be logged.
 	void LogResults(MrTest::ICase& caseData);
 
+
+	/// @brief	Run every test case in the fixture
+	/// @param	fixtureName	The name of the fixture with the test cases
+	void RunAllFixtureTests(const mr_utils::mr_string& fixtureName);
+
+
+	/// @brief	Run every test case in the fixture
+	/// @param	fixtureName	The name of the fixture with the test cases
+	void RunSelectFixtureTests(const mr_utils::mr_string& fixtureName, const std::vector<MrTest::TestInfoObject>& testInfos);
+
+
+	/// @brief	Get the fixture from the registered list
+	/// @param	fixtureName	The name of the fixture to retrieve
+	std::vector<MrTest::IFixture*>::iterator GetFixtureIterator(const mr_utils::mr_string& fixtureName); 
+
+
+	/// @brief	Log the summary results of all test cases for a run
+	void LogSummaries();
+
 };
 
 } // end namespace
