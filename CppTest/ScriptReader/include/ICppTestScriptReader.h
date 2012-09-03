@@ -31,25 +31,19 @@ class CPPTESCASE_API IScriptReader {
 public:
 
 	/// @brief	Opens the script.
-	virtual void Open()  {
-		// Should be pure virtual but cannot export the class
-		throw mr_utils::mr_exception(_FL_, _L_("Do not use base directly - public only for forced export"));
-	}
+	virtual void Open() = 0; 
 
 
 	/// @brief	Extracts the test information from the current test script line.
 	/// @param	fixtureName	Name of the fixture for the test case.
 	/// @return	The populated testInfoObject for the test.  If the object has no more
 	///			script lines the testInfoObject.isValid() will return false.
-	virtual MrTest::TestInfoObject getNextTest(mr_utils::mr_string& fixtureName)  {
-		// Should be pure virtual but cannot export the class
-		throw mr_utils::mr_exception(_FL_, _L_("Do not use base directly - public only for forced export"));
-	}
+	virtual MrTest::TestInfoObject getNextTest(mr_utils::mr_string& fixtureName) = 0;
+
 };
 
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<MrTest::IScriptReader>;
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<MrTest::IScriptReader>;
-
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<MrTest::IScriptReader*>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<MrTest::IScriptReader*>;
 
 } // end namespace
 
