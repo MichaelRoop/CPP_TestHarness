@@ -1,29 +1,26 @@
 ///--------------------------------------------------------------------------------------
-/// @file	CppTestScriptReader.h
-/// @brief	cross platform and char width file script reader.
+/// @file	MrTestCommandLineReader.h
+/// @brief	Converts a command line argument to a test info
 ///
 /// @author		Michael Roop
-/// @date		2010
+/// @date		2012
 /// @version	1.0
 ///
-/// Copyright 2010 Michael Roop
+/// Copyright 2012 Michael Roop
 ///--------------------------------------------------------------------------------------
-#if !defined(CPP_TEST_FILE_SCRIPT_READER_H)
-#define CPP_TEST_FILE_SCRIPT_READER_H
+#if !defined(MR_TEST_COMMAND_LINE_READER_H)
+#define MR_TEST_COMMAND_LINE_READER_H
 
 #include "MrTestScriptReaderBase.h"
-#include "mr_fstream.h"
-#include "mr_char.h" 
-
 
 namespace MrTest {
 
 ///--------------------------------------------------------------------------------------
 ///
-/// @brief	Class to abstract the reading of a test script from a file.
+/// @brief	Class to abstract the reading of command line test request string
 ///
-/// Each line in the file represents one test case. As the lines are read in, a 
-/// testInfoObject is created that holds the name and arguments of the test case.
+/// There are several options for using a string to execute a test. This would normally
+/// be done by grabbing a command line parameter.
 ///
 /// 1.	If there is only one word then it assumes it is a test fixture. The engine will
 ///		then try to execute all tests in the fixture. Example:  #TokenizerTests1
@@ -52,37 +49,35 @@ namespace MrTest {
 /// appear in the logs
 ///
 ///--------------------------------------------------------------------------------------
-class CPPTESCASE_API FileScriptReader : public MrTest::ScriptReaderBase {
+class CPPTESCASE_API CommandLineReader : public MrTest::ScriptReaderBase {
 public:
 
 	/// @brief	Constructor.
-	/// @param	filename	The file to load the script from.
 	/// @param	nameDelimiter	Delimiter character to tokenize the name and 
 	///							argument portion of the line.
 	/// @param	argDelimiter	Delimiter to tokenize the argument portion of the
 	///							line into separate arguments.
-	FileScriptReader( 
-		const std::string&	filename,
-		mr_utils::mr_char	nameDelimiter = _L_('$'),
-		mr_utils::mr_char	argDelimiter = _L_('|')
+	CommandLineReader(
+		const mr_utils::mr_string&	line,
+		mr_utils::mr_char			nameDelimiter = _L_('$'),
+		mr_utils::mr_char			argDelimiter = _L_('|')
 	);
 
 
 	/// @brief	Constructor.
-	/// @param	filename	The file to load the script from.
 	/// @param	nameDelimiter	Delimiter character to tokenize the name and 
 	///							argument portion of the line.
 	/// @param	argDelimiter	Delimiter to tokenize the argument portion of the
 	///							line into separate arguments.
-	FileScriptReader( 
-		const char*			filename,
-		mr_utils::mr_char	nameDelimiter = _L_('$'),
-		mr_utils::mr_char	argDelimiter = _L_('|')
+	CommandLineReader( 
+		const mr_utils::mr_char*	line,   
+		mr_utils::mr_char			nameDelimiter = _L_('$'),
+		mr_utils::mr_char			argDelimiter = _L_('|')
 	);
 
 
-	/// @brief	Opens the file containing the script.
-	///	@throw	Throws a scriptException on empty file name or file not found.
+	/// @brief	Sets the state so that a single info object can be created to
+	///			driver the Engine
 	void Open();
 
 
@@ -94,14 +89,14 @@ public:
 	MrTest::TestInfoObject getNextTest(mr_utils::mr_string& fixtureName);
 
 private:
-	std::string				m_filename;		///< The file name of the script.
-	mr_utils::mr_ifstream	m_scriptStream;	///< The file object.
+	const mr_utils::mr_string	m_line;
+	bool						m_used;
 
 };
 
 } // end namespace
 
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<MrTest::FileScriptReader*>;
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<MrTest::FileScriptReader*>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<MrTest::CommandLineReader*>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<MrTest::CommandLineReader*>;
 
 #endif

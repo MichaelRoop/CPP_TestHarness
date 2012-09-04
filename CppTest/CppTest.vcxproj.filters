@@ -196,6 +196,9 @@
     <ClCompile Include="ScriptReader\source\MrTestScriptReaderBase.cpp">
       <Filter>ScriptReader\source</Filter>
     </ClCompile>
+    <ClCompile Include="ScriptReader\source\MrTestCommandLineReader.cpp">
+      <Filter>ScriptReader\source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Win\resource.h">
@@ -358,6 +361,9 @@
       <Filter>Core\include</Filter>
     </ClInclude>
     <ClInclude Include="ScriptReader\include\MrTestScriptReaderBase.h">
+      <Filter>ScriptReader\include</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptReader\include\MrTestCommandLineReader.h">
       <Filter>ScriptReader\include</Filter>
     </ClInclude>
   </ItemGroup>
