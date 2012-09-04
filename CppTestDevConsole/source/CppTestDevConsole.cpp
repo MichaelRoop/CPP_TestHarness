@@ -96,9 +96,13 @@ int main(int argc, char* argv[]) {
 			//MrTest::CommandLineReader reader(L("TokenizerTests1.UTL_TOK_1_3$arg1=3434||arg2=jjf"));
 			//MrTest::CommandLineReader reader(L("TokenizerTests1"));
 			
+			// Test to make sure they work and are sorted
 			std::vector<mr_utils::mr_string> testVector;
-			testVector.push_back(L("TokenizerTests1.UTL_TOK_1_1"));
 			testVector.push_back(L("TokenizerTests1.UTL_TOK_1_3$arg1=3434||arg2=jjf"));
+			testVector.push_back(L("UtilStrTrimTests"));
+			testVector.push_back(L("TokenizerTests1.UTL_TOK_1_1"));
+		
+
 			MrTest::VectorLineReader reader(testVector);
 
 			reader.Open();

@@ -10,6 +10,7 @@
 ///--------------------------------------------------------------------------------------
 #include "MrTestVectorLineReader.h"
 #include "mr_defines.h"
+#include <algorithm>
 
 namespace MrTest {
 
@@ -46,6 +47,9 @@ MrTest::TestInfoObject VectorLineReader::getNextTest(mr_utils::mr_string& fixtur
 
 void VectorLineReader::SortVector() {
 	// TODO - implement sorting by fixture and test cases within fixture
+
+	std::sort(this->m_lines.begin(), this->m_lines.end());
+
 }
 
 } // end of namespace
