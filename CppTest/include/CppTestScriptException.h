@@ -56,7 +56,7 @@ public:
 		const char*					file, 
 		int							line, 
 		const mr_utils::mr_string&	msg,
-		const std::string&			scriptFileName,
+		const mr_utils::mr_string&	scriptFileName,
 		const mr_utils::mr_string&	scriptLine = L( "" )
 	);
 
@@ -75,7 +75,7 @@ public:
 
 protected:
 
-	std::string			m_scriptFileName;	///< Script file being processed.
+	mr_utils::mr_string	m_scriptFileName;	///< Script file being processed.
 	mr_utils::mr_string m_scriptLine;		///< Contents of the line in question.
 
 };

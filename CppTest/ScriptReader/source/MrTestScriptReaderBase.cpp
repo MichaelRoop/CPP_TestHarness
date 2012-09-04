@@ -18,9 +18,9 @@ namespace MrTest {
 
 
 ScriptReaderBase::ScriptReaderBase(
-	const std::string& origine,
-	mr_utils::mr_char nameDelimiter, 
-	mr_utils::mr_char argDelimiter) :
+	const mr_utils::mr_string&	origine,
+	mr_utils::mr_char			nameDelimiter, 
+	mr_utils::mr_char			argDelimiter) :
 	m_origine(origine),
 	m_nameDelimiter(nameDelimiter),
 	m_argDelimiter(argDelimiter) {

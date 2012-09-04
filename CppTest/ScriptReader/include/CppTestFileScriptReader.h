@@ -62,22 +62,9 @@ public:
 	/// @param	argDelimiter	Delimiter to tokenize the argument portion of the
 	///							line into separate arguments.
 	FileScriptReader( 
-		const std::string&	filename,
-		mr_utils::mr_char	nameDelimiter = _L_('$'),
-		mr_utils::mr_char	argDelimiter = _L_('|')
-	);
-
-
-	/// @brief	Constructor.
-	/// @param	filename	The file to load the script from.
-	/// @param	nameDelimiter	Delimiter character to tokenize the name and 
-	///							argument portion of the line.
-	/// @param	argDelimiter	Delimiter to tokenize the argument portion of the
-	///							line into separate arguments.
-	FileScriptReader( 
-		const char*			filename,
-		mr_utils::mr_char	nameDelimiter = _L_('$'),
-		mr_utils::mr_char	argDelimiter = _L_('|')
+		mr_utils::mr_string&	filename,
+		mr_utils::mr_char		nameDelimiter = _L_('$'),
+		mr_utils::mr_char		argDelimiter = _L_('|')
 	);
 
 
@@ -94,7 +81,7 @@ public:
 	MrTest::TestInfoObject getNextTest(mr_utils::mr_string& fixtureName);
 
 private:
-	std::string				m_filename;		///< The file name of the script.
+	mr_utils::mr_string		m_filename;		///< The file name of the script.
 	mr_utils::mr_ifstream	m_scriptStream;	///< The file object.
 
 };

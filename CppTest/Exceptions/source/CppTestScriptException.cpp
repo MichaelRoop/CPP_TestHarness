@@ -19,7 +19,7 @@ ScriptException::ScriptException(
 	const char*					file, 
 	int							line, 
 	const mr_utils::mr_string&	msg,
-	const std::string&			scriptFileName,
+	const mr_utils::mr_string&	scriptFileName,
 	const mr_utils::mr_string&	scriptLine
 )
 :	mr_utils::mr_exception( file, line, msg ),
@@ -38,8 +38,7 @@ ScriptException::~ScriptException() throw() {
 
 const mr_utils::mr_string ScriptException::LongMsg() const {
 	mr_utils::mr_stringstream ss;
-	ss << mr_utils::mr_exception::longMsg() << L(" : ") ;
-	mr_utils::ToStream( ss, mr_utils::ExtractFileName( m_scriptFileName ) );
+	ss << mr_utils::mr_exception::longMsg() << L(" : ") << mr_utils::ExtractFileName(this->m_scriptFileName);
 
 	if (!m_scriptLine.empty()) {
 		ss << L(" : ") << m_scriptLine.c_str();

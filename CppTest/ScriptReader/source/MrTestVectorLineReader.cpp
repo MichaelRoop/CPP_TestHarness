@@ -18,7 +18,7 @@ VectorLineReader::VectorLineReader(
 	const std::vector<mr_utils::mr_string>&	lines,
 	mr_utils::mr_char						nameDelimiter,
 	mr_utils::mr_char						argDelimiter ) :
-		ScriptReaderBase("VectorOfLines", nameDelimiter, argDelimiter),
+		ScriptReaderBase(L("VectorOfLines"), nameDelimiter, argDelimiter),
 		m_lines(lines),
 		m_index(0) 	{
 

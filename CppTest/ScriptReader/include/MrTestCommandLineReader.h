@@ -64,18 +64,6 @@ public:
 	);
 
 
-	/// @brief	Constructor.
-	/// @param	nameDelimiter	Delimiter character to tokenize the name and 
-	///							argument portion of the line.
-	/// @param	argDelimiter	Delimiter to tokenize the argument portion of the
-	///							line into separate arguments.
-	CommandLineReader( 
-		const mr_utils::mr_char*	line,   
-		mr_utils::mr_char			nameDelimiter = _L_('$'),
-		mr_utils::mr_char			argDelimiter = _L_('|')
-	);
-
-
 	/// @brief	Sets the state so that a single info object can be created to
 	///			driver the Engine
 	void Open();

@@ -20,23 +20,19 @@ fileException::fileException(
 	const char*					file, 
 	int							line, 
 	const mr_utils::mr_string&	msg,
-	const std::string&			fileName
-)
-:	mr_utils::mr_exception( file, line, msg ),
-	m_fileName( fileName )
-{
+	const mr_utils::mr_string&	fileName)
+:	mr_utils::mr_exception(file, line, msg),
+	m_fileName(fileName) {
 }
 
 
-fileException::~fileException() throw()
-{
+fileException::~fileException() throw() {
 }
 
 
-const mr_utils::mr_string fileException::longMsg() const
-{
+const mr_utils::mr_string fileException::longMsg() const {
 	mr_utils::mr_stringstream ss;
-	ss << mr_utils::mr_exception::longMsg() << L(" : ") << mr_utils::ToStream( ss, m_fileName );
+	ss << mr_utils::mr_exception::longMsg() << L(" : ") << m_fileName;
 	return ss.str();
 }
 

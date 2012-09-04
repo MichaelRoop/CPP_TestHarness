@@ -11,6 +11,8 @@
 #include "mr_string.h"
 #include "mr_exception.h"
 #include "mr_defines.h"
+#include "mr_sstream.h"
+#include "mr_toStream.h"
 #include "mr_functors.h"
 
 #include <algorithm>
@@ -69,6 +71,24 @@ std::string ExtractFileName(const std::string& pathAndFile) {
 	mr_exception::assertCondition( pathAndFile.length() > 1, FL, L("Path and file only contains slashes") );
 	return pathAndFile.substr( pos + 1 ); 
 }
+
+
+std::wstring ExtractFileName(const std::wstring& pathAndFile) {
+	if (pathAndFile.empty()) {
+		return pathAndFile;
+	}
+
+	std::string::size_type pos = pathAndFile.find_last_of( L"\\/" );
+	if (pos == mr_utils::StrNPos()) {
+		return pathAndFile;
+	}
+
+	// If found, check that it is not the only character.
+	mr_exception::assertCondition( pathAndFile.length() > 1, FL, L("Path and file only contains slashes") );
+	return pathAndFile.substr( pos + 1 ); 
+}
+
+
 
 
 // But simple wide to narrow conversion.  No Unicode considered.  Will only 
@@ -181,6 +201,32 @@ std::string::size_type Find(const std::string& s, const std::string pattern, std
 
 bool Contains(const std::string& s, const std::string pattern) {
 	return Find(s, pattern, 0) != std::string::npos;
+}
+
+
+mr_utils::mr_string ToMrString(const char* value) {
+	// Convert to wide or narrow mr_string
+	mr_utils::mr_stringstream ss;
+	mr_utils::ToStream(ss, (value == 0 ? "" : value));
+	return ss.str().c_str();
+}
+
+
+mr_utils::mr_string ToMrString(const wchar_t* value) {
+	// Convert to wide or narrow mr_string
+	mr_utils::mr_stringstream ss;
+	mr_utils::ToStream(ss, (value == 0 ? L"" : value));
+	return ss.str().c_str();
+}
+
+
+mr_utils::mr_string ToMrString(const std::string& value) {
+	return mr_utils::ToMrString(value.c_str());
+}
+
+
+mr_utils::mr_string ToMrString(const std::wstring& value) {
+	return mr_utils::ToMrString(value.c_str());
 }
 
 

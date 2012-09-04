@@ -11,23 +11,18 @@
 #include "CppTestFileScriptReader.h"
 #include "mr_pointerException.h"
 #include "mr_defines.h"
+#include "mr_sstream.h"
+#include "mr_toStream.h"
 
 namespace MrTest {
 
+
+
 FileScriptReader::FileScriptReader( 
-	const std::string&	filename,
-	mr_utils::mr_char nameDelimiter,
-	mr_utils::mr_char argDelimiter ) 
+	mr_utils::mr_string&	filename,
+	mr_utils::mr_char		nameDelimiter,
+	mr_utils::mr_char		argDelimiter ) 
 	:	ScriptReaderBase(filename, nameDelimiter, argDelimiter),
-		m_filename(filename) {
-}
-
-
-FileScriptReader::FileScriptReader( 
-	const char*	filename,
-	mr_utils::mr_char nameDelimiter,
-	mr_utils::mr_char argDelimiter ) 
-	:	ScriptReaderBase((filename == NULL ? "" : filename), nameDelimiter, argDelimiter),
 		m_filename(filename) {
 }
 

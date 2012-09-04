@@ -33,9 +33,9 @@ protected:
 	/// @param	argDelimiter	Delimiter to tokenize the argument portion of the
 	///							line into separate arguments.
 	ScriptReaderBase(
-		const std::string& origine,
-		mr_utils::mr_char nameDelimiter = _L_('$'), 
-		mr_utils::mr_char argDelimiter = _L_('|'));
+		const mr_utils::mr_string&	origine,
+		mr_utils::mr_char			nameDelimiter = _L_('$'), 
+		mr_utils::mr_char			argDelimiter = _L_('|'));
 
 
 	/// @brief	Helper method to process one line of the script file.
@@ -107,7 +107,7 @@ protected:
 private:
 	mr_utils::mr_char	m_nameDelimiter;///< Name delimiter.
 	mr_utils::mr_char	m_argDelimiter;	///< Argument delimiter.
-	std::string			m_origine;		///< origine of script input
+	mr_utils::mr_string m_origine;		///< origine of script input
 
 
 	/// @brief	Default constructor

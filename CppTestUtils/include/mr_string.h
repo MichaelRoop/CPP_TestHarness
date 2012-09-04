@@ -57,7 +57,15 @@ CPPTESTUTILS_API mr_string Trim( const mr_string& str );
 /// @param	pathAndFile	The string which includes the fully defined file name and path.
 ///
 /// @return	A copy of the string with only the file name.
-CPPTESTUTILS_API std::string ExtractFileName( const std::string& pathAndFile );
+CPPTESTUTILS_API std::string ExtractFileName(const std::string& pathAndFile);
+
+
+/// @brief	Function to extract the file name from a string which may include the path.
+///
+/// @param	pathAndFile	The string which includes the fully defined file name and path.
+///
+/// @return	A copy of the string with only the file name.
+CPPTESTUTILS_API std::wstring ExtractFileName(const std::wstring& pathAndFile);
 
 
 /// @brief	Function to convert a wide string with only ANSII characters to narrow.
@@ -123,6 +131,30 @@ CPPTESTUTILS_API std::string::size_type Find(const std::string& s, const std::st
 
 /// @brief	Contain function
 CPPTESTUTILS_API bool Contains(const std::string& s, const std::string pattern);
+
+
+/// @brief	Convert a char* to mr_string. Useful for dealing with hard coded types
+//			as they interact with the wide/narrow mr_string in the system
+/// @param	value	The value to tranform
+CPPTESTUTILS_API mr_utils::mr_string ToMrString(const char* value);
+
+
+/// @brief	Convert a char* to mr_string. Useful for dealing with hard coded types
+//			as they interact with the wide/narrow mr_string in the system
+/// @param	value	The value to tranform
+CPPTESTUTILS_API mr_utils::mr_string ToMrString(const wchar_t* value);
+
+
+/// @brief	Convert a char* to mr_string. Useful for dealing with hard coded types
+//			as they interact with the wide/narrow mr_string in the system
+/// @param	value	The value to tranform
+CPPTESTUTILS_API mr_utils::mr_string ToMrString(const std::string& value);
+
+
+/// @brief	Convert a char* to mr_string. Useful for dealing with hard coded types
+//			as they interact with the wide/narrow mr_string in the system
+/// @param	value	The value to tranform
+CPPTESTUTILS_API mr_utils::mr_string ToMrString(const std::wstring& value);
 
 
 } // end namespace.

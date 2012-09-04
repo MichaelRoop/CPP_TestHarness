@@ -26,18 +26,16 @@ class ToStreamVecClass;
 
 // Template function to stream out types to an output with automatic conversions.
 template<class T>
-/*CPPTESTUTILS_API*/ mr_ostream& ToStream( mr_ostream& os, const T& streamValue )
-{
-	ToStreamClass<T,mr_ostream>::streamOut( os, streamValue );
+mr_ostream& ToStream(mr_ostream& os, const T& streamValue) {
+	ToStreamClass<T,mr_ostream>::streamOut(os, streamValue);
 	return os;
 }
 
 
 // Template function to stream out a vector of types to an output with automatic conversions.
 template<class T, class T2>
-/*CPPTESTUTILS_API*/ mr_utils::mr_ostream& ToStream( mr_ostream& os, const std::vector<T>& streamValue, T2& outputFormater )
-{
-	ToStreamVecClass<T, /*mr_ostream,*/T2>::streamOut( /*os,*/ streamValue, outputFormater );
+mr_utils::mr_ostream& ToStream(mr_ostream& os, const std::vector<T>& streamValue, T2& outputFormater) {
+	ToStreamVecClass<T, /*mr_ostream,*/T2>::streamOut( /*os,*/ streamValue, outputFormater);
 	return os;
 }
 
@@ -52,22 +50,18 @@ template<class T, class T2>
 
 
 template<class T, class T2>
-class CPPTESTUTILS_API ToStreamClass
-{
+class CPPTESTUTILS_API ToStreamClass {
 public:
-	static void streamOut( T2& os, const T& value )
-	{
+	static void streamOut(T2& os, const T& value) {
 		os << value;
 	}
 
 	
-	ToStreamClass(  T2& os ) : m_os( os )
-	{
+	ToStreamClass(T2& os) : m_os(os) {
 	}
 
 	
-	void operator () ( const T& obj )
-	{
+	void operator () (const T& obj) {
 		m_os << obj;
 	}
 
@@ -77,39 +71,31 @@ private:
 
 
 	/// @brief	Assignment operator to satisfy compiler warnings.
-	ToStreamClass& operator = ( const ToStreamClass& rhs )
-	{
-		if (&rhs != this)
-		{
+	ToStreamClass& operator = (const ToStreamClass& rhs) {
+		if (&rhs != this) {
 			m_os = rhs.m_os;
 		}
 		return *this;
 	}
-	
-
 };
 
 
 // Class specialisation to bridge between wide char to narrow char output stream.
 template<>
-class CPPTESTUTILS_API ToStreamClass<std::wstring, std::ostream>
-{
+class CPPTESTUTILS_API ToStreamClass<std::wstring, std::ostream> {
 public:
-	static void streamOut( std::ostream& os, const std::wstring& value )
-	{
-		os << mr_utils::WideToNarrowString( value );
+	static void streamOut(std::ostream& os, const std::wstring& value) {
+		os << mr_utils::WideToNarrowString(value);
 	}
 };
 
 
 // Class specialisation to bridge between narrow char to wide output stream.
 template<>
-class CPPTESTUTILS_API ToStreamClass<std::string, std::wostream>
-{
+class CPPTESTUTILS_API ToStreamClass<std::string, std::wostream> {
 public:
-	static void streamOut( std::wostream& os, const std::string& value )
-	{
-		os << mr_utils::NarrowToWideString( value );
+	static void streamOut(std::wostream& os, const std::string& value) {
+		os << mr_utils::NarrowToWideString(value);
 	}
 };
 
@@ -118,39 +104,32 @@ public:
 //---------------------------------------------------------------------------------
 
 template<class T>
-struct CPPTESTUTILS_API VecStreamCommaDelimited
-{
-	VecStreamCommaDelimited( mr_ostream& os ) 
-	:	m_os( os ),
-		m_count( 0 )
-	{
+struct CPPTESTUTILS_API VecStreamCommaDelimited {
+	VecStreamCommaDelimited(mr_ostream& os) 
+	:	m_os(os),
+		m_count(0) {
 	} 
 
-	void operator () ( const T& val )
-	{
-		if (m_count++ > 0)
-		{
+	void operator () (const T& val) {
+		if (m_count++ > 0) {
 			ToStream( m_os, L( "," ) );
 		}
-		ToStream( m_os, val );
+		ToStream(m_os, val);
 	}
 private:
 	mr_ostream&	m_os;
-	int						m_count;
+	int			m_count;
 };
 
 
 template<class T>
-struct CPPTESTUTILS_API VecStreamLineDelimited
-{
-	VecStreamLineDelimited( mr_ostream& os, const mr_string& leader = L( "" ) ) 
-	:	m_os( os ),
-		m_leader( leader )
-	{
+struct CPPTESTUTILS_API VecStreamLineDelimited {
+	VecStreamLineDelimited( mr_ostream& os, const mr_string& leader = L( "" ) )  
+	:	m_os(os),
+		m_leader(leader) {
 	} 
 
-	void operator () ( const T& val )
-	{
+	void operator () (const T& val) {
 		m_os << m_leader;
 		ToStream( m_os, val ); 
 		m_os << std::endl;
@@ -165,12 +144,10 @@ private:
 
 // Class to stream out vector of values.
 template<class T, class T2 >
-class ToStreamVecClass
-{
+class ToStreamVecClass {
 public:
-	static void streamOut( const std::vector<T>& values, T2& outputFormater )
-	{
-		std::for_each( values.begin(), values.end(), outputFormater );
+	static void streamOut(const std::vector<T>& values, T2& outputFormater) {
+		std::for_each(values.begin(), values.end(), outputFormater);
 	}
 };
 

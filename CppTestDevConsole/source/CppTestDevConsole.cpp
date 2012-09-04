@@ -18,6 +18,9 @@
 #include "CppTestListBuilder.h"
 #include "ICppTestRunSummary.h"
 
+#include "mr_fstream.h"
+
+
 #include "mr_pointerException.h"
 #include <algorithm>
 
@@ -91,19 +94,17 @@ int main(int argc, char* argv[]) {
 
 
 			// The include path is provided for now until we can replace with test runner concept
-			//MrTest::FileScriptReader reader( argv[1] );
+			MrTest::FileScriptReader reader(mr_utils::ToMrString(argv[1]));
 
 			//MrTest::CommandLineReader reader(L("TokenizerTests1.UTL_TOK_1_3$arg1=3434||arg2=jjf"));
 			//MrTest::CommandLineReader reader(L("TokenizerTests1"));
 			
 			// Test to make sure they work and are sorted
-			std::vector<mr_utils::mr_string> testVector;
-			testVector.push_back(L("TokenizerTests1.UTL_TOK_1_3$arg1=3434||arg2=jjf"));
-			testVector.push_back(L("UtilStrTrimTests"));
-			testVector.push_back(L("TokenizerTests1.UTL_TOK_1_1"));
-		
-
-			MrTest::VectorLineReader reader(testVector);
+			//std::vector<mr_utils::mr_string> testVector;
+			//testVector.push_back(L("TokenizerTests1.UTL_TOK_1_3$arg1=3434||arg2=jjf"));
+			//testVector.push_back(L("UtilStrTrimTests"));
+			//testVector.push_back(L("TokenizerTests1.UTL_TOK_1_1"));
+			//MrTest::VectorLineReader reader(testVector);
 
 			reader.Open();
 			eng.ProcessTestList(MrTest::ListBuilder().Build(reader));

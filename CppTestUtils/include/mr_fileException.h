@@ -56,7 +56,7 @@ public:
 		const char*					file, 
 		int							line, 
 		const mr_utils::mr_string&	msg,
-		const std::string&			fileName
+		const mr_utils::mr_string&	fileName
 	);
 
 
@@ -74,7 +74,7 @@ public:
 
 protected:
 
-	std::string			m_fileName;	///< file being tested for exception.
+	mr_utils::mr_string	m_fileName;	///< file being tested for exception.
 
 };
 

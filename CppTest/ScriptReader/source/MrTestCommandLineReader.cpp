@@ -17,18 +17,8 @@ CommandLineReader::CommandLineReader(
 	const mr_utils::mr_string&	line,
 	mr_utils::mr_char			nameDelimiter,
 	mr_utils::mr_char			argDelimiter ) 
-	:	ScriptReaderBase("CommandLine", nameDelimiter, argDelimiter),
+	:	ScriptReaderBase(L("CommandLine"), nameDelimiter, argDelimiter),
 		m_line(mr_utils::Trim(line)),
-		m_used(false) {
-}
-
-
-CommandLineReader::CommandLineReader( 
-	const mr_utils::mr_char*	line,   
-	mr_utils::mr_char nameDelimiter,
-	mr_utils::mr_char argDelimiter ) 
-	:	ScriptReaderBase("CommandLine", nameDelimiter, argDelimiter),
-		m_line(line == 0 ? L("") : mr_utils::Trim(line)),
 		m_used(false) {
 }
 
