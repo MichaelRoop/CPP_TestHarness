@@ -9,15 +9,8 @@
 /// Copyright 2010 Michael Roop
 ///--------------------------------------------------------------------------------------
 #include "CppTestFileScriptReader.h"
-#include "CppTestScriptException.h"
-#include "mr_fileException.h"
 #include "mr_pointerException.h"
 #include "mr_defines.h"
-
-
-// temp 
-#include "mr_iostream.h"
-
 
 namespace MrTest {
 

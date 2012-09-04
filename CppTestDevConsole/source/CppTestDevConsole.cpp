@@ -9,7 +9,7 @@
 //#include "CppTestLogEngine.h"
 #include "CppTestFileScriptReader.h"
 #include "MrTestCommandLineReader.h"
-
+#include "MrTestVectorLineReader.h"
 
 #include "mr_char.h"
 #include "mr_iostream.h"
@@ -91,9 +91,15 @@ int main(int argc, char* argv[]) {
 
 
 			// The include path is provided for now until we can replace with test runner concept
-			MrTest::FileScriptReader reader( argv[1] );
+			//MrTest::FileScriptReader reader( argv[1] );
+
 			//MrTest::CommandLineReader reader(L("TokenizerTests1.UTL_TOK_1_3$arg1=3434||arg2=jjf"));
 			//MrTest::CommandLineReader reader(L("TokenizerTests1"));
+			
+			std::vector<mr_utils::mr_string> testVector;
+			testVector.push_back(L("TokenizerTests1.UTL_TOK_1_1"));
+			testVector.push_back(L("TokenizerTests1.UTL_TOK_1_3$arg1=3434||arg2=jjf"));
+			MrTest::VectorLineReader reader(testVector);
 
 			reader.Open();
 			eng.ProcessTestList(MrTest::ListBuilder().Build(reader));

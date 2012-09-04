@@ -9,7 +9,6 @@
 /// Copyright 2012 Michael Roop
 ///--------------------------------------------------------------------------------------
 #include "MrTestCommandLineReader.h"
-#include "CppTestScriptException.h"
 #include "mr_defines.h"
 
 namespace MrTest {
