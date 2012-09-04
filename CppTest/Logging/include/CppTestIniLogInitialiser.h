@@ -31,7 +31,7 @@ public:
 	///
 	/// @param	fileName	Name of the ini file.
 	/// @param	sectionName	The section that has the specific information for the output.
-	IniLogInitialiser(const std::string& fileName, const mr_utils::mr_string& sectionName);
+	IniLogInitialiser(const mr_utils::mr_string& fileName, const mr_utils::mr_string& sectionName);
 
 
 	/// @brief	Load the data from source.
@@ -111,7 +111,7 @@ public:
 	virtual std::vector<mr_utils::mr_string> GetLogList();
 
 private:
-	std::string				m_fileName;
+	mr_utils::mr_string		m_fileName;
 	mr_utils::mr_string		m_sectionName;
 	mr_inireader::iniFile	m_iniFile;
 	bool					m_loaded;

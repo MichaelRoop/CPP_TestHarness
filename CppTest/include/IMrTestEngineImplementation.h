@@ -60,7 +60,7 @@ public:
 	/// @exception	throws a mr_utils::mr_exception if the load fails.
 	/// @param	fileName	Name of the int file.
 	/// @param	fileType	Type of file loading.  Presently INI or XML
-	virtual void LoadLoggersByFileDefinition(const std::string& fileName, const mr_utils::mr_string& fileType) = 0;
+	virtual void LoadLoggersByFileDefinition(const mr_utils::mr_string& fileName, const mr_utils::mr_string& fileType) = 0;
 
 
 	/// @brief	Process the test cases using the vector of info objects that were assembled

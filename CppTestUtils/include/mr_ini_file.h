@@ -39,7 +39,7 @@ public:
 	/// @brief	Constructor.
 	///
 	/// @param	filename	The name of the ini file.
-	iniFile( const std::string& filename );
+	iniFile(const mr_utils::mr_string& filename);
 
 
 	/// @brief	Copy constructor.
@@ -59,13 +59,13 @@ public:
 	/// @param	filename	The name of the ini file.
 	///
 	/// @return	true if the load was successful, otherwise false.
-	bool load( const std::string& filename );
+	bool load( const mr_utils::mr_string& filename );
 
 
 	/// @brief	The ini file name.
 	///
 	/// @return	The ini file name.
-	const std::string& name() const;
+	const mr_utils::mr_string& name() const;
 
 
 	/// @brief	Retrieves the named section.
@@ -144,7 +144,7 @@ public:
 
 private:
 
-	std::string			m_filename;	///< File name of the ini file.
+	mr_utils::mr_string	m_filename;	///< File name of the ini file.
 	SectionVector		m_sections;	///< vector of sections.
 
 

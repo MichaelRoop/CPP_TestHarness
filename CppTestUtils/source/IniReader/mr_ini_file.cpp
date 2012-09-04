@@ -46,7 +46,7 @@ iniFile::iniFile( )
 }
 
 
-iniFile::iniFile( const std::string& filename ) : m_filename( filename )
+iniFile::iniFile( const mr_utils::mr_string& filename ) : m_filename( filename )
 {
 }
 
@@ -75,7 +75,7 @@ void iniFile::init( const iniFile& obj )
 }
 
 
-bool iniFile::load( const std::string& filename )
+bool iniFile::load(const mr_utils::mr_string& filename )
 {
 	m_sections.clear();
 
@@ -134,7 +134,7 @@ bool iniFile::addSection( const section& theSection )
 }
 
 
-const std::string& iniFile::name() const
+const mr_utils::mr_string& iniFile::name() const
 {
 	return m_filename;
 }

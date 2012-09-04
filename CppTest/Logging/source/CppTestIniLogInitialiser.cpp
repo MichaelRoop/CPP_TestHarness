@@ -51,7 +51,7 @@ private:
 
 
 IniLogInitialiser::IniLogInitialiser( 
-	const std::string&			fileName, 
+	const mr_utils::mr_string&	fileName, 
 	const mr_utils::mr_string&	sectionName 
 )	: 	m_fileName(fileName),
 	m_sectionName(sectionName),

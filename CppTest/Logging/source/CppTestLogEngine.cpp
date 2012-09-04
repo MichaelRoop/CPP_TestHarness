@@ -71,9 +71,9 @@ private:
 /// @brief	Functor to load named test to testLogEngine.
 struct LoadLogsFromVector {
 	LoadLogsFromVector( 
-		MrTest::LogEngine*		logEngine, 
-		std::string&			fileName,
-		mr_utils::mr_string&	fileType
+		MrTest::LogEngine*			logEngine, 
+		const mr_utils::mr_string&	fileName,
+		const mr_utils::mr_string&	fileType
 	) 
 	:	m_logEngine(logEngine),
 		m_fileName(fileName),
@@ -84,9 +84,9 @@ struct LoadLogsFromVector {
 		this->m_logEngine->AddLogger(MrTest::LogFactory::Create(this->m_fileName, this->m_fileType, str));
 	}
 
-	MrTest::LogEngine*		m_logEngine;
-	std::string&			m_fileName;
-	mr_utils::mr_string&	m_fileType;
+	MrTest::LogEngine*			m_logEngine;
+	const mr_utils::mr_string&	m_fileName;
+	const mr_utils::mr_string&	m_fileType;
 };
 
 //--------------------------------------------------------------------------------------
@@ -126,7 +126,7 @@ void LogEngine::AddLogger(const mr_utils::SharedPtr<MrTest::ILog>& log) {
 }
 
 
-void LogEngine::LoadLoggers(std::string fileName, mr_utils::mr_string fileType) {
+void LogEngine::LoadLoggers(const mr_utils::mr_string& fileName, const mr_utils::mr_string& fileType) {
 	mr_utils::mr_exception::assertCondition(!fileName.empty(), _FL_, _L_("Empty file name"));
 	std::vector<mr_utils::mr_string> logs = 
 		MrTest::LogInitialiserFactory::Create(fileName, fileType)->GetLogList();

@@ -18,7 +18,7 @@
 namespace MrTest {
 
 LogInitialiserSharedPtr LogInitialiserFactory::Create( 
-	const std::string&			configFileName, 
+	const mr_utils::mr_string&	configFileName, 
 	const mr_utils::mr_string&	configFileType, 
 	const mr_utils::mr_string&	section 
 ) {
@@ -47,7 +47,7 @@ LogInitialiserSharedPtr LogInitialiserFactory::Create(
 
 
 LogInitialiserSharedPtr LogInitialiserFactory::Create( 
-	const std::string&			configFileName, 
+	const mr_utils::mr_string&	configFileName, 
 	const mr_utils::mr_string&	configFileType 
 ) {
 	/// @todo review this - temp to get an init file to only access test list.

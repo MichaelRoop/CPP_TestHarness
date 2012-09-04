@@ -73,7 +73,7 @@ public:
 	///
 	/// @param	fileName	Name of the int file.
 	/// @param	fileType	Type of file loading.  Presently INI or XML
-	void LoadLoggers(std::string fileName, mr_utils::mr_string fileType);
+	void LoadLoggers(const mr_utils::mr_string& filename, const mr_utils::mr_string& fileType);
 
 protected:
 

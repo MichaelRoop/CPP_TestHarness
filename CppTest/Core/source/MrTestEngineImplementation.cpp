@@ -295,7 +295,7 @@ void EngineImplementation::RegisterSummaryEvent(MrTest::TestRunSummaryData summr
 }
 
 
-void EngineImplementation::LoadLoggersByFileDefinition(const std::string& fileName, const mr_utils::mr_string& fileType) {
+void EngineImplementation::LoadLoggersByFileDefinition(const mr_utils::mr_string& fileName, const mr_utils::mr_string& fileType) {
 	this->m_logEngine.LoadLoggers(fileName, fileType);
 }
 

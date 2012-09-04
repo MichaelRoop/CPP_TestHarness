@@ -85,7 +85,7 @@ int main(int argc, char* argv[]) {
 			std::for_each(testNames.begin(), testNames.end(), PrintFixtureCaseNamesFunctor());
 			
 			mr_cout << _L_("Loading Configuration from ./CppTestConfig.ini") << std::endl;
-			eng.LoadLoggersByFileDefinition("CppTestConfig.ini", _L_("INI"));
+			eng.LoadLoggersByFileDefinition(mr_utils::ToMrString("CppTestConfig.ini"), _L_("INI"));
 
 			// Test register event call backs
 			eng.RegisterLoggedEvent(MyLoggedEventHandler);

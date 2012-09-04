@@ -34,7 +34,7 @@ public:
 	/// @param	configFileType	Configuration file type. 
 	/// @param	section			Configuration file section.
 	static LogInitialiserSharedPtr Create( 
-		const std::string&			configFileName, 
+		const mr_utils::mr_string&	configFileName, 
 		const mr_utils::mr_string&	configFileType, 
 		const mr_utils::mr_string&	section 
 	);
@@ -47,7 +47,7 @@ public:
 	/// @param	configFileType	Configuration file type. 
 	/// @param	section			Configuration file section.
 	static LogInitialiserSharedPtr Create( 
-		const std::string&			configFileName, 
+		const mr_utils::mr_string&	configFileName, 
 		const mr_utils::mr_string&	configFileType 
 	);
 };

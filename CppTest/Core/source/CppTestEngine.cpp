@@ -78,7 +78,7 @@ void Engine::RegisterSummaryEvent(MrTest::TestRunSummaryData summrayCallbackEven
 }
 
 
-void Engine::LoadLoggersByFileDefinition(const std::string& fileName, const mr_utils::mr_string& fileType) {
+void Engine::LoadLoggersByFileDefinition(const mr_utils::mr_string& fileName, const mr_utils::mr_string& fileType) {
 	this->m_implementation->LoadLoggersByFileDefinition(fileName, fileType);
 }
 

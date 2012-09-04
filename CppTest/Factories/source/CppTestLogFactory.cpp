@@ -21,7 +21,7 @@
 namespace MrTest {
 
 LogSharedPtr LogFactory::Create( 
-	const std::string&			configFileName, 
+	const mr_utils::mr_string&	configFileName, 
 	const mr_utils::mr_string&	configFileType, 
 	const mr_utils::mr_string&	section 
 ) {
