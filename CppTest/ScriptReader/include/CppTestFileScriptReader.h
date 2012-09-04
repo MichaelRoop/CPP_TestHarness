@@ -11,8 +11,7 @@
 #if !defined(CPP_TEST_FILE_SCRIPT_READER_H)
 #define CPP_TEST_FILE_SCRIPT_READER_H
 
-#include "CppTestDefines.h"
-#include "ICppTestScriptReader.h"
+#include "MrTestScriptReaderBase.h"
 #include "mr_fstream.h"
 #include "mr_char.h" 
 
@@ -46,7 +45,7 @@ namespace MrTest {
 /// If the first non whitespace on a line is '#' it will be considered as a comment or 
 /// inactive test case and be discarded.
 ///--------------------------------------------------------------------------------------
-class CPPTESCASE_API FileScriptReader : public MrTest::IScriptReader {
+class CPPTESCASE_API FileScriptReader : public MrTest::ScriptReaderBase {
 public:
 
 	/// @brief	Constructor.
@@ -75,24 +74,6 @@ public:
 	);
 
 
-	/// @brief	Default constructor in private scope to avoid construction.
-	FileScriptReader() {
-		// put public to force export of class
-	};
-
-
-	/// @brief	Default constructor in private scope to avoid construction.
-	FileScriptReader(const FileScriptReader& obj) {
-		// TODO - check effect  put public to force export of class
-	};
-
-
-	FileScriptReader FileScriptReader::operator=(class MrTest::FileScriptReader const &) {
-		// TODO - check effect  put public to force export of class
-		return *this;
-	}
-
-
 	/// @brief	Opens the file containing the script.
 	///	@throw	Throws a scriptException on empty file name or file not found.
 	void Open();
@@ -108,81 +89,12 @@ public:
 private:
 	std::string				m_filename;		///< The file name of the script.
 	mr_utils::mr_ifstream	m_scriptStream;	///< The file object.
-	mr_utils::mr_char		m_nameDelimiter;///< Name delimiter.
-	mr_utils::mr_char		m_argDelimiter;	///< Argument delimiter.
-
-
-	/// @brief	Helper method to process one line of the script file.
-	/// @param	fixtureName	Name of the fixture for the test case.
-	///	@throw	Throws a scriptException on failure
-	/// @param	testInfo	The testInfoObject to populate from the script file.
-	/// @param	str			The line as read from the file.
-	void ProcessLine(mr_utils::mr_string& fixtureName, MrTest::TestInfoObject& testInfo, mr_utils::mr_string str);
-
-
-	/// @brief	Helper method to process the arguments portion of the script line.
-	///	@throw	Throws a scriptException on failure
-	/// @param	testInfo	The testInfoObject to populate from the script file.
-	/// @param	args		The args portion of the script line.
-	void ProcessArgs(MrTest::TestInfoObject& testInfo, const mr_utils::mr_string& args);
-
-
-	/// @brief	Helper method to process one argument string token.
-	/// Each argument should be in the format name=value.
-	///	@throw	Throws a scriptException on failure
-	/// @param	testInfo	The testInfoObject to populate from the script file.
-	/// @param	args		The arg token from the script line.
-	void ProcessArg(MrTest::TestInfoObject& testInfo, const mr_utils::mr_string& arg);
-
-
-	/// @brief	Extracts name on first call and value on second.
-	///	@throw	Throws a scriptException on failure
-	/// @param	pos		The current position in the argument string.
-	/// @param	str		The argument string.
-	/// @param	token	The string token to be extracted from the argument string.
-	void GetArgComponent( 
-		mr_utils::mr_string::size_type&	pos, 
-		const mr_utils::mr_string&		str, 
-		mr_utils::mr_string&			token 
-	) const;
-
-
-	/// @brief	Wrapper to clean up checking for exception throw.
-	///	@throw	Throws a scriptException on failure
-	/// @param	condition		The condition to test. If false an exception is thrown.
-	/// @param	file			The source code file where problem originates.
-	/// @param	line			The source code line where problem originates.
-	/// @param	msg				The message explaining the exception.
-	/// @param	scriptFileLine	The content of the script line being processed.
-	void ScriptAssert( 
-		bool						condition,
-		const char*					file, 
-		int							line, 
-		const mr_utils::mr_string&	msg,
-		const mr_utils::mr_string&	scriptLine = _L_("")
-	) const;
-
-
-	/// @brief	Wrapper to clean up checking for exception throw.
-	///	@throw	Throws a fileException on failure
-	/// @param	condition		The condition to test. If false an exception is thrown.
-	/// @param	file			The source code file where problem originates.
-	/// @param	line			The source code line where problem originates.
-	/// @param	msg				The message explaining the exception.
-	void FileAssert( 
-		bool						condition,
-		const char*					file, 
-		int							line, 
-		const mr_utils::mr_string&	msg
-	) const;
 
 };
 
 } // end namespace
 
-
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<MrTest::FileScriptReader>;
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<MrTest::FileScriptReader>;
-
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<MrTest::FileScriptReader*>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<MrTest::FileScriptReader*>;
 
 #endif

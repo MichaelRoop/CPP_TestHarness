@@ -130,6 +130,7 @@
     <ClCompile Include="Outputs\source\CppTestFileOutput.cpp" />
     <ClCompile Include="Outputs\source\CppTestOdbcOutput.cpp" />
     <ClCompile Include="ScriptReader\source\CppTestFileScriptReader.cpp" />
+    <ClCompile Include="ScriptReader\source\MrTestScriptReaderBase.cpp" />
     <ClCompile Include="Win\AssemblyInfo.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -185,6 +186,7 @@
     <ClInclude Include="Outputs\include\CppTestOdbcOutput.h" />
     <ClInclude Include="ScriptReader\include\CppTestFileScriptReader.h" />
     <ClInclude Include="ScriptReader\include\ICppTestScriptReader.h" />
+    <ClInclude Include="ScriptReader\include\MrTestScriptReaderBase.h" />
     <ClInclude Include="Win\resource.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
