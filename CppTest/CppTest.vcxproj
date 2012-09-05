@@ -108,6 +108,7 @@
     <ClCompile Include="Core\source\CppTestRunSummary.cpp" />
     <ClCompile Include="Core\source\dllmain.cpp" />
     <ClCompile Include="Core\source\MrTestEngineImplementation.cpp" />
+    <ClCompile Include="Core\source\MrTestListBuilderFactory.cpp" />
     <ClCompile Include="Dlls\source\CppTestDllManager.cpp" />
     <ClCompile Include="Exceptions\source\CppTestScriptException.cpp" />
     <ClCompile Include="Factories\source\CppTestLogFactory.cpp" />
@@ -168,6 +169,7 @@
     <ClInclude Include="include\ICppTestLogOutput.h" />
     <ClInclude Include="include\ICppTestRunSummary.h" />
     <ClInclude Include="include\IMrTestEngineImplementation.h" />
+    <ClInclude Include="include\MrTestListBuilderFactory.h" />
     <ClInclude Include="include\MrTestTypes.h" />
     <ClInclude Include="Logging\include\CppTestBuildColumnInfoString.h" />
     <ClInclude Include="Logging\include\CppTestBuildColumnValueString.h" />

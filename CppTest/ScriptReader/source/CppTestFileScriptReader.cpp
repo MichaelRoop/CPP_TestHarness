@@ -16,12 +16,10 @@
 
 namespace MrTest {
 
-
-
 FileScriptReader::FileScriptReader( 
-	mr_utils::mr_string&	filename,
-	mr_utils::mr_char		nameDelimiter,
-	mr_utils::mr_char		argDelimiter ) 
+	const mr_utils::mr_string&	filename,
+	mr_utils::mr_char			nameDelimiter,
+	mr_utils::mr_char			argDelimiter ) 
 	:	ScriptReaderBase(filename, nameDelimiter, argDelimiter),
 		m_filename(filename) {
 }

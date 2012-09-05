@@ -202,6 +202,9 @@
     <ClCompile Include="ScriptReader\source\MrTestVectorLineReader.cpp">
       <Filter>ScriptReader\source</Filter>
     </ClCompile>
+    <ClCompile Include="Core\source\MrTestListBuilderFactory.cpp">
+      <Filter>Core\source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Win\resource.h">
@@ -371,6 +374,9 @@
     </ClInclude>
     <ClInclude Include="ScriptReader\include\MrTestVectorLineReader.h">
       <Filter>ScriptReader\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\MrTestListBuilderFactory.h">
+      <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

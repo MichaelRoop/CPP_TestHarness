@@ -7,16 +7,18 @@
 
 #include "CppTestEngine.h"
 //#include "CppTestLogEngine.h"
-#include "CppTestFileScriptReader.h"
-#include "MrTestCommandLineReader.h"
-#include "MrTestVectorLineReader.h"
+//#include "CppTestFileScriptReader.h"
+//#include "MrTestCommandLineReader.h"
+//#include "MrTestVectorLineReader.h"
 
 #include "mr_char.h"
 #include "mr_iostream.h"
 #include "mr_fileException.h"
 #include "CppTestScriptException.h"
-#include "CppTestListBuilder.h"
+//#include "CppTestListBuilder.h"
 #include "ICppTestRunSummary.h"
+
+#include "MrTestListBuilderFactory.h"
 
 #include "mr_fstream.h"
 
@@ -92,22 +94,18 @@ int main(int argc, char* argv[]) {
 			eng.RegisterLoggedEvent(MySecondLoggedEventHandler);
 			eng.RegisterSummaryEvent(MySummaryEventHandler);
 
-
-			// The include path is provided for now until we can replace with test runner concept
-			MrTest::FileScriptReader reader(mr_utils::ToMrString(argv[1]));
-
-			//MrTest::CommandLineReader reader(L("TokenizerTests1.UTL_TOK_1_3$arg1=3434||arg2=jjf"));
-			//MrTest::CommandLineReader reader(L("TokenizerTests1"));
-			
-			// Test to make sure they work and are sorted
+			//// Test to make sure they work and are sorted
 			//std::vector<mr_utils::mr_string> testVector;
 			//testVector.push_back(L("TokenizerTests1.UTL_TOK_1_3$arg1=3434||arg2=jjf"));
 			//testVector.push_back(L("UtilStrTrimTests"));
 			//testVector.push_back(L("TokenizerTests1.UTL_TOK_1_1"));
-			//MrTest::VectorLineReader reader(testVector);
+			//eng.ProcessTestList(MrTest::ListBuilderFactory::FromLines(testVector));
 
-			reader.Open();
-			eng.ProcessTestList(MrTest::ListBuilder().Build(reader));
+			eng.ProcessTestList(MrTest::ListBuilderFactory::FromFile(mr_utils::ToMrString(argv[1])));
+
+			//eng.ProcessTestList(MrTest::ListBuilderFactory::FromLine(L("TokenizerTests1.UTL_TOK_1_3$arg1=3434||arg2=jjf")));
+			//eng.ProcessTestList(MrTest::ListBuilderFactory::FromLine(L("TokenizerTests1")));
+		
 			eng.UnloadTests();
 		} 
 		catch( const MrTest::ScriptException e ) {

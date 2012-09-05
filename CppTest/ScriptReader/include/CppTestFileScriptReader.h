@@ -62,9 +62,9 @@ public:
 	/// @param	argDelimiter	Delimiter to tokenize the argument portion of the
 	///							line into separate arguments.
 	FileScriptReader( 
-		mr_utils::mr_string&	filename,
-		mr_utils::mr_char		nameDelimiter = _L_('$'),
-		mr_utils::mr_char		argDelimiter = _L_('|')
+		const mr_utils::mr_string&	filename,
+		mr_utils::mr_char			nameDelimiter = _L_('$'),
+		mr_utils::mr_char			argDelimiter = _L_('|')
 	);
 
 
