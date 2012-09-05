@@ -18,6 +18,8 @@
 
 namespace MrTest {
 
+class IFixutureTestCaseNames;
+
 ///--------------------------------------------------------------------------------------
 /// 
 /// @brief	Build a list of tests grouped by fixture
@@ -47,6 +49,12 @@ public:
 			const std::vector<mr_utils::mr_string>&	lines,
 			mr_utils::mr_char						nameDelimiter = _L_('$'),
 			mr_utils::mr_char						argDelimiter = _L_('|'));
+
+
+	/// @brief	Build a test list from a vector Fixture Test Case Names
+	/// @param	lines	The vector with the test case names objects 
+	static std::vector< mr_utils::SharedPtr<MrTest::ITestFixtureInfoObject> > 
+		FromTestCaseNames(const std::vector<mr_utils::SharedPtr<MrTest::IFixutureTestCaseNames> >& testCaseNames);
 
 };
 

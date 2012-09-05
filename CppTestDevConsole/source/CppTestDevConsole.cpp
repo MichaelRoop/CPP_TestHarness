@@ -20,6 +20,9 @@
 
 #include "MrTestListBuilderFactory.h"
 
+#include "CppTestFixtureTestCaseNames.h"
+
+
 #include "mr_fstream.h"
 
 
@@ -94,6 +97,25 @@ int main(int argc, char* argv[]) {
 			eng.RegisterLoggedEvent(MySecondLoggedEventHandler);
 			eng.RegisterSummaryEvent(MySummaryEventHandler);
 
+			//std::vector< mr_utils::SharedPtr<MrTest::IFixutureTestCaseNames> > tcNames;
+			//mr_utils::SharedPtr<MrTest::IFixutureTestCaseNames> tkn (new MrTest::FixutureTestCaseNames(L("TokenizerTests1")));
+			//tkn->AddTestCaseName(L("TokenizerTests1.UTL_TOK_1_1"));
+			//tkn->AddTestCaseName(L("TokenizerTests1.UTL_TOK_1_2"));
+			//tcNames.push_back(tkn);
+
+			//mr_utils::SharedPtr<MrTest::IFixutureTestCaseNames> trm(new MrTest::FixutureTestCaseNames(L("UtilStrTrimTests")));
+			//tcNames.push_back(trm);
+
+
+			//MrTest::FixutureTestCaseNames tkn(L("TokenizerTests1"));
+			//tkn.AddTestCaseName(L("TokenizerTests1.UTL_TOK_1_1"));
+			//tkn.AddTestCaseName(L("TokenizerTests1.UTL_TOK_1_2"));
+			//tcNames.push_back(tkn);
+
+			//MrTest::FixutureTestCaseNames trm(L("UtilStrTrimTests"));
+			//tcNames.push_back(trm);
+
+
 			//// Test to make sure they work and are sorted
 			//std::vector<mr_utils::mr_string> testVector;
 			//testVector.push_back(L("TokenizerTests1.UTL_TOK_1_3$arg1=3434||arg2=jjf"));
@@ -102,6 +124,8 @@ int main(int argc, char* argv[]) {
 			//eng.ProcessTestList(MrTest::ListBuilderFactory::FromLines(testVector));
 
 			eng.ProcessTestList(MrTest::ListBuilderFactory::FromFile(mr_utils::ToMrString(argv[1])));
+
+			//eng.ProcessTestList(MrTest::ListBuilderFactory::FromTestCaseNames(tcNames));
 
 			//eng.ProcessTestList(MrTest::ListBuilderFactory::FromLine(L("TokenizerTests1.UTL_TOK_1_3$arg1=3434||arg2=jjf")));
 			//eng.ProcessTestList(MrTest::ListBuilderFactory::FromLine(L("TokenizerTests1")));

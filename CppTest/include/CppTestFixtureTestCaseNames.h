@@ -18,7 +18,7 @@ namespace MrTest {
 //----------------------------------------------------------------------------------------
 /// @brief	Storage for test fixture name and its test case names.
 //----------------------------------------------------------------------------------------
-class FixutureTestCaseNames : public IFixutureTestCaseNames {
+class CPPTESCASE_API FixutureTestCaseNames : public IFixutureTestCaseNames {
 public:
 
 	/// @brief The name of the fixture
@@ -53,5 +53,10 @@ private:
 };
 
 } // end namespace
+
+// Force export
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API mr_utils::SharedPtr<MrTest::FixutureTestCaseNames>;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator< mr_utils::SharedPtr<MrTest::FixutureTestCaseNames> >;
+CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector< mr_utils::SharedPtr<MrTest::FixutureTestCaseNames> >;
 
 #endif

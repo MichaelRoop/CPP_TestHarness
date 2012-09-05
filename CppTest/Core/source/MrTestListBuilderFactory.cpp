@@ -14,8 +14,9 @@
 #include "ICppTestScriptReader.h"
 #include "MrTestCommandLineReader.h"
 #include "MrTestVectorLineReader.h"
+#include "MrTestVectorTestCaseNamesReader.h"
 #include "CppTestListBuilder.h"
-
+#include "ICppTestFixtureTestCaseNames.h"
 
 
 namespace MrTest {
@@ -41,8 +42,6 @@ std::vector< mr_utils::SharedPtr<MrTest::ITestFixtureInfoObject> >
 }
 
 
-//	static std::vector< mr_utils::SharedPtr<MrTest::ITestFixtureInfoObject> > FromLines(const std::vector<mr_utils::mr_string>& lines);
-
 std::vector< mr_utils::SharedPtr<MrTest::ITestFixtureInfoObject> > 
 	ListBuilderFactory::FromLines(
 		const std::vector<mr_utils::mr_string>&	lines,
@@ -53,6 +52,15 @@ std::vector< mr_utils::SharedPtr<MrTest::ITestFixtureInfoObject> >
 	reader.Open();
 	return MrTest::ListBuilder().Build(reader);
 }
+
+
+std::vector< mr_utils::SharedPtr<MrTest::ITestFixtureInfoObject> > 
+	ListBuilderFactory::FromTestCaseNames(const std::vector<mr_utils::SharedPtr<MrTest::IFixutureTestCaseNames> >& testCaseNames) {
+	MrTest::VectorFixtureTestCaseNames reader(testCaseNames);
+	return MrTest::ListBuilder().Build(reader);
+}
+
+
 
 
 } // end namesapce
