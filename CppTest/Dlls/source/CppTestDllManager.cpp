@@ -46,7 +46,7 @@ public:
 	}
 
 	void operator () (const std::string& s) {
-		mr_cout << _L_("Calling:") << s.c_str() << std::endl;
+		//mr_cout << _L_("Calling:") << s.c_str() << std::endl;
 		// Get the pointer, cast it to a function pointer and invoke
 		( (ptrFunc)( GET_DLL_FUNC_PTR(this->m_handle,s.c_str()) ) )();
 	}

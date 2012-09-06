@@ -11,6 +11,9 @@
 //#include "MrTestCommandLineReader.h"
 //#include "MrTestVectorLineReader.h"
 
+#include "MrTestParamParser.h"
+
+
 #include "mr_char.h"
 #include "mr_iostream.h"
 #include "mr_fileException.h"
@@ -56,41 +59,76 @@ public:
 };
 
 
+static mr_utils::mr_string currentFixtureName;
+
 static void MyLoggedEventHandler(const MrTest::ICase& testCase) {
-	mr_cout << _L_(" # # # # Received a log event for test:") << testCase.FixtureName << _L_(".") << testCase.Name << _L_(" with results:") << MrTest::ICase::ToString(testCase.Status) << std::endl;
+	if (testCase.FixtureName != currentFixtureName) {
+		mr_cout << testCase.FixtureName << std::endl;
+		currentFixtureName = testCase.FixtureName;
+	}
+	mr_cout << _L_("\t") << testCase.Name << _L_("\t") 
+		<< MrTest::ICase::ToString(testCase.Status) << _L_("\t")
+		<< testCase.Description << _L_("\t")
+		<< testCase.SetupTime << _L_(",")
+		<< testCase.ExecTime << _L_(",")
+		<< testCase.CleanupTime << _L_(",")
+		<< testCase.MsgBuffer.str() << _L_(",")
+		<< testCase.VerboseBuffer.str() << std::endl;
+
+//	mr_cout << _L_(" # # # # Received a log event for test:") << testCase.FixtureName << _L_(".") << testCase.Name << _L_(" with results:") << MrTest::ICase::ToString(testCase.Status) << std::endl;
 }
 
 static void MySecondLoggedEventHandler(const MrTest::ICase& testCase) {
-	mr_cout << _L_(" @ @ @ @ Received a log event for test:") << testCase.FixtureName << _L_(".") << testCase.Name << _L_(" with results:") << MrTest::ICase::ToString(testCase.Status) << std::endl;
+	//mr_cout << _L_(" @ @ @ @ Received a log event for test:") << testCase.FixtureName << _L_(".") << testCase.Name << _L_(" with results:") << MrTest::ICase::ToString(testCase.Status) << std::endl;
 }
 
 static void MySummaryEventHandler(const MrTest::IRunSummary& summary) {
-	mr_cout << _L_("& & & & & Summary Event") << std::endl
-		<< _L_("Success =            ") << summary.Total(MrTest::ICase::ST_SUCCESS) << std::endl
-		<< _L_("Fixture Setup Fail = ") << summary.Total(MrTest::ICase::ST_FAIL_FIXTURE_SETUP) << std::endl
-		<< _L_("Setup Fail =         ") << summary.Total(MrTest::ICase::ST_FAIL_SETUP) << std::endl
-		<< _L_("Test Fail =          ") << summary.Total(MrTest::ICase::ST_FAIL_TEST) << std::endl
-		<< _L_("Teardown Fail =      ") << summary.Total(MrTest::ICase::ST_FAIL_CLEANUP) << std::endl
-		<< _L_("Disabled =           ") << summary.Total(MrTest::ICase::ST_DISABLED) << std::endl
-		<< _L_("Not Found =          ") << summary.Total(MrTest::ICase::ST_NOT_EXISTS) << std::endl
-		<< _L_("Total Tests Run =    ") << summary.Total() << std::endl;
+	
+	mr_utils::mr_string t;
+	
+	mr_cout 
+		<< std::endl 
+		<< _L_("Test Summary") << std::endl
+		<< _L_("---------------------------------") << std::endl
+		<< _L_("Success            = ") << summary.Total(MrTest::ICase::ST_SUCCESS) << std::endl
+		<< _L_("Fail Fixture Setup = ") << summary.Total(MrTest::ICase::ST_FAIL_FIXTURE_SETUP) << std::endl
+		<< _L_("Fail Setup         = ") << summary.Total(MrTest::ICase::ST_FAIL_SETUP) << std::endl
+		<< _L_("Fail Test          = ") << summary.Total(MrTest::ICase::ST_FAIL_TEST) << std::endl
+		<< _L_("Fail Teardown      = ") << summary.Total(MrTest::ICase::ST_FAIL_CLEANUP) << std::endl
+		<< _L_("Disabled           = ") << summary.Total(MrTest::ICase::ST_DISABLED) << std::endl
+		<< _L_("Not Found          = ") << summary.Total(MrTest::ICase::ST_NOT_EXISTS) << std::endl
+		<< _L_("---------------------------------") << std::endl
+		<< _L_("   Total Tests Run = ") << summary.Total() << std::endl << std::endl;
 }
 
 
 int main(int argc, char* argv[]) {
 
-	if (checkParams( 1, argc, argv )) {
-		try {
-			MrTest::Engine& eng = MrTest::Engine::Instance();
-			eng.LoadTests(L"..\\Debug\\CppTestUtilsTestCases.dll");
+	//for (int i = 0; i < argc; i++) {
+	//	mr_cout << i << L(":") << argv[i] << std::endl;
+	//}
+	//return 0;
 
-			// Print out list of loaded tests - temp test
-			mr_cout << L("List of Test Cases from DLL") << std::endl;
-			std::vector<mr_utils::SharedPtr<MrTest::IFixutureTestCaseNames> > testNames = eng.GetTestNames();
-			std::for_each(testNames.begin(), testNames.end(), PrintFixtureCaseNamesFunctor());
+
+
+	//if (checkParams( 1, argc, argv )) {
+		try {
+			// Parse and validate arguments
+			MrTest::ParamParser argParser;
+			argParser.Parse(argc, argv);
+
+			MrTest::Engine& eng = MrTest::Engine::Instance();
+			//eng.LoadTests(L"..\\Debug\\CppTestUtilsTestCases.dll");
+			eng.LoadTests(argParser.GetArg(MrTest::ParamParser::TEST_CASE_DLL));
 			
-			mr_cout << _L_("Loading Configuration from ./CppTestConfig.ini") << std::endl;
-			eng.LoadLoggersByFileDefinition(mr_utils::ToMrString("CppTestConfig.ini"), _L_("INI"));
+
+			//// Print out list of loaded tests - temp test
+			//mr_cout << L("List of Test Cases from DLL") << std::endl;
+			//std::vector<mr_utils::SharedPtr<MrTest::IFixutureTestCaseNames> > testNames = eng.GetTestNames();
+			//std::for_each(testNames.begin(), testNames.end(), PrintFixtureCaseNamesFunctor());
+			
+			//mr_cout << _L_("Loading Configuration from ./CppTestConfig.ini") << std::endl;
+			//eng.LoadLoggersByFileDefinition(mr_utils::ToMrString("CppTestConfig.ini"), _L_("INI"));
 
 			// Test register event call backs
 			eng.RegisterLoggedEvent(MyLoggedEventHandler);
@@ -123,7 +161,15 @@ int main(int argc, char* argv[]) {
 			//testVector.push_back(L("TokenizerTests1.UTL_TOK_1_1"));
 			//eng.ProcessTestList(MrTest::ListBuilderFactory::FromLines(testVector));
 
-			eng.ProcessTestList(MrTest::ListBuilderFactory::FromFile(mr_utils::ToMrString(argv[1])));
+			if (argParser.HasArg(MrTest::ParamParser::TEST_CASE_LINE)) {
+				eng.ProcessTestList(MrTest::ListBuilderFactory::FromLine(argParser.GetArg(MrTest::ParamParser::TEST_CASE_LINE)));
+			}
+
+			if (argParser.HasArg(MrTest::ParamParser::TEST_CASE_LIST)) {
+				eng.ProcessTestList(MrTest::ListBuilderFactory::FromFile(argParser.GetArg(MrTest::ParamParser::TEST_CASE_LIST)));
+			}
+			//eng.ProcessTestList(MrTest::ListBuilderFactory::FromFile(mr_utils::ToMrString(argv[1])));
+
 
 			//eng.ProcessTestList(MrTest::ListBuilderFactory::FromTestCaseNames(tcNames));
 
@@ -148,7 +194,7 @@ int main(int argc, char* argv[]) {
 			mr_cout << L("Unknown exception") << std::endl;
 		}
 		//holdScreen();
-	}
+	//}
 
 	// Temp DLL load test
 //	FreeLibrary(handle);

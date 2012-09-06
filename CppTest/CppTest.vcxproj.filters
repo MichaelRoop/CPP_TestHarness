@@ -208,6 +208,9 @@
     <ClCompile Include="Core\source\MrTestVectorTestCaseNamesReader.cpp">
       <Filter>Core\source</Filter>
     </ClCompile>
+    <ClCompile Include="Core\source\MrTestParamParser.cpp">
+      <Filter>Core\source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Win\resource.h">
@@ -383,6 +386,9 @@
     </ClInclude>
     <ClInclude Include="Core\include\MrTestVectorTestCaseNamesReader.h">
       <Filter>Core\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\MrTestParamParser.h">
+      <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
