@@ -1,91 +1,86 @@
-// CppTestDevConsole.cpp : Defines the entry point for the console application.
-//
-
-
-// TODO - temp for win tests
-#include "windows.h"
-
+///--------------------------------------------------------------------------------------
+/// @file	CppTestDevConsole.cpp
+/// @brief	The Console Test Runner
+///
+/// @author		Michael Roop
+/// @date		2012
+/// @version	1.0
+///
+/// Copyright 2010 Michael Roop
+///--------------------------------------------------------------------------------------
 #include "CppTestEngine.h"
-//#include "CppTestLogEngine.h"
-//#include "CppTestFileScriptReader.h"
-//#include "MrTestCommandLineReader.h"
-//#include "MrTestVectorLineReader.h"
-
 #include "MrTestParamParser.h"
-
-
-#include "mr_char.h"
-#include "mr_iostream.h"
 #include "mr_fileException.h"
 #include "CppTestScriptException.h"
-//#include "CppTestListBuilder.h"
-#include "ICppTestRunSummary.h"
-
 #include "MrTestListBuilderFactory.h"
+#include "mr_iostream.h"
 
-#include "CppTestFixtureTestCaseNames.h"
-
-
-#include "mr_fstream.h"
-
-
-#include "mr_pointerException.h"
-#include <algorithm>
-
-// temp
-#include "CppTestFixture.h"
-
-
-bool checkParams( int required, int argc, char* argv[] );
+/// @brief	Prevent the screen from exiting
 void holdScreen();
 
-class PrintCaseNamesFunctor {
-public:
-	void operator () (const mr_utils::mr_string& name) {
-		mr_cout << _L_("\t") << name << std::endl;
+
+/// @brief Event handler to push log data for individual test cases to console
+static void MyLoggedEventHandler(const MrTest::ICase& testCase);
+
+
+/// @brief Event handler to push test summary information to console
+static void MySummaryEventHandler(const MrTest::IRunSummary& summary);
+
+
+int main(int argc, char* argv[]) {
+
+	try {
+		MrTest::ParamParser argParser;
+		argParser.Parse(argc, argv);
+
+		MrTest::Engine& eng = MrTest::Engine::Instance();
+		eng.LoadTests(argParser.GetArg(MrTest::ParamParser::TEST_CASE_DLL));
+		eng.RegisterLoggedEvent(MyLoggedEventHandler);
+		eng.RegisterSummaryEvent(MySummaryEventHandler);
+
+		if (argParser.HasArg(MrTest::ParamParser::TEST_CASE_LINE)) {
+			eng.ProcessTestList(
+				MrTest::ListBuilderFactory::FromLine(
+					argParser.GetArg(MrTest::ParamParser::TEST_CASE_LINE)));
+		}
+		else if (argParser.HasArg(MrTest::ParamParser::TEST_CASE_LIST)) {
+			eng.ProcessTestList(
+				MrTest::ListBuilderFactory::FromFile(
+					argParser.GetArg(MrTest::ParamParser::TEST_CASE_LIST)));
+		}
+	
+		eng.UnloadTests();
+	} 
+	catch( const MrTest::ScriptException e ) {
+		mr_cout << e.longMsg() << std::endl;
 	}
-};
-
-//std::vector<mr_utils::SharedPtr<MrTest::IFixutureTestCaseNames> >
-class PrintFixtureCaseNamesFunctor {
-public:
-	void operator () (mr_utils::SharedPtr<MrTest::IFixutureTestCaseNames> fixture) {
-		mr_utils::mr_pointerException::ptrAssert(fixture.getPtr(), _FL_ );
-		mr_cout << fixture->FixtureName() << std::endl;
-		std::for_each(
-			fixture->TestCaseNames().begin(), 
-			fixture->TestCaseNames().end(), PrintCaseNamesFunctor());
+	catch( const mr_utils::fileException e ) {
+		mr_cout << e.longMsg() << std::endl;
 	}
-};
-
-
-static mr_utils::mr_string currentFixtureName;
-
-static void MyLoggedEventHandler(const MrTest::ICase& testCase) {
-	if (testCase.FixtureName != currentFixtureName) {
-		mr_cout << testCase.FixtureName << std::endl;
-		currentFixtureName = testCase.FixtureName;
+	catch( const mr_utils::mr_exception e ) {
+		mr_cout << e.longMsg() << std::endl; 
 	}
-	mr_cout << _L_("\t") << testCase.Name << _L_("\t") 
-		<< MrTest::ICase::ToString(testCase.Status) << _L_("\t")
-		<< testCase.Description << _L_("\t")
-		<< testCase.SetupTime << _L_(",")
-		<< testCase.ExecTime << _L_(",")
-		<< testCase.CleanupTime << _L_(",")
-		<< testCase.MsgBuffer.str() << _L_(",")
-		<< testCase.VerboseBuffer.str() << std::endl;
+	catch( const std::exception e ) {
+		mr_cout << e.what() << std::endl;
+	}
+	catch( ... ) {
+		mr_cout << L("Unknown exception") << std::endl;
+	}
 
-//	mr_cout << _L_(" # # # # Received a log event for test:") << testCase.FixtureName << _L_(".") << testCase.Name << _L_(" with results:") << MrTest::ICase::ToString(testCase.Status) << std::endl;
+	//holdScreen();
+	return 0;
 }
 
-static void MySecondLoggedEventHandler(const MrTest::ICase& testCase) {
-	//mr_cout << _L_(" @ @ @ @ Received a log event for test:") << testCase.FixtureName << _L_(".") << testCase.Name << _L_(" with results:") << MrTest::ICase::ToString(testCase.Status) << std::endl;
+
+void holdScreen() {
+	mr_cout << "Type a char and press Enter to end program" << std::endl;
+	// to intercept and wait.
+	//int x;
+	//std::cin >> x;
 }
+
 
 static void MySummaryEventHandler(const MrTest::IRunSummary& summary) {
-	
-	mr_utils::mr_string t;
-	
 	mr_cout 
 		<< std::endl 
 		<< _L_("Test Summary") << std::endl
@@ -102,120 +97,59 @@ static void MySummaryEventHandler(const MrTest::IRunSummary& summary) {
 }
 
 
-int main(int argc, char* argv[]) {
-
-	//for (int i = 0; i < argc; i++) {
-	//	mr_cout << i << L(":") << argv[i] << std::endl;
-	//}
-	//return 0;
+static mr_utils::mr_string currentFixtureName;
 
 
-
-	//if (checkParams( 1, argc, argv )) {
-		try {
-			// Parse and validate arguments
-			MrTest::ParamParser argParser;
-			argParser.Parse(argc, argv);
-
-			MrTest::Engine& eng = MrTest::Engine::Instance();
-			//eng.LoadTests(L"..\\Debug\\CppTestUtilsTestCases.dll");
-			eng.LoadTests(argParser.GetArg(MrTest::ParamParser::TEST_CASE_DLL));
-			
-
-			//// Print out list of loaded tests - temp test
-			//mr_cout << L("List of Test Cases from DLL") << std::endl;
-			//std::vector<mr_utils::SharedPtr<MrTest::IFixutureTestCaseNames> > testNames = eng.GetTestNames();
-			//std::for_each(testNames.begin(), testNames.end(), PrintFixtureCaseNamesFunctor());
-			
-			//mr_cout << _L_("Loading Configuration from ./CppTestConfig.ini") << std::endl;
-			//eng.LoadLoggersByFileDefinition(mr_utils::ToMrString("CppTestConfig.ini"), _L_("INI"));
-
-			// Test register event call backs
-			eng.RegisterLoggedEvent(MyLoggedEventHandler);
-			eng.RegisterLoggedEvent(MySecondLoggedEventHandler);
-			eng.RegisterSummaryEvent(MySummaryEventHandler);
-
-			//std::vector< mr_utils::SharedPtr<MrTest::IFixutureTestCaseNames> > tcNames;
-			//mr_utils::SharedPtr<MrTest::IFixutureTestCaseNames> tkn (new MrTest::FixutureTestCaseNames(L("TokenizerTests1")));
-			//tkn->AddTestCaseName(L("TokenizerTests1.UTL_TOK_1_1"));
-			//tkn->AddTestCaseName(L("TokenizerTests1.UTL_TOK_1_2"));
-			//tcNames.push_back(tkn);
-
-			//mr_utils::SharedPtr<MrTest::IFixutureTestCaseNames> trm(new MrTest::FixutureTestCaseNames(L("UtilStrTrimTests")));
-			//tcNames.push_back(trm);
-
-
-			//MrTest::FixutureTestCaseNames tkn(L("TokenizerTests1"));
-			//tkn.AddTestCaseName(L("TokenizerTests1.UTL_TOK_1_1"));
-			//tkn.AddTestCaseName(L("TokenizerTests1.UTL_TOK_1_2"));
-			//tcNames.push_back(tkn);
-
-			//MrTest::FixutureTestCaseNames trm(L("UtilStrTrimTests"));
-			//tcNames.push_back(trm);
-
-
-			//// Test to make sure they work and are sorted
-			//std::vector<mr_utils::mr_string> testVector;
-			//testVector.push_back(L("TokenizerTests1.UTL_TOK_1_3$arg1=3434||arg2=jjf"));
-			//testVector.push_back(L("UtilStrTrimTests"));
-			//testVector.push_back(L("TokenizerTests1.UTL_TOK_1_1"));
-			//eng.ProcessTestList(MrTest::ListBuilderFactory::FromLines(testVector));
-
-			if (argParser.HasArg(MrTest::ParamParser::TEST_CASE_LINE)) {
-				eng.ProcessTestList(MrTest::ListBuilderFactory::FromLine(argParser.GetArg(MrTest::ParamParser::TEST_CASE_LINE)));
-			}
-
-			if (argParser.HasArg(MrTest::ParamParser::TEST_CASE_LIST)) {
-				eng.ProcessTestList(MrTest::ListBuilderFactory::FromFile(argParser.GetArg(MrTest::ParamParser::TEST_CASE_LIST)));
-			}
-			//eng.ProcessTestList(MrTest::ListBuilderFactory::FromFile(mr_utils::ToMrString(argv[1])));
-
-
-			//eng.ProcessTestList(MrTest::ListBuilderFactory::FromTestCaseNames(tcNames));
-
-			//eng.ProcessTestList(MrTest::ListBuilderFactory::FromLine(L("TokenizerTests1.UTL_TOK_1_3$arg1=3434||arg2=jjf")));
-			//eng.ProcessTestList(MrTest::ListBuilderFactory::FromLine(L("TokenizerTests1")));
-		
-			eng.UnloadTests();
-		} 
-		catch( const MrTest::ScriptException e ) {
-			mr_cout << e.longMsg() << std::endl;
-		}
-		catch( const mr_utils::fileException e ) {
-			mr_cout << e.longMsg() << std::endl;
-		}
-		catch( const mr_utils::mr_exception e ) {
-			mr_cout << e.longMsg() << std::endl; 
-		}
-		catch( const std::exception e ) {
-			mr_cout << e.what() << std::endl;
-		}
-		catch( ... ) {
-			mr_cout << L("Unknown exception") << std::endl;
-		}
-		//holdScreen();
-	//}
-
-	// Temp DLL load test
-//	FreeLibrary(handle);
-
-
-	return 0;
-}
-
-bool checkParams(int required, int argc, char* argv[]) {
-	if (argc < required + 1) {
-		mr_cout << "You need to have the correct arguments - " << argv[0] << " testscriptname.txt" << std::endl;
-		holdScreen();
-		return false;
+static void MyLoggedEventHandler(const MrTest::ICase& testCase) {
+	if (testCase.FixtureName != currentFixtureName) {
+		mr_cout << testCase.FixtureName << std::endl;
+		currentFixtureName = testCase.FixtureName;
 	}
-	return true;
+	mr_cout << _L_("\t") << testCase.Name << _L_("\t") 
+		<< MrTest::ICase::ToString(testCase.Status) << _L_("\t")
+		<< testCase.Description << _L_("\t")
+		<< testCase.SetupTime << _L_(",")
+		<< testCase.ExecTime << _L_(",")
+		<< testCase.CleanupTime << _L_(",")
+		<< testCase.MsgBuffer.str() << _L_(",")
+		<< testCase.VerboseBuffer.str() << std::endl;
 }
 
 
-void holdScreen() {
-	mr_cout << "Type a char and press Enter to end program" << std::endl;
-	// to intercept and wait.
-	//int x;
-	//std::cin >> x;
-}
+
+#ifdef OLDGARBAGE_PUSH_TO_PROCESS
+
+class PrintCaseNamesFunctor {
+public:
+	void operator () (const mr_utils::mr_string& name) {
+		mr_cout << _L_("\t") << name << std::endl;
+	}
+};
+
+class PrintFixtureCaseNamesFunctor {
+public:
+	void operator () (mr_utils::SharedPtr<MrTest::IFixutureTestCaseNames> fixture) {
+		mr_utils::mr_pointerException::ptrAssert(fixture.getPtr(), _FL_ );
+		mr_cout << fixture->FixtureName() << std::endl;
+		std::for_each(
+			fixture->TestCaseNames().begin(), 
+			fixture->TestCaseNames().end(), PrintCaseNamesFunctor());
+	}
+};
+
+	//std::vector< mr_utils::SharedPtr<MrTest::IFixutureTestCaseNames> > tcNames;
+	//mr_utils::SharedPtr<MrTest::IFixutureTestCaseNames> tkn (new MrTest::FixutureTestCaseNames(L("TokenizerTests1")));
+	//tkn->AddTestCaseName(L("TokenizerTests1.UTL_TOK_1_1"));
+	//tkn->AddTestCaseName(L("TokenizerTests1.UTL_TOK_1_2"));
+	//tcNames.push_back(tkn);
+	//mr_utils::SharedPtr<MrTest::IFixutureTestCaseNames> trm(new MrTest::FixutureTestCaseNames(L("UtilStrTrimTests")));
+	//tcNames.push_back(trm);
+
+
+	//// Test to make sure they work and are sorted
+	//std::vector<mr_utils::mr_string> testVector;
+	//testVector.push_back(L("TokenizerTests1.UTL_TOK_1_3$arg1=3434||arg2=jjf"));
+	//testVector.push_back(L("UtilStrTrimTests"));
+	//testVector.push_back(L("TokenizerTests1.UTL_TOK_1_1"));
+	//eng.ProcessTestList(MrTest::ListBuilderFactory::FromLines(testVector));
+#endif
