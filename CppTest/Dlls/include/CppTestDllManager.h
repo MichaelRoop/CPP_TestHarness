@@ -58,6 +58,8 @@ private:
 	/// @breif	Parse the DLL header to discover exported fixture load functions
 	std::vector<std::string> GetMethodNames(const mr_utils::mr_string& dllName);
 
+	/// @brief	Validate that the dll was opened or throw an exception
+	void ValidateDllOpen(DLL_HANDLE handle, const mr_utils::mr_string& name); 
 
 };
 

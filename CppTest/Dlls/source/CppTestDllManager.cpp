@@ -72,12 +72,19 @@ void DllManager::Load(const mr_utils::mr_string& name) {
 		// Load the DLL to trigger the dllMain. If using header parsing another handle 
 		// is opened just to read in the header information for export function names
 		this->m_dllHandle = OPEN_DLL(name.c_str());
+		this->ValidateDllOpen(this->m_dllHandle, name);
 		this->ParseHeaderAndLoad(name.c_str());
 	}
 	catch (std::exception&) { // TODO - Get the message from the exception - need conversion to mr_string
 		this->m_dllHandle = DLL_HANDLE_NULL;
 		mr_utils::mr_stringstream ss;
 		ss << _L_("Exception on opening dll named:") << name;
+		throw mr_utils::mr_exception(_FL_, ss.str());
+	}
+	catch (...) {
+		this->m_dllHandle = DLL_HANDLE_NULL;
+		mr_utils::mr_stringstream ss;
+		ss << _L_("Unkown Exception on opening dll named:") << name;
 		throw mr_utils::mr_exception(_FL_, ss.str());
 	}
 }
@@ -117,7 +124,8 @@ std::vector<std::string> DllManager::GetMethodNames(const mr_utils::mr_string& d
 	// Open a separate handle to the DLL just to parse out the export function names.  You 
 	// need to use the other regular handle in order to invoke the export functions
 	HMODULE handle = LoadLibraryEx(dllName.c_str(), NULL, DONT_RESOLVE_DLL_REFERENCES);
-	//assert(((PIMAGE_DOS_HEADER)handle)->e_magic == IMAGE_DOS_SIGNATURE);
+	this->ValidateDllOpen(handle, dllName);
+
 	mr_utils::mr_exception::assertCondition(
 		(((PIMAGE_DOS_HEADER)handle)->e_magic == IMAGE_DOS_SIGNATURE),  
 		_FL_, 
@@ -125,8 +133,6 @@ std::vector<std::string> DllManager::GetMethodNames(const mr_utils::mr_string& d
 
 
 	PIMAGE_NT_HEADERS header = (PIMAGE_NT_HEADERS) ((BYTE *)handle + ((PIMAGE_DOS_HEADER)handle)->e_lfanew);
-	//assert(header->Signature == IMAGE_NT_SIGNATURE);
-	//assert(header->OptionalHeader.NumberOfRvaAndSizes > 0);
 
 	mr_utils::mr_exception::assertCondition(
 		(header->Signature == IMAGE_NT_SIGNATURE),  
@@ -145,9 +151,7 @@ std::vector<std::string> DllManager::GetMethodNames(const mr_utils::mr_string& d
 	
 	// Iterate through array of export function names				
 	for (unsigned int i = 0; i < exports->NumberOfNames; i++) {
-
 		std::string name( (char*)((BYTE *)handle + ((DWORD *)names)[i]));
-		//printf("Export Function Name: %s\n", (BYTE *)lib + ((DWORD *)names)[i]);
 		if (mr_utils::Contains(name, "_this_is_a_CppTest_loader_")) {
 			funcNames.push_back( (char*)((BYTE *)handle + ((DWORD *)names)[i]));
 		}
@@ -159,6 +163,14 @@ std::vector<std::string> DllManager::GetMethodNames(const mr_utils::mr_string& d
 	return funcNames;
 }
 
+
+void DllManager::ValidateDllOpen(DLL_HANDLE handle, const mr_utils::mr_string& name) {
+	if (handle == DLL_HANDLE_NULL) {
+		mr_utils::mr_stringstream ss;
+		ss << _L_("Could not open DLL ") << name;
+		mr_utils::mr_exception::assertCondition(false, _FL_, ss.str());
+	}
+}
 
 
 
