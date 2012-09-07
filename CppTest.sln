@@ -6,7 +6,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CppTest", "CppTest\CppTest.
 		{BB795E76-4033-411F-9E15-7C4319194D0B} = {BB795E76-4033-411F-9E15-7C4319194D0B}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CppTestDevConsole", "CppTestDevConsole\CppTestDevConsole.vcxproj", "{13A5454F-566B-445C-8F5F-6DC70048B66D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MrTestConsoleRunner", "CppTestDevConsole\CppTestDevConsole.vcxproj", "{13A5454F-566B-445C-8F5F-6DC70048B66D}"
 	ProjectSection(ProjectDependencies) = postProject
 		{849C805B-30EC-425B-98EA-5E3D57416332} = {849C805B-30EC-425B-98EA-5E3D57416332}
 		{BB795E76-4033-411F-9E15-7C4319194D0B} = {BB795E76-4033-411F-9E15-7C4319194D0B}
@@ -15,6 +15,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CppTestUtils", "CppTestUtils\CppTestUtils.vcxproj", "{BB795E76-4033-411F-9E15-7C4319194D0B}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CppTestUtilsTestCases", "CppTestUtilsTestCases\CppTestUtilsTestCases.vcxproj", "{3B985619-39D5-448C-AEC2-6AB7265A5334}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MrTestGuiRunner", "MrTestGuiRunner\MrTestGuiRunner.vcxproj", "{CD197898-F058-452C-BBAF-063113686F2E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +40,10 @@ Global
 		{3B985619-39D5-448C-AEC2-6AB7265A5334}.Debug|Win32.Build.0 = Debug|Win32
 		{3B985619-39D5-448C-AEC2-6AB7265A5334}.Release|Win32.ActiveCfg = Release|Win32
 		{3B985619-39D5-448C-AEC2-6AB7265A5334}.Release|Win32.Build.0 = Release|Win32
+		{CD197898-F058-452C-BBAF-063113686F2E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CD197898-F058-452C-BBAF-063113686F2E}.Debug|Win32.Build.0 = Debug|Win32
+		{CD197898-F058-452C-BBAF-063113686F2E}.Release|Win32.ActiveCfg = Release|Win32
+		{CD197898-F058-452C-BBAF-063113686F2E}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
