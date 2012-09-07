@@ -1,8 +1,15 @@
 #pragma once
 
 #include "CppTestEngine.h"
-//
+//#include "MrTestParamParser.h"
+#include "mr_fileException.h"
+#include "CppTestScriptException.h"
+#include "MrTestListBuilderFactory.h"
 #include "mr_string.h"
+
+
+
+#include < vcclr.h >
 
 namespace MrTestGuiRunner {
 
@@ -14,12 +21,39 @@ namespace MrTestGuiRunner {
 	using namespace System::Drawing;
 	using namespace System::Runtime::InteropServices;
 
+
+/// @brief Event handler to push log data for individual test cases to console
+//#pragma managed(push, off)
+//	//static void MyLoggedEventHandler(const MrTest::ICase& testCase) {
+//	//	MessageBox::Show("Test log callback");
+//	//}
+//
+//	static void MyLoggedEventHandler(MrTest::DataLoggedEvent ev) {
+//		MessageBox::Show("Test log callback");
+//	}
+//
+//
+//#pragma managed(pop)
+
 	/// <summary>
 	/// Summary for Form1
 	/// </summary>
 	public ref class MainForm : public System::Windows::Forms::Form
 	{
 	public:
+
+		delegate void  LogEventDelegate(const MrTest::ICase& testCase);
+
+		void DataLogEventHandler(const MrTest::ICase& testCase) {
+			//MessageBox::Show("Test log callback");
+			//String^ msg = gcnew String(testCase.FixtureName.c_str());
+			//MessageBox::Show(msg);
+
+			MessageBox::Show("Blah");
+		}
+
+
+
 		MainForm(array<System::String ^> ^args)
 		{
 			InitializeComponent();
@@ -27,14 +61,14 @@ namespace MrTestGuiRunner {
 			//TODO: Add the constructor code here
 			//
 
-			int i = args->Length;
+			//int i = args->Length;
 
-		   String^ s = gcnew String("sample string");
-		   IntPtr ip = Marshal::StringToHGlobalAnsi(s);
-		   const wchar_t* str = static_cast<wchar_t*>(ip.ToPointer());
-		   Console::WriteLine("(managed) passing string...");
-		   //NativeTakesAString( str );
-		   Marshal::FreeHGlobal( ip );
+		 //  String^ s = gcnew String("sample string");
+		 //  IntPtr ip = Marshal::StringToHGlobalAnsi(s);
+		 //  const wchar_t* str = static_cast<wchar_t*>(ip.ToPointer());
+		 //  Console::WriteLine("(managed) passing string...");
+		 //  //NativeTakesAString( str );
+		 //  Marshal::FreeHGlobal( ip );
 
 
 
@@ -44,6 +78,66 @@ namespace MrTestGuiRunner {
 			//MrTest::Engine& eng = MrTest::Engine::Instance();
 			mr_utils::mr_string mrs;
 
+
+			try {
+				//MrTest::ParamParser argParser;
+				//argParser.Parse(argc, argv);
+
+				pin_ptr<MrTest::Engine> pEng = &(MrTest::Engine::Instance());
+				//pEng->LoadTests(argParser.GetArg(MrTest::ParamParser::TEST_CASE_DLL));
+				pEng->LoadTests(L("..\\Debug\\CppTestUtilsTestCases.dll"));
+			
+
+				//MyLoggedEventHandler
+
+				LogEventDelegate^ caseLog = gcnew LogEventDelegate(this, &MrTestGuiRunner::MainForm::DataLogEventHandler);
+				IntPtr _caseLog = Marshal::GetFunctionPointerForDelegate(caseLog);
+				pEng->RegisterLoggedEvent((MrTest::DataLoggedEvent)(void*) _caseLog);
+				GC::KeepAlive(caseLog);
+
+				//pEng->RegisterLoggedEvent(MyLoggedEventHandler);
+				//pEng->RegisterSummaryEvent(MySummaryEventHandler);
+
+				//if (argParser.HasArg(MrTest::ParamParser::TEST_CASE_LINE)) {
+				//	pEng->ProcessTestList(
+				//		MrTest::ListBuilderFactory::FromLine(
+				//			argParser.GetArg(MrTest::ParamParser::TEST_CASE_LINE)));
+				//}
+				//else if (argParser.HasArg(MrTest::ParamParser::TEST_CASE_LIST)) {
+				//	pEng->ProcessTestList(
+				//		MrTest::ListBuilderFactory::FromFile(
+				//			argParser.GetArg(MrTest::ParamParser::TEST_CASE_LIST)));
+				//}
+
+				pEng->ProcessTestList(
+					MrTest::ListBuilderFactory::FromLine(L("TokenizerTests1.UTL_TOK_1_1")));
+
+				MessageBox::Show("Before unload");
+
+				pEng->UnloadTests();
+
+				MessageBox::Show("After unload");
+			} 
+			catch( const MrTest::ScriptException e ) {
+				// TODO - make sure not getting char* by define
+				String^ msg = gcnew String(e.longMsg().c_str());
+				MessageBox::Show(msg);
+			}
+			catch( const mr_utils::fileException e ) {
+				String^ msg = gcnew String(e.longMsg().c_str());
+				MessageBox::Show(msg);
+			}
+			catch( const mr_utils::mr_exception e ) {
+				String^ msg = gcnew String(e.longMsg().c_str());
+				MessageBox::Show(msg);
+			}
+			catch( const std::exception e ) {
+			   String^ msg = Marshal::PtrToStringAnsi(static_cast<IntPtr>( const_cast<char*>( e.what() )  ));
+				MessageBox::Show(msg);
+			}
+			catch( ... ) {
+				MessageBox::Show("Unknown Exception");
+			}
 		}
 
 	protected:
