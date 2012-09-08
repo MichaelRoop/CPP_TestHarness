@@ -1,5 +1,7 @@
 #pragma once
 
+#include "ManagedTestCaseData.h"
+
 #include "CppTestEngine.h"
 //#include "MrTestParamParser.h"
 #include "mr_fileException.h"
@@ -22,114 +24,82 @@ namespace MrTestGuiRunner {
 	using namespace System::Runtime::InteropServices;
 
 
-/// @brief Event handler to push log data for individual test cases to console
-//#pragma managed(push, off)
-//	//static void MyLoggedEventHandler(const MrTest::ICase& testCase) {
-//	//	MessageBox::Show("Test log callback");
-//	//}
-//
-//	static void MyLoggedEventHandler(MrTest::DataLoggedEvent ev) {
-//		MessageBox::Show("Test log callback");
-//	}
-//
-//
-//#pragma managed(pop)
 
-//		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-		[UnmanagedFunctionPointer(CallingConvention::Cdecl)]
-		delegate void LogEventDelegate(const MrTest::ICase& testCase);
+	[UnmanagedFunctionPointer(CallingConvention::Cdecl)]
+	delegate void LogEventDelegate(const MrTest::ICase& testCase);
 
 
-		void DataLogEventHandler2(const MrTest::ICase& testCase) {
-			//MessageBox::Show("Test log callback");
-			String^ msg = gcnew String(testCase.FixtureName.c_str());
-			MessageBox::Show(msg);
-
-			MessageBox::Show("Direct Blah");
-		}
+	[UnmanagedFunctionPointer(CallingConvention::Cdecl)]
+	delegate void TestRunSummaryDelegate(const MrTest::IRunSummary& summary);
 
 
-#ifdef skgjsalkdjfgksjf
-		public ref class Listner {
-		public:
-			delegate void LogEventDelegate(const MrTest::ICase& testCase);
+	//void DataLogEventHandler2(const MrTest::ICase& testCase) {
+	//	//MessageBox::Show("Test log callback");
+	//	String^ msg = gcnew String(testCase.FixtureName.c_str());
+	//	MessageBox::Show(msg);
 
-			Listner() {
-				caseLog = gcnew LogEventDelegate(this, &Listner::DataLogEventHandler);
-				pin_ptr<MrTest::Engine> pEng = &(MrTest::Engine::Instance());
-				_caseLog = Marshal::GetFunctionPointerForDelegate(caseLog);
-				pEng->RegisterLoggedEvent((MrTest::DataLoggedEvent)(void*) _caseLog);
-				GC::KeepAlive(caseLog);
-			}
+	//	MessageBox::Show("Direct Blah");
+	//}
 
-			void DataLogEventHandler(const MrTest::ICase& testCase) {
-				String^ msg = gcnew String(testCase.FixtureName.c_str());
-				MessageBox::Show(msg, "Listner class");
-			}
 
-			LogEventDelegate^ caseLog;
-			IntPtr _caseLog;
-			
-		};
-#endif
 
 	/// <summary>
 	/// Summary for Form1
 	/// </summary>
-//[AttributeUsageAttribute(AttributeTargets::Delegate, AllowMultiple = false, Inherited = false)]
 	public ref class MainForm : public System::Windows::Forms::Form
 	{
 	public:
 
-		//[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-
-		//[DllImport("CppTest.dll",CharSet=CharSet::Unicode, CallingConvention=CallingConvention::Cdecl)]
-//		delegate void __cdecl LogEventDelegate(const MrTest::ICase& testCase);
-
-		//[DllImport("TestDLL.dll", CallingConvention=CallingConvention.StdCall)]
+		/// <summary>
+		/// The managed handler for the unmanaged callback
+		/// </summary>
 		void DataLogEventHandler(const MrTest::ICase& testCase) {
-			//MessageBox::Show("Test log callback");
-			String^ msg = gcnew String(testCase.FixtureName.c_str());
-			MessageBox::Show(msg, "Internal forced to Cdecl");
+			//String^ msg = gcnew String(testCase.FixtureName.c_str());
+			//MessageBox::Show(msg, "Internal forced to Cdecl");
+			//msg = gcnew String(testCase.MsgBuffer.str().c_str());
+			//MessageBox::Show(msg, "Internal forced to Cdecl");
 
-			MessageBox::Show("Blah");
+			MrTestGuiRunner::ManagedTestCaseData data;
+			data.FixtureName = gcnew String(testCase.FixtureName.c_str());
+			data.Name = gcnew String(testCase.Name.c_str());
+			data.Status = static_cast<ManagedTestCaseData::TestCaseStatus>(testCase.Status);
+			data.Description = gcnew String(testCase.Description.c_str());
+			//data.m_args;	
+			data.MsgBuffer  = gcnew String(testCase.MsgBuffer.str().c_str());	
+			//data.EmbeddedMsgBuffer= gcnew String(testCase.EmbeddedMsgBuffer.str().c_str());	
+			data.VerboseBuffer= gcnew String(testCase.EmbeddedMsgBuffer.str().c_str());			
+			data.SetupTime = testCase.SetupTime;			
+			data.ExecTime = testCase.ExecTime;
+			data.CleanupTime = testCase.CleanupTime;
+
+
+			//MrTestGuiRunner::ManagedTestCaseData::TestCaseStatus status = 
+			//	static_cast<MrTestGuiRunner::ManagedTestCaseData::TestCaseStatus>(testCase.Status);
+
+			MessageBox::Show(data.FixtureName, data.Status.ToString());
+			MessageBox::Show(data.Name, data.Status.ToString());
+			MessageBox::Show(data.Description, data.Status.ToString());
+
+//			MessageBox::Show(status.ToString(), "Internal forced to Cdecl");
 		}
 
 
-		//void DataLogEventHandler2(const MrTest::ICase& testCase) {
-		//	//MessageBox::Show("Test log callback");
-		//	//String^ msg = gcnew String(testCase.FixtureName.c_str());
-		//	//MessageBox::Show(msg);
+		void TestRunSummaryHandler(const MrTest::IRunSummary& summary) {
+			//virtual int Total(MrTest::ICase::TestCaseStatus status) const = 0;
+			Int32 totalTests = summary.Total();
 
-		//	MessageBox::Show("Direct Blah");
-		//}
+			MessageBox::Show(totalTests.ToString(), "Summary Total Tests");
+		}
+
+
 
 
 
 		MainForm(array<System::String ^> ^args)
 		{
 			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
-
-			//int i = args->Length;
-
-		 //  String^ s = gcnew String("sample string");
-		 //  IntPtr ip = Marshal::StringToHGlobalAnsi(s);
-		 //  const wchar_t* str = static_cast<wchar_t*>(ip.ToPointer());
-		 //  Console::WriteLine("(managed) passing string...");
-		 //  //NativeTakesAString( str );
-		 //  Marshal::FreeHGlobal( ip );
-
-
-
-		   //std::vector<mr_utils::mr_string> myArgs;
-
 
 			//MrTest::Engine& eng = MrTest::Engine::Instance();
-			mr_utils::mr_string mrs;
-
 
 			try {
 				//MrTest::ParamParser argParser;
@@ -140,21 +110,20 @@ namespace MrTestGuiRunner {
 				pEng->LoadTests(L("..\\Debug\\CppTestUtilsTestCases.dll"));
 			
 
-				//MyLoggedEventHandler
-
 				LogEventDelegate^ caseLog = gcnew LogEventDelegate(this, &MrTestGuiRunner::MainForm::DataLogEventHandler);
 				IntPtr _caseLog = Marshal::GetFunctionPointerForDelegate(caseLog);
 				pEng->RegisterLoggedEvent((MrTest::DataLoggedEvent)(void*) _caseLog);
 				GC::KeepAlive(caseLog);
 
-				//LogEventDelegate^ caseLog = gcnew LogEventDelegate(this, &DataLogEventHandler2);
-				//IntPtr _caseLog = Marshal::GetFunctionPointerForDelegate(caseLog);
-				//pEng->RegisterLoggedEvent((MrTest::DataLoggedEvent)(void*) _caseLog);
-				//GC::KeepAlive(caseLog);
 
-				//pEng->RegisterLoggedEvent(&DataLogEventHandler2);
+				//TestRunSummaryHandler
 
-			//	Listner l();
+				TestRunSummaryDelegate^ summaryLog = gcnew TestRunSummaryDelegate(this, &MrTestGuiRunner::MainForm::TestRunSummaryHandler);
+				IntPtr _summaryLog = Marshal::GetFunctionPointerForDelegate(summaryLog);
+				pEng->RegisterSummaryEvent((MrTest::TestRunSummaryData)(void*) _summaryLog);
+				GC::KeepAlive(summaryLog);
+
+
 
 
 				//pEng->RegisterLoggedEvent(MyLoggedEventHandler);
@@ -174,11 +143,7 @@ namespace MrTestGuiRunner {
 				pEng->ProcessTestList(
 					MrTest::ListBuilderFactory::FromLine(L("TokenizerTests1.UTL_TOK_1_1")));
 
-				MessageBox::Show("Before unload");
-
 				pEng->UnloadTests();
-
-				MessageBox::Show("After unload");
 			} 
 			catch( const MrTest::ScriptException e ) {
 				// TODO - make sure not getting char* by define
@@ -194,7 +159,7 @@ namespace MrTestGuiRunner {
 				MessageBox::Show(msg);
 			}
 			catch( const std::exception e ) {
-			   String^ msg = Marshal::PtrToStringAnsi(static_cast<IntPtr>( const_cast<char*>( e.what() )  ));
+				String^ msg = gcnew String(e.what());
 				MessageBox::Show(msg);
 			}
 			catch( ... ) {

@@ -41,7 +41,10 @@
     <ClInclude Include="MainForm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MrTestCaseData.h">
+    <ClInclude Include="ManagedTestCaseData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagedSummaryData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

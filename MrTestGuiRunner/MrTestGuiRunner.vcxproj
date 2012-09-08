@@ -105,7 +105,8 @@
     <ClInclude Include="MainForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="MrTestCaseData.h" />
+    <ClInclude Include="ManagedSummaryData.h" />
+    <ClInclude Include="ManagedTestCaseData.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
