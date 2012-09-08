@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ManagedTestCaseData.h"
+#include "ManagedSummaryData.h"
 
 #include "CppTestEngine.h"
 //#include "MrTestParamParser.h"
@@ -23,24 +24,13 @@ namespace MrTestGuiRunner {
 	using namespace System::Drawing;
 	using namespace System::Runtime::InteropServices;
 
-
-
+	
 	[UnmanagedFunctionPointer(CallingConvention::Cdecl)]
 	delegate void LogEventDelegate(const MrTest::ICase& testCase);
 
 
 	[UnmanagedFunctionPointer(CallingConvention::Cdecl)]
 	delegate void TestRunSummaryDelegate(const MrTest::IRunSummary& summary);
-
-
-	//void DataLogEventHandler2(const MrTest::ICase& testCase) {
-	//	//MessageBox::Show("Test log callback");
-	//	String^ msg = gcnew String(testCase.FixtureName.c_str());
-	//	MessageBox::Show(msg);
-
-	//	MessageBox::Show("Direct Blah");
-	//}
-
 
 
 	/// <summary>
@@ -85,10 +75,18 @@ namespace MrTestGuiRunner {
 
 
 		void TestRunSummaryHandler(const MrTest::IRunSummary& summary) {
-			//virtual int Total(MrTest::ICase::TestCaseStatus status) const = 0;
-			Int32 totalTests = summary.Total();
+			
+			ManagedSummaryData data;
+			data.Success = summary.Total(MrTest::ICase::ST_SUCCESS);
+			data.FailFixtureSetup = summary.Total(MrTest::ICase::ST_FAIL_FIXTURE_SETUP);
+			data.FailSetup = summary.Total(MrTest::ICase::ST_FAIL_SETUP);;
+			data.FailTest = summary.Total(MrTest::ICase::ST_FAIL_TEST);;
+			data.FailTeardown = summary.Total(MrTest::ICase::ST_FAIL_CLEANUP);;
+			data.NotFound = summary.Total(MrTest::ICase::ST_NOT_EXISTS);;
+			data.Disabled = summary.Total(MrTest::ICase::ST_DISABLED);;
+			data.Total = summary.Total();
 
-			MessageBox::Show(totalTests.ToString(), "Summary Total Tests");
+			MessageBox::Show(data.Total.ToString(), "Summary Total Tests");
 		}
 
 
