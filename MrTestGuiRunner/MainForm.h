@@ -35,22 +35,74 @@ namespace MrTestGuiRunner {
 //
 //#pragma managed(pop)
 
+//		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+		[UnmanagedFunctionPointer(CallingConvention::Cdecl)]
+		delegate void LogEventDelegate(const MrTest::ICase& testCase);
+
+
+		void DataLogEventHandler2(const MrTest::ICase& testCase) {
+			//MessageBox::Show("Test log callback");
+			String^ msg = gcnew String(testCase.FixtureName.c_str());
+			MessageBox::Show(msg);
+
+			MessageBox::Show("Direct Blah");
+		}
+
+
+#ifdef skgjsalkdjfgksjf
+		public ref class Listner {
+		public:
+			delegate void LogEventDelegate(const MrTest::ICase& testCase);
+
+			Listner() {
+				caseLog = gcnew LogEventDelegate(this, &Listner::DataLogEventHandler);
+				pin_ptr<MrTest::Engine> pEng = &(MrTest::Engine::Instance());
+				_caseLog = Marshal::GetFunctionPointerForDelegate(caseLog);
+				pEng->RegisterLoggedEvent((MrTest::DataLoggedEvent)(void*) _caseLog);
+				GC::KeepAlive(caseLog);
+			}
+
+			void DataLogEventHandler(const MrTest::ICase& testCase) {
+				String^ msg = gcnew String(testCase.FixtureName.c_str());
+				MessageBox::Show(msg, "Listner class");
+			}
+
+			LogEventDelegate^ caseLog;
+			IntPtr _caseLog;
+			
+		};
+#endif
+
 	/// <summary>
 	/// Summary for Form1
 	/// </summary>
+//[AttributeUsageAttribute(AttributeTargets::Delegate, AllowMultiple = false, Inherited = false)]
 	public ref class MainForm : public System::Windows::Forms::Form
 	{
 	public:
 
-		delegate void  LogEventDelegate(const MrTest::ICase& testCase);
+		//[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 
+		//[DllImport("CppTest.dll",CharSet=CharSet::Unicode, CallingConvention=CallingConvention::Cdecl)]
+//		delegate void __cdecl LogEventDelegate(const MrTest::ICase& testCase);
+
+		//[DllImport("TestDLL.dll", CallingConvention=CallingConvention.StdCall)]
 		void DataLogEventHandler(const MrTest::ICase& testCase) {
 			//MessageBox::Show("Test log callback");
-			//String^ msg = gcnew String(testCase.FixtureName.c_str());
-			//MessageBox::Show(msg);
+			String^ msg = gcnew String(testCase.FixtureName.c_str());
+			MessageBox::Show(msg, "Internal forced to Cdecl");
 
 			MessageBox::Show("Blah");
 		}
+
+
+		//void DataLogEventHandler2(const MrTest::ICase& testCase) {
+		//	//MessageBox::Show("Test log callback");
+		//	//String^ msg = gcnew String(testCase.FixtureName.c_str());
+		//	//MessageBox::Show(msg);
+
+		//	MessageBox::Show("Direct Blah");
+		//}
 
 
 
@@ -94,6 +146,16 @@ namespace MrTestGuiRunner {
 				IntPtr _caseLog = Marshal::GetFunctionPointerForDelegate(caseLog);
 				pEng->RegisterLoggedEvent((MrTest::DataLoggedEvent)(void*) _caseLog);
 				GC::KeepAlive(caseLog);
+
+				//LogEventDelegate^ caseLog = gcnew LogEventDelegate(this, &DataLogEventHandler2);
+				//IntPtr _caseLog = Marshal::GetFunctionPointerForDelegate(caseLog);
+				//pEng->RegisterLoggedEvent((MrTest::DataLoggedEvent)(void*) _caseLog);
+				//GC::KeepAlive(caseLog);
+
+				//pEng->RegisterLoggedEvent(&DataLogEventHandler2);
+
+			//	Listner l();
+
 
 				//pEng->RegisterLoggedEvent(MyLoggedEventHandler);
 				//pEng->RegisterSummaryEvent(MySummaryEventHandler);

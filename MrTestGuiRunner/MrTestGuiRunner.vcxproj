@@ -50,9 +50,11 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;MR_USE_WIDE_STR;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <AdditionalIncludeDirectories>$(SolutionDir)\CppTestUtils\include;$(SolutionDir)\CppTestUtils\Exceptions\include;$(SolutionDir)\CppTest\include;$(SolutionDir)\CppTest\ScriptReader\include;$(SolutionDir)\CppTest\Core\include</AdditionalIncludeDirectories>
       <CompileAsManaged>true</CompileAsManaged>
+      <CallingConvention>Cdecl</CallingConvention>
+      <CompileAs>Default</CompileAs>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -66,9 +68,11 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>WIN32;MR_USE_WIDE_STR;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <AdditionalIncludeDirectories>$(SolutionDir)\CppTestUtils\include;$(SolutionDir)\CppTestUtils\Exceptions\include;$(SolutionDir)\CppTest\include;$(SolutionDir)\CppTest\ScriptReader\include;$(SolutionDir)\CppTest\Core\include</AdditionalIncludeDirectories>
       <CompileAsManaged>true</CompileAsManaged>
+      <CallingConvention>Cdecl</CallingConvention>
+      <CompileAs>Default</CompileAs>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

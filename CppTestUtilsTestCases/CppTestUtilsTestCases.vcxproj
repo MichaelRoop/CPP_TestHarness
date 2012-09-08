@@ -55,6 +55,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <MinimalRebuild>true</MinimalRebuild>
       <AdditionalIncludeDirectories>include;$(SolutionDir)\CppTest\include;$(SolutionDir)\CppTest\Core\include;$(SolutionDir)\CppTestUtils\include;$(SolutionDir)\CppTestUtils\Exceptions\include;$(SolutionDir)\CppTest\ScriptReader\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <CallingConvention>Cdecl</CallingConvention>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -80,6 +81,7 @@
       <CompileAsManaged>false</CompileAsManaged>
       <MinimalRebuild>true</MinimalRebuild>
       <ExceptionHandling>Sync</ExceptionHandling>
+      <CallingConvention>Cdecl</CallingConvention>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
