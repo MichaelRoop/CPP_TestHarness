@@ -93,6 +93,8 @@ CPPTESCASE_API void IsFalse(
 	const char* file, int line, bool condition, mr_utils::mr_stringstream& buffer, const mr_utils::mr_stringstream& userMsg);
 
 
+//CPPTESCASE_API void DoesThrow(const char* file, int line, Ifixture_method_ptr method);
+
 
 //#define ASSERT_TRUE(_file_, _line_, _condition_, _buffer_, _streamMsg_)		\
 //mr_utils::mr_stringstream ss;												\

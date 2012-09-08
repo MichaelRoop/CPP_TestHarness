@@ -12,6 +12,7 @@
 #include "CppTestAsserts.h"
 
 // temp
+#include "mr_char.h"
 #include <exception>
 
 
@@ -98,6 +99,25 @@ public:
 	}
 	
 	void UTL_TOK_1_5() { 
+
+		TEST_NOT_THROWS(this, 
+			throw mr_utils::mr_exception(__FILE__,__LINE__,L("This is a thrown exception")); 
+		);
+
+
+		TEST_THROWS(this, 
+			throw mr_utils::mr_exception(__FILE__,__LINE__,L("This is a thrown exception")); 
+		);
+		
+		TEST_THROWS(this, {
+			int i = 10;
+			double j = 20;
+			throw mr_utils::mr_exception(__FILE__,__LINE__,L("This is a thrown exception")); 
+		});
+
+
+
+
 		this->TokenizeString(_L_("||||||||This|is|a|test|string|with|some|tokens||||||||"));
 	}
 

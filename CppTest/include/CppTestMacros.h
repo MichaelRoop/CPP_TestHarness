@@ -114,16 +114,40 @@ MrTest::IsFalse(_FL_, (_condition_), (_fixture_)->CurrentTestCase().MsgBuffer, (
 
 
 
-/*
-#define TEST_THROWS(_fixture_, _exception_, _logic_) \
-	try {									\
-		(_logic_);							\
-		TEST_EQUAL(_fixture_, 1, 2);		\
-	}										\
-	catch (const (_exception_)& e) {			\
-		prinf("caught exception");			\
-	}										\
-*/
+
+//#define TEST_THROWS(_fixture_, _exception_, _logic_)							\
+
+
+#define TEST_THROWS(_fixture_, _logic_)							\
+	try {																		\
+	{								\
+		_logic_																	\
+		}							\
+		TEST_TRUE(_fixture_, false, L("Code should not expected to throw"));	\
+	}																			\
+	catch (const std::exception& e) {											\
+		printf("\n ** caught exception **\n\n");												\
+	}																			\
+	catch (...)	{							\
+	}						\
+
+
+
+#define TEST_NOT_THROWS(_fixture_, _logic_)							\
+	try {																		\
+	{								\
+		_logic_																	\
+		}							\
+	}																			\
+	catch (const std::exception& e) {											\
+		TEST_TRUE(_fixture_, false, L("Code should have thrown exception"));	\
+		printf("\n ** caught exception **\n\n");												\
+	}																			\
+	catch (...)	{							\
+	}						\
+
+
+
 
 
 #endif
