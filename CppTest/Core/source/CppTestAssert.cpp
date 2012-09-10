@@ -52,5 +52,26 @@ void IsFalse(
 }
 
 
+CPPTESCASE_API void Fail(
+	const char* file, int line, mr_utils::mr_stringstream& buffer, const mr_utils::mr_stringstream& userMsg) {
+
+	mr_utils::mr_stringstream ss;
+	ss << _L_("User Forced Fail ");	
+	CreateMsg(ss, file, line, userMsg);
+	buffer << ss.str();
+	throw mr_utils::mr_exception(file, line, ss.str());				
+}
+
+
+CPPTESCASE_API void FailOnNotThrow(
+	const char* file, int line, mr_utils::mr_stringstream& buffer, const mr_utils::mr_stringstream& userMsg) {
+
+	mr_utils::mr_stringstream ss;
+	ss << _L_("Test Expected Exception to be Thrown ");	
+	CreateMsg(ss, file, line, userMsg);
+	buffer << ss.str();
+	throw mr_utils::mr_exception(file, line, ss.str());				
+}
+
 }
 

@@ -93,7 +93,65 @@ CPPTESCASE_API void IsFalse(
 	const char* file, int line, bool condition, mr_utils::mr_stringstream& buffer, const mr_utils::mr_stringstream& userMsg);
 
 
-//CPPTESCASE_API void DoesThrow(const char* file, int line, Ifixture_method_ptr method);
+CPPTESCASE_API void FailOnNotThrow(
+	const char* file, int line, mr_utils::mr_stringstream& buffer, const mr_utils::mr_stringstream& userMsg);
+
+
+CPPTESCASE_API void Fail(
+	const char* file, int line, mr_utils::mr_stringstream& buffer, const mr_utils::mr_stringstream& userMsg);
+
+
+// Class generalization of exeption types
+template<class T>
+class ReportException
+{
+public:
+	static void ThrowReport(const char* file, int line, mr_utils::mr_stringstream& buffer, T& exception, const mr_utils::mr_stringstream& userMsg) {
+		mr_utils::mr_stringstream ss;
+		ss << _L_("Did not Expected Unknown Exception ");	
+		MrTest::CreateMsg(ss, file, line, userMsg);
+		buffer << ss.str().c_str();
+		throw mr_utils::mr_exception(file, line, ss.str());				
+	}
+};
+
+
+// Class specific std::exeption type
+template<>
+class ReportException<std::exception>
+{
+public:
+	static void ThrowReport(const char* file, int line, mr_utils::mr_stringstream& buffer, std::exception& exception, const mr_utils::mr_stringstream& userMsg) {
+		mr_utils::mr_stringstream ss;
+		ss << L("Did not Expected std::exception ") << exception.what() << _L_(" ");	
+		MrTest::CreateMsg(ss, file, line, userMsg);
+		buffer << ss.str().c_str();
+		throw mr_utils::mr_exception(file, line, ss.str());				
+	}
+};
+
+
+// Class specific mr_utils::mr_exception type
+template<>
+class ReportException<mr_utils::mr_exception> {
+public:
+	static void ThrowReport(const char* file, int line, mr_utils::mr_stringstream& buffer, mr_utils::mr_exception& exception, const mr_utils::mr_stringstream& userMsg) {
+		mr_utils::mr_stringstream ss;
+		ss << L("Did not Expected mr_utils::mr_exception ") << exception.longMsg() << _L_(" ");	
+		MrTest::CreateMsg(ss, mr_utils::ToCharPtr(exception.fileName()).c_str(), exception.fileLine(), userMsg);
+		buffer << ss.str().c_str();
+		throw mr_utils::mr_exception(mr_utils::ToCharPtr(exception.fileName()).c_str(), exception.fileLine(), ss.str());				
+	}
+};
+
+
+
+/// @brief	Use the template function to automatically resolve the proper template class handler
+template<class T>
+void FailOnThrow(
+	const char* file, int line, mr_utils::mr_stringstream& buffer, T& exception, const mr_utils::mr_stringstream& userMsg) {
+	ReportException<T>::ThrowReport(file, line, buffer, exception, userMsg);
+}
 
 
 //#define ASSERT_TRUE(_file_, _line_, _condition_, _buffer_, _streamMsg_)		\

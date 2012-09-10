@@ -108,46 +108,49 @@ MrTest::IsFalse(_FL_, (_condition_), (_fixture_)->CurrentTestCase().MsgBuffer, (
 
 
 
-
-//void IsTrue(
-//	const char* file, int line, bool condition, mr_utils::mr_stringstream& buffer, const mr_utils::mr_string& msg) {
-
-
-
-
-//#define TEST_THROWS(_fixture_, _exception_, _logic_)							\
-
-
-#define TEST_THROWS(_fixture_, _logic_)							\
-	try {																		\
-	{								\
-		_logic_																	\
-		}							\
-		TEST_TRUE(_fixture_, false, L("Code should not expected to throw"));	\
-	}																			\
-	catch (const std::exception& e) {											\
-		printf("\n ** caught exception **\n\n");												\
-	}																			\
-	catch (...)	{							\
-	}						\
+#define TEST_THROWS(_fixture_, _logic_)																					\
+do {																													\
+	try {																												\
+		{																												\
+			_logic_																										\
+		}																												\
+	}																													\
+	catch (std::exception& e) {																							\
+		break;																											\
+	}																													\
+	catch (...)	{																										\
+		break;																											\
+	}																													\
+	MrTest::FailOnNotThrow(																								\
+		_FL_, (_fixture_)->CurrentTestCase().MsgBuffer, (_fixture_)->CurrentTestCase().EmbeddedMsgBuffer);				\
+} while(false);																											\
 
 
 
-#define TEST_NOT_THROWS(_fixture_, _logic_)							\
-	try {																		\
-	{								\
-		_logic_																	\
-		}							\
-	}																			\
-	catch (const std::exception& e) {											\
-		TEST_TRUE(_fixture_, false, L("Code should have thrown exception"));	\
-		printf("\n ** caught exception **\n\n");												\
-	}																			\
-	catch (...)	{							\
-	}						\
-
-
-
+#define TEST_NOT_THROWS(_fixture_, _logic_)																			\
+	try {																											\
+		{																											\
+			_logic_																									\
+		}																											\
+	}																												\
+	catch (mr_utils::mr_exception& e) {																				\
+		MrTest::FailOnThrow(																						\
+			_FL_, (_fixture_)->CurrentTestCase().MsgBuffer, e, (_fixture_)->CurrentTestCase().EmbeddedMsgBuffer);	\
+	}																												\
+	catch (const mr_utils::mr_exception& e) {																		\
+		MrTest::FailOnThrow(																						\
+			_FL_, (_fixture_)->CurrentTestCase().MsgBuffer, e, (_fixture_)->CurrentTestCase().EmbeddedMsgBuffer);	\
+	}																												\
+	catch (std::exception& e) {																						\
+		MrTest::FailOnThrow(																						\
+			_FL_, (_fixture_)->CurrentTestCase().MsgBuffer, e, (_fixture_)->CurrentTestCase().EmbeddedMsgBuffer);	\
+	}																												\
+	catch (const std::exception& e) {																				\
+		MrTest::FailOnThrow(																						\
+			_FL_, (_fixture_)->CurrentTestCase().MsgBuffer, e, (_fixture_)->CurrentTestCase().EmbeddedMsgBuffer);	\
+	}																												\
+	catch (...)	{																									\
+	}																												\
 
 
 #endif
