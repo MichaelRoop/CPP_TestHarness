@@ -157,11 +157,20 @@ CPPTESTUTILS_API mr_utils::mr_string ToMrString(const std::string& value);
 CPPTESTUTILS_API mr_utils::mr_string ToMrString(const std::wstring& value);
 
 
+/// @brief	Convert to a char* from mr_string. Useful for dealing with returns requiring 
+///			hard coded types as they interact with the wide/narrow mr_string in the system
+///			The argument is hard coded to handle one possible form of the mr_string
+/// @param	value	The value to tranform
+CPPTESTUTILS_API std::string ToCharPtr(const std::string& value);
+
+
+/// @brief	Convert to a char* from mr_string. Useful for dealing with returns requiring 
+///			hard coded types as they interact with the wide/narrow mr_string in the system
+///			The argument is hard coded to handle one possible form of the mr_string
+/// @param	value	The value to tranform
+CPPTESTUTILS_API std::string ToCharPtr(const std::wstring value);
+
+
 } // end namespace.
-
-
-
-
-
 
 #endif

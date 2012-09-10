@@ -230,5 +230,17 @@ mr_utils::mr_string ToMrString(const std::wstring& value) {
 }
 
 
+std::string ToCharPtr(const std::string& value) {
+	return value;
+}
+
+
+std::string ToCharPtr(const std::wstring value) {
+	return mr_utils::WideToNarrowString(value);
+}
+
+
+
+
 
 } // end namespace
