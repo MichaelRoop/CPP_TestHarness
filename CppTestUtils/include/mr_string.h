@@ -133,6 +133,10 @@ CPPTESTUTILS_API std::string::size_type Find(const std::string& s, const std::st
 CPPTESTUTILS_API bool Contains(const std::string& s, const std::string pattern);
 
 
+/// @brief	Contain function
+CPPTESTUTILS_API bool Contains(const std::wstring& s, const std::wstring pattern);
+
+
 /// @brief	Convert a char* to mr_string. Useful for dealing with hard coded types
 //			as they interact with the wide/narrow mr_string in the system
 /// @param	value	The value to tranform

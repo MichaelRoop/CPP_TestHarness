@@ -54,7 +54,7 @@
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <MinimalRebuild>true</MinimalRebuild>
-      <AdditionalIncludeDirectories>include;$(SolutionDir)\CppTest\include;$(SolutionDir)\CppTest\Core\include;$(SolutionDir)\CppTestUtils\include;$(SolutionDir)\CppTestUtils\Exceptions\include;$(SolutionDir)\CppTest\ScriptReader\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;$(SolutionDir)\CppTest\include;$(SolutionDir)\CppTest\Core\include;$(SolutionDir)\CppTestUtils\include;$(SolutionDir)\CppTestUtils\Exceptions\include;$(SolutionDir)\CppTest\ScriptReader\include;$(SolutionDir)\CppTestUtilsTestCases\CppTestCaseTests;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CallingConvention>Cdecl</CallingConvention>
     </ClCompile>
     <Link>
@@ -77,7 +77,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>MR_USE_WIDE_STR;WIN32;NDEBUG</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>include;$(SolutionDir)\CppTest\include;$(SolutionDir)\CppTest\Core\include;$(SolutionDir)\CppTestUtils\include;$(SolutionDir)\CppTestUtils\Exceptions\include;$(SolutionDir)\CppTest\ScriptReader\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;$(SolutionDir)\CppTest\include;$(SolutionDir)\CppTest\Core\include;$(SolutionDir)\CppTestUtils\include;$(SolutionDir)\CppTestUtils\Exceptions\include;$(SolutionDir)\CppTest\ScriptReader\include;$(SolutionDir)\CppTestUtilsTestCases\CppTestCaseTests;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CompileAsManaged>false</CompileAsManaged>
       <MinimalRebuild>true</MinimalRebuild>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -96,6 +96,7 @@
     <ClCompile Include="source\dllmain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CppTestCaseTests\CppTestMacroTests.h" />
     <ClInclude Include="include\mr_testSharedPtr.h" />
     <ClInclude Include="include\mr_util_str_token_tests.h" />
     <ClInclude Include="include\mr_util_str_trim_tests.h" />

@@ -16,7 +16,7 @@
 namespace MrTest {
 
 
-void CreateMsg(mr_utils::mr_stringstream& msgBuffer, const char* file, int line, const mr_utils::mr_stringstream& userMsg) {
+void CreateMsg(mr_utils::mr_stringstream& msgBuffer, const char* file, int line, mr_utils::mr_stringstream& userMsg) {
 	mr_utils::ToStream( msgBuffer, mr_utils::ExtractFileName(file));
 	msgBuffer << _L_(":") << line;
 
@@ -27,7 +27,7 @@ void CreateMsg(mr_utils::mr_stringstream& msgBuffer, const char* file, int line,
 
 
 void IsTrue(
-	const char* file, int line, bool condition, mr_utils::mr_stringstream& buffer, const mr_utils::mr_stringstream& userMsg) {
+	const char* file, int line, bool condition, mr_utils::mr_stringstream& buffer, mr_utils::mr_stringstream& userMsg) {
 
 	mr_utils::mr_stringstream ss;
 	ss << _L_("Did not Expected false condition ");	
@@ -36,11 +36,13 @@ void IsTrue(
 	if (!MrTest::CompareEqual(true, condition, buffer, ss.str())) {
 		throw mr_utils::mr_exception(file, line, ss.str());				
 	}		
+	mr_utils::ResetStringStream(buffer);
+	mr_utils::ResetStringStream(userMsg);
 }
 
 
 void IsFalse(
-	const char* file, int line, bool condition, mr_utils::mr_stringstream& buffer, const mr_utils::mr_stringstream& userMsg) {
+	const char* file, int line, bool condition, mr_utils::mr_stringstream& buffer, mr_utils::mr_stringstream& userMsg) {
 
 	mr_utils::mr_stringstream ss;
 	ss << _L_("Did not Expected true condition ");	
@@ -48,12 +50,14 @@ void IsFalse(
 
 	if (!MrTest::CompareEqual(false, condition, buffer, ss.str())) {
 		throw mr_utils::mr_exception(file, line, ss.str());				
-	}																	
+	}			
+	mr_utils::ResetStringStream(buffer);
+	mr_utils::ResetStringStream(userMsg);
 }
 
 
 CPPTESCASE_API void Fail(
-	const char* file, int line, mr_utils::mr_stringstream& buffer, const mr_utils::mr_stringstream& userMsg) {
+	const char* file, int line, mr_utils::mr_stringstream& buffer, mr_utils::mr_stringstream& userMsg) {
 
 	mr_utils::mr_stringstream ss;
 	ss << _L_("User Forced Fail ");	
@@ -64,7 +68,7 @@ CPPTESCASE_API void Fail(
 
 
 CPPTESCASE_API void FailOnNotThrow(
-	const char* file, int line, mr_utils::mr_stringstream& buffer, const mr_utils::mr_stringstream& userMsg) {
+	const char* file, int line, mr_utils::mr_stringstream& buffer, mr_utils::mr_stringstream& userMsg) {
 
 	mr_utils::mr_stringstream ss;
 	ss << _L_("Test Expected Exception to be Thrown ");	

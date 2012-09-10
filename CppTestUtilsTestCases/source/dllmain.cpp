@@ -7,8 +7,11 @@
 
 #include <cstdio>
 
+
+// TODO - find out why these have to be included in the header for the test cases to register
 #include "mr_util_str_token_tests.h"
 #include "mr_util_str_trim_tests.h"
+#include "CppTestMacroTests.h"
 
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved ) { 
 	switch (ul_reason_for_call)

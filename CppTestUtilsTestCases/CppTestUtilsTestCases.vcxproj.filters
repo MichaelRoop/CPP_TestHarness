@@ -11,6 +11,9 @@
     <Filter Include="include">
       <UniqueIdentifier>{6f62b90b-ef52-4d16-850c-e34479c50a16}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CppTestTests">
+      <UniqueIdentifier>{67f21644-927b-49c8-bbbd-3baff10fdfca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\dllmain.cpp">
@@ -26,6 +29,9 @@
     </ClInclude>
     <ClInclude Include="include\mr_util_str_trim_tests.h">
       <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="CppTestCaseTests\CppTestMacroTests.h">
+      <Filter>CppTestTests</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

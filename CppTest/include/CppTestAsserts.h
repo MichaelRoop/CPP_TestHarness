@@ -29,7 +29,7 @@ namespace MrTest {
 /// @param	userMsg		The user message.
 template<class T>
 void AreEqual(
-	const char* file, int line, const T& expected, const T& actual, mr_utils::mr_stringstream& buffer, const mr_utils::mr_stringstream& userMsg) {
+	const char* file, int line, const T& expected, const T& actual, mr_utils::mr_stringstream& buffer, mr_utils::mr_stringstream& userMsg) {
 
 	mr_utils::mr_stringstream ss;
 	ss << _L_("Expected '") << expected << _L_("' but actual is '") << actual << _L_("'  ");
@@ -38,6 +38,8 @@ void AreEqual(
 	if (!MrTest::CompareEqual(expected, actual, buffer, ss.str())) {
 		throw mr_utils::mr_exception(file, line, ss.str());				
 	}																	
+	mr_utils::ResetStringStream(buffer);
+	mr_utils::ResetStringStream(userMsg);
 }
 
 
@@ -52,7 +54,7 @@ void AreEqual(
 /// @param	userMsg		The user message.
 template<class T>
 void AreNotEqual(
-	const char* file, int line, const T& nonexpected, const T& actual, mr_utils::mr_stringstream& buffer, const mr_utils::mr_stringstream& userMsg) {
+	const char* file, int line, const T& nonexpected, const T& actual, mr_utils::mr_stringstream& buffer, mr_utils::mr_stringstream& userMsg) {
 
 	mr_utils::mr_stringstream ss;
 	ss << _L_("Did not Expected '") << nonexpected << _L_("' but actual is '") << actual << _L_("'  ");
@@ -60,7 +62,9 @@ void AreNotEqual(
 
 	if (!MrTest::CompareNotEqual(nonexpected, actual, buffer, ss.str())) {
 		throw mr_utils::mr_exception(file, line, ss.str());				
-	}																	
+	}		
+	mr_utils::ResetStringStream(buffer);
+	mr_utils::ResetStringStream(userMsg);
 }
 
 
@@ -70,7 +74,7 @@ void AreNotEqual(
 /// @param	file	The file where the method was executing
 /// @param	line	The line being executed
 /// @param	userMsg	The user message.
-CPPTESCASE_API void CreateMsg(mr_utils::mr_stringstream& msgBuffer, const char* file, int line, const mr_utils::mr_stringstream& userMsg);
+CPPTESCASE_API void CreateMsg(mr_utils::mr_stringstream& msgBuffer, const char* file, int line, mr_utils::mr_stringstream& userMsg);
 
 
 /// @brief	Test if a condigion is true or otherwise fail and log results
@@ -80,7 +84,7 @@ CPPTESCASE_API void CreateMsg(mr_utils::mr_stringstream& msgBuffer, const char* 
 /// @param	buffer	The message buffer to received the results.
 /// @param	userMsg	The user message.
 CPPTESCASE_API void IsTrue(
-	const char* file, int line, bool condition, mr_utils::mr_stringstream& buffer, const mr_utils::mr_stringstream& userMsg);
+	const char* file, int line, bool condition, mr_utils::mr_stringstream& buffer, mr_utils::mr_stringstream& userMsg);
 
 
 /// @brief	Test if a condigion is false or otherwise fail and log results
@@ -90,15 +94,15 @@ CPPTESCASE_API void IsTrue(
 /// @param	buffer	The message buffer to received the results.
 /// @param	userMsg	The user message.
 CPPTESCASE_API void IsFalse(
-	const char* file, int line, bool condition, mr_utils::mr_stringstream& buffer, const mr_utils::mr_stringstream& userMsg);
+	const char* file, int line, bool condition, mr_utils::mr_stringstream& buffer, mr_utils::mr_stringstream& userMsg);
 
 
 CPPTESCASE_API void FailOnNotThrow(
-	const char* file, int line, mr_utils::mr_stringstream& buffer, const mr_utils::mr_stringstream& userMsg);
+	const char* file, int line, mr_utils::mr_stringstream& buffer, mr_utils::mr_stringstream& userMsg);
 
 
 CPPTESCASE_API void Fail(
-	const char* file, int line, mr_utils::mr_stringstream& buffer, const mr_utils::mr_stringstream& userMsg);
+	const char* file, int line, mr_utils::mr_stringstream& buffer, mr_utils::mr_stringstream& userMsg);
 
 
 // Class generalization of exeption types
@@ -106,7 +110,7 @@ template<class T>
 class ReportException
 {
 public:
-	static void ThrowReport(const char* file, int line, mr_utils::mr_stringstream& buffer, T& exception, const mr_utils::mr_stringstream& userMsg) {
+	static void ThrowReport(const char* file, int line, mr_utils::mr_stringstream& buffer, T& exception, mr_utils::mr_stringstream& userMsg) {
 		mr_utils::mr_stringstream ss;
 		ss << _L_("Did not Expected Unknown Exception ");	
 		MrTest::CreateMsg(ss, file, line, userMsg);
@@ -121,7 +125,7 @@ template<>
 class ReportException<std::exception>
 {
 public:
-	static void ThrowReport(const char* file, int line, mr_utils::mr_stringstream& buffer, std::exception& exception, const mr_utils::mr_stringstream& userMsg) {
+	static void ThrowReport(const char* file, int line, mr_utils::mr_stringstream& buffer, std::exception& exception, mr_utils::mr_stringstream& userMsg) {
 		mr_utils::mr_stringstream ss;
 		ss << L("Did not Expected std::exception ") << exception.what() << _L_(" ");	
 		MrTest::CreateMsg(ss, file, line, userMsg);
@@ -135,7 +139,7 @@ public:
 template<>
 class ReportException<mr_utils::mr_exception> {
 public:
-	static void ThrowReport(const char* file, int line, mr_utils::mr_stringstream& buffer, mr_utils::mr_exception& exception, const mr_utils::mr_stringstream& userMsg) {
+	static void ThrowReport(const char* file, int line, mr_utils::mr_stringstream& buffer, mr_utils::mr_exception& exception, mr_utils::mr_stringstream& userMsg) {
 		mr_utils::mr_stringstream ss;
 		ss << L("Did not Expected mr_utils::mr_exception ") << exception.longMsg() << _L_(" ");	
 		MrTest::CreateMsg(ss, mr_utils::ToCharPtr(exception.fileName()).c_str(), exception.fileLine(), userMsg);
@@ -149,7 +153,7 @@ public:
 /// @brief	Use the template function to automatically resolve the proper template class handler
 template<class T>
 void FailOnThrow(
-	const char* file, int line, mr_utils::mr_stringstream& buffer, T& exception, const mr_utils::mr_stringstream& userMsg) {
+	const char* file, int line, mr_utils::mr_stringstream& buffer, T& exception, mr_utils::mr_stringstream& userMsg) {
 	ReportException<T>::ThrowReport(file, line, buffer, exception, userMsg);
 }
 

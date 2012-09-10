@@ -107,6 +107,16 @@ MrTest::IsTrue(_FL_, (_condition_), (_fixture_)->CurrentTestCase().MsgBuffer, (_
 MrTest::IsFalse(_FL_, (_condition_), (_fixture_)->CurrentTestCase().MsgBuffer, (_fixture_)->CurrentTestCase().EmbeddedMsgBuffer);
 
 
+#define TEST_FAIL(_fixture_,_msg_)																				\
+(_fixture_)->CurrentTestCase().EmbeddedMsgBuffer << _msg_;														\
+MrTest::Fail(_FL_, (_fixture_)->CurrentTestCase().MsgBuffer, (_fixture_)->CurrentTestCase().EmbeddedMsgBuffer);	\
+
+
+//CPPTESCASE_API void Fail(
+//	const char* file, int line, mr_utils::mr_stringstream& buffer, const mr_utils::mr_stringstream& userMsg);
+
+
+
 
 #define TEST_THROWS(_fixture_, _logic_)																					\
 do {																													\
@@ -115,7 +125,7 @@ do {																													\
 			_logic_																										\
 		}																												\
 	}																													\
-	catch (std::exception& e) {																							\
+	catch (std::exception&) {																							\
 		break;																											\
 	}																													\
 	catch (...)	{																										\

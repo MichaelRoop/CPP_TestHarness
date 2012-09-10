@@ -10,13 +10,13 @@ UtilStrTrimTests
 #UtilStrTrimTests.UTL_STR_TRIM_2
 
 #TokenizerTests1
-TokenizerTests1.UTL_TOK_1_1
-TokenizerTests1.UTL_TOK_1_2$
-TokenizerTests1.UTL_TOK_1_3$arg1=3434||arg2=jjf
-TokenizerTests1.UTL_TOK_1_4$arg1=3434|
-TokenizerTests1.UTL_TOK_1_5$arg1=3434
-@TokenizerTests1.UTL_TOK_1_6
-TokenizerTests2.UTL_TOK_1_7
+#TokenizerTests1.UTL_TOK_1_1
+#TokenizerTests1.UTL_TOK_1_2$
+#TokenizerTests1.UTL_TOK_1_3$arg1=3434||arg2=jjf
+#TokenizerTests1.UTL_TOK_1_4$arg1=3434|
+#TokenizerTests1.UTL_TOK_1_5$arg1=3434
+#@TokenizerTests1.UTL_TOK_1_6
+#TokenizerTests2.UTL_TOK_1_7
 
 
 #Test SharedPtr object
@@ -81,3 +81,7 @@ TokenizerTests2.UTL_TOK_1_7
 
 #State Machine tests.
 #SM_1_1
+
+
+
+MrTestMacroTests

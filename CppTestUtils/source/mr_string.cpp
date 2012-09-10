@@ -200,7 +200,12 @@ std::string::size_type Find(const std::string& s, const std::string pattern, std
 
 
 bool Contains(const std::string& s, const std::string pattern) {
-	return Find(s, pattern, 0) != std::string::npos;
+	return s.find(pattern) != std::string::npos;
+}
+
+
+bool Contains(const std::wstring& s, const std::wstring pattern) {
+	return s.find(pattern) != std::wstring::npos;
 }
 
 
