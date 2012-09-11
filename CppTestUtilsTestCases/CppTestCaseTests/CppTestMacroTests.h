@@ -43,6 +43,13 @@ public:
 
 	// TEST_EQUAL test with equal values
 	void TestEqual_Equal() { 
+
+		//TEST_FALSE(this, true, L("Blaaaaaah"));
+
+		int x = 0;
+		int i = 10 / x;
+
+
 		bool thrown = false;
 		mr_utils::mr_string msg;
 		try {

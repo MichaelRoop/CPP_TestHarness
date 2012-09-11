@@ -390,5 +390,8 @@
     <ClInclude Include="include\MrTestParamParser.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="Core\include\MrTestWinFaultHandler.h">
+      <Filter>Core\include</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
