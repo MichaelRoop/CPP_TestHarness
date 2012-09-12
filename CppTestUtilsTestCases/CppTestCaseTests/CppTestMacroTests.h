@@ -46,6 +46,7 @@ public:
 
 		//TEST_FALSE(this, true, L("Blaaaaaah"));
 
+		// sample devide by zero fault
 		int x = 0;
 		int i = 10 / x;
 

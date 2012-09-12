@@ -113,6 +113,7 @@
     <ClCompile Include="Core\source\MrTestListBuilderFactory.cpp" />
     <ClCompile Include="Core\source\MrTestParamParser.cpp" />
     <ClCompile Include="Core\source\MrTestVectorTestCaseNamesReader.cpp" />
+    <ClCompile Include="Core\source\MrTestWinFaultHandler.cpp" />
     <ClCompile Include="Dlls\source\CppTestDllManager.cpp" />
     <ClCompile Include="Exceptions\source\CppTestScriptException.cpp" />
     <ClCompile Include="Factories\source\CppTestLogFactory.cpp" />

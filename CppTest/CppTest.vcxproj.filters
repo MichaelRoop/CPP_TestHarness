@@ -211,6 +211,9 @@
     <ClCompile Include="Core\source\MrTestParamParser.cpp">
       <Filter>Core\source</Filter>
     </ClCompile>
+    <ClCompile Include="Core\source\MrTestWinFaultHandler.cpp">
+      <Filter>Core\source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Win\resource.h">

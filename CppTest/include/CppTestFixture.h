@@ -145,6 +145,10 @@ private:
 	/// @brief	Execute the Fixture setup 
 	void ExecTestFixtureSetup();
 
+	/// @brief	Lookup and set the current test case by name
+	/// @param	name	The name of the test case to lookup
+	void SetCurrentTest(const mr_utils::mr_string& name);
+
 private:  // temp to check for linking
 	
 	///// @brief Protected default constructor to force use of regular constructor.
