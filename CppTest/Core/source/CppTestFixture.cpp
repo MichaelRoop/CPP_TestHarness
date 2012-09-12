@@ -12,7 +12,7 @@
 #include "CppTestFixture.h"
 #include "CppTestCaseHolder.h"
 #include "CppTestFixtureTestCaseNames.h"
-#include "MrTestWinFaultHandler.h"
+#include "MrTestSegfaultHandler.h"
 #include "mr_staticTimer.h"
 #include "mr_iostream.h"
 #include "mr_functors.h"
@@ -152,26 +152,15 @@ void Fixture::RunTest(const mr_utils::mr_string& name, const MrTest::TestCaseArg
 	// Get a copy of the optional arguments for the current named test case
 	this->m_args = args;
 
-	// Windows specific structured exception to catch IO faults also
-#if defined (_WIN32)
-__try {
-#else
-	try {
-#endif
+	START_SEGFAULT_CATCH_BLOCK
 		this->SetCurrentTest(name);
 		this->ExecTestFixtureSetup();
 		this->ExecStep(this->m_currentTestCase->Data()->SetupTime, this->m_testSetup, ICase::ST_FAIL_SETUP);
 		this->ExecStep(this->m_currentTestCase->Data()->ExecTime, this->m_currentTestCase->Pointer(), ICase::ST_FAIL_TEST);	
 		this->ExecStep(this->m_currentTestCase->Data()->CleanupTime, this->m_testTeardown, ICase::ST_FAIL_CLEANUP);
 		// Test fixture teardown is called on fixture from outside when no more tests to execute in fixture
-	}
-#if defined (_WIN32)
-	__except(WinExceptionHandler::Process(GetExceptionCode(), GetExceptionInformation(), this->m_currentTestCase)) {
-#else 
-	catch (...) {
-		// TODO - later we may put the writing to buffer here but for now we will do it in the assert methods
-#endif
-	}
+	END_SEGFAULT_CATCH_BLOCK
+
 }
 
 
