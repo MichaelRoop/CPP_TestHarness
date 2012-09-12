@@ -20,16 +20,11 @@ namespace MrTest {
 
 
 #if defined (_WIN32)
-#	define START_SEGFAULT_CATCH_BLOCK			__try {	
+#	define START_SEGFAULT_CATCH_BLOCK	__try {	
+#	define END_SEGFAULT_CATCH_BLOCK		} __except(WinExceptionHandler::Process(GetExceptionCode(), GetExceptionInformation(), this->m_currentTestCase)) {}
 #else
-#	define START_SEGFAULT_CATCH_BLOCK			try {	
-#endif
-
-
-#if defined (_WIN32)
-#	define END_SEGFAULT_CATCH_BLOCK	} __except(WinExceptionHandler::Process(GetExceptionCode(), GetExceptionInformation(), this->m_currentTestCase)) {}
-#else
-#	define END_SEGFAULT_CATCH_BLOCK	} catch (...) {}
+#	define START_SEGFAULT_CATCH_BLOCK	try {	
+#	define END_SEGFAULT_CATCH_BLOCK		} catch (...) {}
 #endif
 
 
