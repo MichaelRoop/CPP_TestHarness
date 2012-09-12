@@ -396,5 +396,8 @@
     <ClInclude Include="Core\include\MrTestWinFaultHandler.h">
       <Filter>Core\include</Filter>
     </ClInclude>
+    <ClInclude Include="Core\include\MrTestSegfaultHandler.h">
+      <Filter>Core\include</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

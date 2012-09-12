@@ -204,15 +204,12 @@ void Fixture::ResetFixture() {
 	if (this->m_isFixtureCalled) {
 
 		// Do not report errors on test fixture teardown
-		try {
+		START_SEGFAULT_CATCH_BLOCK
 			this->m_isFixtureCalled = false;
 			if (this->m_fixtureTeardown != 0) {
 				(this->*m_fixtureTeardown)();
 			}
-		}
-		catch (...) {
-			// TODO - try to log something here
-		}
+		END_SEGFAULT_CATCH_BLOCK
 	}
 }
 

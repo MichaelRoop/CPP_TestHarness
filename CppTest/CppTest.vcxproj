@@ -146,6 +146,7 @@
     <ClInclude Include="Core\include\CppTestFixtureInfoObject.h" />
     <ClInclude Include="Core\include\CppTestRunSummary.h" />
     <ClInclude Include="Core\include\MrTestEngineImplementation.h" />
+    <ClInclude Include="Core\include\MrTestSegfaultHandler.h" />
     <ClInclude Include="Core\include\MrTestVectorTestCaseNamesReader.h" />
     <ClInclude Include="Core\include\MrTestWinFaultHandler.h" />
     <ClInclude Include="Dlls\include\CppTestDllManager.h" />
