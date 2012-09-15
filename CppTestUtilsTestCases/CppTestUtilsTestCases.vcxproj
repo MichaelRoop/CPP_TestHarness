@@ -100,6 +100,7 @@
     <ClInclude Include="include\mr_testSharedPtr.h" />
     <ClInclude Include="include\mr_util_str_token_tests.h" />
     <ClInclude Include="include\mr_util_str_trim_tests.h" />
+    <ClInclude Include="include\TestList.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

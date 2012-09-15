@@ -33,5 +33,8 @@
     <ClInclude Include="CppTestCaseTests\CppTestMacroTests.h">
       <Filter>CppTestTests</Filter>
     </ClInclude>
+    <ClInclude Include="include\TestList.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

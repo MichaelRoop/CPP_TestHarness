@@ -8,21 +8,23 @@
 #include <cstdio>
 
 
-// TODO - find out why these have to be included in the header for the test cases to register
-#include "mr_util_str_token_tests.h"
-#include "mr_util_str_trim_tests.h"
-#include "CppTestMacroTests.h"
+//// TODO - find out why these have to be included in the header for the test cases to register
+#include "TestList.h"
 
-BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved ) { 
+
+BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved) { 
 	switch (ul_reason_for_call)
 	{
 	case DLL_PROCESS_ATTACH:
 		printf("-----------------------------DLL_PROCESS_ATTACH - Utils Test Cases\n");
 		{
 			/*
+			// Only required for those OS that cannot parse the DLL header. These are registered on 
+			// DLL load of dllMain
 			REGISTER_FIXTURE_MAIN(TokenizerTests1);
 			REGISTER_FIXTURE_MAIN(TokenizerTests2);
 			REGISTER_FIXTURE_MAIN(UtilStrTrimTests);
+			REGISTER_FIXTURE_MAIN(MrTestMacroTests);
 			*/
 		}
 		break;

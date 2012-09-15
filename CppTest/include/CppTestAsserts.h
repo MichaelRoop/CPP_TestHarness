@@ -12,6 +12,7 @@
 #define CPP_TEST_ASSERT_H
 
 #include "CppTestDefines.h"
+#include "CppTestCompareFunctions.h"
 #include "mr_sstream.h"
 #include "mr_string.h"
 #include "mr_exception.h"

@@ -1,6 +1,4 @@
-#if !defined(WIN32)
-#	pragma unmanaged
-#endif
+
 
 #include "CppTestFixture.h"
 #include "CppTestMacros.h"
