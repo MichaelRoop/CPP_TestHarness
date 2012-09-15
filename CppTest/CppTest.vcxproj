@@ -116,6 +116,7 @@
     <ClCompile Include="Core\source\MrTestWinFaultHandler.cpp" />
     <ClCompile Include="Dlls\source\CppTestDllManager.cpp" />
     <ClCompile Include="Exceptions\source\CppTestScriptException.cpp" />
+    <ClCompile Include="Exceptions\source\MrTestAssertException.cpp" />
     <ClCompile Include="Factories\source\CppTestLogFactory.cpp" />
     <ClCompile Include="Factories\source\CppTestLogInitialiserFactory.cpp" />
     <ClCompile Include="Factories\source\CppTestLogOutputFactory.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="include\ICppTestLogOutput.h" />
     <ClInclude Include="include\ICppTestRunSummary.h" />
     <ClInclude Include="include\IMrTestEngineImplementation.h" />
+    <ClInclude Include="include\MrTestAssertException.h" />
     <ClInclude Include="include\MrTestListBuilderFactory.h" />
     <ClInclude Include="include\MrTestParamParser.h" />
     <ClInclude Include="include\MrTestTypes.h" />

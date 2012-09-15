@@ -214,6 +214,9 @@
     <ClCompile Include="Core\source\MrTestWinFaultHandler.cpp">
       <Filter>Core\source</Filter>
     </ClCompile>
+    <ClCompile Include="Exceptions\source\MrTestAssertException.cpp">
+      <Filter>Exceptions\source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Win\resource.h">
@@ -398,6 +401,9 @@
     </ClInclude>
     <ClInclude Include="Core\include\MrTestSegfaultHandler.h">
       <Filter>Core\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\MrTestAssertException.h">
+      <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -45,7 +45,7 @@ public:
 	void TestEqual_Equal() { 
 
 		//throw std::exception("What the ....");
-
+		//throw mr_utils::mr_exception(_FL_, L("Using mr_utils exception"));
 		//TEST_FALSE(this, true, L("Blaaaaaah"));
 
 		// sample devide by zero fault

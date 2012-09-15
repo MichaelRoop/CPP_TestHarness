@@ -10,8 +10,8 @@
 ///--------------------------------------------------------------------------------------
 #include "CppTestAsserts.h"
 #include "CppTestCompareFunctions.h"
+#include "MrTestAssertException.h"
 #include "mr_toStream.h"
-#include "mr_exception.h"
 
 namespace MrTest {
 
@@ -34,7 +34,7 @@ void IsTrue(
 	CreateMsg(ss, file, line, userMsg);
 
 	if (!MrTest::CompareEqual(true, condition, buffer, ss.str())) {
-		throw mr_utils::mr_exception(file, line, ss.str());				
+		throw MrTest::AssertException(file, line, ss.str());				
 	}		
 	mr_utils::ResetStringStream(buffer);
 	mr_utils::ResetStringStream(userMsg);
@@ -49,7 +49,7 @@ void IsFalse(
 	CreateMsg(ss, file, line, userMsg);
 
 	if (!MrTest::CompareEqual(false, condition, buffer, ss.str())) {
-		throw mr_utils::mr_exception(file, line, ss.str());				
+		throw MrTest::AssertException(file, line, ss.str());				
 	}			
 	mr_utils::ResetStringStream(buffer);
 	mr_utils::ResetStringStream(userMsg);
@@ -63,7 +63,7 @@ CPPTESCASE_API void Fail(
 	ss << _L_("User Forced Fail ");	
 	CreateMsg(ss, file, line, userMsg);
 	buffer << ss.str();
-	throw mr_utils::mr_exception(file, line, ss.str());				
+	throw MrTest::AssertException(file, line, ss.str());				
 }
 
 
@@ -74,7 +74,7 @@ CPPTESCASE_API void FailOnNotThrow(
 	ss << _L_("Test Expected Exception to be Thrown ");	
 	CreateMsg(ss, file, line, userMsg);
 	buffer << ss.str();
-	throw mr_utils::mr_exception(file, line, ss.str());				
+	throw MrTest::AssertException(file, line, ss.str());				
 }
 
 }
