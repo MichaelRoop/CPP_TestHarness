@@ -47,8 +47,14 @@ LIBDIR = lib
 UTILLIB = $(LIBDIR)/libutils.a
 
 
+DEFINES=-DCPPTESTUTILS_EXPORTS
+DEFINES+=-DMR_USE_WIDE_STR
+
 # User defined function for compile to make for each compact. 
-do-compile=$(CC) $(CFLAGS) $(INCLUDES) -c $1.cpp -o $1.o > stderr
+do-compile=$(CC) $(DEFINES) $(CFLAGS) $(INCLUDES) -c $1.cpp -o $1.o > stderr
+
+#do-compile=$(CC) $(DEFINES) $(CFLAGS) $(INCLUDES) -c $1.cpp -o $1.o > stderr
+
 
 
 # The following part of the makefile is generic; it can be used to 
@@ -87,9 +93,14 @@ $(UTILLIB): $(SRCS)
 #.cpp.o:
 #	$(CC) $(CFLAGS) $(INCLUDES) -c $<  -o $@
 
-clean: 
-	$(RM) $(OBJS)
-	$(RM) *~ $(UTILLIB)
+clean:
+	@echo ------------------------------------------------------------
+	@echo Cleaning House
+	@echo ------------------------------------------------------------
+	@rm $(OBJS)
+	@rm $(UTILLIB)
+		#$(RM) $(OBJS)
+		#$(RM) *~ $(UTILLIB)
 
 
 depend: $(SRCS)

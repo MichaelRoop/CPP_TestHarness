@@ -7,17 +7,30 @@
 #include <vector>
 
 // Think it applies to both nix and win32
-//#if defined(WIN32) 
+#if defined(WIN32)
 	#if defined(CPPTESTUTILS_EXPORTS)
 		#pragma message("Exporting CppTestUtils DLL Classes")
 		#define CPPTESTUTILS_API __declspec(dllexport)
-		#define EXP_TEMPLATE
+        #define EXP_TEMPLATE
 	#else
 		#pragma message("Importing CppTestUtils DLL Classes")
 		#define CPPTESTUTILS_API __declspec(dllimport)
 		#define EXP_TEMPLATE extern
 	#endif
+#else
+    #if defined(CPPTESTUTILS_EXPORTS)
+        #pragma message("Exporting CppTestUtils DLL Classes")
+        #define CPPTESTUTILS_API
+        #define EXP_TEMPLATE
+    #else
+        #pragma message("Importing CppTestUtils DLL Classes")
+        #define CPPTESTUTILS_API __declspec(dllimport)
+        #define EXP_TEMPLATE extern
+    #endif
+#endif
 
+
+//#if defined(WIN32)
    //disable warnings on 255 char debug symbols
     #pragma warning (disable : 4786)
    //disable warnings on extern before template instantiation
@@ -38,6 +51,8 @@
 //#	pragma message("*** WIN32 Not defined ***")
 //#	define CPPTESTUTILS_EXPORTS
 //#	define EXP_TEMPLATE
+//#endif
+
 //#endif
 
 	// TODO - figure out a way to get the string npos exported. It will cause link failures in with classes using the npos or substring
