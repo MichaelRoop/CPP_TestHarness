@@ -44,11 +44,13 @@ public:
 	// TEST_EQUAL test with equal values
 	void TestEqual_Equal() { 
 
+		//throw std::exception("What the ....");
+
 		//TEST_FALSE(this, true, L("Blaaaaaah"));
 
 		// sample devide by zero fault
-		int x = 0;
-		int i = 10 / x;
+		//int x = 0;
+		//int i = 10 / x;
 
 
 		bool thrown = false;
