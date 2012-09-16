@@ -11,9 +11,15 @@ CC = gcc
 
 # define any compile-time flags
 CFLAGS = -c
+CFLAGS += -fPIC
+CFLAGS += -fno-stack-protector
 
 # define any archive (static lib) flags
-ARFLAGS=rv
+#ARFLAGS=rv
+
+# define any shared object flags
+#CXXFLAGS += -fPIC
+#CXXFLAGS += -O3
 
 # define any directories containing header files other than /usr/include
 INCLUDES =-Iinclude
@@ -24,12 +30,18 @@ INCLUDES =-Iinclude
 
 # define the CPP source files
 SRCS = \
-	source/mr_string.cpp							\
 	source/mr_exception.cpp							\
+	source/mr_singleton.cpp							\
+	source/mr_sstream.cpp							\
+	source/mr_string.cpp							\
+	source/mr_staticTimer.cpp						\
 	source/exceptions/mr_fileException.cpp			\
 	source/exceptions/mr_pointerException.cpp		\
-	source/mr_singleton.cpp							\
-	source/mr_staticTimer.cpp
+	source/IniReader/mr_ini_node.cpp				\
+	source/IniReader/mr_ini_section.cpp				\
+	source/IniReader/mr_iniInputLine.cpp			\
+	source/IniReader/mr_ini_file.cpp				\
+
 
 # define the CPP object files 
 #
@@ -44,7 +56,8 @@ OBJS = $(SRCS:.cpp=.o)
 LIBDIR = lib
 
 # define the static lib file 
-UTILLIB = $(LIBDIR)/libutils.a
+#UTILLIB = $(LIBDIR)/libutils.a
+UTILLIB = $(LIBDIR)/libutils.so
 
 
 DEFINES=-DCPPTESTUTILS_EXPORTS
@@ -63,7 +76,7 @@ do-compile=$(CC) $(DEFINES) $(CFLAGS) $(INCLUDES) -c $1.cpp -o $1.o > stderr
 .PHONY: depend clean
 
 all: $(UTILLIB)
-	@echo  Simple compiler named libutils.a has been compiled
+	@echo  Simple compiler named libutils.so has been compiled
 
 
 # rule to archive all of the object files into the static lib
@@ -80,11 +93,23 @@ $(UTILLIB): $(SRCS)
 	@echo ------------------------------------------------------------
 	
 	
+	#@echo ------------------------------------------------------------
+	#@echo Creating lib
+	#$(AR) $(ARFLAGS) $@ $(OBJS)
+	#@echo ------------------------------------------------------------
+
 	@echo ------------------------------------------------------------
-	@echo Creating lib
-	$(AR) $(ARFLAGS) $@ $(OBJS)	
+	@echo Creating Shared Object
+	ld -shared -soname $@ -o $@ $(OBJS)
 	@echo ------------------------------------------------------------
 
+
+#	ld -shared -soname $@ -o $@ /usr/lib/gcc/i686-linux-gnu/4.6.3/libgcc_s.so -lc -fno-stack-protector $(OBJS)
+#	ld -shared -fno-stack-protector -soname $@ -o $@  $(OBJS)
+#ld -shared -lc -fno-stack-protector -soname $@ -o $@  $(OBJS)
+
+
+# TODO - lookup what the no-stack-protector might be doing
 
 # this is a suffix replacement rule for building .o's from .cpp's
 # it uses automatic variables $<: the name of the prerequisite of
@@ -97,10 +122,8 @@ clean:
 	@echo ------------------------------------------------------------
 	@echo Cleaning House
 	@echo ------------------------------------------------------------
-	@rm $(OBJS)
-	@rm $(UTILLIB)
-		#$(RM) $(OBJS)
-		#$(RM) *~ $(UTILLIB)
+	$(RM) $(UTILLIB)
+	$(RM) $(OBJS)
 
 
 depend: $(SRCS)

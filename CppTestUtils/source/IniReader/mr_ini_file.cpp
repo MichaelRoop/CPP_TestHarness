@@ -78,8 +78,13 @@ void iniFile::init( const iniFile& obj )
 bool iniFile::load(const mr_utils::mr_string& filename )
 {
 	m_sections.clear();
+#if defined(_WIN32)
+    // The wchar_t for filename is a MS extension
+    mr_utils::mr_ifstream  script(filename.c_str());
+#else
+    mr_utils::mr_ifstream  script(mr_utils::ToCharPtr(filename).c_str());
+#endif
 
-	mr_utils::mr_ifstream  script( filename.c_str() );
 	mr_utils::mr_stringstream ss;
 	mr_utils::ToStream( ss, filename ) << L( " cannot be opened" );
 	mr_utils::mr_exception::assertCondition( script.is_open(), FL, ss.str() );
