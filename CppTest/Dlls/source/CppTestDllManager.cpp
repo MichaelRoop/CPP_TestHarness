@@ -27,8 +27,9 @@
 #	define DLL_HANDLE_NULL 0
 #	define OPEN_DLL(__dll_name__) dlopen(mr_utils::ToCharPtr((__dll_name__)).c_str(), RTLD_NOW)
 #	define FREE_DLL_HANDLE(__dll_handle__) dlclose((__dll_handle__)) 
+#	define GET_DLL_FUNC_PTR(__dll_handle__,__func_name__) dlsym((__dll_handle__),(__func_name__))
 #else
-#   pragma message("*** Neither WIN32 or Linux defined ***")
+#   error *** Neither WIN32 or Linux defined ***
 #endif
 
 
@@ -43,10 +44,10 @@ typedef void (__cdecl *ptrFunc)();
 #endif
 
 // functors ------------------------------------------------------------------
-#if defined(_WIN32)
 // Functor which call the export function on the DLL that creates an instance 
 // of the test fixture which causes it to auto-register itself with the test
 // engine.  The export functions were created by the REGISTER_FIXTURE macro
+
 class ExecDllFunctionFunctor {
 public:
 	ExecDllFunctionFunctor(DLL_HANDLE handle) : m_handle(handle) {
@@ -61,7 +62,6 @@ public:
 private:
 	DLL_HANDLE m_handle;
 };
-#endif
 
 // End of functors -----------------------------------------------------------
 
@@ -113,15 +113,12 @@ void DllManager::Unload() {
 
 
 void DllManager::ParseHeaderAndLoad(const mr_utils::mr_string& dllName) {
-#if defined(_WIN32)
 	std::vector<std::string> funcNames = this->GetMethodNames(dllName);
 	std::for_each(
 		funcNames.begin(), 
 		funcNames.end(), 
 		ExecDllFunctionFunctor(this->m_dllHandle));
-#endif
 }
-
 
 
 std::vector<std::string> DllManager::GetMethodNames(const mr_utils::mr_string& dllName) {
@@ -168,7 +165,14 @@ std::vector<std::string> DllManager::GetMethodNames(const mr_utils::mr_string& d
 	}
 	FreeLibrary(handle);
 #else
-    // TODO - Called defined exported method in DLL to register the test cases
+    // Temporary measure until parsing of DLL ELF headers is done.
+    // We will call a defined exported method in DLL to register the test cases
+    // All registration macros in the method will be executed and their test
+    // cases will self register with the TestEngine
+    //funcNames.push_back(std::string("__nonWinCutTestCaseRegistrationMethod__"));
+
+    // TODO - for now we will try the __attribute__((constructor)) to emulate the
+    // DllMain auto load for linux
 
 #endif
 

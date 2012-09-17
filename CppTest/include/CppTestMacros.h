@@ -48,6 +48,41 @@ MrTest::Engine::Instance().RegisterCase( _fixtureClass_ );	\
 #endif
 
 
+//// This is for an export that we would call
+//
+//// For OSs that do not have the code yet to parse the DLL headers we can use a known exported
+//// function name in order to call the registration methods
+//#define NON_PARSED_HEADER_REGISTER_BLOCK_START												\
+//	extern "C" {																			\
+//		__declspec(dllexport) void __cdecl __nonWinCutTestCaseRegistrationMethod__() {		
+//
+//
+//#define NON_PARSED_HEADER_REGISTER_BLOCK_END												\
+//		}																					\
+//	}																						\
+
+
+// THis is for the linux autoload
+#if defined(__linux) || defined(_linux_)
+#	define NON_PARSED_HEADER_REGISTER_BLOCK_START									\
+	void __attribute__ ((constructor)) __nonWinCutTestCaseRegistrationMethod__(void);	\
+	void __nonWinCutTestCaseRegistrationMethod__(void) {								\		
+#else 
+#	define NON_PARSED_HEADER_REGISTER_BLOCK_START									\
+	void __nonWinCutTestCaseRegistrationMethod__() {			
+#endif
+
+
+#define NON_PARSED_HEADER_REGISTER_BLOCK_END	}
+
+
+
+
+
+
+//__nonWinCutTestCaseRegistrationMethod__
+
+
 
 // Register the class void method as the fixture setup method
 #define FIXTURE_SETUP( _fixture_,  _setup_ )		\
