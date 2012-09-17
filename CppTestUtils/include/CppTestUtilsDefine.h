@@ -17,19 +17,23 @@
 		#define CPPTESTUTILS_API __declspec(dllimport)
 		#define EXP_TEMPLATE extern
 	#endif
-#else
+#elif defined(__linux) || defined(_linux_)
     #if defined(CPPTESTUTILS_EXPORTS)
         #pragma message("Exporting CppTestUtils DLL Classes")
         #define CPPTESTUTILS_API
         #define EXP_TEMPLATE
     #else
         #pragma message("Importing CppTestUtils DLL Classes")
-        #define CPPTESTUTILS_API __declspec(dllimport)
+        #define CPPTESTUTILS_API
         #define EXP_TEMPLATE extern
     #endif
+#else
+#   pragma message("*** Neither WIN32 or Linux defined ***")
 #endif
 
+#if defined(_WIN32)
 
+//#if defined(CPPTESTUTILS_EXPORTS)
 //#if defined(WIN32)
    //disable warnings on 255 char debug symbols
     #pragma warning (disable : 4786)
@@ -53,7 +57,10 @@
 //#	define EXP_TEMPLATE
 //#endif
 
+#endif
+
 //#endif
+
 
 	// TODO - figure out a way to get the string npos exported. It will cause link failures in with classes using the npos or substring
 

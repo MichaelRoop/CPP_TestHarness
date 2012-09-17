@@ -14,15 +14,19 @@ CFLAGS = -c
 CFLAGS += -fPIC
 CFLAGS += -fno-stack-protector
 
-# define any archive (static lib) flags
-#ARFLAGS=rv
-
-# define any shared object flags
-#CXXFLAGS += -fPIC
-#CXXFLAGS += -O3
-
 # define any directories containing header files other than /usr/include
 INCLUDES =-Iinclude
+INCLUDES +=-ICore/include
+INCLUDES +=-IDlls/include
+INCLUDES +=-IExceptions/include
+INCLUDES +=-IFactories/include
+INCLUDES +=-ILogging/include
+INCLUDES +=-IOutputs/include
+INCLUDES +=-IScriptReader/include
+INCLUDES +=-I../CppTestUtils/include
+
+#INCLUDES +=-Iinclude
+
 
 # define library paths in addition to /usr/lib
 #   specify path using -Lpath, something like:
@@ -30,17 +34,58 @@ INCLUDES =-Iinclude
 
 # define the CPP source files
 SRCS = \
-	source/mr_exception.cpp							\
-	source/mr_singleton.cpp							\
-	source/mr_sstream.cpp							\
-	source/mr_string.cpp							\
-	source/mr_staticTimer.cpp						\
-	source/exceptions/mr_fileException.cpp			\
-	source/exceptions/mr_pointerException.cpp		\
-	source/IniReader/mr_ini_node.cpp				\
-	source/IniReader/mr_ini_section.cpp				\
-	source/IniReader/mr_iniInputLine.cpp			\
-	source/IniReader/mr_ini_file.cpp				\
+	Core/source/CppTestAssert.cpp							\
+	Core/source/CppTestCase.cpp							\
+	Core/source/CppTestCaseHolder.cpp							\
+	Core/source/CppTestCompareFunctions.cpp							\
+	Core/source/CppTestEngine.cpp							\
+	Core/source/CppTestFixture.cpp							\
+	Core/source/CppTestFixtureInfoObject.cpp							\
+	Core/source/CppTestFixtureTestCaseNames.cpp							\
+	Core/source/CppTestInfoObject.cpp							\
+	Core/source/CppTestListBuilder.cpp							\
+	Core/source/CppTestRunSummary.cpp							\
+	Core/source/MrTestEngineImplementation.cpp							\
+	Core/source/MrTestListBuilderFactory.cpp							\
+	Core/source/MrTestParamParser.cpp							\
+	Core/source/MrTestVectorTestCaseNamesReader.cpp							\
+	Dlls/source/CppTestDllManager.cpp							\
+	Exceptions/source/CppTestScriptException.cpp							\
+	Exceptions/source/MrTestAssertException.cpp							\
+	Factories/source/CppTestLogFactory.cpp							\
+	Factories/source/CppTestLogInitialiserFactory.cpp							\
+	Factories/source/CppTestLogOutputFactory.cpp							\
+	Logging/source/CppTestBuildColumnInfoString.cpp							\
+	Logging/source/CppTestBuildColumnValueString.cpp							\
+	Logging/source/CppTestBuildConsoleSummaryString.cpp							\
+	Logging/source/CppTestBuildSummaryColumnValueString.cpp							\
+	Logging/source/CppTestBuildTestCaseColumnValueString.cpp							\
+	Logging/source/CppTestColumnBuilder.cpp							\
+	Logging/source/CppTestIniLogInitialiser.cpp							\
+	Logging/source/CppTestLog.cpp							\
+	Logging/source/CppTestLogEngine.cpp							\
+	Logging/source/CppTestSimpleLog.cpp							\
+	Logging/source/CppTestSqlBuilder.cpp							\
+	Logging/source/CppTestSqlLog.cpp							\
+	Outputs/source/CppTestConsoleOutput.cpp							\
+	Outputs/source/CppTestFileOutput.cpp							\
+	Outputs/source/CppTestOdbcOutput.cpp							\
+	ScriptReader/source/CppTestFileScriptReader.cpp							\
+	ScriptReader/source/MrTestCommandLineReader.cpp							\
+	ScriptReader/source/MrTestScriptReaderBase.cpp							\
+	ScriptReader/source/MrTestVectorLineReader.cpp							\
+
+
+#	source/.cpp							\
+#	source/.cpp							\
+#	source/.cpp							\
+#	source/.cpp							\
+#	source/.cpp							\
+#	source/.cpp							\
+#	source/.cpp							\
+#	source/.cpp							\
+#	source/.cpp							\
+#	source/.cpp							\
 
 
 # define the CPP object files 
@@ -55,12 +100,11 @@ OBJS = $(SRCS:.cpp=.o)
 # folder for lib file.
 LIBDIR = lib
 
-# define the static lib file 
-#UTILLIB = $(LIBDIR)/libutils.a
-UTILLIB = $(LIBDIR)/libutils.so
+# define the shared object file
+UTILLIB = $(LIBDIR)/libmr_test.so
 
 
-DEFINES=-DCPPTESTUTILS_EXPORTS
+DEFINES+=-DCPPTESTCASE_EXPORTS
 DEFINES+=-DMR_USE_WIDE_STR
 
 # User defined function for compile to make for each compact. 
@@ -76,7 +120,7 @@ do-compile=$(CC) $(DEFINES) $(CFLAGS) $(INCLUDES) -c $1.cpp -o $1.o > stderr
 .PHONY: depend clean
 
 all: $(UTILLIB)
-	@echo  Simple compiler named libutils.so has been compiled
+	@echo  Simple compiler named libmrtest.so has been compiled
 
 
 # rule to archive all of the object files into the static lib

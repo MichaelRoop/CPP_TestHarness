@@ -80,10 +80,10 @@ protected:
 	std::vector< mr_utils::SharedPtr<MrTest::ILog> >	m_logs; ///< Vector of derived logger objects.
 };
 
+} // end namespace
+
 // Force export
 CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator< mr_utils::SharedPtr<MrTest::LogEngine> >;
 CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector< mr_utils::SharedPtr<MrTest::LogEngine> >;
-
-}
 
 #endif

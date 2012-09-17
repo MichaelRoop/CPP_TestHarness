@@ -114,21 +114,10 @@ public:
 	mr_exception() {}
 };
 
-
 }
 
 #include <vector>
 EXP_TEMPLATE template class CPPTESTUTILS_API std::allocator<mr_utils::mr_exception>;
 EXP_TEMPLATE template class CPPTESTUTILS_API std::vector<mr_utils::mr_exception>;
-
-//#include <memory>
-//EXP_TEMPLATE template class CPPTESTUTILS_API std::shared_ptr<mr_utils::mr_exception>;
-//EXP_TEMPLATE template class CPPTESTUTILS_API std::vector<mr_utils::mr_exception>;
-
-//EXP_TEMPLATE template class CPPTESTUTILS_API std::char_traits<mr_utils::mr_exception>;
-
-
-// TODO - Force load 
-
 
 #endif

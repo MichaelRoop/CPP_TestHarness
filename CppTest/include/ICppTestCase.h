@@ -122,5 +122,4 @@ private:
 CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<MrTest::ICase*>;
 CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<MrTest::ICase*>;
 
-
 #endif

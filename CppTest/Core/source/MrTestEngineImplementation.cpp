@@ -76,7 +76,7 @@ public:
 	}
 
 	void operator () (const MrTest::DataLoggedEvent logEvent) {
-		mr_utils::mr_pointerException::ptrAssert(logEvent, _FL_ );
+        //mr_utils::mr_pointerException::ptrAssert(static_cast<void*>(logEvent), _FL_ );
 		(*logEvent)(this->m_case);
 	}
 
@@ -92,7 +92,7 @@ public:
 	}
 
 	void operator () (const MrTest::TestRunSummaryData summaryEvent) {
-		mr_utils::mr_pointerException::ptrAssert(summaryEvent, _FL_ );
+        //mr_utils::mr_pointerException::ptrAssert(static_cast<void*>(summaryEvent), _FL_ );
 		(*summaryEvent)((*this->m_summary));
 	}
 
@@ -284,13 +284,13 @@ std::vector<mr_utils::SharedPtr<MrTest::IFixutureTestCaseNames> > EngineImplemen
 
 
 void EngineImplementation::RegisterLoggedEvent(MrTest::DataLoggedEvent loggedCallbackEvent) {
-	mr_utils::mr_pointerException::ptrAssert(loggedCallbackEvent, _FL_);
+    //mr_utils::mr_pointerException::ptrAssert(static_cast<void*>(loggedCallbackEvent), _FL_);
 	this->m_logEvents.push_back(loggedCallbackEvent);
 }
 
 
 void EngineImplementation::RegisterSummaryEvent(MrTest::TestRunSummaryData summrayCallbackEvent) {
-	mr_utils::mr_pointerException::ptrAssert(summrayCallbackEvent, _FL_);
+    //mr_utils::mr_pointerException::ptrAssert(static_cast<void*>(summrayCallbackEvent), _FL_);
 	this->m_summaryEvents.push_back(summrayCallbackEvent);
 }
 
@@ -320,12 +320,14 @@ void EngineImplementation::RunSelectFixtureTests(const mr_utils::mr_string& fixt
 				}
 				else {
 					// Test found but marked disabled
-					this->LogResults(DisabledTestData((*itFixture)->Name(), name));
+                    DisabledTestData dtd((*itFixture)->Name(), name);
+                    this->LogResults(dtd);
 				}
 			}
 			else {
 				// test not found by name
-				this->LogResults(NonExistantTestData((*itFixture)->Name(), name));
+                NonExistantTestData netd((*itFixture)->Name(), name);
+                this->LogResults(netd);
 			}
 		}
 		// Last test in fixture. Need to close off the fixture
@@ -349,7 +351,8 @@ void EngineImplementation::RunAllFixtureTests(const mr_utils::mr_string& fixture
 				this->LogResults((*itFixture)->CurrentTestCase());
 			}
 			else {
-				this->LogResults(NonExistantTestData((*itFixture)->Name(), *itTestNames));
+                NonExistantTestData netd((*itFixture)->Name(), *itTestNames);
+                this->LogResults(netd);
 			}
 		}
 		// Last test in fixture. Need to close off the fixture

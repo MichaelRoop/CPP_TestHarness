@@ -88,9 +88,9 @@ public:
 
 };
 
+} // end namespace
+
 CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator< mr_utils::SharedPtr<MrTest::ILog> >;
 CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector< mr_utils::SharedPtr<MrTest::ILog> >;
-
-} // end namespace
 
 #endif

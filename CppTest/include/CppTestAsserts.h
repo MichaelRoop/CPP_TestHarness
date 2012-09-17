@@ -19,6 +19,17 @@
 
 namespace MrTest {
 
+
+
+/// @brief	Create a message with file and line and possibly appending user message
+///
+/// @param	buffer	The message buffer to received the results.
+/// @param	file	The file where the method was executing
+/// @param	line	The line being executed
+/// @param	userMsg	The user message.
+CPPTESCASE_API void CreateMsg(mr_utils::mr_stringstream& msgBuffer, const char* file, int line, mr_utils::mr_stringstream& userMsg);
+
+
 /// @brief	Compares two values and asserts if different after a message is written
 ///
 /// @tparam	T			The type of the expected and actual value.
@@ -67,15 +78,6 @@ void AreNotEqual(
 	mr_utils::ResetStringStream(buffer);
 	mr_utils::ResetStringStream(userMsg);
 }
-
-
-/// @brief	Create a message with file and line and possibly appending user message
-///
-/// @param	buffer	The message buffer to received the results.
-/// @param	file	The file where the method was executing
-/// @param	line	The line being executed
-/// @param	userMsg	The user message.
-CPPTESCASE_API void CreateMsg(mr_utils::mr_stringstream& msgBuffer, const char* file, int line, mr_utils::mr_stringstream& userMsg);
 
 
 /// @brief	Test if a condigion is true or otherwise fail and log results

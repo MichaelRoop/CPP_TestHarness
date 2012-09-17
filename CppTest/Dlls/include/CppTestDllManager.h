@@ -19,7 +19,7 @@
 	typedef HINSTANCE DLL_HANDLE;
 #else
 #	pragma message("WIN32 is not defined")
-#	error Faild compilation Nix section not yet defined
+//#	error Faild compilation Nix section not yet defined
 	typedef void* DLL_HANDLE;
 #endif
 

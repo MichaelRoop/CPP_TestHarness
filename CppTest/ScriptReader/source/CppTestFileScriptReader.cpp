@@ -28,8 +28,7 @@ FileScriptReader::FileScriptReader(
 void FileScriptReader::Open() {
 	mr_utils::mr_pointerException::ptrAssert(this->m_filename.c_str(), _FL_);
 	this->FileAssert(!this->m_filename.empty(), _FL_, _L_("Empty File Name"));
-
-	this->m_scriptStream.open(m_filename.c_str());
+    this->m_scriptStream.open(mr_utils::ToCharPtr(m_filename).c_str());
 	this->FileAssert(this->m_scriptStream.is_open(), _FL_, _L_("File not open"));
 }
 

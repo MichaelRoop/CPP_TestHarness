@@ -24,9 +24,12 @@ namespace MrTest {
 
 //odbcOutput::odbcOutput( const mr_utils::mr_string&, const mr_utils::mr_string& )
 OdbcOutput::OdbcOutput(mr_utils::SharedPtr<MrTest::ILogInitialiser>& initialiser)
-:	m_odbcEnv(SQL_NULL_HENV),
+:
+  #if defined(_WIN32)
+  m_odbcEnv(SQL_NULL_HENV),
 	m_odbcHdbc(SQL_NULL_HDBC),
 	m_odbcVersion(0),
+  #endif
 	m_connectTimeout(0) {
 	initialiser->Load();
 	this->m_dsn = initialiser->GetOdbcDsnName();
@@ -39,6 +42,7 @@ OdbcOutput::OdbcOutput(mr_utils::SharedPtr<MrTest::ILogInitialiser>& initialiser
 
 bool OdbcOutput::InitOutput()
 {
+#if defined(_WIN32)
 	// Create the environment handle.
 	SQLRETURN ret = SQLAllocHandle(SQL_HANDLE_ENV, SQL_NULL_HANDLE, &m_odbcEnv);
 	if (ret != SQL_SUCCESS && ret != SQL_SUCCESS_WITH_INFO) {
@@ -86,6 +90,9 @@ bool OdbcOutput::InitOutput()
 		return this->FreeHandles();
 	}
 	return true;
+#else
+    return false;
+#endif
 }
 
 
@@ -95,6 +102,7 @@ void OdbcOutput::CloseOutput() {
 
 
 bool OdbcOutput::Write( const mr_utils::mr_string& str ) {
+#if defined (_WIN32)
 	mr_utils::mr_exception::assertCondition(this->m_odbcEnv != SQL_NULL_HENV, _FL_, _L_("No DB Connection"));
 
 	SQLHSTMT stmt;
@@ -129,10 +137,14 @@ bool OdbcOutput::Write( const mr_utils::mr_string& str ) {
 	SQLFreeHandle(SQL_HANDLE_STMT, stmt);
 
 	return ret == SQL_SUCCESS;
+#else
+    return false;
+#endif
 }
 
 
 bool OdbcOutput::FreeHandles() {
+#if defined(_WIN32)
 	// Start with connection then the environment.
 	if (this->m_odbcHdbc != SQL_NULL_HDBC) {
 		SQLDisconnect(this->m_odbcHdbc);
@@ -144,6 +156,7 @@ bool OdbcOutput::FreeHandles() {
 		SQLFreeHandle(SQL_HANDLE_DBC, this->m_odbcEnv );
 		this->m_odbcEnv = SQL_NULL_HENV;
 	}
+#endif
 	
 	return false;
 }

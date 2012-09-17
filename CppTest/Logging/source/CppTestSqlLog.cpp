@@ -30,11 +30,18 @@ SqlLog::SqlLog(
 	this->Init(initialiser);
 }
 
+// for nix
+//mr_utils::SharedPtr<MrTest::ILog> __createDummyLogForConstructor() {
+//    return mr_utils::SharedPtr<MrTest::ILog>();
+//}
+
+mr_utils::SharedPtr<MrTest::ILog> __dummyLogForConstructor;
+
 
 SqlLog::SqlLog( 
 	mr_utils::SharedPtr<MrTest::ILogOutput>&		output, 
-	mr_utils::SharedPtr<MrTest::ILogInitialiser>&	initialiser 
-):	MrTest::Log(output, mr_utils::SharedPtr<MrTest::ILog>()) {
+    mr_utils::SharedPtr<MrTest::ILogInitialiser>&	initialiser)
+    :   MrTest::Log(output, __dummyLogForConstructor) {
 	this->Init(initialiser);
 }
 

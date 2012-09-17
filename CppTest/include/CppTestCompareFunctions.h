@@ -17,6 +17,7 @@
 #include "mr_string.h"
 #include "mr_sstream.h"
 #include "mr_doCompare.h"
+#include "mr_toStream.h"
 
 #include <vector>
 

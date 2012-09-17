@@ -42,9 +42,9 @@ public:
 
 };
 
+} // end namespace
+
 CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<MrTest::IScriptReader*>;
 CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<MrTest::IScriptReader*>;
-
-} // end namespace
 
 #endif

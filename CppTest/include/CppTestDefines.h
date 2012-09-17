@@ -11,8 +11,7 @@
 #if !defined(CPP_TEST_DEFINES_H)
 #define CPP_TEST_DEFINES_H
 
-// This should apply both to win 32 and Nix
-//#if defined(WIN32) 
+#if defined(WIN32)
 #	if defined(CPPTESTCASE_EXPORTS)
 #		pragma message("Exporting CppTestCase DLL Classes")
 #		define CPPTESCASE_API __declspec(dllexport)
@@ -22,6 +21,21 @@
 #		define CPPTESCASE_API __declspec(dllimport)
 #		define CPPTESCASE_EXP_TEMPLATE extern
 #	endif
+#elif defined(__linux) || defined(_linux_)
+#	if defined(CPPTESTCASE_EXPORTS)
+#		pragma message("Exporting CppTestCase DLL Classes")
+#		define CPPTESCASE_API
+#		define CPPTESCASE_EXP_TEMPLATE
+#	else
+#		pragma message("Importing CppTestCase DLL Classes")
+#		define CPPTESCASE_API __declspec(dllimport)
+#		define CPPTESCASE_EXP_TEMPLATE extern
+#	endif
+#else
+#   pragma message("*** Neither WIN32 or Linux defined ***")
+#endif
+
+
 
    //disable warnings on 255 char debug symbols
 #	pragma warning (disable : 4786)

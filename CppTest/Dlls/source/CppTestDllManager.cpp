@@ -22,10 +22,13 @@
 #	define OPEN_DLL(__dll_name__) LoadLibrary((__dll_name__))
 #	define FREE_DLL_HANDLE(__dll_handle__) FreeLibrary((__dll_handle__))
 #	define GET_DLL_FUNC_PTR(__dll_handle__,__func_name__) GetProcAddress((__dll_handle__),(__func_name__))
-#else
+#elif defined(__linux) || defined(_linux_)
+#   include <dlfcn.h>
 #	define DLL_HANDLE_NULL 0
 #	define OPEN_DLL(__dll_name__) dlopen((__dll_name__), RTLD_NOW)
 #	define FREE_DLL_HANDLE(__dll_handle__) dlclose((__dll_handle__)) 
+#else
+#   pragma message("*** Neither WIN32 or Linux defined ***")
 #endif
 
 
@@ -33,10 +36,14 @@
 namespace MrTest {
 
 // typedef of an export function pointer
+#if defined(__linux) || defined(_linux_)
+typedef void (*ptrFunc)();
+#else
 typedef void (__cdecl *ptrFunc)();
+#endif
 
 // functors ------------------------------------------------------------------
-
+#if defined(_WIN32)
 // Functor which call the export function on the DLL that creates an instance 
 // of the test fixture which causes it to auto-register itself with the test
 // engine.  The export functions were created by the REGISTER_FIXTURE macro
@@ -54,6 +61,7 @@ public:
 private:
 	DLL_HANDLE m_handle;
 };
+#endif
 
 // End of functors -----------------------------------------------------------
 
@@ -71,7 +79,11 @@ void DllManager::Load(const mr_utils::mr_string& name) {
 	try {
 		// Load the DLL to trigger the dllMain. If using header parsing another handle 
 		// is opened just to read in the header information for export function names
-		this->m_dllHandle = OPEN_DLL(name.c_str());
+#if defined (_WIN32)
+        this->m_dllHandle = OPEN_DLL(name.c_str());
+#else
+        this->m_dllHandle = OPEN_DLL(mr_utils::ToCharPtr(name).c_str());
+#endif
 		this->ValidateDllOpen(this->m_dllHandle, name);
 		this->ParseHeaderAndLoad(name.c_str());
 	}
@@ -105,11 +117,13 @@ void DllManager::Unload() {
 
 
 void DllManager::ParseHeaderAndLoad(const mr_utils::mr_string& dllName) {
+#if defined(_WIN32)
 	std::vector<std::string> funcNames = this->GetMethodNames(dllName);
 	std::for_each(
 		funcNames.begin(), 
 		funcNames.end(), 
 		ExecDllFunctionFunctor(this->m_dllHandle));
+#endif
 }
 
 
@@ -158,6 +172,8 @@ std::vector<std::string> DllManager::GetMethodNames(const mr_utils::mr_string& d
 	}
 	FreeLibrary(handle);
 #else
+    // TODO - Called defined exported method in DLL to register the test cases
+
 #endif
 
 	return funcNames;

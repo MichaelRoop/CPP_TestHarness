@@ -69,10 +69,10 @@ private:
 
 };
 
+} // end namespace
+
 // Force export of class with std objects
 CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<MrTest::TestFixtureInfoObject*>;
 CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<MrTest::TestFixtureInfoObject*>;
-
-} // end namespace
 
 #endif

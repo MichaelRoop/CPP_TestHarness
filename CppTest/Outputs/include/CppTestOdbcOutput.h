@@ -28,8 +28,12 @@
 	#include <windows.h>
 #endif
 
+#if defined(_WIN32)
+// Temp until I can get the gcc versions
 //#include <sql.h>
 #include <sqlext.h>
+#endif
+
 #include "ICppTestLogInitialiser.h"
 
 
@@ -78,8 +82,10 @@ public:
 	bool Write( const mr_utils::mr_string& str );
 
 private:
+#if defined(_WIN32)
 	SQLHENV					m_odbcEnv;			///< ODBC Environment handle.
 	SQLHDBC					m_odbcHdbc;			///< ODBC DB Connection handle.
+#endif
 	mr_utils::mr_string		m_dsn;				///< ODBC DSN name.
 	mr_utils::mr_string		m_user;				///< User name for connection.
 	mr_utils::mr_string		m_authorisation;	///< Authorisation string, typicaly password.

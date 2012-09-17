@@ -116,9 +116,9 @@ private:
 
 };
 
+} // end namespace
+
 CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<MrTest::ScriptReaderBase*>;
 CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<MrTest::ScriptReaderBase*>;
-
-} // end namespace
 
 #endif

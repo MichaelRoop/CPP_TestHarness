@@ -161,10 +161,8 @@ private:  // temp to check for linking
 
 };
 
-
 } // end namespace MrTest
 
-////#include <vector>
 CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<MrTest::Fixture*>;
 CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<MrTest::Fixture*>;
 
