@@ -28,7 +28,7 @@
 #		define CPPTESCASE_EXP_TEMPLATE
 #	else
 #		pragma message("Importing CppTestCase DLL Classes")
-#		define CPPTESCASE_API __declspec(dllimport)
+#		define CPPTESCASE_API
 #		define CPPTESCASE_EXP_TEMPLATE extern
 #	endif
 #else

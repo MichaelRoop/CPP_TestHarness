@@ -38,8 +38,15 @@ public:
 	AssertException(const char*	file, int line, const mr_utils::mr_string&	msg);
 
 
+    /// @brief	Copy Constructor.
+    ///
+    /// @param	msg				The message explaining the exception.
+    AssertException(const AssertException& obj);
+
+
 	/// @brief	Destructor.
 	virtual ~AssertException() throw();
+
 
 };
 

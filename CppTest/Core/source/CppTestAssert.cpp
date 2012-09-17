@@ -10,7 +10,6 @@
 ///--------------------------------------------------------------------------------------
 #include "CppTestAsserts.h"
 #include "CppTestCompareFunctions.h"
-#include "MrTestAssertException.h"
 #include "mr_toStream.h"
 
 namespace MrTest {

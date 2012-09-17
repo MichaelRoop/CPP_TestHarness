@@ -19,6 +19,12 @@ AssertException::AssertException(const char* file, int line, const mr_utils::mr_
 	: mr_utils::mr_exception(file, line, msg)  {
 }
 
+AssertException::AssertException(const AssertException& obj) 
+    : mr_utils::mr_exception(obj) {
+}
+
+
+
 
 AssertException::~AssertException() throw() {
 }

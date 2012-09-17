@@ -8,8 +8,8 @@
 ///
 /// Copyright 2010 Michael Roop
 ///--------------------------------------------------------------------------------------
-#if !defined(MR__EXCEPTION_H)
-#define MR__EXCEPTION_H
+#if !defined(MR_EXCEPTION_H)
+#define MR_EXCEPTION_H
 
 #include "mr_string.h"
 #include <exception>
@@ -40,8 +40,7 @@ namespace mr_utils
 ///		}											\n
 ///
 ///--------------------------------------------------------------------------------------
-class CPPTESTUTILS_API mr_exception : public std::exception
-{
+class CPPTESTUTILS_API mr_exception : public std::exception {
 public:
 
 	/// @brief	Constructor.
@@ -49,7 +48,15 @@ public:
 	/// @param	file	The source code file where problem originates.
 	/// @param	line	The source code line where problem originates.
 	/// @param	msg		The message explaining the exception.
-	mr_exception( const char* file, int line, const mr_string& msg );
+	mr_exception(const char* file, int line, const mr_string& msg);
+
+
+	/// @brief	Copy Constructor.
+	///
+	/// @param	file	The source code file where problem originates.
+	/// @param	line	The source code line where problem originates.
+	/// @param	msg		The message explaining the exception.
+	mr_exception(const mr_exception& obj);
 
 
 	/// @brief	Destructor.
@@ -96,8 +103,7 @@ public:
 		bool				condition,
 		const char*			file, 
 		int					line, 
-		const mr_string&	msg
-	);
+		const mr_string&	msg);
 
 
 

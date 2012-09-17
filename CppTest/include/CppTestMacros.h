@@ -28,7 +28,7 @@ MrTest::Engine::Instance().RegisterCase( _fixtureClass_ );	\
 // with the engine. You can only register a fixture class once. Place this in the dllMain for those OS which do
 // not have DLL header parsing implemented
 #define REGISTER_FIXTURE_MAIN( _fixture_ )						\
-	_fixture_*  ##_fixture_##Instance  = new _fixture_(_L_((#_fixture_)));		\
+    _fixture_*  _fixture_##Instance  = new _fixture_(_L_(#_fixture_));		\
 
 // Dynamic loading of the fixture via a called export function. In windows the functions are discovered by parsing
 // the DLL header to extract export function names which are then called. This allows the macro to be placed in 
@@ -66,7 +66,7 @@ MrTest::Engine::Instance().RegisterCase( _fixtureClass_ );	\
 #if defined(__linux) || defined(_linux_)
 #	define NON_PARSED_HEADER_REGISTER_BLOCK_START									\
 	void __attribute__ ((constructor)) __nonWinCutTestCaseRegistrationMethod__(void);	\
-	void __nonWinCutTestCaseRegistrationMethod__(void) {								\		
+    void __nonWinCutTestCaseRegistrationMethod__(void) {
 #else 
 #	define NON_PARSED_HEADER_REGISTER_BLOCK_START									\
 	void __nonWinCutTestCaseRegistrationMethod__() {			
@@ -106,7 +106,7 @@ _fixture_->RegisterTestTeardown(static_cast<MrTest::IFixture::Ifixture_method_pt
 
 // Register the class void method as the test method
 #define REGISTER_TEST( _fixture_, _test_, _desc_ )												\
-_fixture_->RegisterTest(static_cast<MrTest::IFixture::Ifixture_method_ptr>( _test_ ), _L_((#_test_)), _L_((_desc_)) );			\
+_fixture_->RegisterTest(static_cast<MrTest::IFixture::Ifixture_method_ptr>( _test_ ), _L_(#_test_), _L_(_desc_) );			\
 
 
 //----------------------------------------------------------------------------------
@@ -172,13 +172,25 @@ do {																													\
 
 
 
+
+
+
+
 #define TEST_NOT_THROWS(_fixture_, _logic_)																			\
 	try {																											\
 		{																											\
 			_logic_																									\
 		}																											\
 	}																												\
-	catch (mr_utils::mr_exception& e) {																				\
+    catch (MrTest::AssertException& e) {																		\
+        MrTest::FailOnThrow(																						\
+            _FL_, (_fixture_)->CurrentTestCase().MsgBuffer, e, (_fixture_)->CurrentTestCase().EmbeddedMsgBuffer);	\
+    }																												\
+    catch (const MrTest::AssertException& e) {                                                                            \
+        MrTest::FailOnThrow(																						\
+            _FL_, (_fixture_)->CurrentTestCase().MsgBuffer, e, (_fixture_)->CurrentTestCase().EmbeddedMsgBuffer);	\
+    }																												\
+    catch (mr_utils::mr_exception& e) {																				\
 		MrTest::FailOnThrow(																						\
 			_FL_, (_fixture_)->CurrentTestCase().MsgBuffer, e, (_fixture_)->CurrentTestCase().EmbeddedMsgBuffer);	\
 	}																												\

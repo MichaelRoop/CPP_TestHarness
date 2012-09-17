@@ -13,9 +13,9 @@
 
 #include "CppTestDefines.h"
 #include "CppTestCompareFunctions.h"
+#include "MrTestAssertException.h"
 #include "mr_sstream.h"
 #include "mr_string.h"
-#include "mr_exception.h"
 
 namespace MrTest {
 
@@ -48,7 +48,7 @@ void AreEqual(
 	CreateMsg(ss, file, line, userMsg);
 
 	if (!MrTest::CompareEqual(expected, actual, buffer, ss.str())) {
-		throw mr_utils::mr_exception(file, line, ss.str());				
+        throw MrTest::AssertException(file, line, ss.str());
 	}																	
 	mr_utils::ResetStringStream(buffer);
 	mr_utils::ResetStringStream(userMsg);
@@ -73,7 +73,7 @@ void AreNotEqual(
 	CreateMsg(ss, file, line, userMsg);
 
 	if (!MrTest::CompareNotEqual(nonexpected, actual, buffer, ss.str())) {
-		throw mr_utils::mr_exception(file, line, ss.str());				
+        throw MrTest::AssertException(file, line, ss.str());
 	}		
 	mr_utils::ResetStringStream(buffer);
 	mr_utils::ResetStringStream(userMsg);
@@ -118,7 +118,7 @@ public:
 		ss << _L_("Did not Expected Unknown Exception ");	
 		MrTest::CreateMsg(ss, file, line, userMsg);
 		buffer << ss.str().c_str();
-		throw mr_utils::mr_exception(file, line, ss.str());				
+        throw MrTest::AssertException(file, line, ss.str());
 	}
 };
 
@@ -133,7 +133,7 @@ public:
 		ss << L("Did not Expected std::exception ") << exception.what() << _L_(" ");	
 		MrTest::CreateMsg(ss, file, line, userMsg);
 		buffer << ss.str().c_str();
-		throw mr_utils::mr_exception(file, line, ss.str());				
+        throw MrTest::AssertException(file, line, ss.str());
 	}
 };
 
@@ -147,7 +147,7 @@ public:
 		ss << L("Did not Expected mr_utils::mr_exception ") << exception.longMsg() << _L_(" ");	
 		MrTest::CreateMsg(ss, mr_utils::ToCharPtr(exception.fileName()).c_str(), exception.fileLine(), userMsg);
 		buffer << ss.str().c_str();
-		throw mr_utils::mr_exception(mr_utils::ToCharPtr(exception.fileName()).c_str(), exception.fileLine(), ss.str());				
+        throw MrTest::AssertException(mr_utils::ToCharPtr(exception.fileName()).c_str(), exception.fileLine(), ss.str());
 	}
 };
 
