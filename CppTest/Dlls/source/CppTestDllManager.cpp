@@ -19,13 +19,13 @@
 
 #if defined(WIN32)
 #	define DLL_HANDLE_NULL NULL
-#	define OPEN_DLL(__dll_name__) LoadLibrary((__dll_name__))
+#	define OPEN_DLL(__dll_name__) LoadLibrary((__dll_name__).c_str())
 #	define FREE_DLL_HANDLE(__dll_handle__) FreeLibrary((__dll_handle__))
 #	define GET_DLL_FUNC_PTR(__dll_handle__,__func_name__) GetProcAddress((__dll_handle__),(__func_name__))
 #elif defined(__linux) || defined(_linux_)
 #   include <dlfcn.h>
 #	define DLL_HANDLE_NULL 0
-#	define OPEN_DLL(__dll_name__) dlopen((__dll_name__), RTLD_NOW)
+#	define OPEN_DLL(__dll_name__) dlopen(mr_utils::ToCharPtr((__dll_name__)).c_str(), RTLD_NOW)
 #	define FREE_DLL_HANDLE(__dll_handle__) dlclose((__dll_handle__)) 
 #else
 #   pragma message("*** Neither WIN32 or Linux defined ***")
@@ -79,11 +79,7 @@ void DllManager::Load(const mr_utils::mr_string& name) {
 	try {
 		// Load the DLL to trigger the dllMain. If using header parsing another handle 
 		// is opened just to read in the header information for export function names
-#if defined (_WIN32)
-        this->m_dllHandle = OPEN_DLL(name.c_str());
-#else
-        this->m_dllHandle = OPEN_DLL(mr_utils::ToCharPtr(name).c_str());
-#endif
+        this->m_dllHandle = OPEN_DLL(name);
 		this->ValidateDllOpen(this->m_dllHandle, name);
 		this->ParseHeaderAndLoad(name.c_str());
 	}
