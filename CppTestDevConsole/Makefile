@@ -70,7 +70,7 @@ do-compile=$(CC) $(DEFINES) $(CFLAGS) $(INCLUDES) -c $1.cpp -o $1.o > stderr
 .PHONY: depend clean
 
 all: $(UTILLIB)
-	@echo  Simple compiler named libmrtest.so has been compiled
+	@echo  Simple compiler named ConsoleRunner has been compiled
 
 
 # rule to archive all of the object files into the static lib

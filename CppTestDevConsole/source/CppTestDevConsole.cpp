@@ -38,17 +38,18 @@ int main(int argc, char* argv[]) {
 		eng.RegisterLoggedEvent(MyLoggedEventHandler);
 		eng.RegisterSummaryEvent(MySummaryEventHandler);
 
+        std::vector<mr_utils::SharedPtr<MrTest::ITestFixtureInfoObject> > tests;
+
 		if (argParser.HasArg(MrTest::ParamParser::TEST_CASE_LINE)) {
-			eng.ProcessTestList(
-				MrTest::ListBuilderFactory::FromLine(
-					argParser.GetArg(MrTest::ParamParser::TEST_CASE_LINE)));
+            tests = MrTest::ListBuilderFactory::FromLine(
+                        argParser.GetArg(MrTest::ParamParser::TEST_CASE_LINE));
 		}
 		else if (argParser.HasArg(MrTest::ParamParser::TEST_CASE_LIST)) {
-			eng.ProcessTestList(
-				MrTest::ListBuilderFactory::FromFile(
-					argParser.GetArg(MrTest::ParamParser::TEST_CASE_LIST)));
-		}
-	
+            tests = MrTest::ListBuilderFactory::FromFile(
+                    argParser.GetArg(MrTest::ParamParser::TEST_CASE_LIST));
+        }
+
+        eng.ProcessTestList(tests);
 		eng.UnloadTests();
 	} 
 	catch( const MrTest::ScriptException e ) {
