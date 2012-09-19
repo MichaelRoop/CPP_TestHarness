@@ -100,8 +100,14 @@ OBJS = $(SRCS:.cpp=.o)
 # folder for lib file.
 LIBDIR = lib
 
+#until I can get groups and rights setup
+#LIBOPTDIR=/opt/cut_test/lib
+LIBOPTDIR=/home/michael/opt/cut_test/lib
+
 # define the shared object file
-UTILLIB = $(LIBDIR)/libmr_test.so
+LIBNAME=libcut_test.so
+UTILLIB = $(LIBDIR)/$(LIBNAME)
+#UTILLIB = $(LIBDIR)/libmr_test.so
 
 
 DEFINES+=-DCPPTESTCASE_EXPORTS
@@ -109,10 +115,6 @@ DEFINES+=-DMR_USE_WIDE_STR
 
 # User defined function for compile to make for each compact. 
 do-compile=$(CC) $(DEFINES) $(CFLAGS) $(INCLUDES) -c $1.cpp -o $1.o > stderr
-
-#do-compile=$(CC) $(DEFINES) $(CFLAGS) $(INCLUDES) -c $1.cpp -o $1.o > stderr
-
-
 
 # The following part of the makefile is generic; it can be used to 
 # build any static lib just by changing the definitions above and by
@@ -135,17 +137,23 @@ $(UTILLIB): $(SRCS)
 	@echo Compiling object files.
 	$(foreach i,$(SRCS:.cpp=),$(shell $(call do-compile,$i) ))
 	@echo ------------------------------------------------------------
-	
-	
-	#@echo ------------------------------------------------------------
-	#@echo Creating lib
-	#$(AR) $(ARFLAGS) $@ $(OBJS)
-	#@echo ------------------------------------------------------------
-
+	@echo
 	@echo ------------------------------------------------------------
 	@echo Creating Shared Object
-	ld -shared -soname $@ -o $@ $(OBJS)
+	$(CC) -shared -W1,-soname,$@.1 -o $@.1.0 $(OBJS)
 	@echo ------------------------------------------------------------
+
+
+#	@echo ------------------------------------------------------------
+#	@echo Creating Shared Object
+#	ld -shared -soname $@ -o $@ $(OBJS)
+#	@echo ------------------------------------------------------------
+
+
+	mkdir -p $(LIBOPTDIR)
+	mv $@.1.0 $(LIBOPTDIR)
+	ln -sf $(LIBOPTDIR)/$(LIBNAME).1.0 $(LIBOPTDIR)/$(LIBNAME)
+	ln -sf $(LIBOPTDIR)/$(LIBNAME).1.0 $(LIBOPTDIR)/$(LIBNAME).1
 
 
 #	ld -shared -soname $@ -o $@ /usr/lib/gcc/i686-linux-gnu/4.6.3/libgcc_s.so -lc -fno-stack-protector $(OBJS)
@@ -168,6 +176,9 @@ clean:
 	@echo ------------------------------------------------------------
 	$(RM) $(UTILLIB)
 	$(RM) $(OBJS)
+	$(RM) $(LIBOPTDIR)/$@
+	$(RM) $(LIBOPTDIR)/$@.1
+	$(RM) $(LIBOPTDIR)/$@
 
 
 depend: $(SRCS)
