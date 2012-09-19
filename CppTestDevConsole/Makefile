@@ -18,14 +18,6 @@ CFLAGS += -fno-stack-protector
 INCLUDES +=-I../CppTestUtils/include
 INCLUDES +=-I../CppTest/include
 
-#INCLUDES +=-ICore/include
-#INCLUDES +=-IDlls/include
-#INCLUDES +=-IExceptions/include
-#INCLUDES +=-IFactories/include
-#INCLUDES +=-ILogging/include
-#INCLUDES +=-IOutputs/include
-#INCLUDES +=-IScriptReader/include
-
 
 
 # define library paths in addition to /usr/lib
@@ -53,6 +45,14 @@ LIBDIR = lib
 # define the shared object file
 UTILLIB = $(LIBDIR)/cutConsoleRunner
 
+# the libs from the other Cut so
+CUT_LIBS+=-llibutils.so
+CUT_LIBS+=-llibmr_test.so
+
+
+LDFLAGS+=-L/mnt/hgfs/Dev/CPP_TestHarness/CppTestUtils/lib/
+LDFLAGS+=-L/mnt/hgfs/Dev/CPP_TestHarness/CppTest/lib/
+
 
 DEFINES+=-DMR_USE_WIDE_STR
 
@@ -61,7 +61,6 @@ DEFINES+=-DMR_USE_WIDE_STR
 do-compile=$(CC) $(DEFINES) $(CFLAGS) $(INCLUDES) -c $1.cpp -o $1.o > stderr
 
 #do-compile=$(CC) $(DEFINES) $(CFLAGS) $(INCLUDES) -c $1.cpp -o $1.o > stderr
-
 
 
 # The following part of the makefile is generic; it can be used to 
@@ -85,17 +84,20 @@ $(UTILLIB): $(SRCS)
 	@echo Compiling object files.
 	$(foreach i,$(SRCS:.cpp=),$(shell $(call do-compile,$i) ))
 	@echo ------------------------------------------------------------
-	
-	
-	#@echo ------------------------------------------------------------
-	#@echo Creating lib
-	#$(AR) $(ARFLAGS) $@ $(OBJS)
-	#@echo ------------------------------------------------------------
 
 	@echo ------------------------------------------------------------
-	@echo Creating Shared Object
-	ld -shared -soname $@ -o $@ $(OBJS)
+	@echo Linking into executable
+	$(CC) -o $@ $(OBJS)
 	@echo ------------------------------------------------------------
+
+
+#$(LDFLAGS) $(CUT_LIBS)
+
+
+#	@echo ------------------------------------------------------------
+#	@echo Creating Shared Object
+#	ld -shared -soname $@ -o $@ $(OBJS)
+#	@echo ------------------------------------------------------------
 
 
 #	ld -shared -soname $@ -o $@ /usr/lib/gcc/i686-linux-gnu/4.6.3/libgcc_s.so -lc -fno-stack-protector $(OBJS)
