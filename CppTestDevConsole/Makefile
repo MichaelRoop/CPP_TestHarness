@@ -46,12 +46,20 @@ LIBDIR = lib
 UTILLIB = $(LIBDIR)/cutConsoleRunner
 
 # the libs from the other Cut so
-CUT_LIBS+=-llibutils.so
-CUT_LIBS+=-llibmr_test.so
+LIBS+=-lcut_utils
+LIBS+=-lcut_test
+LIBS+=-lstdc++
+LIBS+=-ldl
+
+#LDFLAGS+=-L/mnt/hgfs/Dev/CPP_TestHarness/CppTestUtils/lib/
+#LDFLAGS+=-L/mnt/hgfs/Dev/CPP_TestHarness/CppTest/lib/
+
+#until I can get groups and rights setup
+#LDFLAGS=/opt/cut_test/lib
+LIBDIRS+=-L/home/michael/opt/cut_test/lib
+LIBDIRS+=-L/usr/lib/gcc/i686-linux-gnu/4.63
 
 
-LDFLAGS+=-L/mnt/hgfs/Dev/CPP_TestHarness/CppTestUtils/lib/
-LDFLAGS+=-L/mnt/hgfs/Dev/CPP_TestHarness/CppTest/lib/
 
 
 DEFINES+=-DMR_USE_WIDE_STR
@@ -87,7 +95,11 @@ $(UTILLIB): $(SRCS)
 
 	@echo ------------------------------------------------------------
 	@echo Linking into executable
-	$(CC) -o $@ $(OBJS)
+	$(CC) -o $@ $(OBJS) $(LIBDIRS) $(LIBS)
+
+
+
+
 	@echo ------------------------------------------------------------
 
 
