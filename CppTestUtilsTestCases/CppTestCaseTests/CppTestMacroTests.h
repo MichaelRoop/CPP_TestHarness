@@ -2,6 +2,8 @@
 #include "CppTestMacros.h"
 #include "mr_exception.h"
 
+#include <stdio.h>
+
 
 class MrTestMacroTests : public MrTest::Fixture {
 public:
@@ -9,7 +11,12 @@ public:
 	MrTestMacroTests(const mr_utils::mr_string& name) 
 		: MrTest::Fixture(name) {
 
+
+        printf("**********************\n");
+
+
 		ADD_TEST_FIXTURE(this);
+
 
 		// Register test case methods
 		REGISTER_TEST(this, &MrTestMacroTests::UserFail, "Forced fail by TEST_FAIL macro");
@@ -21,7 +28,9 @@ public:
 		REGISTER_TEST(this, &MrTestMacroTests::TestEqual_Equal, "TEST_EQUAL no error on nequal values");
 		REGISTER_TEST(this, &MrTestMacroTests::TestNotEqual_Equal, "TEST_NOT_EQUAL signals error on equal values");
 		REGISTER_TEST(this, &MrTestMacroTests::TestNotEqual_NotEqual, "TEST_NOT_EQUAL no error on unequal values");
-	}
+
+//        assert(0);
+    }
 	
 
 

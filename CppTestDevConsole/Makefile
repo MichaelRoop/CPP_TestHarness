@@ -20,7 +20,6 @@ INCLUDES +=-I../CppTest/include
 INCLUDES +=-I../CppTest/Core/include
 
 
-
 # define library paths in addition to /usr/lib
 #   specify path using -Lpath, something like:
 #LFLAGS = -L/home/newhall/lib  -L../lib
@@ -47,18 +46,25 @@ LIBDIR = lib
 UTILLIB = $(LIBDIR)/cutConsoleRunner
 
 # the libs from the other Cut so
-LIBS+=-lstdc++
+#LIBS+=-lstdc++
+#LIBS+=-lcut_utils
+#LIBS+=-ldl
+#LIBS+=-lcut_test
+
+
+LIBS+=-lcut_test
 LIBS+=-lcut_utils
 LIBS+=-ldl
-LIBS+=-lcut_test
+LIBS+=-lstdc++
 
-#LDFLAGS+=-L/mnt/hgfs/Dev/CPP_TestHarness/CppTestUtils/lib/
-#LDFLAGS+=-L/mnt/hgfs/Dev/CPP_TestHarness/CppTest/lib/
+
+
 
 #until I can get groups and rights setup
-#LDFLAGS=/opt/cut_test/lib
-LIBDIRS+=-L/home/michael/opt/cut_test/lib
-LIBDIRS+=-L/usr/lib/gcc/i686-linux-gnu/4.6.3
+#LIBDIRS+=-L/home/michael/opt/cut_test/lib
+#LIBDIRS+=-L/usr/lib/gcc/i686-linux-gnu/4.6.3
+LIBDIRS+=-L/usr/lib/gcc/i686-linux-gnu/4.6.3/
+LIBDIRS+=-L/opt/cut_test/lib/
 
 
 
@@ -103,7 +109,8 @@ $(UTILLIB): $(SRCS)
 	@echo Linking into executable
 #	ld -o $@ $(OBJS) $(LIBDIRS) $(LIBS)
 
-	$(CC) -o $@ $(OBJS) $(LIBDIRS) $(LIBS)
+#	$(CC) -o $@ $(OBJS) $(LIBDIRS) $(LIBS)
+	$(CC) $(OBJS) $(LIBDIRS) $(LIBS) -o $@
 
 
 

@@ -19,6 +19,8 @@
 #include "mr_defines.h"
 
 
+static std::string MAIN_DLL_REG_FUNC("__nonWinCutTestCaseRegistrationMethod__");
+
 // Adding the test fixture to the engine
 #define ADD_TEST_FIXTURE( _fixtureClass_ )					\
 MrTest::Engine::Instance().RegisterCase( _fixtureClass_ );	\
@@ -63,17 +65,22 @@ MrTest::Engine::Instance().RegisterCase( _fixtureClass_ );	\
 
 
 // THis is for the linux autoload
-#if defined(__linux) || defined(_linux_)
-#	define NON_PARSED_HEADER_REGISTER_BLOCK_START									\
-	void __attribute__ ((constructor)) __nonWinCutTestCaseRegistrationMethod__(void);	\
-    void __nonWinCutTestCaseRegistrationMethod__(void) {
-#else 
-#	define NON_PARSED_HEADER_REGISTER_BLOCK_START									\
-	void __nonWinCutTestCaseRegistrationMethod__() {			
-#endif
+//#if defined(__linux) || defined(_linux_)
+//#	define NON_PARSED_HEADER_REGISTER_BLOCK_START									\
+//    static void __nonWinCutTestCaseRegistrationMethod__(void) __attribute__ ((constructor));	\
+//    void __nonWinCutTestCaseRegistrationMethod__(void) {
+//#else
+//#	define NON_PARSED_HEADER_REGISTER_BLOCK_START									\
+//    void __nonWinCutTestCaseRegistrationMethod__() {
+//#endif
 
 
-#define NON_PARSED_HEADER_REGISTER_BLOCK_END	}
+//#	define NON_PARSED_HEADER_REGISTER_BLOCK_START									\
+extern "C" {																			\
+    void __nonWinCutTestCaseRegistrationMethod__() {			\
+
+
+#define NON_PARSED_HEADER_REGISTER_BLOCK_END	} }
 
 
 

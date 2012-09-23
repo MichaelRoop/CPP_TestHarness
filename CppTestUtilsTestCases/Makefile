@@ -98,6 +98,17 @@ $(UTILLIB): $(SRCS)
 	@echo ------------------------------------------------------------
 	@echo Creating Shared Object
 	ld -shared -soname $@ -o $@ $(OBJS)
+#	ld -shared -init __nonWinCutTestCaseRegistrationMethod__ -soname $@ -o $@ $(OBJS)
+
+#	$(CC) -Wall -shared -fPIC -W1,soname $@ -o $@ $(INCLUDES) $(SRCS)
+
+#	$(CC) -shared -W1,-soname,$@ -o $@ $(OBJS)
+#	$(CC) -Wall -shared -fPIC -W1,-soname,$@ -o $@ $(OBJS)
+
+#this one may actually call the attr constructor on dll. but undefined symbols found
+#	$(CC) -Wall -shared -fPIC -o $@ $(INCLUDES) $(SRCS)
+
+
 	@echo ------------------------------------------------------------
 
 

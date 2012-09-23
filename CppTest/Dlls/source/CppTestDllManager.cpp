@@ -9,6 +9,7 @@
 /// Copyright 2012 Michael Roop
 ///--------------------------------------------------------------------------------------
 #include "CppTestDllManager.h"
+#include "CppTestMacros.h"
 #include "mr_sstream.h"
 #include "mr_exception.h"
 #include "mr_defines.h"
@@ -54,10 +55,25 @@ public:
 	}
 
 	void operator () (const std::string& s) {
-		//mr_cout << _L_("Calling:") << s.c_str() << std::endl;
+        mr_cout << _L_("Calling:") << s.c_str() << std::endl;
 		// Get the pointer, cast it to a function pointer and invoke
-		( (ptrFunc)( GET_DLL_FUNC_PTR(this->m_handle,s.c_str()) ) )();
-	}
+#if defined(_WIN32)
+        ( (ptrFunc)( GET_DLL_FUNC_PTR(this->m_handle,s.c_str()) ) )();
+#elif defined(__linux) || defined(_linux_)
+       dlerror();
+       ptrFunc func = (ptrFunc) GET_DLL_FUNC_PTR(this->m_handle,s.c_str());
+       char* err = dlerror();
+       if (err != NULL) {
+           mr_utils::mr_stringstream ss;
+           ss << L("Could not find function named:") << s.c_str() << L(" - ") << err;
+           mr_utils::mr_exception::assertCondition(false, _FL_, ss.str());
+       }
+
+       mr_cout << _L_("Retrieved the Calling:") << s.c_str() << std::endl;
+       (*func)();
+
+#endif
+    }
 
 private:
 	DLL_HANDLE m_handle;
@@ -79,21 +95,29 @@ void DllManager::Load(const mr_utils::mr_string& name) {
 	try {
 		// Load the DLL to trigger the dllMain. If using header parsing another handle 
 		// is opened just to read in the header information for export function names
+        mr_cout << L("Attempting open of ") << name.c_str() << std::endl;
         this->m_dllHandle = OPEN_DLL(name);
 		this->ValidateDllOpen(this->m_dllHandle, name);
 		this->ParseHeaderAndLoad(name.c_str());
 	}
-	catch (std::exception&) { // TODO - Get the message from the exception - need conversion to mr_string
-		this->m_dllHandle = DLL_HANDLE_NULL;
+    catch (mr_utils::mr_exception& e) {
+        throw;
+    }
+    catch (std::exception& e) { // TODO - Get the message from the exception - need conversion to mr_string
+        //this->m_dllHandle = DLL_HANDLE_NULL;
 		mr_utils::mr_stringstream ss;
-		ss << _L_("Exception on opening dll named:") << name;
+        // TODO - get linux error here before close
+        ss << _L_("Exception on opening dll named:") << name << L(" - ") << e.what();
+        this->Unload();
 		throw mr_utils::mr_exception(_FL_, ss.str());
 	}
 	catch (...) {
-		this->m_dllHandle = DLL_HANDLE_NULL;
+        //this->m_dllHandle = DLL_HANDLE_NULL;
 		mr_utils::mr_stringstream ss;
-		ss << _L_("Unkown Exception on opening dll named:") << name;
-		throw mr_utils::mr_exception(_FL_, ss.str());
+        // TODO - get linux error here before close
+        ss << _L_("Unkown Exception on opening dll named:") << name;
+        this->Unload();
+        throw mr_utils::mr_exception(_FL_, ss.str());
 	}
 }
 
@@ -113,6 +137,8 @@ void DllManager::Unload() {
 
 
 void DllManager::ParseHeaderAndLoad(const mr_utils::mr_string& dllName) {
+    mr_cout << L("ParseHeaderAndLoad") << std::endl;
+
 	std::vector<std::string> funcNames = this->GetMethodNames(dllName);
 	std::for_each(
 		funcNames.begin(), 
@@ -123,7 +149,8 @@ void DllManager::ParseHeaderAndLoad(const mr_utils::mr_string& dllName) {
 
 std::vector<std::string> DllManager::GetMethodNames(const mr_utils::mr_string& dllName) {
 	// TODO - resolve narrow and wide char here
-	
+    mr_cout << L("GetMethodNames") << std::endl;
+
 	std::vector<std::string> funcNames;
 
 	// The windows version loads the tests by export functions created by the macros
@@ -165,11 +192,13 @@ std::vector<std::string> DllManager::GetMethodNames(const mr_utils::mr_string& d
 	}
 	FreeLibrary(handle);
 #else
+    mr_cout << L("Pushing __nonWinCutTestCaseRegistrationMethod__ to names ") << std::endl;
+
     // Temporary measure until parsing of DLL ELF headers is done.
     // We will call a defined exported method in DLL to register the test cases
     // All registration macros in the method will be executed and their test
     // cases will self register with the TestEngine
-    //funcNames.push_back(std::string("__nonWinCutTestCaseRegistrationMethod__"));
+    funcNames.push_back(MAIN_DLL_REG_FUNC);
 
     // TODO - for now we will try the __attribute__((constructor)) to emulate the
     // DllMain auto load for linux
@@ -181,11 +210,22 @@ std::vector<std::string> DllManager::GetMethodNames(const mr_utils::mr_string& d
 
 
 void DllManager::ValidateDllOpen(DLL_HANDLE handle, const mr_utils::mr_string& name) {
-	if (handle == DLL_HANDLE_NULL) {
-		mr_utils::mr_stringstream ss;
+    mr_cout << L("Validating Open of ") << name.c_str() << std::endl;
+
+    if (handle == DLL_HANDLE_NULL) {
+        mr_cout << name.c_str() << L(" handle is null") << std::endl;
+        mr_utils::mr_stringstream ss;
 		ss << _L_("Could not open DLL ") << name;
+#if defined(__linux) || defined(_linux_)
+        char* err = dlerror();
+        if (err != NULL) {
+            ss << L(" - ") << err;
+        }
+#endif
+
 		mr_utils::mr_exception::assertCondition(false, _FL_, ss.str());
 	}
+    mr_cout << name.c_str() << L(" handle is ok") << std::endl;
 }
 
 
