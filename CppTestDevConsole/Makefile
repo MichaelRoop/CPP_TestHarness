@@ -17,6 +17,7 @@ CFLAGS += -fno-stack-protector
 # define any directories containing header files other than /usr/include
 INCLUDES +=-I../CppTestUtils/include
 INCLUDES +=-I../CppTest/include
+INCLUDES +=-I../CppTest/Core/include
 
 
 
@@ -46,10 +47,10 @@ LIBDIR = lib
 UTILLIB = $(LIBDIR)/cutConsoleRunner
 
 # the libs from the other Cut so
-LIBS+=-lcut_utils
-LIBS+=-lcut_test
 LIBS+=-lstdc++
+LIBS+=-lcut_utils
 LIBS+=-ldl
+LIBS+=-lcut_test
 
 #LDFLAGS+=-L/mnt/hgfs/Dev/CPP_TestHarness/CppTestUtils/lib/
 #LDFLAGS+=-L/mnt/hgfs/Dev/CPP_TestHarness/CppTest/lib/
@@ -57,7 +58,7 @@ LIBS+=-ldl
 #until I can get groups and rights setup
 #LDFLAGS=/opt/cut_test/lib
 LIBDIRS+=-L/home/michael/opt/cut_test/lib
-LIBDIRS+=-L/usr/lib/gcc/i686-linux-gnu/4.63
+LIBDIRS+=-L/usr/lib/gcc/i686-linux-gnu/4.6.3
 
 
 
@@ -94,9 +95,15 @@ $(UTILLIB): $(SRCS)
 	@echo ------------------------------------------------------------
 
 	@echo ------------------------------------------------------------
-	@echo Linking into executable
-	$(CC) -o $@ $(OBJS) $(LIBDIRS) $(LIBS)
+	@echo Objects $(OBJS)
+	@echo Libs $(LIBS)
+	@echo ------------------------------------------------------------
 
+	@echo ------------------------------------------------------------
+	@echo Linking into executable
+#	ld -o $@ $(OBJS) $(LIBDIRS) $(LIBS)
+
+	$(CC) -o $@ $(OBJS) $(LIBDIRS) $(LIBS)
 
 
 

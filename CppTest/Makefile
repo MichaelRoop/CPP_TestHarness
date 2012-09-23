@@ -101,8 +101,8 @@ OBJS = $(SRCS:.cpp=.o)
 LIBDIR = lib
 
 #until I can get groups and rights setup
-#LIBOPTDIR=/opt/cut_test/lib
-LIBOPTDIR=/home/michael/opt/cut_test/lib
+LIBOPTDIR=/opt/cut_test/lib
+#LIBOPTDIR=/home/michael/opt/cut_test/lib
 
 # define the shared object file
 LIBNAME=libcut_test.so
@@ -176,9 +176,11 @@ clean:
 	@echo ------------------------------------------------------------
 	$(RM) $(UTILLIB)
 	$(RM) $(OBJS)
-	$(RM) $(LIBOPTDIR)/$@
-	$(RM) $(LIBOPTDIR)/$@.1
-	$(RM) $(LIBOPTDIR)/$@
+	$(RM) $(LIBOPTDIR)/$(LIBNAME)
+	$(RM) $(LIBOPTDIR)/$(LIBNAME).1
+	$(RM) $(LIBOPTDIR)/$(LIBNAME).1.0
+
+
 
 
 depend: $(SRCS)

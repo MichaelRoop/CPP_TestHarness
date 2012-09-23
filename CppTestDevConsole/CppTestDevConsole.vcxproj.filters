@@ -13,9 +13,6 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="source\UtilsTests">
-      <UniqueIdentifier>{abde9007-788f-4bc0-93b6-4486a882fc94}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -25,15 +22,6 @@
   <ItemGroup>
     <ClCompile Include="source\CppTestDevConsole.cpp">
       <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="source\UtilsTests\mr_testSharedPtr.cpp">
-      <Filter>source\UtilsTests</Filter>
-    </ClCompile>
-    <ClCompile Include="source\UtilsTests\mr_util_str_token_tests.cpp">
-      <Filter>source\UtilsTests</Filter>
-    </ClCompile>
-    <ClCompile Include="source\UtilsTests\mr_util_str_trim_tests.cpp">
-      <Filter>source\UtilsTests</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

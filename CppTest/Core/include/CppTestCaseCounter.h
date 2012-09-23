@@ -11,7 +11,7 @@
 #if !defined(CPP_TEST_CASE_COUNTER_H)
 #define CPP_TEST_CASE_COUNTER_H
 
-#include "CppTestDefines.h"
+//#include "CppTestDefines.h"
 #include "ICppTestRunSummary.h"
 #include "mr_SharedPtr.h"
 #include "mr_string.h"
@@ -23,7 +23,7 @@ class ICase;
 ///--------------------------------------------------------------------------------------
 ///	@brief	Accumatalate summary information on test cases through a run
 ///--------------------------------------------------------------------------------------
-class CPPTESCASE_API CaseCounter {
+class /*CPPTESCASE_API*/ CaseCounter {
 public:
 
 	/// @brief	Constructor
@@ -83,7 +83,7 @@ public:
 } // end namespace 
 
 // Force export of std items
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<MrTest::CaseCounter*>;
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<MrTest::CaseCounter*>;
+//CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<MrTest::CaseCounter*>;
+//CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<MrTest::CaseCounter*>;
 
 #endif
