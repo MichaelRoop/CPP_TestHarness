@@ -36,6 +36,7 @@ INCLUDES +=-I../CppTestUtils/include
 SRCS = \
 	Core/source/CppTestAssert.cpp							\
 	Core/source/CppTestCase.cpp							\
+	Core/source/CppTestCaseCounter.cpp							\
 	Core/source/CppTestCaseHolder.cpp							\
 	Core/source/CppTestCompareFunctions.cpp							\
 	Core/source/CppTestEngine.cpp							\
