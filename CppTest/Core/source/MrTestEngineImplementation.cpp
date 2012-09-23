@@ -49,7 +49,7 @@ public:
 		return fixture->Name() == this->m_name;
 	}
 private:
-	const mr_utils::mr_string& m_name;
+    const mr_utils::mr_string m_name;
 };
 
 

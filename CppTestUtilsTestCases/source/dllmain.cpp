@@ -22,13 +22,13 @@ extern "C" {
         printf("*******************Load method of dll is called");
        // assert(0);
 
-        ////    REGISTER_FIXTURE_MAIN(TokenizerTests1);
-        ////    REGISTER_FIXTURE_MAIN(TokenizerTests2);
-        ////    REGISTER_FIXTURE_MAIN(UtilStrTrimTests);
-         //  REGISTER_FIXTURE_MAIN(MrTestMacroTests);
+        REGISTER_FIXTURE_MAIN(TokenizerTests1);
+        REGISTER_FIXTURE_MAIN(TokenizerTests2);
+        REGISTER_FIXTURE_MAIN(UtilStrTrimTests);
+        REGISTER_FIXTURE_MAIN(MrTestMacroTests);
 
 
-        MrTestMacroTests* mt = new MrTestMacroTests(L("MrTestMacroTests"));
+        //MrTestMacroTests* mt = new MrTestMacroTests(L("MrTestMacroTests"));
 
     }
 }

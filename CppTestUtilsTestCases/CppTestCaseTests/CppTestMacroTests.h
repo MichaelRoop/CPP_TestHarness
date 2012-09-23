@@ -3,7 +3,7 @@
 #include "mr_exception.h"
 
 #include <stdio.h>
-
+#include "mr_iostream.h"
 
 class MrTestMacroTests : public MrTest::Fixture {
 public:
@@ -12,7 +12,7 @@ public:
 		: MrTest::Fixture(name) {
 
 
-        printf("**********************\n");
+        mr_cout << L("&&&&&&&&&&&&&&&&&&&&&&&&&") << std::endl;
 
 
 		ADD_TEST_FIXTURE(this);

@@ -16,7 +16,7 @@ namespace MrTest {
 
 
 TestFixtureInfoObject::TestFixtureInfoObject(const mr_utils::mr_string& name) 
-	: m_name(name) {
+    : m_name(mr_utils::Trim(name)) {
 }
 
 
@@ -32,7 +32,7 @@ const mr_utils::mr_string& TestFixtureInfoObject::GetName() const {
 
 
 const void TestFixtureInfoObject::SetName(mr_utils::mr_string& name) {
-	this->m_name = name;
+    this->m_name = mr_utils::Trim(name);
 }
 
 

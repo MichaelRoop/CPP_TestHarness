@@ -70,7 +70,7 @@ LIBDIRS+=-L/opt/cut_test/lib/
 
 
 DEFINES+=-DMR_USE_WIDE_STR
-
+DEFINES+=-DDEBUG
 
 # User defined function for compile to make for each compact. 
 do-compile=$(CC) $(DEFINES) $(CFLAGS) $(INCLUDES) -c $1.cpp -o $1.o > stderr
