@@ -11,8 +11,10 @@ CC = gcc
 
 # define any compile-time flags
 CFLAGS = -c
+CFLAGS = -g
 CFLAGS += -fPIC
 CFLAGS += -fno-stack-protector
+
 
 # define any directories containing header files other than /usr/include
 INCLUDES =-Iinclude
@@ -37,7 +39,7 @@ INCLUDES +=-I../CppTest/include
 
 # define the CPP source files
 SRCS = \
-	source/dllmain.cpp							\
+	source/dllmain.cpp  							\
 
 
 
@@ -97,7 +99,14 @@ $(UTILLIB): $(SRCS)
 
 	@echo ------------------------------------------------------------
 	@echo Creating Shared Object
-	ld -shared -soname $@ -o $@ $(OBJS)
+#	ld -shared -soname $@ -o $@ $(OBJS)
+
+
+	$(CC) -shared -W1,-soname,$@ -o $@ $(OBJS)
+
+
+#	$(CC) -shared -W1,-soname $@ -o $@ -fPIC $(SRCS)
+
 #	ld -shared -init __nonWinCutTestCaseRegistrationMethod__ -soname $@ -o $@ $(OBJS)
 
 #	$(CC) -Wall -shared -fPIC -W1,soname $@ -o $@ $(INCLUDES) $(SRCS)
