@@ -11,6 +11,7 @@ CC = gcc
 
 # define any compile-time flags
 CFLAGS = -c
+CFLAGS = -g
 CFLAGS += -fPIC
 CFLAGS += -fno-stack-protector
 
