@@ -107,9 +107,6 @@
     <ClCompile Include="CppTestUtils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dllmain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="source\mr_exception.cpp">
       <Filter>source</Filter>
     </ClCompile>

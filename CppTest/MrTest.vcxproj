@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{849C805B-30EC-425B-98EA-5E3D57416332}</ProjectGuid>
+    <ProjectGuid>{1DCFF28A-C933-49FC-B256-8EBE6349CB0C}</ProjectGuid>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <Keyword>ManagedCProj</Keyword>
     <RootNamespace>CppTest</RootNamespace>
