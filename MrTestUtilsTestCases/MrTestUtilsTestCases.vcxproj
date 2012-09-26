@@ -55,7 +55,7 @@
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <MinimalRebuild>true</MinimalRebuild>
-      <AdditionalIncludeDirectories>include;$(SolutionDir)\CppTest\include;$(SolutionDir)\CppTest\Core\include;$(SolutionDir)\CppTestUtils\include;$(SolutionDir)\CppTestUtils\Exceptions\include;$(SolutionDir)\CppTest\ScriptReader\include;$(SolutionDir)\CppTestUtilsTestCases\CppTestCaseTests;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;$(SolutionDir)\MrTest\include;$(SolutionDir)\MrTest\Core\include;$(SolutionDir)\MrTestUtils\include;$(SolutionDir)\MrTestUtils\Exceptions\include;$(SolutionDir)\MrTest\ScriptReader\include;$(SolutionDir)\MrTestUtilsTestCases\MrTestCaseTests;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CallingConvention>Cdecl</CallingConvention>
     </ClCompile>
     <Link>
@@ -78,7 +78,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>MR_USE_WIDE_STR;WIN32;NDEBUG</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>include;$(SolutionDir)\CppTest\include;$(SolutionDir)\CppTest\Core\include;$(SolutionDir)\CppTestUtils\include;$(SolutionDir)\CppTestUtils\Exceptions\include;$(SolutionDir)\CppTest\ScriptReader\include;$(SolutionDir)\CppTestUtilsTestCases\CppTestCaseTests;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;$(SolutionDir)\MrTest\include;$(SolutionDir)\MrTest\Core\include;$(SolutionDir)\MrTestUtils\include;$(SolutionDir)\MrTestUtils\Exceptions\include;$(SolutionDir)\MrTest\ScriptReader\include;$(SolutionDir)\MrTestUtilsTestCases\MrTestCaseTests;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CompileAsManaged>false</CompileAsManaged>
       <MinimalRebuild>true</MinimalRebuild>
       <ExceptionHandling>Sync</ExceptionHandling>

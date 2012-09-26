@@ -11,7 +11,7 @@
     <Filter Include="include">
       <UniqueIdentifier>{6f62b90b-ef52-4d16-850c-e34479c50a16}</UniqueIdentifier>
     </Filter>
-    <Filter Include="CppTestTests">
+    <Filter Include="MrTestTests">
       <UniqueIdentifier>{67f21644-927b-49c8-bbbd-3baff10fdfca}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -34,7 +34,7 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="CppTestCaseTests\MrTestMacroTests.h">
-      <Filter>CppTestTests</Filter>
+      <Filter>MrTestTests</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -7,20 +7,20 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MrTestGuiRunner", "MrTestGu
 		{1DCFF28A-C933-49FC-B256-8EBE6349CB0C} = {1DCFF28A-C933-49FC-B256-8EBE6349CB0C}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MrTest", "CppTest\MrTest.vcxproj", "{1DCFF28A-C933-49FC-B256-8EBE6349CB0C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MrTest", "MrTest\MrTest.vcxproj", "{1DCFF28A-C933-49FC-B256-8EBE6349CB0C}"
 	ProjectSection(ProjectDependencies) = postProject
 		{5D087129-5CAC-4A39-95BB-BE4A2DA970E4} = {5D087129-5CAC-4A39-95BB-BE4A2DA970E4}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MrTestConsoleRunner", "CppTestDevConsole\MrTestConsoleRunner.vcxproj", "{55957BE2-90CF-472D-86F1-0E5C4C34F2E6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MrTestConsoleRunner", "MrTestConsoleRunner\MrTestConsoleRunner.vcxproj", "{55957BE2-90CF-472D-86F1-0E5C4C34F2E6}"
 	ProjectSection(ProjectDependencies) = postProject
 		{5D087129-5CAC-4A39-95BB-BE4A2DA970E4} = {5D087129-5CAC-4A39-95BB-BE4A2DA970E4}
 		{1DCFF28A-C933-49FC-B256-8EBE6349CB0C} = {1DCFF28A-C933-49FC-B256-8EBE6349CB0C}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MrTestUtils", "CppTestUtils\MrTestUtils.vcxproj", "{5D087129-5CAC-4A39-95BB-BE4A2DA970E4}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MrTestUtils", "MrTestUtils\MrTestUtils.vcxproj", "{5D087129-5CAC-4A39-95BB-BE4A2DA970E4}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MrTestUtilsTestCases", "CppTestUtilsTestCases\MrTestUtilsTestCases.vcxproj", "{2C60B974-4E4F-40C5-81BC-F84C38A874B5}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MrTestUtilsTestCases", "MrTestUtilsTestCases\MrTestUtilsTestCases.vcxproj", "{2C60B974-4E4F-40C5-81BC-F84C38A874B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

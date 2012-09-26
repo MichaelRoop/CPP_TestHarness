@@ -51,7 +51,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;MR_USE_WIDE_STR;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <AdditionalIncludeDirectories>$(SolutionDir)\CppTestUtils\include;$(SolutionDir)\CppTestUtils\Exceptions\include;$(SolutionDir)\CppTest\include;$(SolutionDir)\CppTest\ScriptReader\include;$(SolutionDir)\CppTest\Core\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\MrTestUtils\include;$(SolutionDir)\MrTestUtils\Exceptions\include;$(SolutionDir)\MrTest\include;$(SolutionDir)\MrrTest\ScriptReader\include;$(SolutionDir)\MrTest\Core\include</AdditionalIncludeDirectories>
       <CompileAsManaged>true</CompileAsManaged>
       <CallingConvention>Cdecl</CallingConvention>
       <CompileAs>Default</CompileAs>
@@ -69,7 +69,7 @@
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>WIN32;MR_USE_WIDE_STR;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <AdditionalIncludeDirectories>$(SolutionDir)\CppTestUtils\include;$(SolutionDir)\CppTestUtils\Exceptions\include;$(SolutionDir)\CppTest\include;$(SolutionDir)\CppTest\ScriptReader\include;$(SolutionDir)\CppTest\Core\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\MrTestUtils\include;$(SolutionDir)\MrTestUtils\Exceptions\include;$(SolutionDir)\MrTest\include;$(SolutionDir)\MrrTest\ScriptReader\include;$(SolutionDir)\MrTest\Core\include</AdditionalIncludeDirectories>
       <CompileAsManaged>true</CompileAsManaged>
       <CallingConvention>Cdecl</CallingConvention>
       <CompileAs>Default</CompileAs>
