@@ -11,6 +11,7 @@ CC = gcc
 
 # define any compile-time flags
 CFLAGS = -c
+CFLAGS = -g
 CFLAGS += -fPIC
 CFLAGS += -fno-stack-protector
 
@@ -109,8 +110,11 @@ $(UTILLIB): $(SRCS)
 	@echo Linking into executable
 #	ld -o $@ $(OBJS) $(LIBDIRS) $(LIBS)
 
+#	ld -export-dynamic  $(OBJS) $(LIBDIRS) $(LIBS) -o $@
+
 #	$(CC) -o $@ $(OBJS) $(LIBDIRS) $(LIBS)
-	$(CC) $(OBJS) $(LIBDIRS) $(LIBS) -o $@
+#	$(CC) $(OBJS) $(LIBDIRS) $(LIBS) -o $@
+	$(CC) -export-dynamic  $(OBJS) $(LIBDIRS) $(LIBS) -o $@
 
 
 
