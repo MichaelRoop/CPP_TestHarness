@@ -38,6 +38,12 @@ local.properties
 stderr
 
 #################
+## this project executable linux
+#################
+cutConsoleRunner
+
+
+#################
 ## Visual Studio
 #################
 
