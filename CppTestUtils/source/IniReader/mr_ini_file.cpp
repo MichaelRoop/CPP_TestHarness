@@ -21,19 +21,15 @@
 #include <algorithm>
 
 
-namespace mr_inireader
-{
+namespace mr_inireader {
 
 
 /// @brief	Filter out non valid sections to produce a good set of sections.
-struct FilterSections
-{
-	FilterSections( iniFile::SectionVector& sectionVec ) : m_sections( sectionVec ) {}
+struct FilterSectionsFunctor {
+	FilterSectionsFunctor( iniFile::SectionVector& sectionVec ) : m_sections( sectionVec ) {}
 
-	void operator () ( const section& theSection )
-	{
-		if (theSection.isDataSection())
-		{
+	void operator () (const section& theSection) {
+		if (theSection.isDataSection()) {
 			m_sections.push_back( theSection );
 		}
 	}
@@ -41,42 +37,35 @@ struct FilterSections
 };
 // -------------------- end functors ----------------
 
-iniFile::iniFile( )
-{
+iniFile::iniFile() {
 }
 
 
-iniFile::iniFile( const mr_utils::mr_string& filename ) : m_filename( filename )
-{
+iniFile::iniFile(const mr_utils::mr_string& filename) : m_filename(filename) {
 }
 
 
-iniFile::iniFile( const iniFile& obj )
-{
+iniFile::iniFile(const iniFile& obj) {
 	this->init( obj );
 }
 
 
-iniFile& iniFile::operator = ( const iniFile& rhs )
-{
-	if (this != &rhs)
-	{
+iniFile& iniFile::operator = (const iniFile& rhs) {
+	if (this != &rhs) {
 		this->init( rhs );
 	}
 	return *this;
 }
 
 
-void iniFile::init( const iniFile& obj )
-{
+void iniFile::init(const iniFile& obj) {
 	m_sections.clear();
 	m_sections = obj.m_sections;
 	m_filename = obj.m_filename;
 }
 
 
-bool iniFile::load(const mr_utils::mr_string& filename )
-{
+bool iniFile::load(const mr_utils::mr_string& filename) {
 	m_sections.clear();
 #if defined(_WIN32)
     // The wchar_t for filename is a MS extension
@@ -95,25 +84,21 @@ bool iniFile::load(const mr_utils::mr_string& filename )
 	section			workingSection;
 	iniInputLine	inLine;
 
-	while (script.getline( &buff[0], size ))
-	{
+	while (script.getline(&buff[0], size)) {
 		inLine.init( mr_utils::mr_string( &buff[0] ) );
 
-		switch (inLine.type())
-		{
+		switch (inLine.type()) {
 		case iniInputLine::SECTION:
 			this->addSection( workingSection );
 			workingSection.setName( inLine.firstValue() );
 			break;
 		default:
-			if (workingSection.name().empty())
-			{
+			if (workingSection.name().empty()) {
 				// Text lines before the first section is detected will be written as non data 
 				// sections representing comments and garbage lines.
 				this->addSection( section( inLine ) );
 			}
-			else
-			{
+			else {
 				workingSection.addNode( inLine );
 			}
 			break;
@@ -128,10 +113,8 @@ bool iniFile::load(const mr_utils::mr_string& filename )
 }
 
 
-bool iniFile::addSection( const section& theSection )
-{
-	if (!theSection.name().empty())
-	{
+bool iniFile::addSection(const section& theSection) {
+	if (!theSection.name().empty()) {
 		m_sections.push_back( theSection );
 		return true;
 	}
@@ -139,14 +122,12 @@ bool iniFile::addSection( const section& theSection )
 }
 
 
-const mr_utils::mr_string& iniFile::name() const
-{
+const mr_utils::mr_string& iniFile::name() const {
 	return m_filename;
 }
 
 
-iniFile::SectionIterator iniFile::getSection( const mr_utils::mr_string& name )
-{
+iniFile::SectionIterator iniFile::getSection(const mr_utils::mr_string& name) {
 	return 
 		std::find_if( 
 			m_sections.begin(), 
@@ -156,11 +137,9 @@ iniFile::SectionIterator iniFile::getSection( const mr_utils::mr_string& name )
 }
 
 
-bool iniFile::sectionExists( const mr_utils::mr_string& name )
-{
+bool iniFile::sectionExists(const mr_utils::mr_string& name) {
 	SectionIterator it = this->getSection( name );
-	if (it == m_sections.end() || !it->isDataSection())
-	{
+	if (it == m_sections.end() || !it->isDataSection()) {
 		return false;
 	}
 	return true;
@@ -169,11 +148,8 @@ bool iniFile::sectionExists( const mr_utils::mr_string& name )
 
 bool iniFile::nodeExists( 
 	const mr_utils::mr_string& sectionName, 
-	const mr_utils::mr_string& nodeName 
-)
-{
-	if (this->sectionExists( sectionName ))
-	{
+	const mr_utils::mr_string& nodeName) {
+	if (this->sectionExists(sectionName)) {
 		return this->getSection( sectionName )->nodeExists( nodeName );
 	}
 	return false;
@@ -182,44 +158,37 @@ bool iniFile::nodeExists(
 
 mr_utils::mr_string iniFile::getValue( 
 	const mr_utils::mr_string& sectionName, 
-	const mr_utils::mr_string& nodeName )
-{
+	const mr_utils::mr_string& nodeName) {
 	SectionIterator it = this->getSection( sectionName );
 	return it == this->sections().end() ? mr_utils::mr_string( L("") ) : it->value( nodeName );
 }
 
 
-const iniFile::SectionVector& iniFile::sections() const
-{
+const iniFile::SectionVector& iniFile::sections() const {
 	return m_sections;
 }
 
 
-iniFile::SectionVector iniFile::getSectionsCopy()
-{
+iniFile::SectionVector iniFile::getSectionsCopy() {
 	iniFile::SectionVector sections;
-	std::for_each( m_sections.begin(), m_sections.end(), FilterSections( sections ) );
+	std::for_each( m_sections.begin(), m_sections.end(), FilterSectionsFunctor( sections ) );
 	return sections;
 }
 
 
-section::NodeVector iniFile::getNodesCopy( const mr_utils::mr_string& sectionName )
-{
-	if (this->sectionExists( sectionName ))
-	{
+section::NodeVector iniFile::getNodesCopy(const mr_utils::mr_string& sectionName) {
+	if (this->sectionExists(sectionName)) {
 		return this->getSection( sectionName )->getNodesCopy();
 	}
 	return section::NodeVector();
 }
 
 
-mr_utils::mr_ostream& operator << ( mr_utils::mr_ostream& os, const iniFile& obj )
-{
+mr_utils::mr_ostream& operator << (mr_utils::mr_ostream& os, const iniFile& obj) {
 	std::for_each( 
 		obj.sections().begin(), 
 		obj.sections().end(), 
-		mr_utils::ToStreamClass<section,mr_utils::mr_ostream>( os ) 
-	);
+		mr_utils::ToStreamClass<section,mr_utils::mr_ostream>(os));
 	return os;
 }
 

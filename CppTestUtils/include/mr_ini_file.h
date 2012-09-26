@@ -11,25 +11,19 @@
 #if !defined(MR_INI_FILE_H)
 #define MR_INI_FILE_H
 
-#include "CppTestUtilsDefine.h"
+#include "MrTestUtilsDefine.h"
 #include "mr_ini_section.h"
-
-#include <vector>
-EXP_TEMPLATE template class CPPTESTUTILS_API std::allocator<mr_inireader::section>;
-EXP_TEMPLATE template class CPPTESTUTILS_API std::vector<mr_inireader::section>;
-
 
 
 namespace mr_inireader
 {
 
 /// @brief	Ini file reader.
-class CPPTESTUTILS_API iniFile
-{
+class CPPTESTUTILS_API iniFile {
 public:
 
-	typedef std::vector<mr_inireader::section>					SectionVector;
-	typedef std::vector<mr_inireader::section>::iterator			SectionIterator;
+	typedef std::vector<mr_inireader::section>				SectionVector;
+	typedef std::vector<mr_inireader::section>::iterator	SectionIterator;
 
 
 	/// @brief	Constructor.
@@ -51,7 +45,7 @@ public:
 	/// @brief	Assignment operator.
 	///
 	/// @param	rhs	The iniFile object used to initialise this object.
-	iniFile& operator = ( const iniFile& rhs );
+	iniFile& operator = (const iniFile& rhs);
 
 
 	/// @brief	Load the ini file into the object.
@@ -163,7 +157,6 @@ private:
 ///
 /// @return	The output stream object.
 mr_utils::mr_ostream& operator << ( mr_utils::mr_ostream& os, const iniFile& obj );
-
 
 }
 

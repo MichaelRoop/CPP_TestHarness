@@ -11,7 +11,7 @@
 #if !defined(MR_STRING_H)
 #define MR_STRING_H
 
-#include "CppTestUtilsDefine.h"
+#include "MrTestUtilsDefine.h"
 #include "mr_char.h"
 
 

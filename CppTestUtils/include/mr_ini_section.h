@@ -11,13 +11,9 @@
 #if !defined(MR_INI_SECTION_H)
 #define MR_INI_SECTION_H
 
-#include "CppTestUtilsDefine.h"
+#include "MrTestUtilsDefine.h"
 #include "mr_ini_node.h"
 #include "mr_iniInputLine.h"
-
-#include <vector>
-EXP_TEMPLATE template class CPPTESTUTILS_API std::allocator<mr_inireader::node>;
-EXP_TEMPLATE template class CPPTESTUTILS_API std::vector<mr_inireader::node>;
 
 
 namespace mr_inireader
@@ -164,5 +160,8 @@ mr_utils::mr_ostream& operator << ( mr_utils::mr_ostream& os, const section& the
 
 }
 
+// Force export of template containing class
+EXP_TEMPLATE template class CPPTESTUTILS_API std::allocator<mr_inireader::section>;
+EXP_TEMPLATE template class CPPTESTUTILS_API std::vector<mr_inireader::section>;
 
 #endif

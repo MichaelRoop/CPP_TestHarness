@@ -11,27 +11,11 @@
 #if !defined(MR_IOSTREAM_H)
 #define MR_IOSTREAM_H
 
-#include "CppTestUtilsDefine.h"
+#include "MrTestUtilsDefine.h"
 #include <iostream>
 #include <ostream>
 
 namespace mr_utils {
-
-
-
-#if defined(WIN32) 
-// TODO does not want to allow decl
-#endif
-
-
-//#if defined(WIN32) 
-//	EXP_TEMPLATE template class CPPTESTUTILS_API std::basic_ostream<wchar_t, std::char_traits<wchar_t> >;
-//	EXP_TEMPLATE template class CPPTESTUTILS_API std::basic_ostream<wchar_t, std::char_traits<wchar_t> >;
-//	EXP_TEMPLATE template class CPPTESTUTILS_API std::basic_istream<char, std::char_traits<char> >;
-//	EXP_TEMPLATE template class CPPTESTUTILS_API std::basic_ostream<char, std::char_traits<char> >;
-//#endif
-
-
 
 #if defined(MR_USE_WIDE_STR)
 	typedef std::wostream	mr_ostream;
@@ -41,8 +25,15 @@ namespace mr_utils {
 	#define mr_cout			std::cout
 #endif
 
-
 }
+
+// Force export of i and o stream template class with different char types
+//#if defined(WIN32) 
+//	EXP_TEMPLATE template class CPPTESTUTILS_API std::basic_ostream<wchar_t, std::char_traits<wchar_t> >;
+//	EXP_TEMPLATE template class CPPTESTUTILS_API std::basic_ostream<wchar_t, std::char_traits<wchar_t> >;
+//	EXP_TEMPLATE template class CPPTESTUTILS_API std::basic_istream<char, std::char_traits<char> >;
+//	EXP_TEMPLATE template class CPPTESTUTILS_API std::basic_ostream<char, std::char_traits<char> >;
+//#endif
 
 
 #endif

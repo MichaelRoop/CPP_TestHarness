@@ -11,24 +11,13 @@
 #if !defined(MR_SSTREAM_H)
 #define MR_SSTREAM_H
 
-#include "CppTestUtilsDefine.h"
+#include "MrTestUtilsDefine.h"
 
 #include <sstream>
 
-#if defined(WIN32) 
-
-	EXP_TEMPLATE template class CPPTESTUTILS_API std::basic_stringstream<char, std::char_traits<char>, std::allocator<char> >;
-	//EXP_TEMPLATE template class CPPTESTUTILS_API std::allocator< std::basic_stringstream<char, std::char_traits<char>, std::allocator<char> > >;
-	//EXP_TEMPLATE template class CPPTESTUTILS_API std::vector< std::basic_stringstream<char, std::char_traits<char>, std::allocator<char> > >;
-
-	EXP_TEMPLATE template class CPPTESTUTILS_API std::basic_stringstream<wchar_t, std::char_traits<wchar_t>, std::allocator<wchar_t> >;
-	//EXP_TEMPLATE template class CPPTESTUTILS_API std::allocator< std::basic_stringstream<wchar_t, std::char_traits<wchar_t>, std::allocator<wchar_t> > >;
-	//EXP_TEMPLATE template class CPPTESTUTILS_API std::vector< std::basic_stringstream<wchar_t, std::char_traits<wchar_t>, std::allocator<wchar_t> > , std::allocator< std::basic_stringstream<wchar_t, std::char_traits<wchar_t>, std::allocator<wchar_t> > > > ;
-#endif
-
 namespace mr_utils {
 
-
+// defines a string stream that is wide or narrow depending on MR_USE_WIDE_STR define
 #if defined(MR_USE_WIDE_STR)
 	typedef std::wstringstream	mr_stringstream;
 	typedef std::wistringstream	mr_istringstream;
@@ -40,14 +29,18 @@ namespace mr_utils {
 #endif
 
 
-#if defined(WIN32) 
-
-#endif
-
 /// @brief	Rest the mr_stringstream so it can be reused
 ///
 /// @param	ss	The mr_stringstream to reset
 CPPTESTUTILS_API void ResetStringStream(mr_stringstream& ss); 
+
+
+// Force export of std string stream template classe with different char types 
+#if defined(WIN32) 
+	EXP_TEMPLATE template class CPPTESTUTILS_API std::basic_stringstream<char, std::char_traits<char>, std::allocator<char> >;
+	EXP_TEMPLATE template class CPPTESTUTILS_API std::basic_stringstream<wchar_t, std::char_traits<wchar_t>, std::allocator<wchar_t> >;
+#endif
+
 
 
 } // end namespace

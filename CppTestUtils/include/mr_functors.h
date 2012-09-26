@@ -11,31 +11,23 @@
 #if !defined(MR_FUNCTORS_H)
 #define MR_FUNCTORS_H
 
-#include "CppTestUtilsDefine.h"
+#include "MrTestUtilsDefine.h"
 #include "mr_exception.h"
 #include "mr_defines.h"
-#include "string.h" //memcpy
 
-#include <vector>
-
-
-namespace mr_utils
-{
+namespace mr_utils {
 
 ///--------------------------------------------------------------------------------------
 /// @brief	Functor to delete each pointer on iteration.
 ///
 	/// You can use this with the std::for each to delete out a container of pointers.
 template<class T>
-struct DeletePtr
-{
+struct DeletePtr {
 	/// @brief	Function operator called on each iteration.
 	///
 	/// @param	ptr	The pointer to delete.
-	void operator () ( T* ptr )
-	{
-		if (ptr)
-		{
+	void operator () ( T* ptr ) {
+		if (ptr) {
 			delete ptr;
 			ptr = 0;
 		}
@@ -51,8 +43,7 @@ struct DeletePtr
 /// Assume null terminator already in wchar_t string.
 ///
 ///--------------------------------------------------------------------------------------
-struct CPPTESTUTILS_API AnsiiWideCharToNarrow
-{
+struct CPPTESTUTILS_API AnsiiWideCharToNarrow {
 
 	/// @brief	Constructor.
 	///
@@ -61,10 +52,9 @@ struct CPPTESTUTILS_API AnsiiWideCharToNarrow
 	/// @param	output	A vector of narrow char to receive the converted characters.  It must
 	///					already be sized to the same length as the container of wide chars 
 	///					being converted.
-	AnsiiWideCharToNarrow( std::vector<char>& output ) 
-	:	m_output( output ), 
-		m_pos( 0 ) 
-	{
+	AnsiiWideCharToNarrow(std::vector<char>& output) 
+	:	m_output(output), 
+		m_pos(0) {
 	}
 
 
@@ -74,8 +64,7 @@ struct CPPTESTUTILS_API AnsiiWideCharToNarrow
 	///				vector.
 	///
 	/// @param	c	The character to be converted to narrow.
-	void operator () ( const wchar_t& c )
-	{
+	void operator () (const wchar_t& c) {
 		mr_exception::assertCondition( m_pos < m_output.size(), FL, L("Exceeded receptor limits") );
 
 		/// @todo This assumes windows 16 bit wchar_t. Add compiler switch for NIX 32 bit.
@@ -91,10 +80,8 @@ private:
 
 
 	/// @brief	Assignment operator to satisfy compiler warnings.
-	AnsiiWideCharToNarrow& operator = ( const AnsiiWideCharToNarrow& rhs )
-	{
-		if (&rhs != this)
-		{
+	AnsiiWideCharToNarrow& operator = (const AnsiiWideCharToNarrow& rhs) {
+		if (&rhs != this) {
 			m_output	= rhs.m_output;
 			m_pos		= rhs.m_pos;
 		}
@@ -110,8 +97,7 @@ private:
 /// @brief	Functor to convert from narrow to wide char.  
 ///
 ///--------------------------------------------------------------------------------------
-struct CPPTESTUTILS_API NarrowCharToWide
-{
+struct CPPTESTUTILS_API NarrowCharToWide {
 
 	/// @brief	Constructor.
 	///
@@ -120,10 +106,9 @@ struct CPPTESTUTILS_API NarrowCharToWide
 	/// @param	output	A vector of wide char to receive the converted characters.  It must
 	///					already be sized to the same length as the container of narrow chars 
 	///					being converted.
-	NarrowCharToWide( std::vector<wchar_t>& output ) 
-	:	m_output( output ), 
-		m_pos( 0 ) 
-	{
+	NarrowCharToWide(std::vector<wchar_t>& output) 
+	:	m_output(output), 
+		m_pos(0) {
 	}
 
 
@@ -133,8 +118,7 @@ struct CPPTESTUTILS_API NarrowCharToWide
 	///				vector.
 	///
 	/// @param	c	The character to be converted to wide.
-	void operator () ( const char& c )
-	{
+	void operator () (const char& c)	{
 		mr_exception::assertCondition( m_pos < m_output.size(), FL, L("Exceeded receptor limits") );
 
 		/// @todo  Note: this assumes windows 16 bit wchar_t. Add compiler switch for NIX 32 bit.
@@ -150,10 +134,8 @@ private:
 
 
 	/// @brief	Assignment operator to satisfy compiler warnings.
-	NarrowCharToWide& operator = ( const NarrowCharToWide& rhs )
-	{
-		if (&rhs != this)
-		{
+	NarrowCharToWide& operator = (const NarrowCharToWide& rhs) {
+		if (&rhs != this) {
 			m_output	= rhs.m_output;
 			m_pos		= rhs.m_pos;
 		}
@@ -173,15 +155,13 @@ private:
 //
 ///--------------------------------------------------------------------------------------
 template<class T, class T2>
-class isNamed
-{
+class isNamed {
 public:
 
 	/// @brief	Constructor.
 	///
 	/// @param	name	The name to compare through the iterations.
-	isNamed( const T2& name ) : m_name( name ) 
-	{ 
+	isNamed(const T2& name) : m_name(name) { 
 	}
 
 
@@ -190,8 +170,7 @@ public:
 	/// @param	theObj	The current object in the iteration.
 	///
 	/// @return	true if the name matches, otherwise false.
-	bool operator () ( const T& theObj ) 
-	{ 
+	bool operator () (const T& theObj) { 
 		return theObj.name() == m_name; 
 	}
 
@@ -200,10 +179,6 @@ private:
 	const T2& m_name;	///< The comparison name.
 };
 
-
-
-
 }
-
 
 #endif

@@ -11,19 +11,16 @@
 #if !defined(MR_STATIC_TIMER_H)
 #define MR_STATIC_TIMER_H
 
-#include "CppTestUtilsDefine.h"
+#include "MrTestUtilsDefine.h"
 
-namespace mr_utils
-{
+namespace mr_utils {
 
 	/// @brief	Static timer that tracks how many milliseconds has expired between
 	///			calls.
 	///
 	/// @todo	Check about date roll overs.
-	class CPPTESTUTILS_API StaticTimer
-	{
+	class CPPTESTUTILS_API StaticTimer {
 	public:
-
 
 		/// @brief	Constructor.
 		StaticTimer();
@@ -49,8 +46,6 @@ namespace mr_utils
 
 	};
 
-
 }
-
 
 #endif

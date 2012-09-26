@@ -13,8 +13,7 @@
 #if !defined(MR_SHARED_PTR_H) 
 #define MR_SHARED_PTR_H
 
-#include "CppTestUtilsDefine.h"
-#include "mr_string.h"
+#include "MrTestUtilsDefine.h"
 #include <assert.h>
 
 

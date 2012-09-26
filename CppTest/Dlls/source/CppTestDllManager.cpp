@@ -101,7 +101,12 @@ void DllManager::Load(const mr_utils::mr_string& name) {
 		this->ParseHeaderAndLoad(name.c_str());
 	}
     catch (mr_utils::mr_exception& e) {
-        throw;
+        //this->m_dllHandle = DLL_HANDLE_NULL;
+		mr_utils::mr_stringstream ss;
+        // TODO - get linux error here before close
+        ss << _L_("Exception on opening dll named:") << name << L(" - ") << e.what();
+        this->Unload();
+		throw mr_utils::mr_exception(_FL_, ss.str());
     }
     catch (std::exception& e) { // TODO - Get the message from the exception - need conversion to mr_string
         //this->m_dllHandle = DLL_HANDLE_NULL;

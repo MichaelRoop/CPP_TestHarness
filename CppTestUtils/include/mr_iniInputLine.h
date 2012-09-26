@@ -14,19 +14,16 @@
 #if !defined(MR_INI_INPUT_LINE_H)
 #define MR_INI_INPUT_LINE_H
 
-#include "CppTestUtilsDefine.h"
+#include "MrTestUtilsDefine.h"
 #include "mr_string.h"
 
-namespace mr_inireader
-{
+namespace mr_inireader {
 
 /// @brief	Ini file reader.
-class CPPTESTUTILS_API iniInputLine
-{
+class CPPTESTUTILS_API iniInputLine {
 public:
 
-	typedef enum _lineTypeData
-	{
+	typedef enum _lineTypeData {
 		BLANK,
 		COMMENT,
 		SECTION,

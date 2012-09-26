@@ -12,7 +12,7 @@
 #define MR_INI_NODE_H
 
 
-#include "CppTestUtilsDefine.h"
+#include "MrTestUtilsDefine.h"
 #include "mr_string.h"
 #include "mr_iostream.h"
 #include "mr_iniInputLine.h"
@@ -108,5 +108,8 @@ mr_utils::mr_ostream& operator << ( mr_utils::mr_ostream& os, const node& theNod
 
 }
 
+// Force export of template containing class
+EXP_TEMPLATE template class CPPTESTUTILS_API std::allocator<mr_inireader::node>;
+EXP_TEMPLATE template class CPPTESTUTILS_API std::vector<mr_inireader::node>;
 
 #endif

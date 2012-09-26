@@ -96,7 +96,7 @@
     <ClInclude Include="include\mr_iniInputLine.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\CppTestUtilsDefine.h">
+    <ClInclude Include="include\MrTestUtilsDefine.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

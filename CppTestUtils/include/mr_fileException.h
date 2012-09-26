@@ -11,7 +11,7 @@
 #if !defined(MR_FILE_EXCEPTIONS_H)
 #define MR_FILE_EXCEPTIONS_H
 
-#include "CppTestUtilsDefine.h"
+#include "MrTestUtilsDefine.h"
 #include "mr_exception.h"
 
 namespace mr_utils
@@ -42,8 +42,7 @@ namespace mr_utils
 ///		}
 ///
 ///--------------------------------------------------------------------------------------
-class CPPTESTUTILS_API fileException : public mr_utils::mr_exception
-{
+class CPPTESTUTILS_API fileException : public mr_utils::mr_exception {
 public:
 
 	/// @brief	Constructor.
@@ -56,8 +55,7 @@ public:
 		const char*					file, 
 		int							line, 
 		const mr_utils::mr_string&	msg,
-		const mr_utils::mr_string&	fileName
-	);
+		const mr_utils::mr_string&	fileName);
 
 
 	/// @brief	Destructor.
