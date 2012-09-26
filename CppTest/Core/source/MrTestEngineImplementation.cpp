@@ -9,12 +9,12 @@
 /// Copyright 2012 Michael Roop
 ///--------------------------------------------------------------------------------------
 #include "MrTestEngineImplementation.h"
-#include "CppTestFixture.h"
-#include "CppTestCase.h"
-#include "CppTestInfoObject.h"
-#include "CppTestDllManager.h"
-#include "CppTestRunSummary.h"
-#include "CppTestFixtureInfoObject.h"
+#include "MrTestFixture.h"
+#include "MrTestCase.h"
+#include "MrTestInfoObject.h"
+#include "MrTestDllManager.h"
+#include "MrTestRunSummary.h"
+#include "MrTestFixtureInfoObject.h"
 #include "mr_pointerException.h"
 #include "mr_defines.h"
 #include <time.h>

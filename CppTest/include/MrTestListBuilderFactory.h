@@ -1,5 +1,5 @@
 ///--------------------------------------------------------------------------------------
-/// @file	ICppTestListBuilder.h
+/// @file	IMrTestListBuilder.h
 /// @brief	
 ///
 /// @author		Michael Roop
@@ -11,8 +11,8 @@
 #if !defined(MR_TEST_LIST_BUILDER_FACTORY_H)
 #define MR_TEST_LIST_BUILDER_FACTORY_H
 
-#include "CppTestDefines.h"
-#include "ICppTestFixtureInfoObject.h"
+#include "MrTestDefines.h"
+#include "IMrTestFixtureInfoObject.h"
 #include "mr_SharedPtr.h"
 #include <vector>
 
@@ -25,7 +25,7 @@ class IFixutureTestCaseNames;
 /// @brief	Build a list of tests grouped by fixture
 ///
 ///--------------------------------------------------------------------------------------
-class CPPTESCASE_API ListBuilderFactory {
+class MRTESCASE_API ListBuilderFactory {
 public:
 
 	/// @brief	Build a test list from file
@@ -61,8 +61,8 @@ public:
 } // end namesapce
 
 // Force export of class with std objects
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator< mr_utils::SharedPtr<MrTest::ListBuilderFactory*> >;
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector< mr_utils::SharedPtr<MrTest::ListBuilderFactory*> >;
+MRTESCASE_EXP_TEMPLATE template class MRTESCASE_API std::allocator< mr_utils::SharedPtr<MrTest::ListBuilderFactory*> >;
+MRTESCASE_EXP_TEMPLATE template class MRTESCASE_API std::vector< mr_utils::SharedPtr<MrTest::ListBuilderFactory*> >;
 
 
 #endif

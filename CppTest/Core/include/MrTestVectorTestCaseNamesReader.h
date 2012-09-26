@@ -12,7 +12,7 @@
 #define MR_TEST_VECTOR_FIXTURE_TEST_CASE_NAMES_READER_H
 
 #include "MrTestScriptReaderBase.h"
-#include "ICppTestFixtureTestCaseNames.h"
+#include "IMrTestFixtureTestCaseNames.h"
 
 #include "mr_SharedPtr.h"
 #include <vector>
@@ -60,7 +60,7 @@ private:
 
 } // end namespace
 
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<mr_utils::SharedPtr<MrTest::VectorFixtureTestCaseNames> >;
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<mr_utils::SharedPtr<MrTest::VectorFixtureTestCaseNames> >;
+MRTESCASE_EXP_TEMPLATE template class MRTESCASE_API std::allocator<mr_utils::SharedPtr<MrTest::VectorFixtureTestCaseNames> >;
+MRTESCASE_EXP_TEMPLATE template class MRTESCASE_API std::vector<mr_utils::SharedPtr<MrTest::VectorFixtureTestCaseNames> >;
 
 #endif

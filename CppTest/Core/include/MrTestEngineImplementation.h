@@ -12,9 +12,9 @@
 #define MR_TEST_ENGINE_IMPLEMENTATION_H
 
 #include "IMrTestEngineImplementation.h"
-#include "CppTestLogEngine.h"
-#include "CppTestCaseCounter.h"
-#include "ICppTestDllManager.h"
+#include "MrTestLogEngine.h"
+#include "MrTestCaseCounter.h"
+#include "IMrTestDllManager.h"
 #include "mr_SharedPtr.h"
 
 namespace MrTest {

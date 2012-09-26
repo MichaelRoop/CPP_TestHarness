@@ -12,7 +12,7 @@
 #if defined (_WIN32)
 
 #include "MrTestWinFaultHandler.h"
-#include "ICppTestCaseHolder.h"
+#include "IMrTestCaseHolder.h"
 #include "mr_sstream.h"
 
 namespace MrTest {

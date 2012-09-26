@@ -48,7 +48,7 @@ namespace MrTest {
 /// appear in the logs
 ///
 ///--------------------------------------------------------------------------------------
-class CPPTESCASE_API VectorLineReader : public MrTest::ScriptReaderBase {
+class MRTESCASE_API VectorLineReader : public MrTest::ScriptReaderBase {
 public:
 
 	/// @brief	Constructor.
@@ -88,7 +88,7 @@ private:
 
 } // end namespace
 
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<MrTest::VectorLineReader*>;
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<MrTest::VectorLineReader*>;
+MRTESCASE_EXP_TEMPLATE template class MRTESCASE_API std::allocator<MrTest::VectorLineReader*>;
+MRTESCASE_EXP_TEMPLATE template class MRTESCASE_API std::vector<MrTest::VectorLineReader*>;
 
 #endif

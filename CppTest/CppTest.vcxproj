@@ -51,7 +51,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>MR_USE_WIDE_STR;WIN32;CPPTESTCASE_EXPORTS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>MR_USE_WIDE_STR;WIN32;MRTESTCASE_EXPORTS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <AdditionalIncludeDirectories>$(ProjectDir)\include;$(ProjectDir)\Core\include;$(ProjectDir)\Exceptions\include;$(ProjectDir)\Factories\include;$(ProjectDir)\Logging\include;$(ProjectDir)\Outputs\include;$(ProjectDir)\ScriptReader\include;$(SolutionDir)\CppTestUtils\include;$(ProjectDir)\Dlls\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -69,7 +69,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>MR_USE_WIDE_STR;WIN32;CPPTESTCASE_EXPORTS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>MR_USE_WIDE_STR;WIN32;MRTESTCASE_EXPORTS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <AdditionalIncludeDirectories>$(ProjectDir)\include;$(ProjectDir)\Core\include;$(ProjectDir)\Exceptions\include;$(ProjectDir)\Factories\include;$(ProjectDir)\Logging\include;$(ProjectDir)\Outputs\include;$(ProjectDir)\ScriptReader\include;$(SolutionDir)\CppTestUtils\include;$(ProjectDir)\Dlls\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -96,111 +96,109 @@
     <ResourceCompile Include="Win\app.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Core\source\CppTestAssert.cpp" />
-    <ClCompile Include="Core\source\CppTestCase.cpp" />
-    <ClCompile Include="Core\source\CppTestCaseCounter.cpp" />
-    <ClCompile Include="Core\source\CppTestCaseHolder.cpp" />
-    <ClCompile Include="Core\source\CppTestCompareFunctions.cpp" />
-    <ClCompile Include="Core\source\CppTestEngine.cpp" />
-    <ClCompile Include="Core\source\CppTestFixture.cpp" />
-    <ClCompile Include="Core\source\CppTestFixtureInfoObject.cpp" />
-    <ClCompile Include="Core\source\CppTestFixtureTestCaseNames.cpp" />
-    <ClCompile Include="Core\source\CppTestInfoObject.cpp" />
-    <ClCompile Include="Core\source\CppTestListBuilder.cpp" />
-    <ClCompile Include="Core\source\CppTestRunSummary.cpp" />
-    <ClCompile Include="Core\source\dllmain.cpp" />
+    <ClCompile Include="Core\source\MrTestAssert.cpp" />
+    <ClCompile Include="Core\source\MrTestCase.cpp" />
+    <ClCompile Include="Core\source\MrTestCaseCounter.cpp" />
+    <ClCompile Include="Core\source\MrTestCaseHolder.cpp" />
+    <ClCompile Include="Core\source\MrTestCompareFunctions.cpp" />
+    <ClCompile Include="Core\source\MrTestEngine.cpp" />
+    <ClCompile Include="Core\source\MrTestFixture.cpp" />
+    <ClCompile Include="Core\source\MrTestFixtureInfoObject.cpp" />
+    <ClCompile Include="Core\source\MrTestFixtureTestCaseNames.cpp" />
+    <ClCompile Include="Core\source\MrTestInfoObject.cpp" />
+    <ClCompile Include="Core\source\MrTestListBuilder.cpp" />
+    <ClCompile Include="Core\source\MrTestRunSummary.cpp" />
     <ClCompile Include="Core\source\MrTestEngineImplementation.cpp" />
     <ClCompile Include="Core\source\MrTestListBuilderFactory.cpp" />
     <ClCompile Include="Core\source\MrTestParamParser.cpp" />
     <ClCompile Include="Core\source\MrTestVectorTestCaseNamesReader.cpp" />
     <ClCompile Include="Core\source\MrTestWinFaultHandler.cpp" />
-    <ClCompile Include="Dlls\source\CppTestDllManager.cpp" />
-    <ClCompile Include="Exceptions\source\CppTestScriptException.cpp" />
+    <ClCompile Include="Dlls\source\MrTestDllManager.cpp" />
+    <ClCompile Include="Exceptions\source\MrTestScriptException.cpp" />
     <ClCompile Include="Exceptions\source\MrTestAssertException.cpp" />
-    <ClCompile Include="Factories\source\CppTestLogFactory.cpp" />
-    <ClCompile Include="Factories\source\CppTestLogInitialiserFactory.cpp" />
-    <ClCompile Include="Factories\source\CppTestLogOutputFactory.cpp" />
-    <ClCompile Include="include\ICppTestFixtureTestCaseNames.h" />
-    <ClCompile Include="Logging\source\CppTestBuildColumnInfoString.cpp" />
-    <ClCompile Include="Logging\source\CppTestBuildColumnValueString.cpp" />
-    <ClCompile Include="Logging\source\CppTestBuildConsoleSummaryString.cpp" />
-    <ClCompile Include="Logging\source\CppTestBuildSummaryColumnValueString.cpp" />
-    <ClCompile Include="Logging\source\CppTestBuildTestCaseColumnValueString.cpp" />
-    <ClCompile Include="Logging\source\CppTestColumnBuilder.cpp" />
-    <ClCompile Include="Logging\source\CppTestIniLogInitialiser.cpp" />
-    <ClCompile Include="Logging\source\CppTestSimpleLog.cpp" />
-    <ClCompile Include="Logging\source\CppTestSqlBuilder.cpp" />
-    <ClCompile Include="Logging\source\CppTestSqlLog.cpp" />
-    <ClCompile Include="Logging\source\CppTestLog.cpp" />
-    <ClCompile Include="Logging\source\CppTestLogEngine.cpp" />
-    <ClCompile Include="Outputs\source\CppTestConsoleOutput.cpp" />
-    <ClCompile Include="Outputs\source\CppTestFileOutput.cpp" />
-    <ClCompile Include="Outputs\source\CppTestOdbcOutput.cpp" />
-    <ClCompile Include="ScriptReader\source\CppTestFileScriptReader.cpp" />
+    <ClCompile Include="Factories\source\MrTestLogFactory.cpp" />
+    <ClCompile Include="Factories\source\MrTestLogInitialiserFactory.cpp" />
+    <ClCompile Include="Factories\source\MrTestLogOutputFactory.cpp" />
+    <ClCompile Include="include\IMrTestFixtureTestCaseNames.h" />
+    <ClCompile Include="Logging\source\MrTestBuildColumnInfoString.cpp" />
+    <ClCompile Include="Logging\source\MrTestBuildColumnValueString.cpp" />
+    <ClCompile Include="Logging\source\MrTestBuildConsoleSummaryString.cpp" />
+    <ClCompile Include="Logging\source\MrTestBuildSummaryColumnValueString.cpp" />
+    <ClCompile Include="Logging\source\MrTestBuildTestCaseColumnValueString.cpp" />
+    <ClCompile Include="Logging\source\MrTestColumnBuilder.cpp" />
+    <ClCompile Include="Logging\source\MrTestIniLogInitialiser.cpp" />
+    <ClCompile Include="Logging\source\MrTestSimpleLog.cpp" />
+    <ClCompile Include="Logging\source\MrTestSqlBuilder.cpp" />
+    <ClCompile Include="Logging\source\MrTestSqlLog.cpp" />
+    <ClCompile Include="Logging\source\MrTestLog.cpp" />
+    <ClCompile Include="Logging\source\MrTestLogEngine.cpp" />
+    <ClCompile Include="Outputs\source\MrTestConsoleOutput.cpp" />
+    <ClCompile Include="Outputs\source\MrTestFileOutput.cpp" />
+    <ClCompile Include="Outputs\source\MrTestOdbcOutput.cpp" />
+    <ClCompile Include="ScriptReader\source\MrTestFileScriptReader.cpp" />
     <ClCompile Include="ScriptReader\source\MrTestCommandLineReader.cpp" />
     <ClCompile Include="ScriptReader\source\MrTestScriptReaderBase.cpp" />
     <ClCompile Include="ScriptReader\source\MrTestVectorLineReader.cpp" />
     <ClCompile Include="Win\AssemblyInfo.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Core\include\CppTestCaseCounter.h" />
-    <ClInclude Include="Core\include\CppTestFixtureInfoObject.h" />
-    <ClInclude Include="Core\include\CppTestRunSummary.h" />
+    <ClInclude Include="Core\include\MrTestCaseCounter.h" />
+    <ClInclude Include="Core\include\MrTestFixtureInfoObject.h" />
+    <ClInclude Include="Core\include\MrTestRunSummary.h" />
     <ClInclude Include="Core\include\MrTestEngineImplementation.h" />
     <ClInclude Include="Core\include\MrTestSegfaultHandler.h" />
     <ClInclude Include="Core\include\MrTestVectorTestCaseNamesReader.h" />
     <ClInclude Include="Core\include\MrTestWinFaultHandler.h" />
-    <ClInclude Include="Dlls\include\CppTestDllManager.h" />
-    <ClInclude Include="Factories\include\CppTestLogFactory.h" />
-    <ClInclude Include="Factories\include\CppTestLogInitialiserFactory.h" />
-    <ClInclude Include="Factories\include\CppTestLogOutputFactory.h" />
-    <ClInclude Include="include\CppTestAsserts.h" />
-    <ClInclude Include="include\CppTestCase.h" />
-    <ClInclude Include="include\CppTestCaseHolder.h" />
-    <ClInclude Include="include\CppTestCompareFunctions.h" />
-    <ClInclude Include="include\CppTestDefines.h" />
-    <ClInclude Include="include\CppTestEngine.h" />
-    <ClInclude Include="include\CppTestFixture.h" />
-    <ClInclude Include="include\CppTestFixtureTestCaseNames.h" />
-    <ClInclude Include="include\CppTestInfoObject.h" />
-    <ClInclude Include="include\CppTestListBuilder.h" />
-    <ClInclude Include="include\CppTestLogEngine.h" />
-    <ClInclude Include="include\CppTestMacros.h" />
-    <ClInclude Include="include\CppTestScriptException.h" />
-    <ClInclude Include="include\ICppTestCaseArgument.h" />
-    <ClInclude Include="include\ICppTestCase.h" />
-    <ClInclude Include="include\ICppTestDllManager.h" />
-    <ClInclude Include="include\ICppTestFixture.h" />
-    <ClInclude Include="include\ICppTestCaseHolder.h" />
-    <ClInclude Include="include\ICppTestFixtureInfoObject.h" />
-    <ClInclude Include="include\ICppTestListBuilder.h" />
-    <ClInclude Include="include\ICppTestLog.h" />
-    <ClInclude Include="include\ICppTestLogOutput.h" />
-    <ClInclude Include="include\ICppTestRunSummary.h" />
+    <ClInclude Include="Dlls\include\MrTestDllManager.h" />
+    <ClInclude Include="Factories\include\MrTestLogFactory.h" />
+    <ClInclude Include="Factories\include\MrTestLogInitialiserFactory.h" />
+    <ClInclude Include="Factories\include\MrTestLogOutputFactory.h" />
+    <ClInclude Include="include\MrTestAsserts.h" />
+    <ClInclude Include="include\MrTestCase.h" />
+    <ClInclude Include="include\MrTestCaseHolder.h" />
+    <ClInclude Include="include\MrTestCompareFunctions.h" />
+    <ClInclude Include="include\MrTestDefines.h" />
+    <ClInclude Include="include\MrTestEngine.h" />
+    <ClInclude Include="include\MrTestFixture.h" />
+    <ClInclude Include="include\MrTestFixtureTestCaseNames.h" />
+    <ClInclude Include="include\MrTestInfoObject.h" />
+    <ClInclude Include="include\MrTestListBuilder.h" />
+    <ClInclude Include="include\MrTestLogEngine.h" />
+    <ClInclude Include="include\MrTestMacros.h" />
+    <ClInclude Include="include\MrTestScriptException.h" />
+    <ClInclude Include="include\IMrTestCaseArgument.h" />
+    <ClInclude Include="include\IMrTestCase.h" />
+    <ClInclude Include="include\IMrTestDllManager.h" />
+    <ClInclude Include="include\IMrTestFixture.h" />
+    <ClInclude Include="include\IMrTestCaseHolder.h" />
+    <ClInclude Include="include\IMrTestFixtureInfoObject.h" />
+    <ClInclude Include="include\IMrTestListBuilder.h" />
+    <ClInclude Include="include\IMrTestLog.h" />
+    <ClInclude Include="include\IMrTestLogOutput.h" />
+    <ClInclude Include="include\IMrTestRunSummary.h" />
     <ClInclude Include="include\IMrTestEngineImplementation.h" />
     <ClInclude Include="include\MrTestAssertException.h" />
     <ClInclude Include="include\MrTestListBuilderFactory.h" />
     <ClInclude Include="include\MrTestParamParser.h" />
     <ClInclude Include="include\MrTestTypes.h" />
-    <ClInclude Include="Logging\include\CppTestBuildColumnInfoString.h" />
-    <ClInclude Include="Logging\include\CppTestBuildColumnValueString.h" />
-    <ClInclude Include="Logging\include\CppTestBuildConsoleSummaryString.h" />
-    <ClInclude Include="Logging\include\CppTestBuildSummaryColumnValueString.h" />
-    <ClInclude Include="Logging\include\CppTestBuildTestCaseColumnValueString.h" />
-    <ClInclude Include="Logging\include\CppTestColumnBuilder.h" />
-    <ClInclude Include="Logging\include\CppTestFieldPair.h" />
-    <ClInclude Include="Logging\include\ICppTestLogInitialiser.h" />
-    <ClInclude Include="Logging\include\CppTestIniLogInitialiser.h" />
-    <ClInclude Include="Logging\include\CppTestSimpleLog.h" />
-    <ClInclude Include="Logging\include\CppTestSqlBuilder.h" />
-    <ClInclude Include="Logging\include\CppTestSqlLog.h" />
-    <ClInclude Include="Logging\include\CppTestLog.h" />
-    <ClInclude Include="Outputs\include\CppTestConsoleOutput.h" />
-    <ClInclude Include="Outputs\include\CppTestFileOutput.h" />
-    <ClInclude Include="Outputs\include\ICppTestLogOutput.h" />
-    <ClInclude Include="Outputs\include\CppTestOdbcOutput.h" />
-    <ClInclude Include="ScriptReader\include\CppTestFileScriptReader.h" />
-    <ClInclude Include="ScriptReader\include\ICppTestScriptReader.h" />
+    <ClInclude Include="Logging\include\MrTestBuildColumnInfoString.h" />
+    <ClInclude Include="Logging\include\MrTestBuildColumnValueString.h" />
+    <ClInclude Include="Logging\include\MrTestBuildConsoleSummaryString.h" />
+    <ClInclude Include="Logging\include\MrTestBuildSummaryColumnValueString.h" />
+    <ClInclude Include="Logging\include\MrTestBuildTestCaseColumnValueString.h" />
+    <ClInclude Include="Logging\include\MrTestColumnBuilder.h" />
+    <ClInclude Include="Logging\include\MrTestFieldPair.h" />
+    <ClInclude Include="Logging\include\IMrTestLogInitialiser.h" />
+    <ClInclude Include="Logging\include\MrTestIniLogInitialiser.h" />
+    <ClInclude Include="Logging\include\MrTestSimpleLog.h" />
+    <ClInclude Include="Logging\include\MrTestSqlBuilder.h" />
+    <ClInclude Include="Logging\include\MrTestSqlLog.h" />
+    <ClInclude Include="Logging\include\MrTestLog.h" />
+    <ClInclude Include="Outputs\include\MrTestConsoleOutput.h" />
+    <ClInclude Include="Outputs\include\MrTestFileOutput.h" />
+    <ClInclude Include="Outputs\include\MrTestOdbcOutput.h" />
+    <ClInclude Include="ScriptReader\include\MrTestFileScriptReader.h" />
+    <ClInclude Include="ScriptReader\include\IMrTestScriptReader.h" />
     <ClInclude Include="ScriptReader\include\MrTestCommandLineReader.h" />
     <ClInclude Include="ScriptReader\include\MrTestScriptReaderBase.h" />
     <ClInclude Include="ScriptReader\include\MrTestVectorLineReader.h" />

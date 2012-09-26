@@ -85,111 +85,6 @@
     <ClCompile Include="Win\AssemblyInfo.cpp">
       <Filter>Win</Filter>
     </ClCompile>
-    <ClCompile Include="Core\source\CppTestAssert.cpp">
-      <Filter>Core\source</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\source\CppTestCase.cpp">
-      <Filter>Core\source</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\source\CppTestCompareFunctions.cpp">
-      <Filter>Core\source</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\source\CppTestEngine.cpp">
-      <Filter>Core\source</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\source\CppTestFixture.cpp">
-      <Filter>Core\source</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\source\CppTestInfoObject.cpp">
-      <Filter>Core\source</Filter>
-    </ClCompile>
-    <ClCompile Include="Exceptions\source\CppTestScriptException.cpp">
-      <Filter>Exceptions\source</Filter>
-    </ClCompile>
-    <ClCompile Include="ScriptReader\source\CppTestFileScriptReader.cpp">
-      <Filter>ScriptReader\source</Filter>
-    </ClCompile>
-    <ClCompile Include="Factories\source\CppTestLogFactory.cpp">
-      <Filter>Factories\source</Filter>
-    </ClCompile>
-    <ClCompile Include="Factories\source\CppTestLogInitialiserFactory.cpp">
-      <Filter>Factories\source</Filter>
-    </ClCompile>
-    <ClCompile Include="Factories\source\CppTestLogOutputFactory.cpp">
-      <Filter>Factories\source</Filter>
-    </ClCompile>
-    <ClCompile Include="Outputs\source\CppTestConsoleOutput.cpp">
-      <Filter>Outputs\source</Filter>
-    </ClCompile>
-    <ClCompile Include="Outputs\source\CppTestFileOutput.cpp">
-      <Filter>Outputs\source</Filter>
-    </ClCompile>
-    <ClCompile Include="Outputs\source\CppTestOdbcOutput.cpp">
-      <Filter>Outputs\source</Filter>
-    </ClCompile>
-    <ClCompile Include="Logging\source\CppTestBuildColumnInfoString.cpp">
-      <Filter>Logging\source</Filter>
-    </ClCompile>
-    <ClCompile Include="Logging\source\CppTestBuildColumnValueString.cpp">
-      <Filter>Logging\source</Filter>
-    </ClCompile>
-    <ClCompile Include="Logging\source\CppTestBuildConsoleSummaryString.cpp">
-      <Filter>Logging\source</Filter>
-    </ClCompile>
-    <ClCompile Include="Logging\source\CppTestBuildSummaryColumnValueString.cpp">
-      <Filter>Logging\source</Filter>
-    </ClCompile>
-    <ClCompile Include="Logging\source\CppTestBuildTestCaseColumnValueString.cpp">
-      <Filter>Logging\source</Filter>
-    </ClCompile>
-    <ClCompile Include="Logging\source\CppTestColumnBuilder.cpp">
-      <Filter>Logging\source</Filter>
-    </ClCompile>
-    <ClCompile Include="Logging\source\CppTestIniLogInitialiser.cpp">
-      <Filter>Logging\source</Filter>
-    </ClCompile>
-    <ClCompile Include="Logging\source\CppTestSimpleLog.cpp">
-      <Filter>Logging\source</Filter>
-    </ClCompile>
-    <ClCompile Include="Logging\source\CppTestSqlBuilder.cpp">
-      <Filter>Logging\source</Filter>
-    </ClCompile>
-    <ClCompile Include="Logging\source\CppTestSqlLog.cpp">
-      <Filter>Logging\source</Filter>
-    </ClCompile>
-    <ClCompile Include="Logging\source\CppTestLog.cpp">
-      <Filter>Logging\source</Filter>
-    </ClCompile>
-    <ClCompile Include="Logging\source\CppTestLogEngine.cpp">
-      <Filter>Logging\source</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\source\CppTestCaseHolder.cpp">
-      <Filter>Core\source</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\source\dllmain.cpp">
-      <Filter>Core\source</Filter>
-    </ClCompile>
-    <ClCompile Include="include\ICppTestFixtureTestCaseNames.h">
-      <Filter>include</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\source\CppTestFixtureTestCaseNames.cpp">
-      <Filter>Core\source</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\source\CppTestFixtureInfoObject.cpp">
-      <Filter>Core\source</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\source\CppTestListBuilder.cpp">
-      <Filter>Core\source</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\source\CppTestCaseCounter.cpp">
-      <Filter>Core\source</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\source\CppTestRunSummary.cpp">
-      <Filter>Core\source</Filter>
-    </ClCompile>
-    <ClCompile Include="Dlls\source\CppTestDllManager.cpp">
-      <Filter>Dlls\source</Filter>
-    </ClCompile>
     <ClCompile Include="Core\source\MrTestEngineImplementation.cpp">
       <Filter>Core\source</Filter>
     </ClCompile>
@@ -217,157 +112,112 @@
     <ClCompile Include="Exceptions\source\MrTestAssertException.cpp">
       <Filter>Exceptions\source</Filter>
     </ClCompile>
+    <ClCompile Include="Core\source\MrTestAssert.cpp">
+      <Filter>Core\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\source\MrTestCase.cpp">
+      <Filter>Core\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\source\MrTestCaseCounter.cpp">
+      <Filter>Core\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\source\MrTestCaseHolder.cpp">
+      <Filter>Core\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\source\MrTestCompareFunctions.cpp">
+      <Filter>Core\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\source\MrTestEngine.cpp">
+      <Filter>Core\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\source\MrTestFixture.cpp">
+      <Filter>Core\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\source\MrTestFixtureInfoObject.cpp">
+      <Filter>Core\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\source\MrTestFixtureTestCaseNames.cpp">
+      <Filter>Core\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\source\MrTestInfoObject.cpp">
+      <Filter>Core\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\source\MrTestListBuilder.cpp">
+      <Filter>Core\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\source\MrTestRunSummary.cpp">
+      <Filter>Core\source</Filter>
+    </ClCompile>
+    <ClCompile Include="include\IMrTestFixtureTestCaseNames.h">
+      <Filter>include</Filter>
+    </ClCompile>
+    <ClCompile Include="Exceptions\source\MrTestScriptException.cpp">
+      <Filter>Exceptions\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Dlls\source\MrTestDllManager.cpp">
+      <Filter>Dlls\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Factories\source\MrTestLogFactory.cpp">
+      <Filter>Factories\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Factories\source\MrTestLogInitialiserFactory.cpp">
+      <Filter>Factories\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Factories\source\MrTestLogOutputFactory.cpp">
+      <Filter>Factories\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Outputs\source\MrTestConsoleOutput.cpp">
+      <Filter>Outputs\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Outputs\source\MrTestFileOutput.cpp">
+      <Filter>Outputs\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Outputs\source\MrTestOdbcOutput.cpp">
+      <Filter>Outputs\source</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptReader\source\MrTestFileScriptReader.cpp">
+      <Filter>ScriptReader\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Logging\source\MrTestBuildColumnInfoString.cpp">
+      <Filter>Logging\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Logging\source\MrTestBuildColumnValueString.cpp">
+      <Filter>Logging\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Logging\source\MrTestBuildConsoleSummaryString.cpp">
+      <Filter>Logging\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Logging\source\MrTestBuildSummaryColumnValueString.cpp">
+      <Filter>Logging\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Logging\source\MrTestBuildTestCaseColumnValueString.cpp">
+      <Filter>Logging\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Logging\source\MrTestColumnBuilder.cpp">
+      <Filter>Logging\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Logging\source\MrTestIniLogInitialiser.cpp">
+      <Filter>Logging\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Logging\source\MrTestLog.cpp">
+      <Filter>Logging\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Logging\source\MrTestLogEngine.cpp">
+      <Filter>Logging\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Logging\source\MrTestSimpleLog.cpp">
+      <Filter>Logging\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Logging\source\MrTestSqlBuilder.cpp">
+      <Filter>Logging\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Logging\source\MrTestSqlLog.cpp">
+      <Filter>Logging\source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Win\resource.h">
       <Filter>Win</Filter>
-    </ClInclude>
-    <ClInclude Include="include\CppTestAsserts.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\CppTestCase.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\CppTestCompareFunctions.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\CppTestEngine.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\CppTestFixture.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\CppTestInfoObject.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\CppTestMacros.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="ScriptReader\include\CppTestFileScriptReader.h">
-      <Filter>ScriptReader\include</Filter>
-    </ClInclude>
-    <ClInclude Include="ScriptReader\include\ICppTestScriptReader.h">
-      <Filter>ScriptReader\include</Filter>
-    </ClInclude>
-    <ClInclude Include="Factories\include\CppTestLogFactory.h">
-      <Filter>Factories\include</Filter>
-    </ClInclude>
-    <ClInclude Include="Factories\include\CppTestLogInitialiserFactory.h">
-      <Filter>Factories\include</Filter>
-    </ClInclude>
-    <ClInclude Include="Factories\include\CppTestLogOutputFactory.h">
-      <Filter>Factories\include</Filter>
-    </ClInclude>
-    <ClInclude Include="Outputs\include\CppTestConsoleOutput.h">
-      <Filter>Outputs\include</Filter>
-    </ClInclude>
-    <ClInclude Include="Outputs\include\CppTestFileOutput.h">
-      <Filter>Outputs\include</Filter>
-    </ClInclude>
-    <ClInclude Include="Outputs\include\ICppTestLogOutput.h">
-      <Filter>Outputs\include</Filter>
-    </ClInclude>
-    <ClInclude Include="Outputs\include\CppTestOdbcOutput.h">
-      <Filter>Outputs\include</Filter>
-    </ClInclude>
-    <ClInclude Include="Logging\include\CppTestBuildColumnInfoString.h">
-      <Filter>Logging\include</Filter>
-    </ClInclude>
-    <ClInclude Include="Logging\include\CppTestBuildColumnValueString.h">
-      <Filter>Logging\include</Filter>
-    </ClInclude>
-    <ClInclude Include="Logging\include\CppTestBuildConsoleSummaryString.h">
-      <Filter>Logging\include</Filter>
-    </ClInclude>
-    <ClInclude Include="Logging\include\CppTestBuildSummaryColumnValueString.h">
-      <Filter>Logging\include</Filter>
-    </ClInclude>
-    <ClInclude Include="Logging\include\CppTestBuildTestCaseColumnValueString.h">
-      <Filter>Logging\include</Filter>
-    </ClInclude>
-    <ClInclude Include="Logging\include\CppTestColumnBuilder.h">
-      <Filter>Logging\include</Filter>
-    </ClInclude>
-    <ClInclude Include="Logging\include\CppTestFieldPair.h">
-      <Filter>Logging\include</Filter>
-    </ClInclude>
-    <ClInclude Include="Logging\include\ICppTestLogInitialiser.h">
-      <Filter>Logging\include</Filter>
-    </ClInclude>
-    <ClInclude Include="Logging\include\CppTestSimpleLog.h">
-      <Filter>Logging\include</Filter>
-    </ClInclude>
-    <ClInclude Include="Logging\include\CppTestSqlBuilder.h">
-      <Filter>Logging\include</Filter>
-    </ClInclude>
-    <ClInclude Include="Logging\include\CppTestSqlLog.h">
-      <Filter>Logging\include</Filter>
-    </ClInclude>
-    <ClInclude Include="Logging\include\CppTestLog.h">
-      <Filter>Logging\include</Filter>
-    </ClInclude>
-    <ClInclude Include="Logging\include\CppTestIniLogInitialiser.h">
-      <Filter>Logging\include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\CppTestLogEngine.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\CppTestScriptException.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ICppTestFixture.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ICppTestCase.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ICppTestCaseArgument.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ICppTestCaseHolder.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\CppTestCaseHolder.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ICppTestLog.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ICppTestLogOutput.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\CppTestFixtureTestCaseNames.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\include\CppTestFixtureInfoObject.h">
-      <Filter>Core\include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ICppTestListBuilder.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\CppTestListBuilder.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ICppTestFixtureInfoObject.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\CppTestDefines.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ICppTestRunSummary.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\include\CppTestCaseCounter.h">
-      <Filter>Core\include</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\include\CppTestRunSummary.h">
-      <Filter>Core\include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ICppTestDllManager.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="Dlls\include\CppTestDllManager.h">
-      <Filter>Dlls\include</Filter>
     </ClInclude>
     <ClInclude Include="include\MrTestTypes.h">
       <Filter>include</Filter>
@@ -404,6 +254,150 @@
     </ClInclude>
     <ClInclude Include="include\MrTestAssertException.h">
       <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\MrTestCaseCounter.h">
+      <Filter>Core\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\MrTestFixtureInfoObject.h">
+      <Filter>Core\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\MrTestRunSummary.h">
+      <Filter>Core\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\MrTestAsserts.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\MrTestCase.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\MrTestCaseHolder.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\MrTestCompareFunctions.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\MrTestDefines.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\MrTestEngine.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\MrTestFixture.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\MrTestFixtureTestCaseNames.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\MrTestInfoObject.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\MrTestListBuilder.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\MrTestLogEngine.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\MrTestMacros.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\MrTestScriptException.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IMrTestCase.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IMrTestCaseArgument.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IMrTestCaseHolder.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IMrTestDllManager.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IMrTestFixture.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IMrTestFixtureInfoObject.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IMrTestListBuilder.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IMrTestLog.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IMrTestLogOutput.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IMrTestRunSummary.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="Dlls\include\MrTestDllManager.h">
+      <Filter>Dlls\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Factories\include\MrTestLogFactory.h">
+      <Filter>Factories\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Factories\include\MrTestLogInitialiserFactory.h">
+      <Filter>Factories\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Factories\include\MrTestLogOutputFactory.h">
+      <Filter>Factories\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Logging\include\MrTestBuildColumnInfoString.h">
+      <Filter>Logging\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Logging\include\MrTestBuildColumnValueString.h">
+      <Filter>Logging\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Logging\include\MrTestBuildConsoleSummaryString.h">
+      <Filter>Logging\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Logging\include\MrTestBuildSummaryColumnValueString.h">
+      <Filter>Logging\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Logging\include\MrTestBuildTestCaseColumnValueString.h">
+      <Filter>Logging\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Logging\include\MrTestColumnBuilder.h">
+      <Filter>Logging\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Logging\include\MrTestFieldPair.h">
+      <Filter>Logging\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Logging\include\MrTestIniLogInitialiser.h">
+      <Filter>Logging\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Logging\include\MrTestLog.h">
+      <Filter>Logging\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Logging\include\MrTestSimpleLog.h">
+      <Filter>Logging\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Logging\include\MrTestSqlBuilder.h">
+      <Filter>Logging\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Logging\include\MrTestSqlLog.h">
+      <Filter>Logging\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Logging\include\IMrTestLogInitialiser.h">
+      <Filter>Logging\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Outputs\include\MrTestConsoleOutput.h">
+      <Filter>Outputs\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Outputs\include\MrTestFileOutput.h">
+      <Filter>Outputs\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Outputs\include\MrTestOdbcOutput.h">
+      <Filter>Outputs\include</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptReader\include\MrTestFileScriptReader.h">
+      <Filter>ScriptReader\include</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptReader\include\IMrTestScriptReader.h">
+      <Filter>ScriptReader\include</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

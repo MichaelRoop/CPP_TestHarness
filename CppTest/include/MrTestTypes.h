@@ -11,9 +11,9 @@
 #if !defined(MR_TEST_TYPE_H)
 #define MR_TEST_TYPE_H
 
-#include "CppTestDefines.h"
-#include "ICppTestCase.h"
-#include "ICppTestRunSummary.h"
+#include "MrTestDefines.h"
+#include "IMrTestCase.h"
+#include "IMrTestRunSummary.h"
 
 
 namespace MrTest {
@@ -30,12 +30,12 @@ typedef void (* TestRunSummaryData) (const MrTest::IRunSummary&);
 } // end namespace
 
 // Force export so it can be used in of std contained object 
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<MrTest::DataLoggedEvent>;
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<MrTest::DataLoggedEvent>;
+MRTESCASE_EXP_TEMPLATE template class MRTESCASE_API std::allocator<MrTest::DataLoggedEvent>;
+MRTESCASE_EXP_TEMPLATE template class MRTESCASE_API std::vector<MrTest::DataLoggedEvent>;
 
 // Force export so it can be used in of std contained object 
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<MrTest::TestRunSummaryData>;
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<MrTest::TestRunSummaryData>;
+MRTESCASE_EXP_TEMPLATE template class MRTESCASE_API std::allocator<MrTest::TestRunSummaryData>;
+MRTESCASE_EXP_TEMPLATE template class MRTESCASE_API std::vector<MrTest::TestRunSummaryData>;
 
 
 #endif

@@ -9,7 +9,7 @@
 /// Copyright 2012 Michael Roop
 ///--------------------------------------------------------------------------------------
 #include "MrTestScriptReaderBase.h"
-#include "CppTestScriptException.h"
+#include "MrTestScriptException.h"
 #include "mr_defines.h"
 #include "mr_fileException.h"
 

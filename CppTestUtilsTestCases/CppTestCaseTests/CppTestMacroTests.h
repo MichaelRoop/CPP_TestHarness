@@ -1,5 +1,5 @@
-#include "CppTestFixture.h"
-#include "CppTestMacros.h"
+#include "MrTestFixture.h"
+#include "MrTestMacros.h"
 #include "mr_exception.h"
 
 #include <stdio.h>

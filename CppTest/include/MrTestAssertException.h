@@ -11,7 +11,7 @@
 #if !defined(MR_TEST_ASSERT_EXCEPTION_H)
 #define MR_TEST_ASSERT_EXCEPTION_H
 
-#include "CppTestDefines.h"
+#include "MrTestDefines.h"
 #include "mr_exception.h"
 
 
@@ -27,7 +27,7 @@ namespace MrTest {
 /// both narrow and wide char compilation mode.
 ///
 ///--------------------------------------------------------------------------------------
-class CPPTESCASE_API AssertException : public mr_utils::mr_exception {
+class MRTESCASE_API AssertException : public mr_utils::mr_exception {
 public:
 
 	/// @brief	Constructor.

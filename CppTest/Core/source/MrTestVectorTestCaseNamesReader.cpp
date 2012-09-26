@@ -9,7 +9,7 @@
 /// Copyright 2012 Michael Roop
 ///--------------------------------------------------------------------------------------
 #include "MrTestVectorTestCaseNamesReader.h"
-#include "ICppTestFixtureTestCaseNames.h"
+#include "IMrTestFixtureTestCaseNames.h"
 
 
 #include "mr_defines.h"

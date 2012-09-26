@@ -11,7 +11,7 @@
 #if !defined(MR_TEST_SCRIPT_READER_BASE_H)
 #define MR_TEST_SCRIPT_READER_BASE_H
 
-#include "ICppTestScriptReader.h"
+#include "IMrTestScriptReader.h"
 
 namespace MrTest {
 
@@ -23,7 +23,7 @@ namespace MrTest {
 /// as they satisfy the interface.  In this case you could have a custom format of script
 /// file or one that used known formats such as ini or XML.
 ///--------------------------------------------------------------------------------------
-class CPPTESCASE_API ScriptReaderBase : public IScriptReader {
+class MRTESCASE_API ScriptReaderBase : public IScriptReader {
 protected:
 
 	/// @brief	Constructor.
@@ -118,7 +118,7 @@ private:
 
 } // end namespace
 
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::allocator<MrTest::ScriptReaderBase*>;
-CPPTESCASE_EXP_TEMPLATE template class CPPTESCASE_API std::vector<MrTest::ScriptReaderBase*>;
+MRTESCASE_EXP_TEMPLATE template class MRTESCASE_API std::allocator<MrTest::ScriptReaderBase*>;
+MRTESCASE_EXP_TEMPLATE template class MRTESCASE_API std::vector<MrTest::ScriptReaderBase*>;
 
 #endif

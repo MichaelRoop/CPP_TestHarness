@@ -1,12 +1,12 @@
 
 
-#include "CppTestFixture.h"
-#include "CppTestMacros.h"
+#include "MrTestFixture.h"
+#include "MrTestMacros.h"
+#include "MrTestCompareFunctions.h"
+#include "MrTestAsserts.h"
 #include "mr_string.h"
 #include "mr_iostream.h"
 #include "mr_sstream.h"
-#include "CppTestCompareFunctions.h"
-#include "CppTestAsserts.h"
 
 
 class UtilStrTrimTests : public MrTest::Fixture {

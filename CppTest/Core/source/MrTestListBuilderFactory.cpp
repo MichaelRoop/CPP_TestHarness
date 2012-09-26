@@ -10,13 +10,13 @@
 ///--------------------------------------------------------------------------------------
 
 #include "MrTestListBuilderFactory.h"
-#include "CppTestFileScriptReader.h"
-#include "ICppTestScriptReader.h"
+#include "MrTestFileScriptReader.h"
+#include "IMrTestScriptReader.h"
 #include "MrTestCommandLineReader.h"
 #include "MrTestVectorLineReader.h"
 #include "MrTestVectorTestCaseNamesReader.h"
-#include "CppTestListBuilder.h"
-#include "ICppTestFixtureTestCaseNames.h"
+#include "MrTestListBuilder.h"
+#include "IMrTestFixtureTestCaseNames.h"
 
 
 namespace MrTest {

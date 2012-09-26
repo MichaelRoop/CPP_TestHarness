@@ -11,7 +11,7 @@
 #if !defined(MR_TEST_PARAM_PARSER_H)
 #define MR_TEST_PARAM_PARSER_H
 
-#include "CppTestDefines.h"
+#include "MrTestDefines.h"
 #include "mr_string.h"
 
 namespace MrTest {
@@ -21,7 +21,7 @@ class ParamParserImplementation;
 ///--------------------------------------------------------------------------------------
 ///	@brief	Read in and parse the arguments
 ///--------------------------------------------------------------------------------------
-class CPPTESCASE_API ParamParser {
+class MRTESCASE_API ParamParser {
 
 public:
 	/// @brief	Status indicator for the test case.
