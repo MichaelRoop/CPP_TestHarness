@@ -15,6 +15,9 @@
 #include "MrTestListBuilderFactory.h"
 #include "mr_iostream.h"
 
+#include "MrTestAssertException.h"
+
+
 /// @brief	Prevent the screen from exiting
 void holdScreen();
 
@@ -27,9 +30,42 @@ static void MyLoggedEventHandler(const MrTest::ICase& testCase);
 static void MySummaryEventHandler(const MrTest::IRunSummary& summary);
 
 
+// Early research into transforming signals to exceptions
+//#if defined(__linux) || defined(_linux_)
+//#include <signal.h>
+//#include <ucontext.h>
+//static void catchSig(int num) {
+//    mr_cout << L(" ### Caught signal:") << num << std::endl;
+//    //throw MrTest::AssertException(_FL_, L("Caught a signal"));
+////    int x =3;
+////    throw x;
+//}
+
+//#endif
+
+
+
+
 int main(int argc, char* argv[]) {
 
+
+
+// Early research into transforming signals to exceptions
+//#if defined(__linux) || defined(_linux_)
+//    signal(SIGINT, catchSig);
+//    signal(SIGSEGV, catchSig);
+
+//#endif
+
+
+
 	try {
+
+
+//        int* x = NULL;
+//        *x = 1;
+
+
 		MrTest::ParamParser argParser;
 		argParser.Parse(argc, argv);
 
