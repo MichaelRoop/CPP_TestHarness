@@ -96,7 +96,7 @@
     <ClCompile Include="source\dllmain.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CppTestCaseTests\CppTestMacroTests.h" />
+    <ClInclude Include="CppTestCaseTests\MrTestMacroTests.h" />
     <ClInclude Include="include\mr_testSharedPtr.h" />
     <ClInclude Include="include\mr_util_str_token_tests.h" />
     <ClInclude Include="include\mr_util_str_trim_tests.h" />

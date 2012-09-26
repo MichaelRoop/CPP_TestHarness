@@ -20,7 +20,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="source\CppTestDevConsole.cpp">
+    <ClCompile Include="source\MrTestConsoleRunner.cpp">
       <Filter>source</Filter>
     </ClCompile>
   </ItemGroup>

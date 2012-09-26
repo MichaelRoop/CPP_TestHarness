@@ -30,11 +30,11 @@
     <ClInclude Include="include\mr_util_str_trim_tests.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="CppTestCaseTests\CppTestMacroTests.h">
-      <Filter>CppTestTests</Filter>
-    </ClInclude>
     <ClInclude Include="include\TestList.h">
       <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="CppTestCaseTests\MrTestMacroTests.h">
+      <Filter>CppTestTests</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
