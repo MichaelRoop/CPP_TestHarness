@@ -14,6 +14,7 @@
     <ProjectGuid>{3B985619-39D5-448C-AEC2-6AB7265A5334}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>CppTestUtilsTestCases</RootNamespace>
+    <ProjectName>MrTestUtilsTestCases</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -63,7 +64,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <FixedBaseAddress>
       </FixedBaseAddress>
-      <AdditionalDependencies>CppTestUtils.lib;CppTest.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>MrTestUtils.lib;MrTest.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)\$(Configuration)</AdditionalLibraryDirectories>
       <DataExecutionPrevention>
       </DataExecutionPrevention>
@@ -88,7 +89,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>CppTestUtils.lib;CppTest.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>MrTestUtils.lib;MrTest.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)\$(Configuration)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>

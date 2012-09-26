@@ -3,10 +3,10 @@
 #include "ManagedTestCaseData.h"
 #include "ManagedSummaryData.h"
 
-#include "CppTestEngine.h"
+#include "MrTestEngine.h"
 //#include "MrTestParamParser.h"
 #include "mr_fileException.h"
-#include "CppTestScriptException.h"
+#include "MrTestScriptException.h"
 #include "MrTestListBuilderFactory.h"
 #include "mr_string.h"
 
