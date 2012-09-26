@@ -75,7 +75,7 @@ MrTest::Engine::Instance().RegisterCase( _fixtureClass_ );	\
 //#endif
 
 
-//#	define NON_PARSED_HEADER_REGISTER_BLOCK_START									\
+#	define NON_PARSED_HEADER_REGISTER_BLOCK_START									\
 extern "C" {																			\
     void __nonWinCutTestCaseRegistrationMethod__() {			\
 

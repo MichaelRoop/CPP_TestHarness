@@ -130,7 +130,10 @@ class ReportException<std::exception>
 public:
 	static void ThrowReport(const char* file, int line, mr_utils::mr_stringstream& buffer, std::exception& exception, mr_utils::mr_stringstream& userMsg) {
 		mr_utils::mr_stringstream ss;
-		ss << L("Did not Expected std::exception ") << exception.what() << _L_(" ");	
+        ss << L("Did not Expected std::exception ");
+        if (exception.what() != 0) {
+            ss << exception.what() << _L_(" ");
+        }
 		MrTest::CreateMsg(ss, file, line, userMsg);
 		buffer << ss.str().c_str();
         throw MrTest::AssertException(file, line, ss.str());

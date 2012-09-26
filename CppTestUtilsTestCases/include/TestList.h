@@ -5,9 +5,9 @@
 #if defined(__linux) || defined(_linux_)
 // the std iostream does not seem to link in unless you force it
 // http://www.linuxquestions.org/questions/programming-9/fyi-shared-libs-and-iostream-c-331113/
-extern "C" {
-    void *__dso_handle = 0;
-}
+//extern "C" {
+//    void *__dso_handle = 0;
+//}
 
 
 #endif
@@ -16,7 +16,6 @@ extern "C" {
 #include "mr_util_str_token_tests.h"
 #include "mr_util_str_trim_tests.h"
 #include "CppTestMacroTests.h"
-
 
 
 

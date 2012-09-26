@@ -62,7 +62,12 @@ int main(int argc, char* argv[]) {
 		mr_cout << e.longMsg() << std::endl; 
 	}
 	catch( const std::exception e ) {
-		mr_cout << e.what() << std::endl;
+        if (e.what() != 0) {
+            mr_cout << e.what() << std::endl;
+        }
+        else {
+            mr_cout << L("std::exception with no information") << std::endl;
+        }
 	}
 	catch( ... ) {
 		mr_cout << L("Unknown exception") << std::endl;

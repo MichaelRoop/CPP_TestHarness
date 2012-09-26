@@ -18,6 +18,8 @@ TokenizerTests1
 #@TokenizerTests1.UTL_TOK_1_6
 #TokenizerTests2.UTL_TOK_1_7
 
+MrTestMacroTests
+
 
 #Test SharedPtr object
 #UTIL_SHARED_PTR_1
@@ -84,4 +86,6 @@ TokenizerTests1
 
 
 
-#MrTestMacroTests
+
+
+

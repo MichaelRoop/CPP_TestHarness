@@ -49,7 +49,7 @@ public:
 
 
 	/// @brief	Destructor.
-	~mr_pointerException() throw();
+    virtual ~mr_pointerException() throw();
 
 
 	/// @brief	Wrapper to clean up checking for exception throw on bad pointers.
