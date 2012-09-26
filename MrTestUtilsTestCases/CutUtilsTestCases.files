@@ -1,7 +1,0 @@
-/mnt/hgfs/Dev/CPP_TestHarness/CppTestUtilsTestCases/include/mr_testSharedPtr.h
-/mnt/hgfs/Dev/CPP_TestHarness/CppTestUtilsTestCases/include/mr_util_str_token_tests.h
-/mnt/hgfs/Dev/CPP_TestHarness/CppTestUtilsTestCases/include/TestList.h
-/mnt/hgfs/Dev/CPP_TestHarness/CppTestUtilsTestCases/source/dllmain.cpp
-Makefile
-include/mr_util_str_trim_tests.h
-CppTestCaseTests/CppTestMacroTests.h

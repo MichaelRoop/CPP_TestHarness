@@ -16,9 +16,9 @@ CFLAGS += -fPIC
 CFLAGS += -fno-stack-protector
 
 # define any directories containing header files other than /usr/include
-INCLUDES +=-I../CppTestUtils/include
-INCLUDES +=-I../CppTest/include
-INCLUDES +=-I../CppTest/Core/include
+INCLUDES +=-I../MrTestUtils/include
+INCLUDES +=-I../MrTest/include
+INCLUDES +=-I../MrTest/Core/include
 
 
 # define library paths in addition to /usr/lib
@@ -27,7 +27,7 @@ INCLUDES +=-I../CppTest/Core/include
 
 # define the CPP source files
 SRCS = \
-	source/CppTestDevConsole.cpp							\
+	source/MrTestConsoleRunner.cpp
 
 
 

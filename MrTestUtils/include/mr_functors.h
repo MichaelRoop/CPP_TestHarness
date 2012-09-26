@@ -14,6 +14,7 @@
 #include "MrTestUtilsDefine.h"
 #include "mr_exception.h"
 #include "mr_defines.h"
+#include <string.h>
 
 namespace mr_utils {
 

@@ -24,7 +24,7 @@ INCLUDES +=-IFactories/include
 INCLUDES +=-ILogging/include
 INCLUDES +=-IOutputs/include
 INCLUDES +=-IScriptReader/include
-INCLUDES +=-I../CppTestUtils/include
+INCLUDES +=-I../MrTestUtils/include
 
 #INCLUDES +=-Iinclude
 
@@ -35,44 +35,44 @@ INCLUDES +=-I../CppTestUtils/include
 
 # define the CPP source files
 SRCS = \
-	Core/source/CppTestAssert.cpp							\
-	Core/source/CppTestCase.cpp							\
-	Core/source/CppTestCaseCounter.cpp							\
-	Core/source/CppTestCaseHolder.cpp							\
-	Core/source/CppTestCompareFunctions.cpp							\
-	Core/source/CppTestEngine.cpp							\
-	Core/source/CppTestFixture.cpp							\
-	Core/source/CppTestFixtureInfoObject.cpp							\
-	Core/source/CppTestFixtureTestCaseNames.cpp							\
-	Core/source/CppTestInfoObject.cpp							\
-	Core/source/CppTestListBuilder.cpp							\
-	Core/source/CppTestRunSummary.cpp							\
+	Core/source/MrTestAssert.cpp							\
+	Core/source/MrTestCase.cpp							\
+	Core/source/MrTestCaseCounter.cpp							\
+	Core/source/MrTestCaseHolder.cpp							\
+	Core/source/MrTestCompareFunctions.cpp							\
+	Core/source/MrTestEngine.cpp							\
+	Core/source/MrTestFixture.cpp							\
+	Core/source/MrTestFixtureInfoObject.cpp							\
+	Core/source/MrTestFixtureTestCaseNames.cpp							\
+	Core/source/MrTestInfoObject.cpp							\
+	Core/source/MrTestListBuilder.cpp							\
+	Core/source/MrTestRunSummary.cpp							\
 	Core/source/MrTestEngineImplementation.cpp							\
 	Core/source/MrTestListBuilderFactory.cpp							\
 	Core/source/MrTestParamParser.cpp							\
 	Core/source/MrTestVectorTestCaseNamesReader.cpp							\
-	Dlls/source/CppTestDllManager.cpp							\
-	Exceptions/source/CppTestScriptException.cpp							\
+	Dlls/source/MrTestDllManager.cpp							\
+	Exceptions/source/MrTestScriptException.cpp							\
 	Exceptions/source/MrTestAssertException.cpp							\
-	Factories/source/CppTestLogFactory.cpp							\
-	Factories/source/CppTestLogInitialiserFactory.cpp							\
-	Factories/source/CppTestLogOutputFactory.cpp							\
-	Logging/source/CppTestBuildColumnInfoString.cpp							\
-	Logging/source/CppTestBuildColumnValueString.cpp							\
-	Logging/source/CppTestBuildConsoleSummaryString.cpp							\
-	Logging/source/CppTestBuildSummaryColumnValueString.cpp							\
-	Logging/source/CppTestBuildTestCaseColumnValueString.cpp							\
-	Logging/source/CppTestColumnBuilder.cpp							\
-	Logging/source/CppTestIniLogInitialiser.cpp							\
-	Logging/source/CppTestLog.cpp							\
-	Logging/source/CppTestLogEngine.cpp							\
-	Logging/source/CppTestSimpleLog.cpp							\
-	Logging/source/CppTestSqlBuilder.cpp							\
-	Logging/source/CppTestSqlLog.cpp							\
-	Outputs/source/CppTestConsoleOutput.cpp							\
-	Outputs/source/CppTestFileOutput.cpp							\
-	Outputs/source/CppTestOdbcOutput.cpp							\
-	ScriptReader/source/CppTestFileScriptReader.cpp							\
+	Factories/source/MrTestLogFactory.cpp							\
+	Factories/source/MrTestLogInitialiserFactory.cpp							\
+	Factories/source/MrTestLogOutputFactory.cpp							\
+	Logging/source/MrTestBuildColumnInfoString.cpp							\
+	Logging/source/MrTestBuildColumnValueString.cpp							\
+	Logging/source/MrTestBuildConsoleSummaryString.cpp							\
+	Logging/source/MrTestBuildSummaryColumnValueString.cpp							\
+	Logging/source/MrTestBuildTestCaseColumnValueString.cpp							\
+	Logging/source/MrTestColumnBuilder.cpp							\
+	Logging/source/MrTestIniLogInitialiser.cpp							\
+	Logging/source/MrTestLog.cpp							\
+	Logging/source/MrTestLogEngine.cpp							\
+	Logging/source/MrTestSimpleLog.cpp							\
+	Logging/source/MrTestSqlBuilder.cpp							\
+	Logging/source/MrTestSqlLog.cpp							\
+	Outputs/source/MrTestConsoleOutput.cpp							\
+	Outputs/source/MrTestFileOutput.cpp							\
+	Outputs/source/MrTestOdbcOutput.cpp							\
+	ScriptReader/source/MrTestFileScriptReader.cpp							\
 	ScriptReader/source/MrTestCommandLineReader.cpp							\
 	ScriptReader/source/MrTestScriptReaderBase.cpp							\
 	ScriptReader/source/MrTestVectorLineReader.cpp							\
@@ -112,7 +112,7 @@ UTILLIB = $(LIBDIR)/$(LIBNAME)
 #UTILLIB = $(LIBDIR)/libmr_test.so
 
 
-DEFINES+=-DCPPTESTCASE_EXPORTS
+DEFINES+=-DMRTESTCASE_EXPORTS
 DEFINES+=-DMR_USE_WIDE_STR
 DEFINES+=-DDEBUG
 

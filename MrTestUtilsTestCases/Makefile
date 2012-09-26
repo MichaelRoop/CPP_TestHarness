@@ -18,9 +18,9 @@ CFLAGS += -fno-stack-protector
 
 # define any directories containing header files other than /usr/include
 INCLUDES =-Iinclude
-INCLUDES +=-ICppTestCaseTests
-INCLUDES +=-I../CppTestUtils/include
-INCLUDES +=-I../CppTest/include
+INCLUDES +=-IMrTestCaseTests
+INCLUDES +=-I../MrTestUtils/include
+INCLUDES +=-I../MrTest/include
 
 #INCLUDES +=-ICore/include
 #INCLUDES +=-IDlls/include

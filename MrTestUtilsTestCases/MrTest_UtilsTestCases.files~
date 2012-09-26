@@ -1,0 +1,7 @@
+/mnt/hgfs/Dev/CPP_MrTestHarness/MrTestUtilsTestCases/include/mr_testSharedPtr.h
+/mnt/hgfs/Dev/CPP_MrTestHarness/MrTestUtilsTestCases/include/mr_util_str_token_tests.h
+/mnt/hgfs/Dev/CPP_MrTestHarness/MrTestUtilsTestCases/include/TestList.h
+/mnt/hgfs/Dev/CPP_MrTestHarness/MrTestUtilsTestCases/source/dllmain.cpp
+Makefile
+include/mr_util_str_trim_tests.h
+MrTestCaseTests/MrTestMacroTests.h

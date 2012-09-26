@@ -1,0 +1,8 @@
+/mnt/hgfs/Dev/CPP_MrTestHarness/MrTestConsoleRunner/source/UtilsTests/mr_testSharedPtr.cpp
+/mnt/hgfs/Dev/CPP_MrTestHarness/MrTestConsoleRunner/source/UtilsTests/mr_util_str_token_tests.cpp
+/mnt/hgfs/Dev/CPP_MrTestHarness/MrTestConsoleRunner/source/UtilsTests/mr_util_str_trim_tests.cpp
+/mnt/hgfs/Dev/CPP_MrTestHarness/MrTestConsoleRunner/source/MrTestConsoleRunner.cpp
+/mnt/hgfs/Dev/CPP_MrTestHarness/MrTestConsoleRunner/MrTestConfig.ini
+/mnt/hgfs/Dev/CPP_MrTestHarness/MrTestConsoleRunner/targetver.h
+/mnt/hgfs/Dev/CPP_MrTestHarness/MrTestConsoleRunner/testscript.txt
+Makefile

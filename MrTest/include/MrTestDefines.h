@@ -22,7 +22,7 @@
 #		define MRTESCASE_EXP_TEMPLATE extern
 #	endif
 #elif defined(__linux) || defined(_linux_)
-#	if defined(CPPTESTCASE_EXPORTS)
+#	if defined(MRTESTCASE_EXPORTS)
 #		pragma message("Exporting CppTestCase DLL Classes")
 #		define MRTESCASE_API
 #		define MRTESCASE_EXP_TEMPLATE
