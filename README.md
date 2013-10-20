@@ -15,3 +15,7 @@ but coudl use some hammering on.  Just let me know
 This is offered as a support to the development community if any find it useful.  It is done in the spirit of an open 
 license.  That is, you can use it freely but not package it up to sell.  Not sure if that is enough for the lawyers
 but you should be able to get the gist.  Also, if you find this useful, let me know.
+
+And, oh by the way, it is currently name MRTest after my intials. Not that I am a megalomaniac or anything.  It is just that 
+every time I though of a name someone else beat me to it. So, until I or someone else gets a great idea that it how it will 
+stay. Sorry
